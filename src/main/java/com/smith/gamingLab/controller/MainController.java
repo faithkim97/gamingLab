@@ -1,4 +1,4 @@
-package com.smith.gamingLab;
+package com.smith.gamingLab.controller;
 
 import com.smith.gamingLab.service.PersonService;
 import com.smith.gamingLab.table.Person;
