@@ -30,4 +30,9 @@ public class PersonService {
     public void delete(int id) {
         personRepository.deleteById(id);
     }
+
+    public Person getPersonByName(String name) {
+        return personRepository.getPersonByName(name);
+    }
+
 }

@@ -38,5 +38,10 @@ public class MainController {
         personService.saveOrUpdate(p);
     }
 
+    @GetMapping("/getPerson/{name}")
+    private Person getPersonByName(@PathVariable("name") String name) {
+        return personService.getPersonByName(name);
+    }
+
 
 }
