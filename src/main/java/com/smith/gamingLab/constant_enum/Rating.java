@@ -8,14 +8,14 @@ public enum Rating {
     A(4, "Adults only, 18+");
 
     private int rank;
-    private String desc;
+    private String description;
 
     Rating(int rank, String desc) {
         this.rank = rank;
-        this.desc = desc;
+        this.description = desc;
     }
 
     public int getRank() { return rank; }
 
-    public String getDesc() {return desc;}
+    public String getDescription() {return description;}
 }

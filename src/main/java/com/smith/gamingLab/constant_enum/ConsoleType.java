@@ -18,22 +18,15 @@ public enum ConsoleType {
         this.consoleText = consoleText;
     }
 
-    public String getConsoleText() { return consoleText; }
+    public String getText() { return consoleText; }
 
-    public static ConsoleType getTypeByText(String text) {
+    public ConsoleType getTypeByText(String text) {
         for (ConsoleType c : ConsoleType.values()) {
             if (c.consoleText.equals(text)) { return c;}
         }
         System.err.println("Unable to find console type with text " + text);
         return null;
     }
-
-
-
-
-
-
-
 
 
 }
