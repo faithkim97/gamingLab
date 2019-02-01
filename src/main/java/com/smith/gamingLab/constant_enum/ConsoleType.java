@@ -18,7 +18,8 @@ public enum ConsoleType {
         this.consoleText = consoleText;
     }
 
-    public String getText() { return consoleText; }
+
+    public String getTypeText() { return consoleText; }
 
     public ConsoleType getTypeByText(String text) {
         for (ConsoleType c : ConsoleType.values()) {

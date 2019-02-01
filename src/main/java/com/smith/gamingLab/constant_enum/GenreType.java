@@ -23,7 +23,8 @@ public enum GenreType {
         this.genreText = genreText;
     }
 
-    public String getGenreText() { return genreText; }
+
+    public String getTypeText() { return genreText; }
 
     //TODO might not need this
     public static GenreType getGenreByText(String text) {
