@@ -1,6 +1,7 @@
 package com.smith.gamingLab.table;
 
-import com.smith.gamingLab.Converter.ListToStringConverter;
+import com.smith.gamingLab.Converter.GenreTypeListToStringConverter;
+import com.smith.gamingLab.Converter.PlayableModeListToStringConverter;
 import com.smith.gamingLab.constant_enum.ConsoleType;
 import com.smith.gamingLab.constant_enum.GenreType;
 import com.smith.gamingLab.constant_enum.PlayableMode;
@@ -29,12 +30,13 @@ public class Game {
     /*TODO make genre a list of string, list of enum or just a string?
      *  Depends on query?
      * */
-    @ManyToMany
+    @Column
+    @Convert(converter = GenreTypeListToStringConverter.class)
     private List<GenreType> genres;
 
     //TODO make this into a HashSet instead?
     @Column
-    @Convert(converter = ListToStringConverter.class)
+    @Convert(converter = PlayableModeListToStringConverter.class)
     private List<PlayableMode> modes;
 
     public Game() {}
@@ -71,20 +73,20 @@ public class Game {
 
     public void setIsDigital(boolean isDigital) { this.isDigital = isDigital; }
 
-//    public void addGenre(GenreType genre) { genres.add(genre); }
+    public void addGenre(GenreType genre) { genres.add(genre); }
 
-//    //TODO unit test this
-//    public void deleteGenre(GenreType genre) {
-//        if (genres.contains(genre)) {
-//            genres.remove(genre);
-//        }
-//    }
+    //TODO unit test this
+    public void deleteGenre(GenreType genre) {
+        if (genres.contains(genre)) {
+            genres.remove(genre);
+        }
+    }
 
-//    public void addPlayableMode(PlayableMode mode) { modes.add(mode);}
-//
-//    public void deletePlayableMode(PlayableMode mode) {
-//        if (modes.contains(mode)) { modes.remove(mode); }
-//    }
+    public void addPlayableMode(PlayableMode mode) { modes.add(mode);}
+
+    public void deletePlayableMode(PlayableMode mode) {
+        if (modes.contains(mode)) { modes.remove(mode); }
+    }
 
 
 

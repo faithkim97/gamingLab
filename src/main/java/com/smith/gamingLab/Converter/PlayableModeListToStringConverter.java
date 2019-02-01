@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Converter
-public class ListToStringConverter implements AttributeConverter<List<PlayableMode>,String> {
+public class PlayableModeListToStringConverter implements AttributeConverter<List<PlayableMode>,String> {
 
     @Override
     public String convertToDatabaseColumn(List<PlayableMode> list) {
