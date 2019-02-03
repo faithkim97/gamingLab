@@ -21,7 +21,7 @@ public enum ConsoleType {
 
     public String getTypeText() { return consoleText; }
 
-    public ConsoleType getTypeByText(String text) {
+    public static ConsoleType getTypeByText(String text) {
         for (ConsoleType c : ConsoleType.values()) {
             if (c.consoleText.equals(text)) { return c;}
         }

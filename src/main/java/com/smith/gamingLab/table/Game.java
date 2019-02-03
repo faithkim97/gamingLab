@@ -8,13 +8,14 @@ import com.smith.gamingLab.constant_enum.PlayableMode;
 import com.smith.gamingLab.constant_enum.Rating;
 
 import javax.persistence.*;
+import java.io.Console;
 import java.util.List;
 
 @Entity
 public class Game {
     @GeneratedValue
     @Id
-    private int id;
+    private long id;
 
     private String title;
 
@@ -33,15 +34,17 @@ public class Game {
     @Column
     @Convert(converter = GenreTypeListToStringConverter.class)
     private List<GenreType> genres;
-
-    //TODO make this into a HashSet instead?
-    @Column
-    @Convert(converter = PlayableModeListToStringConverter.class)
-    private List<PlayableMode> modes;
+//
+//    //TODO make this into a HashSet instead?
+//    @Column
+//    @Convert(converter = PlayableModeListToStringConverter.class)
+//    private List<PlayableMode> modes;
 
     public Game() {}
 
-    public int getId() { return id; }
+    public long getId() { return id; }
+
+    public String getTitle() { return title; }
 
     public ConsoleType getConsoleType() { return consoleType; }
 
@@ -55,7 +58,7 @@ public class Game {
 
     public boolean getIsDigital() { return isDigital; }
 
-//    public List<GenreType> getGenres() {return genres;}
+    public List<GenreType> getGenres() {return genres;}
 
 //    public List<PlayableMode> getPlayableModes() { return modes; }
 
@@ -63,7 +66,23 @@ public class Game {
 
     public void setConsoleType(ConsoleType consoleType) { this.consoleType = consoleType; }
 
+    public void setConsoleType(String console) {
+        ConsoleType c = ConsoleType.getTypeByText(console);
+        if (c != null) {
+            consoleType = c;
+        }
+    }
+
     public void setRating(Rating rating) { this.rating = rating; }
+
+    public void setRating(String r) {
+        Rating rate = Rating.valueOf(r);
+        if (rate != null) {
+            rating = rate;
+        }
+    }
+
+    public void setTitle(String title) { this.title = title; }
 
     public void setIsCheckedOut(boolean isCheckedOut) { this.isCheckedOut = isCheckedOut; }
 
@@ -73,20 +92,22 @@ public class Game {
 
     public void setIsDigital(boolean isDigital) { this.isDigital = isDigital; }
 
-    public void addGenre(GenreType genre) { genres.add(genre); }
+    public void setGenres(List<GenreType> genres) {this.genres = genres;}
 
-    //TODO unit test this
-    public void deleteGenre(GenreType genre) {
-        if (genres.contains(genre)) {
-            genres.remove(genre);
-        }
-    }
+//    public void addGenre(GenreType genre) { genres.add(genre); }
 
-    public void addPlayableMode(PlayableMode mode) { modes.add(mode);}
-
-    public void deletePlayableMode(PlayableMode mode) {
-        if (modes.contains(mode)) { modes.remove(mode); }
-    }
+//    //TODO unit test this
+//    public void deleteGenre(GenreType genre) {
+//        if (genres.contains(genre)) {
+//            genres.remove(genre);
+//        }
+//    }
+//
+//    public void addPlayableMode(PlayableMode mode) { modes.add(mode);}
+//
+//    public void deletePlayableMode(PlayableMode mode) {
+//        if (modes.contains(mode)) { modes.remove(mode); }
+//    }
 
 
 

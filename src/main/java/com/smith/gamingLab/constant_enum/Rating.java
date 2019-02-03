@@ -18,4 +18,5 @@ public enum Rating {
     public int getRank() { return rank; }
 
     public String getDescription() {return description;}
+
 }
