@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "game_console")
-public class GameToConsoleMap {
+public class GameConsoleMap {
 
     @GeneratedValue
     @Id
@@ -16,7 +16,12 @@ public class GameToConsoleMap {
     @ManyToOne
     private Console console;
 
-    public GameToConsoleMap() {}
+    public GameConsoleMap() {}
+
+    public GameConsoleMap(Game game, Console console) {
+        this.game = game;
+        this.console = console;
+    }
 
     public int getId() {
         return id;

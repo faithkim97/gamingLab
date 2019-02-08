@@ -19,7 +19,7 @@ public class GameService {
         return games;
     }
 
-    public Game getGameById(long id) {
+    public Game getGameById(int id) {
         return gameRepository.findById(id).get();
     }
 
@@ -27,7 +27,7 @@ public class GameService {
         gameRepository.save(game);
     }
 
-    public void delete(long id) {
+    public void delete(int id) {
         gameRepository.deleteById(id);
     }
 
@@ -38,6 +38,19 @@ public class GameService {
     public List<Game> getGameByFields(String title, String description) {
         return gameRepository.getGames(title, description);
     }
+
+    public int getIdByGameTitle(String title) {
+        return gameRepository.getGameIdByTitle(title);
+    }
+
+    public Game getGameByTitle(String title) {
+        return gameRepository.getGameByTitle(title);
+    }
+
+    public List<Game> getGamesByTitle(String title) {
+        return gameRepository.getGamesByTitle(title);
+    }
+
 
 
 

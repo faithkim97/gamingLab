@@ -6,6 +6,7 @@ import com.smith.gamingLab.service.ConsoleService;
 import com.smith.gamingLab.service.GameService;
 import com.smith.gamingLab.table.Console;
 import com.smith.gamingLab.table.Game;
+import com.smith.gamingLab.table.GameConsoleMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -66,7 +67,7 @@ public class GameController {
     private List<Console> addConsole(@RequestParam String name) {
         Console c = new Console();
         c.setConsole(name);
-        consoleService.saveOrUpdate(c);
+        consoleService.saveConsole(c);
         return getConsoles();
     }
 
@@ -75,6 +76,13 @@ public class GameController {
     private List<Console> getConsoles() {
         return consoleService.getAllConsoles();
     }
-    
+
+    //TODO don't do this by id. Do it by game
+    @GetMapping("/mapConsole")
+    private void addConsoleByGame(@RequestParam String gameTitle, @RequestParam String console) {
+        Game g = gameService.getGameByTitle(gameTitle);
+        Console c = consoleService.getConsoleByType(console);
+        consoleService.saveGameConsoleMap(new GameConsoleMap(g, c));
+    }
 
 }
