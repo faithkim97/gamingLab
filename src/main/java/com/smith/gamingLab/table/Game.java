@@ -94,7 +94,7 @@ public class Game {
 
     public void setGenres(List<GenreType> genres) {this.genres = genres;}
 
-//    public void addGenre(GenreType genre) { genres.add(genre); }
+    public void addGenre(GenreType genre) { genres.add(genre); }
 
 //    //TODO unit test this
 //    public void deleteGenre(GenreType genre) {

@@ -1,11 +1,12 @@
 package com.smith.gamingLab.Converter;
 
 import com.smith.gamingLab.constant_enum.GenreType;
-import com.smith.gamingLab.constant_enum.PlayableMode;
+import org.springframework.lang.Nullable;
 
 import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 //TODO THIS IS REPETITIVE CODING HOW TO CONSOLIDATE??
@@ -14,21 +15,24 @@ public class GenreTypeListToStringConverter implements AttributeConverter<List<G
 
     @Override
     public String convertToDatabaseColumn(List<GenreType> list) {
-        String s = "";
-        for (GenreType mode : list) {
-            s += mode.getTypeText() +",";
+        StringBuilder s = new StringBuilder();
+        for (int i = 0; i < list.size(); i++) {
+            if (i>0) {
+                s.append(",");
+            }
+            GenreType mode = list.get(i);
+            s.append(mode.getTypeText());
         }
-        return  s.substring(0, s.length() - 1);
+        return  s.toString();
     }
 
     @Override
-    public List<GenreType> convertToEntityAttribute(String joined) {
-        List<GenreType> modeList = new ArrayList<>();
-        String[] strArr = joined.split(",");
-        for (String s : strArr) {
-            modeList.add(GenreType.getGenreByText(s));
+    public List<GenreType> convertToEntityAttribute(@Nullable String joined) {
+        List<GenreType> genreList = new ArrayList<>();
+        if (joined != null) {
+            Arrays.asList(joined.split(",")).forEach(genre -> genreList.add(GenreType.getGenreByText(genre)));
         }
-        return modeList;
+        return genreList;
     }
 
 }

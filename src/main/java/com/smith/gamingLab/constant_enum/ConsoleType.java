@@ -1,5 +1,7 @@
 package com.smith.gamingLab.constant_enum;
 
+import org.springframework.lang.Nullable;
+
 public enum ConsoleType {
     PS4_VR("PS4 VR"),
     PS4("PS4"),
@@ -21,7 +23,7 @@ public enum ConsoleType {
 
     public String getTypeText() { return consoleText; }
 
-    public static ConsoleType getTypeByText(String text) {
+    public static @Nullable ConsoleType getTypeByText(String text) {
         for (ConsoleType c : ConsoleType.values()) {
             if (c.consoleText.equals(text)) { return c;}
         }

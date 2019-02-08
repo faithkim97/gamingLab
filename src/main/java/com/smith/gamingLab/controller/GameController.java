@@ -19,30 +19,21 @@ public class GameController {
     GameService gameService;
 
 
-    @GetMapping("/default")
-    private String getDefault() {
-        return "Default";
-    }
-
+    //TODO idk how to get around the list of genre stuff...
     @GetMapping("/games")
     private List<Game> getAllGames() {
         return gameService.getAllGames();
     }
 
-//    @GetMapping("/addGame/{title}{console}-{description}-{quantity}-{rating}")
-//    private void addGame(@PathVariable("title") String title, @PathVariable("console") String console,
-//                         @PathVariable("description") String d, @PathVariable("quantity") Integer q,
-//                         @PathVariable("rating") String rating) {
-//        Game g = new Game();
-//        g.setTitle(title);
-//        g.setConsoleType(console);
-//        g.setDescription(d);
-//        g.setQuantity(q);
-//        g.setRating(rating);
-//
-//    }
+    @GetMapping("/getGames")
+    private List<Game> getGamesBy(@RequestParam String title, @RequestParam String description) {
+        return gameService.getGameByFields(title, description);
+    }
 
-    @GetMapping("/addGame")
+
+
+    //TODO made this a postmapping
+    @PostMapping("/addGame")
     private void addGame(@RequestParam String title, @RequestParam String console,
                          @RequestParam String description, @RequestParam Integer q, @RequestParam String rating) {
         Game g = new Game();
@@ -56,11 +47,8 @@ public class GameController {
 
     @GetMapping("addGameGenres")
     private void addGame(@RequestParam String genres) {
-        //TODO how to use converter??
-        //TODO Maybe get rid of converter??
         Game g  = new Game();
-        List<GenreType> genreList = new ArrayList<>();
-        Arrays.asList(genres.split(",")).forEach(genre -> genreList.add(GenreType.getGenreByText(genre)));
+        List<GenreType> genreList = new GenreTypeListToStringConverter().convertToEntityAttribute(genres);
         g.setGenres(genreList);
         gameService.saveOrUpdate(g);
     }
@@ -72,5 +60,10 @@ public class GameController {
         g.setTitle(title);
         gameService.saveOrUpdate(g);
     }
+
+//    @GetMapping("/getGame")
+//    private List<Game> getGamebyGenre(@RequestParam String genre){
+//        return gameService.getGameByGenre(genre);
+//    }
 
 }

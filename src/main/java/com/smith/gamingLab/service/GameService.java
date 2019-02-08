@@ -31,10 +31,17 @@ public class GameService {
         gameRepository.deleteById(id);
     }
 
-
-//    public Game getGameByTitle(String title) {
-//        return gameRepository.
+//    public List<Game> getGameByGenre(String genre) {
+//        return gameRepository.getGameByGenre(genre);
 //    }
+
+    public List<Game> getGameByFields(String title, String description) {
+        return gameRepository.getGames(title, description);
+    }
+
+
+
+
 
 
 }
