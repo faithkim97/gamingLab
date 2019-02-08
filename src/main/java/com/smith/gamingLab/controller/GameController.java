@@ -40,21 +40,12 @@ public class GameController {
                          @RequestParam String description, @RequestParam Integer q, @RequestParam String rating) {
         Game g = new Game();
         g.setTitle(title);
-        g.setConsoleType(console);
         g.setDescription(description);
         g.setQuantity(q);
         g.setRating(rating);
+        consoleService.saveGameConsoleMap(new GameConsoleMap(g, consoleService.getConsoleByType(console)));
         gameService.saveOrUpdate(g);
     }
-
-//    @GetMapping("addGameGenres")
-//    private void addGame(@RequestParam String genres) {
-//        Game g  = new Game();
-//        List<GenreType> genreList = new GenreTypeListToStringConverter().convertToEntityAttribute(genres);
-//        g.setGenres(genreList);
-//        gameService.saveOrUpdate(g);
-//    }
-
 
     @GetMapping("/addGame/{title}")
     private void addGameByTitle(@PathVariable("title") String title) {
@@ -77,12 +68,18 @@ public class GameController {
         return consoleService.getAllConsoles();
     }
 
-    //TODO don't do this by id. Do it by game
     @GetMapping("/mapConsole")
     private void addConsoleByGame(@RequestParam String gameTitle, @RequestParam String console) {
         Game g = gameService.getGameByTitle(gameTitle);
         Console c = consoleService.getConsoleByType(console);
-        consoleService.saveGameConsoleMap(new GameConsoleMap(g, c));
+        if (g != null && c != null) {
+            consoleService.saveGameConsoleMap(new GameConsoleMap(g, c));
+        }
+    }
+
+    @GetMapping("/game_console")
+    private List<GameConsoleMap> getGameConsoleMap() {
+        return consoleService.getAllGameConsoleMapping();
     }
 
 }

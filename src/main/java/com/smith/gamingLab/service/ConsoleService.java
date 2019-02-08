@@ -30,10 +30,6 @@ public class ConsoleService {
         consoleRepository.save(console);
     }
 
-    public void saveGameConsoleMap(GameConsoleMap gameConsoleMap) {
-        gameConsoleMapRepository.save(gameConsoleMap);
-    }
-
     public List<Console> getAllConsoles() {
         List<Console> consoles = new ArrayList<>();
         consoleRepository.findAll().forEach(c -> consoles.add(c));
@@ -46,6 +42,16 @@ public class ConsoleService {
 
     public Console getConsoleByType(String consoleType) {
         return consoleRepository.getConsoleByType(consoleType);
+    }
+
+    public void saveGameConsoleMap(GameConsoleMap gameConsoleMap) {
+        gameConsoleMapRepository.save(gameConsoleMap);
+    }
+
+    public List<GameConsoleMap> getAllGameConsoleMapping() {
+        List<GameConsoleMap> mapping = new ArrayList<>();
+        gameConsoleMapRepository.findAll().forEach(gc -> mapping.add(gc));
+        return mapping;
     }
 
 }
