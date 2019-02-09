@@ -5,26 +5,28 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
-public class Console {
+public class PlayableMode {
+
     @GeneratedValue
     @Id
     private int id;
 
-    private String console;
+    private String mode;
 
-    public Console() {
+    public PlayableMode() {
         super();
     }
 
-    public Console(String console) {
-        this.console = console;
+    public PlayableMode(String mode) {
+        this.mode = mode;
     }
 
-    public String getConsole() { return console; }
-
-    public void setConsole(String console) { this.console = console; }
+    public String getMode() { return mode; }
 
     public int getId() { return id; }
 
     public void setId(int id) { this.id = id; }
+
+    public void setMode(String mode) { this.mode = mode;}
+
 }

@@ -41,7 +41,7 @@ public class GameController {
         g.setDescription(description);
         g.setQuantity(q);
         g.setRating(rating);
-        consoleService.saveGameConsoleMap(new GameConsoleMap(g, consoleService.getConsoleByType(console)));
+//        consoleService.saveGameConsoleMap(new GameConsoleMap(g, consoleService.getConsoleByType(console)));
         gameService.saveOrUpdate(g);
     }
 
@@ -70,9 +70,7 @@ public class GameController {
     private void addConsoleByGame(@RequestParam String gameTitle, @RequestParam String console) {
         Game g = gameService.getGameByTitle(gameTitle);
         Console c = consoleService.getConsoleByType(console);
-        if (g != null && c != null) {
-            consoleService.saveGameConsoleMap(new GameConsoleMap(g, c));
-        }
+
     }
 
     @GetMapping("/game_console")

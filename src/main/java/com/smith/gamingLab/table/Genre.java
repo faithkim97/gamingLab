@@ -10,18 +10,22 @@ public class Genre {
     @GeneratedValue
     @Id
     private int id;
+
     private String genre;
 
-    public Genre() {}
+    public Genre() {
+        super();
+    }
 
     public Genre(String genre) {
         this.genre = genre;
     }
 
-    public int getId() { return id; }
-
     public String getGenre() { return genre; }
 
-    public void setGenre(String genre) { this.genre = genre; }
+    public int getId() { return id;}
 
+    public void setId(int id) { this.id = id; }
+
+    public void setGenre(String genre) { this.genre = genre; }
 }

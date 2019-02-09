@@ -36,9 +36,10 @@ public class ConsoleService {
         return consoles;
     }
 
-    public Console getConsoleByGameId(int id) {
-        return gameConsoleMapRepository.getConsoleByGameId(id);
+    public List<Console> getConsolesByGameId(int id) {
+        return gameConsoleMapRepository.getConsolesByGameId(id);
     }
+    public List<Game> getGamesByConsoleId(int id) { return gameConsoleMapRepository.getGamesByConsoleId(id);}
 
     public Console getConsoleByType(String consoleType) {
         return consoleRepository.getConsoleByType(consoleType);

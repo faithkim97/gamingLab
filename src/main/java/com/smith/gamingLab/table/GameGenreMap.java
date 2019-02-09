@@ -17,7 +17,8 @@ public class GameGenreMap {
     @ManyToOne
     private Genre genre;
 
-    public GameGenreMap() {}
+    public GameGenreMap() {
+    }
 
     public GameGenreMap(Game game, Genre genre) {
         this.game = game;
@@ -32,5 +33,6 @@ public class GameGenreMap {
 
     public void setGame(Game game) { this.game = game; }
 
-    public void setGenre(Genre genre) {this.genre = genre;}
+    public void setGenre(Genre genre) { this.genre = genre;}
+
 }
