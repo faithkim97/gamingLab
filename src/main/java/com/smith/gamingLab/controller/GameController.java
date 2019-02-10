@@ -3,6 +3,7 @@ package com.smith.gamingLab.controller;
 import com.smith.gamingLab.service.ConsoleService;
 import com.smith.gamingLab.service.GameService;
 import com.smith.gamingLab.service.GenreService;
+import com.smith.gamingLab.service.PlayableModeService;
 import com.smith.gamingLab.table.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -22,6 +23,9 @@ public class GameController {
     @Autowired
     GenreService genreService;
 
+    @Autowired
+    PlayableModeService playableModeService;
+
 
     @GetMapping("/games")
     private List<Game> getAllGames() {
@@ -33,6 +37,7 @@ public class GameController {
         return gameService.getGameByFields(title, description);
     }
 
+    //TODO expand on this for fields like genre, playable modes, etc..
     @PostMapping("/addGame")
     private void addGame(@RequestParam String title, @RequestParam String console,
                          @RequestParam String description, @RequestParam Integer q, @RequestParam String rating) {
@@ -41,7 +46,7 @@ public class GameController {
         g.setDescription(description);
         g.setQuantity(q);
         g.setRating(rating);
-//        consoleService.saveGameConsoleMap(new GameConsoleMap(g, consoleService.getConsoleByType(console)));
+        consoleService.saveGameConsoleMap(new GameConsoleMap(g, consoleService.getConsoleByType(console)));
         gameService.saveOrUpdate(g);
     }
 
@@ -107,6 +112,7 @@ public class GameController {
 
     }
 
+    //TODO delete this eventually
     @GetMapping("/addGenre")
     private List<Genre> addGenre(@RequestParam String genre) {
         Genre g = new Genre(genre);
@@ -114,15 +120,47 @@ public class GameController {
         return getAllGenres();
     }
 
+    //TODO delete this eventually
     @GetMapping("/genres")
     private List<Genre> getAllGenres() {
         return genreService.getAllGenres();
     }
 
+    //TODO delete this eventually
     @GetMapping("/game_genre")
     private List<GameGenreMap> getAllGameGenres() {
         return genreService.getAllGameGenreMap();
     }
 
+    @GetMapping("/addMode")
+    private void addPlayableMode(@RequestParam String mode) {
+        PlayableMode m = new PlayableMode(mode);
+        playableModeService.savePlayableMode(m);
+    }
 
+    @GetMapping("/mapMode")
+    private void mapPlayableMode(@RequestParam String gameName, @RequestParam String modeName) {
+        Game game = gameService.getGameByTitle(gameName);
+        PlayableMode p = playableModeService.getPlayableModeByTitle(modeName);
+        if ( game == null ) {
+            game = new Game();
+            game.setTitle(gameName);
+        }
+
+        if (p == null) {
+            p = new PlayableMode(modeName);
+        }
+
+        playableModeService.saveMapping(new GamePlayableModeMap(game, p));
+    }
+
+    @GetMapping("/modes")
+    private List<PlayableMode> getAllModes() {
+        return playableModeService.getAllPlayableModes();
+    }
+
+    @GetMapping("/game_modes")
+    private List<GamePlayableModeMap> getAllPlayableModeMapping() {
+        return playableModeService.getAllMapping();
+    }
 }
