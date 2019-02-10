@@ -51,6 +51,8 @@ public class GameService {
         return gameRepository.getGamesByTitle(title);
     }
 
+    public List<Game> getGameByKey(String key) { return gameRepository.getGameByKeywords(key);}
+
 
 
 

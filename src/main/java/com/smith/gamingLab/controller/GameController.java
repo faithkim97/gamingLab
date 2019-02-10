@@ -163,4 +163,9 @@ public class GameController {
     private List<GamePlayableModeMap> getAllPlayableModeMapping() {
         return playableModeService.getAllMapping();
     }
+
+    @GetMapping("/key")
+    private List<Game> getByKey(@RequestParam String k) {
+        return gameService.getGameByKey(k);
+    }
 }
