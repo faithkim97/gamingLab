@@ -70,7 +70,16 @@ public class GameController {
     private void addConsoleByGame(@RequestParam String gameTitle, @RequestParam String console) {
         Game g = gameService.getGameByTitle(gameTitle);
         Console c = consoleService.getConsoleByType(console);
+        if (g == null) {
+            g = new Game();
+            g.setTitle(gameTitle);
+        }
 
+        if (c == null) {
+            c = new Console(console);
+        }
+
+        consoleService.saveGameConsoleMap(new GameConsoleMap(g, c));
     }
 
     @GetMapping("/game_console")

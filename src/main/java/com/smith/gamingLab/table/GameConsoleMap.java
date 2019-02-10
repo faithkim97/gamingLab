@@ -10,10 +10,10 @@ public class GameConsoleMap {
     @Id
     private int id;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Game game;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Console console;
 
     public GameConsoleMap() {}
