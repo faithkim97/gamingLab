@@ -164,8 +164,8 @@ public class GameController {
         return playableModeService.getAllMapping();
     }
 
-    @GetMapping("/key")
-    private List<Game> getByKey(@RequestParam String k) {
-        return gameService.getGameByKey(k);
+    @GetMapping("/findGame")
+    private List<Game> getByKey(@RequestParam String key, @RequestParam(required = false) Boolean checkedOut, @RequestParam(required = false)  String mode ) {
+        return gameService.getGameByKey(key, checkedOut);
     }
 }

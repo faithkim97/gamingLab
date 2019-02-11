@@ -33,9 +33,11 @@ public interface GameRepository extends CrudRepository<Game, Integer> {
     @Query(value = "select * from game where title like %?1%", nativeQuery = true)
     List<Game> getGamesByTitle(String title);
 
-    @Query(value = full_table + "where title like %?1% or genre like %?1% or description = %?1%", nativeQuery = true)
+    @Query(value = full_table + "where title like %?1% or genre like %?1% or description like %?1%", nativeQuery = true)
     List<Game> getGameByKeywords(String key);
 
+    @Query(value = full_table + "where title like %?1% or genre like %?1% or description like %?1% and is_checked_out = ?2", nativeQuery = true)
+    List<Game> getGameByKeywords(String key, Boolean checkedOut);
 
 
 
