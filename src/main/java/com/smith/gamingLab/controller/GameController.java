@@ -5,11 +5,13 @@ import com.smith.gamingLab.service.GameService;
 import com.smith.gamingLab.service.GenreService;
 import com.smith.gamingLab.service.PlayableModeService;
 import com.smith.gamingLab.table.*;
+import jdk.internal.jline.internal.Nullable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+//TODO add in functionality for delete
+//TODO rating?? make into table as well??
 @RestController
 @RequestMapping(path="/game")
 public class GameController {
@@ -32,15 +34,35 @@ public class GameController {
         return gameService.getAllGames();
     }
 
-    @GetMapping("/getGames")
-    private List<Game> getGamesBy(@RequestParam String title, @RequestParam String description) {
-        return gameService.getGameByFields(title, description);
+    private void saveGenres(Game g, String genreTitle) {
+        if (genreTitle != null) {
+            List<Genre> genres = genreService.getGenresByTitleToken(genreTitle, ",");
+            genreService.saveGameGenreMap(g, genres);
+        }
+    }
+
+    private void saveConsoles(Game g, String console) {
+        if (console != null) {
+            List<Console> consoles = consoleService.getConsoles(console, ",");
+            consoleService.saveGameConsoleMap(g, consoles);
+        }
+    }
+
+    private Game saveGame(String gameTitle) {
+        Game g = gameService.getGameByTitle(gameTitle);
+        if (g == null) {
+            g.setTitle(gameTitle);
+        }
+        gameService.saveOrUpdate(g);
+        return g;
     }
 
     //TODO expand on this for fields like genre, playable modes, etc..
+    //TODO put in @Nullable for all nullable fields
+    //TODO just fill all fields (checkedout, digital, etc...
     //TODO stopped working with postmappingt
     @GetMapping("/addGame")
-    private void addGame(@RequestParam String title, @RequestParam(required = false) String genreTitle, @RequestParam(required = false) String console,
+    private void addGame(@RequestParam String title, @Nullable @RequestParam(required = false) String genreTitle, @RequestParam(required = false) String console,
                          @RequestParam(required = false) String description, @RequestParam(required = false) Integer quantity, @RequestParam(required = false) String rating
                          ) {
         Game g = new Game();
@@ -49,22 +71,9 @@ public class GameController {
         if ( quantity != null) {
             g.setQuantity(quantity);
         }
-//        g.setRating(rating);
-        if (genreTitle != null) {
-            List<Genre> genres = genreService.getGenresByTitleToken(genreTitle, ",");
-            genreService.saveGameGenreMap(g, genres);
-        }
-        if (console != null) {
-            List<Console> consoles = consoleService.getConsoles(console, ",");
-            consoleService.saveGameConsoleMap(g, consoles);
-        }
-        gameService.saveOrUpdate(g);
-    }
-
-    @GetMapping("/addGame/{title}")
-    private void addGameByTitle(@PathVariable("title") String title) {
-        Game g = new Game();
-        g.setTitle(title);
+        if (rating != null) { g.setRating(rating);}
+        saveGenres(g, genreTitle);
+        saveConsoles(g, console);
         gameService.saveOrUpdate(g);
     }
 
@@ -84,18 +93,8 @@ public class GameController {
 
     @GetMapping("/mapConsole")
     private void addConsoleByGame(@RequestParam String gameTitle, @RequestParam String console) {
-        Game g = gameService.getGameByTitle(gameTitle);
-        Console c = consoleService.getConsoleByType(console);
-        if (g == null) {
-            g = new Game();
-            g.setTitle(gameTitle);
-        }
-
-        if (c == null) {
-            c = new Console(console);
-        }
-
-        consoleService.saveGameConsoleMap(new GameConsoleMap(g, c));
+        Game g = saveGame(gameTitle);
+        saveGenres(g, console);
     }
 
     @GetMapping("/game_console")
@@ -106,20 +105,11 @@ public class GameController {
     //TODO tried to do @PostMapping but got a whitelist error
     @GetMapping("/mapGenre")
     private List<GameGenreMap> addGenrebyGame(@RequestParam String gameTitle, @RequestParam String genreTitle) {
-        Game game = gameService.getGameByTitle(gameTitle);
-        List<Genre> genres = genreService.getGenresByTitleToken(genreTitle, ",");
-        if (game == null) {
-            game = new Game();
-            game.setTitle(gameTitle);
-            gameService.saveOrUpdate(game);
-        }
-
-        genreService.saveGameGenreMap(game, genres);
+        Game game = saveGame(gameTitle);
+        saveGenres(game, genreTitle);
         return getAllGameGenres();
-
     }
 
-    //TODO delete this eventually
     @GetMapping("/addGenre")
     private List<Genre> addGenre(@RequestParam String genre) {
         Genre g = new Genre(genre);
@@ -127,13 +117,11 @@ public class GameController {
         return getAllGenres();
     }
 
-    //TODO delete this eventually
     @GetMapping("/genres")
     private List<Genre> getAllGenres() {
         return genreService.getAllGenres();
     }
 
-    //TODO delete this eventually
     @GetMapping("/game_genre")
     private List<GameGenreMap> getAllGameGenres() {
         return genreService.getAllGameGenreMap();
@@ -147,13 +135,8 @@ public class GameController {
 
     @GetMapping("/mapMode")
     private void mapPlayableMode(@RequestParam String gameName, @RequestParam String modeName) {
-        Game game = gameService.getGameByTitle(gameName);
         PlayableMode p = playableModeService.getPlayableModeByTitle(modeName);
-        if ( game == null ) {
-            game = new Game();
-            game.setTitle(gameName);
-        }
-
+        Game game = saveGame(gameName);
         if (p == null) {
             p = new PlayableMode(modeName);
         }
