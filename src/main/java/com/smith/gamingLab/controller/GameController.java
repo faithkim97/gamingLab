@@ -38,15 +38,26 @@ public class GameController {
     }
 
     //TODO expand on this for fields like genre, playable modes, etc..
-    @PostMapping("/addGame")
-    private void addGame(@RequestParam String title, @RequestParam String console,
-                         @RequestParam String description, @RequestParam Integer q, @RequestParam String rating) {
+    //TODO stopped working with postmappingt
+    @GetMapping("/addGame")
+    private void addGame(@RequestParam String title, @RequestParam(required = false) String genreTitle, @RequestParam(required = false) String console,
+                         @RequestParam(required = false) String description, @RequestParam(required = false) Integer quantity, @RequestParam(required = false) String rating
+                         ) {
         Game g = new Game();
         g.setTitle(title);
         g.setDescription(description);
-        g.setQuantity(q);
-        g.setRating(rating);
-        consoleService.saveGameConsoleMap(new GameConsoleMap(g, consoleService.getConsoleByType(console)));
+        if ( quantity != null) {
+            g.setQuantity(quantity);
+        }
+//        g.setRating(rating);
+        if (genreTitle != null) {
+            List<Genre> genres = genreService.getGenresByTitleToken(genreTitle, ",");
+            genreService.saveGameGenreMap(g, genres);
+        }
+        if (console != null) {
+            List<Console> consoles = consoleService.getConsoles(console, ",");
+            consoleService.saveGameConsoleMap(g, consoles);
+        }
         gameService.saveOrUpdate(g);
     }
 
@@ -96,18 +107,14 @@ public class GameController {
     @GetMapping("/mapGenre")
     private List<GameGenreMap> addGenrebyGame(@RequestParam String gameTitle, @RequestParam String genreTitle) {
         Game game = gameService.getGameByTitle(gameTitle);
-        Genre genre = genreService.getGenreByTitle(genreTitle);
+        List<Genre> genres = genreService.getGenresByTitleToken(genreTitle, ",");
         if (game == null) {
             game = new Game();
             game.setTitle(gameTitle);
             gameService.saveOrUpdate(game);
         }
-        if (genre == null) {
-            genre = new Genre(genreTitle);
-            genreService.saveGenre(genre);
-        }
 
-        genreService.saveGameGenreMap(new GameGenreMap(game, genre));
+        genreService.saveGameGenreMap(game, genres);
         return getAllGameGenres();
 
     }
@@ -168,4 +175,6 @@ public class GameController {
     private List<Game> getByKey(@RequestParam String key, @RequestParam(required = false) Boolean checkedOut, @RequestParam(required = false)  String mode ) {
         return gameService.getGameByKey(key, checkedOut);
     }
+
+
 }

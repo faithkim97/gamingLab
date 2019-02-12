@@ -1,9 +1,6 @@
 package com.smith.gamingLab.table;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 @Entity
 public class GameGenreMap {
@@ -11,10 +8,10 @@ public class GameGenreMap {
     @Id
     private int id;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Game game;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Genre genre;
 
     public GameGenreMap() {

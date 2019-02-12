@@ -1,5 +1,6 @@
 package com.smith.gamingLab.service;
 
+import com.smith.gamingLab.Misc.StringParser;
 import com.smith.gamingLab.repository.GameGenreMapRepository;
 import com.smith.gamingLab.repository.GenreRepository;
 import com.smith.gamingLab.table.Game;
@@ -21,9 +22,24 @@ public class GenreService {
     @Autowired
     GameGenreMapRepository gameGenreMapRepository;
 
-    public Genre getGenreByTitle(String title) {
-        return genreRepository.getGenreByTitle(title);
+    public List<Genre> getGenresByTitleToken(String title, String token) {
+        List<Genre> genres = new ArrayList<>();
+        String[] parsed = StringParser.parseString(title, token);
+        if (parsed.length > 0) {
+            Genre genre;
+            for (String g : parsed) {
+                genre = genreRepository.getGenreByTitle(g);
+                if (genre == null) {
+                    genre = new Genre(g);
+                }//endif
+                saveGenre(genre);
+                genres.add(genre);
+            }
+        }
+        return genres;
     }
+
+
 
     public List<Genre> getAllGenres() {
         List<Genre> genres = new ArrayList<>();
@@ -32,7 +48,7 @@ public class GenreService {
     }
 
 
-    public List<Genre> getGenresByTitle(String title) {
+    public List<Genre> getGenres(String title) {
         return genreRepository.getGenresByTitle(title);
     }
 
@@ -52,6 +68,15 @@ public class GenreService {
         gameGenreMapRepository.save(gameGenreMap);
     }
 
+    @Deprecated
+    public void saveGameGenreMap(Game game, String genreStr) {
+        List<Genre> genres = getGenresByTitleToken(genreStr, ",");
+        genres.forEach(g -> saveGameGenreMap(new GameGenreMap(game, g)));
+    }
+
+    public void saveGameGenreMap(Game game, List<Genre> genres) {
+        genres.forEach(g -> saveGameGenreMap(new GameGenreMap(game, g)));
+    }
     public List<GameGenreMap> getAllGameGenreMap() {
         List<GameGenreMap> map = new ArrayList<>();
         gameGenreMapRepository.findAll().forEach(g -> map.add(g));

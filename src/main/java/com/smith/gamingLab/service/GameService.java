@@ -55,10 +55,4 @@ public class GameService {
 
     public List<Game> getGameByKey(String key, Boolean checkedOut) { return gameRepository.getGameByKeywords(key, checkedOut);}
 
-
-
-
-
-
-
 }

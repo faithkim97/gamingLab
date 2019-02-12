@@ -13,7 +13,7 @@ public class Game {
     private String title;
     private Rating rating;
     private boolean isCheckedOut;
-    private int quantity;
+    private int quantity = 1;
     private String description;
     private boolean isDigital;
 

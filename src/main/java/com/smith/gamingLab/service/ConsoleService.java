@@ -1,5 +1,6 @@
 package com.smith.gamingLab.service;
 
+import com.smith.gamingLab.Misc.StringParser;
 import com.smith.gamingLab.repository.ConsoleRepository;
 import com.smith.gamingLab.repository.GameConsoleMapRepository;
 import com.smith.gamingLab.table.Console;
@@ -20,7 +21,22 @@ public class ConsoleService {
     @Autowired
     GameConsoleMapRepository gameConsoleMapRepository;
 
-    //TODO consolidate game to console mapping repo here as well
+    public List<Console> getConsoles(String consoleName, String token) {
+        List<Console> consoles = new ArrayList<>();
+        String[] parsed = StringParser.parseString(consoleName, token);
+        if (parsed.length > 0) {
+            Console console;
+            for (String c : parsed) {
+                console = consoleRepository.getConsoleByType(c);
+                if (console == null) {
+                    console = new Console(c);
+                }
+                saveConsole(console);
+                consoles.add(console);
+            }
+        }
+        return consoles;
+    }
 
     public Console gameConsoleById(int id) {
         return consoleRepository.findById(id).get();
@@ -47,6 +63,10 @@ public class ConsoleService {
 
     public void saveGameConsoleMap(GameConsoleMap gameConsoleMap) {
         gameConsoleMapRepository.save(gameConsoleMap);
+    }
+
+    public void saveGameConsoleMap(Game game, List<Console> consoles) {
+        consoles.forEach(c -> saveGameConsoleMap(new GameConsoleMap(game, c)));
     }
 
     public List<GameConsoleMap> getAllGameConsoleMapping() {
