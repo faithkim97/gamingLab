@@ -8,6 +8,7 @@ import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
 
+//TODO move all genre/game queries to here
 public interface GameGenreMapRepository extends CrudRepository<GameGenreMap, Integer> {
 
     @Query(value = "select genre from genre where game.id = ?1", nativeQuery = true)

@@ -5,13 +5,15 @@ import com.smith.gamingLab.service.GameService;
 import com.smith.gamingLab.service.GenreService;
 import com.smith.gamingLab.service.PlayableModeService;
 import com.smith.gamingLab.table.*;
-import jdk.internal.jline.internal.Nullable;
+import jdk.nashorn.internal.ir.RuntimeNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 //TODO add in functionality for delete
 //TODO rating?? make into table as well??
+
+//TODO create AdminController--> add and delete games/other objects
 @RestController
 @RequestMapping(path="/game")
 public class GameController {
@@ -60,14 +62,17 @@ public class GameController {
     //TODO expand on this for fields like genre, playable modes, etc..
     //TODO put in @Nullable for all nullable fields
     //TODO just fill all fields (checkedout, digital, etc...
+
+    //TODO value too long for description
     //TODO stopped working with postmappingt
-    @GetMapping("/addGame")
-    private void addGame(@RequestParam String title, @Nullable @RequestParam(required = false) String genreTitle, @RequestParam(required = false) String console,
-                         @RequestParam(required = false) String description, @RequestParam(required = false) Integer quantity, @RequestParam(required = false) String rating
-                         ) {
+//    @GetMapping("/addGame")
+    @PostMapping("/addGame")
+    private void addGame(@RequestParam(value = "title") String title, @RequestParam(value = "genre",required = false) String genreTitle, @RequestParam(value = "console",required = false) String console,
+                         @RequestParam(value = "quantity", required = false) Integer quantity, @RequestParam(value = "rating", required = false) String rating,
+                         @RequestParam(value = "playable mode", required = false) String mode) {
         Game g = new Game();
         g.setTitle(title);
-        g.setDescription(description);
+//        g.setDescription(description);
         if ( quantity != null) {
             g.setQuantity(quantity);
         }
@@ -154,6 +159,7 @@ public class GameController {
         return playableModeService.getAllMapping();
     }
 
+    //TODO finish this query
     @GetMapping("/findGame")
     private List<Game> getByKey(@RequestParam String key, @RequestParam(required = false) Boolean checkedOut, @RequestParam(required = false)  String mode ) {
         return gameService.getGameByKey(key, checkedOut);

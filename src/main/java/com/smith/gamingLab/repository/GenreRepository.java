@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface GenreRepository extends CrudRepository<Genre, Integer> {
 
-    @Query(value = "select * from genre where genre like %?1%", nativeQuery = true)
+    @Query(value = "select * from genre where genre=?1", nativeQuery = true)
     Genre getGenreByTitle(String genre);
 
     @Query(value = "select * from genre where genre like %?1%", nativeQuery = true)

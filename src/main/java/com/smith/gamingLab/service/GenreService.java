@@ -22,6 +22,7 @@ public class GenreService {
     @Autowired
     GameGenreMapRepository gameGenreMapRepository;
 
+    //TODO lowercase everything for genre
     public List<Genre> getGenresByTitleToken(String title, String token) {
         List<Genre> genres = new ArrayList<>();
         String[] parsed = StringParser.parseString(title, token);
