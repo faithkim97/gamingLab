@@ -1,5 +1,6 @@
 package com.smith.gamingLab.service;
 
+import com.smith.gamingLab.Misc.StringParser;
 import com.smith.gamingLab.repository.GamePlayableModeMapRepository;
 import com.smith.gamingLab.repository.PlayableModeRepository;
 import com.smith.gamingLab.table.Game;
@@ -41,8 +42,33 @@ public class PlayableModeService {
     }
 
     public PlayableMode getPlayableModeByTitle(String title) {
-        return playableModeRepository.getModeByText(title);
+        return playableModeRepository.getMode(title);
     }
+
+
+    public List<PlayableMode> getPlayableModes(String modeName, String token) {
+        List<PlayableMode> modes = new ArrayList<>();
+        String[] parsed = StringParser.parseString(modeName, token);
+        if (parsed.length > 0) {
+            PlayableMode pm;
+            for (String p : parsed) {
+                pm = playableModeRepository.getMode(p);
+                if (pm == null) {
+                    pm = new PlayableMode(modeName);
+                }
+
+                savePlayableMode(pm);
+                modes.add(pm);
+            }
+        }
+
+        return modes;
+    }
+
+    public void saveMapping(Game g, List<PlayableMode> modes) {
+        modes.forEach(m -> saveMapping(new GamePlayableModeMap(g, m)));
+    }
+
 
     public List<Game> getGamesByPlayableMode(PlayableMode p) {
         return mapRepository.getGamesByMode(p.getId());

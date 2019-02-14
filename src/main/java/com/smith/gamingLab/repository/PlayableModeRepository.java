@@ -7,6 +7,6 @@ import org.springframework.data.repository.CrudRepository;
 public interface PlayableModeRepository extends CrudRepository<PlayableMode, Integer> {
 
     @Query(value = "select * from playable_mode where mode = ?1", nativeQuery = true)
-    PlayableMode getModeByText(String mode);
+    PlayableMode getMode(String mode);
 
 }

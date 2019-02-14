@@ -5,7 +5,6 @@ import com.smith.gamingLab.service.GameService;
 import com.smith.gamingLab.service.GenreService;
 import com.smith.gamingLab.service.PlayableModeService;
 import com.smith.gamingLab.table.*;
-import jdk.nashorn.internal.ir.RuntimeNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -59,6 +58,13 @@ public class GameController {
         return g;
     }
 
+    private void savePlayableModes(Game g, String mode) {
+        if ( mode != null) {
+            List<PlayableMode> modes = playableModeService.getPlayableModes(mode, ",");
+            playableModeService.saveMapping(g, modes);
+        }
+    }
+
     //TODO expand on this for fields like genre, playable modes, etc..
     //TODO put in @Nullable for all nullable fields
     //TODO just fill all fields (checkedout, digital, etc...
@@ -79,6 +85,7 @@ public class GameController {
         if (rating != null) { g.setRating(rating);}
         saveGenres(g, genreTitle);
         saveConsoles(g, console);
+        savePlayableModes(g, mode);
         gameService.saveOrUpdate(g);
     }
 
