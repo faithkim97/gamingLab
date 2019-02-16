@@ -27,7 +27,7 @@ public class GameService {
         gameRepository.save(game);
     }
 
-    public void delete(int id) {
+    public void deleteGame(int id) {
         gameRepository.deleteById(id);
     }
 

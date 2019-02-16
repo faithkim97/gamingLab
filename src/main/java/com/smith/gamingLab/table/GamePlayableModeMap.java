@@ -11,10 +11,10 @@ public class GamePlayableModeMap {
     private int id;
 
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private Game game;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private PlayableMode mode;
 
     public GamePlayableModeMap() {}
