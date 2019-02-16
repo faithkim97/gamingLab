@@ -10,9 +10,10 @@ import java.util.List;
 
 public interface GameConsoleMapRepository extends CrudRepository<GameConsoleMap, Integer> {
 
-    @Query(value = "select console from game_console where game.id = ?1", nativeQuery = true)
-    List<Console> getConsolesByGameId(int gameId);
+    @Query(value = "select * from game_console where game_id = ?1", nativeQuery = true)
+    List<GameConsoleMap> getMappingByGameId(int gameId);
 
-    @Query(value = "select game from game_console where console.id = ?1", nativeQuery = true)
-    List<Game> getGamesByConsoleId(int consoleId);
+    @Query(value = " select * from game_console where console_id = ?1", nativeQuery = true)
+    List<GameConsoleMap> getMappingByConsoleId(int consoleId);
+
 }

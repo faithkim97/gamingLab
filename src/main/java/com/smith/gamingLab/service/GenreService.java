@@ -4,7 +4,6 @@ import com.smith.gamingLab.Misc.StringParser;
 import com.smith.gamingLab.repository.GameGenreMapRepository;
 import com.smith.gamingLab.repository.GenreRepository;
 import com.smith.gamingLab.table.Game;
-import com.smith.gamingLab.table.GameConsoleMap;
 import com.smith.gamingLab.table.GameGenreMap;
 import com.smith.gamingLab.table.Genre;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -82,6 +81,27 @@ public class GenreService {
         List<GameGenreMap> map = new ArrayList<>();
         gameGenreMapRepository.findAll().forEach(g -> map.add(g));
         return map;
+    }
+
+    public void deleteMappingByGameId(int gameId) {
+        List<GameGenreMap> map = gameGenreMapRepository.getMappingByGameId(gameId);
+        map.forEach(m -> deleteMapping(m.getId()));
+    }
+
+    /**Should only be used when deleting genre from genre table*/
+    //TODO unit test this
+    public void deleteMappingByGenreId(int genreId) {
+        List<GameGenreMap> map = gameGenreMapRepository.getMappingByGenreId(genreId);
+        map.forEach(m-> deleteMapping(m.getId()));
+    }
+
+    public void deleteGenre(int genreId) {
+        deleteMappingByGenreId(genreId);
+        genreRepository.deleteById(genreId);
+    }
+
+    public void deleteMapping(int id) {
+        gameGenreMapRepository.deleteById(id);
     }
 
 

@@ -13,4 +13,6 @@ public interface GenreRepository extends CrudRepository<Genre, Integer> {
 
     @Query(value = "select * from genre where genre like %?1%", nativeQuery = true)
     List<Genre> getGenresByTitle(String genre);
+
+
 }

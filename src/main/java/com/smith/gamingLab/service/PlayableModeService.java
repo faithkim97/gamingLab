@@ -70,12 +70,18 @@ public class PlayableModeService {
     }
 
 
-    public List<Game> getGamesByPlayableMode(PlayableMode p) {
-        return mapRepository.getGamesByMode(p.getId());
+    public List<PlayableMode> getModesByGameId(int gameId) {
+        List<PlayableMode> modes = new ArrayList<>();
+        List<GamePlayableModeMap> map =  mapRepository.getMappingByGameId(gameId);
+        map.forEach(m -> modes.add(m.getPlayableMode()));
+        return modes;
     }
 
-    public List<PlayableMode> getModesByGame(Game game) {
-        return mapRepository.getModesByGameId(game.getId());
+    public List<Game> getGamesByPlayableModeId(int modeId) {
+        List<Game> games = new ArrayList<>();
+        List<GamePlayableModeMap> map = mapRepository.getMappingByPlayableId(modeId);
+        map.forEach(m -> games.add(m.getGame()));
+        return games;
     }
 
     public void deletePlayableMode(int id) {

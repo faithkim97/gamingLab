@@ -11,10 +11,12 @@ import java.util.List;
 public interface GamePlayableModeMapRepository extends CrudRepository<GamePlayableModeMap, Integer> {
 
     @Query(value = "select * from game_mode where playable_mode.id = ?1", nativeQuery = true)
-    List<Game> getGamesByMode(int id);
+    List<GamePlayableModeMap> getMappingByPlayableId(int playableId);
 
-    @Query(value = "select * from game_mode where game.id = ?1", nativeQuery = true)
-    List<PlayableMode> getModesByGameId(int id);
+    @Query(value = "select * from game_mode where game_id = ?1", nativeQuery = true)
+    List<GamePlayableModeMap> getMappingByGameId(int id);
+
+
 
 
 

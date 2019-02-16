@@ -52,11 +52,6 @@ public class ConsoleService {
         return consoles;
     }
 
-    public List<Console> getConsolesByGameId(int id) {
-        return gameConsoleMapRepository.getConsolesByGameId(id);
-    }
-    public List<Game> getGamesByConsoleId(int id) { return gameConsoleMapRepository.getGamesByConsoleId(id);}
-
     public Console getConsoleByType(String consoleType) {
         return consoleRepository.getConsoleByType(consoleType);
     }
@@ -73,6 +68,49 @@ public class ConsoleService {
         List<GameConsoleMap> mapping = new ArrayList<>();
         gameConsoleMapRepository.findAll().forEach(gc -> mapping.add(gc));
         return mapping;
+    }
+
+    public void deleteMapping(int id) {
+        gameConsoleMapRepository.deleteById(id);
+    }
+
+    public void deleteMappingByGameId(int gameId) {
+        List<GameConsoleMap> maps = gameConsoleMapRepository.getMappingByGameId(gameId);
+        maps.forEach(m -> deleteMapping(m.getId()));
+    }
+
+    /** Should only be used when we want to delete the console from the console table*/
+    //TODO UNIT TEST
+    public void deleteMappingByConsoleId(int consoleId) {
+        List<GameConsoleMap> maps = gameConsoleMapRepository.getMappingByConsoleId(consoleId);
+        maps.forEach(m-> deleteMapping(m.getId()));
+    }
+
+    public void deleteConsole(int consoleId) {
+        deleteMappingByConsoleId(consoleId);
+        consoleRepository.deleteById(consoleId);
+    }
+
+    public List<Console> getConsolesByGameId(int gameId) {
+       List<Console> consoles = new ArrayList<>();
+       List<GameConsoleMap> map = getMappingByGameId(gameId);
+       map.forEach(m -> consoles.add(m.getConsole()));
+       return consoles;
+    }
+
+    public List<Game> getGamesByConsoleId(int consoleId) {
+        List<Game> games = new ArrayList<>();
+        List<GameConsoleMap> map = getMappingByConsoleId(consoleId);
+        map.forEach(m -> games.add(m.getGame()));
+        return games;
+    }
+
+    public List<GameConsoleMap> getMappingByGameId(int gameId) {
+        return gameConsoleMapRepository.getMappingByGameId(gameId);
+    }
+
+    public List<GameConsoleMap> getMappingByConsoleId(int consoleId) {
+        return gameConsoleMapRepository.getMappingByConsoleId(consoleId);
     }
 
 }

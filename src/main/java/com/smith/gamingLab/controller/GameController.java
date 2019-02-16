@@ -172,5 +172,26 @@ public class GameController {
         return gameService.getGameByKey(key, checkedOut);
     }
 
+    @GetMapping("/deleteGame")
+    private void deleteGame(@RequestParam int gameId) {
+        //TODO delete from playable mode mapping
+        consoleService.deleteMappingByGameId(gameId);
+        genreService.deleteMappingByGameId(gameId);
+
+
+
+    }
+
+    @GetMapping("/getMapping")
+    private List<PlayableMode> getMode(@RequestParam int gameId) {
+        return playableModeService.getModesByGameId(gameId);
+    }
+
+    @GetMapping("/modesmapping")
+    private List<GamePlayableModeMap> allModes() {
+        return playableModeService.getAllMapping();
+    }
+
+
 
 }
