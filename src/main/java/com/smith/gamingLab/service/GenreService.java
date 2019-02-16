@@ -52,12 +52,18 @@ public class GenreService {
         return genreRepository.getGenresByTitle(title);
     }
 
-    public List<Genre> getGenresByGame(Game game) {
-        return gameGenreMapRepository.getGenresbyGameId(game.getId());
+    public List<Genre> getGenresByGameId(int gameId) {
+        List<Genre> genres = new ArrayList<>();
+        List<GameGenreMap> map = gameGenreMapRepository.getMappingByGameId(gameId);
+        map.forEach(m -> genres.add(m.getGenre()));
+        return genres;
     }
 
-    public List<Game> getGamesByGenre(Genre genre) {
-        return gameGenreMapRepository.getGamesByGenreId(genre.getId());
+    public List<Game> getGamesByGenreId(int genreId) {
+        List<Game> games = new ArrayList<>();
+        List<GameGenreMap> map = gameGenreMapRepository.getMappingByGenreId(genreId);
+        map.forEach(m -> games.add(m.getGame()));
+        return games;
     }
 
     public void saveGenre(Genre genre) {

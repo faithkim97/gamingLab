@@ -84,11 +84,30 @@ public class PlayableModeService {
         return games;
     }
 
-    public void deletePlayableMode(int id) {
-        playableModeRepository.deleteById(id);
+    public List<GamePlayableModeMap> getMappingByGameId(int id) {
+        return mapRepository.getMappingByGameId(id);
     }
 
-    public void deleteMapping(int id) {
+    public List<GamePlayableModeMap> getMappingByModeId(int id) {
+        return mapRepository.getMappingByPlayableId(id);
+    }
+
+    public void deletePlayableMode(int modeId) {
+        deleteMappingByModeId(modeId);
+        playableModeRepository.deleteById(modeId);
+    }
+
+    public void deleteMappingByGameId(int gameId) {
+        List<GamePlayableModeMap> map = getMappingByGameId(gameId);
+        map.forEach(m -> deleteMappingById(m.getId()));
+    }
+
+    public void deleteMappingByModeId(int modeId) {
+        List<GamePlayableModeMap> map = getMappingByModeId(modeId);
+        map.forEach(m->deleteMappingById(m.getId()));
+    }
+
+    private void deleteMappingById(int id) {
         mapRepository.deleteById(id);
     }
 
