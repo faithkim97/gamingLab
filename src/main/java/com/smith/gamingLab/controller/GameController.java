@@ -70,24 +70,26 @@ public class GameController {
     //TODO just fill all fields (checkedout, digital, etc...
 
     //TODO value too long for description
-    //TODO stopped working with postmappingt
 //    @GetMapping("/addGame")
     @PostMapping("/addGame")
-    private void addGame(@RequestParam(value = "title") String title, @RequestParam(value = "genre",required = false) String genreTitle, @RequestParam(value = "console",required = false) String console,
+    private void addGame(@RequestParam(value = "title") String title, @RequestParam(value = "desc", required = false) String description,
+                        @RequestParam(value = "genre",required = false) String genreTitle,
+                         @RequestParam(value = "console",required = false) String console,
                          @RequestParam(value = "quantity", required = false) Integer quantity, @RequestParam(value = "rating", required = false) String rating,
-                         @RequestParam(value = "playable mode", required = false) String mode) {
+                         @RequestParam(value = "playable mode", required = false) String mode, @RequestParam(value = "checked_out", required = false) boolean checkedOut) {
         Game g = new Game();
-        g.setTitle(title);
-//        g.setDescription(description);
-        if ( quantity != null) {
-            g.setQuantity(quantity);
-        }
+        g.setTitle(title.toLowerCase());
+//        g.setDescription(description.toLowerCase());
+        int q = quantity == null ? 1 : quantity;
+        g.setQuantity(q);
         if (rating != null) { g.setRating(rating);}
-        saveGenres(g, genreTitle);
-        saveConsoles(g, console);
-        savePlayableModes(g, mode);
+        g.setIsCheckedOut(checkedOut);
+        saveGenres(g, genreTitle.toLowerCase());
+        saveConsoles(g, console.toLowerCase());
+        savePlayableModes(g, mode.toLowerCase());
         gameService.saveOrUpdate(g);
     }
+
 
     @GetMapping("/addConsole")
     private List<Console> addConsole(@RequestParam String name) {

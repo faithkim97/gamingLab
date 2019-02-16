@@ -7,7 +7,6 @@ with open(path) as fp:
   header = next(csvReader)
   for row in csvReader:
     data = dict(zip(header, row))
-    del data['checked_out']
     print(data)
     requests.post('http://localhost:8080/game/addGame', data=data)
 
