@@ -65,7 +65,6 @@ public class GameController {
         }
     }
 
-    //TODO expand on this for fields like genre, playable modes, etc..
     //TODO put in @Nullable for all nullable fields
     //TODO just fill all fields (checkedout, digital, etc...
 
@@ -76,7 +75,8 @@ public class GameController {
                         @RequestParam(value = "genre",required = false) String genreTitle,
                          @RequestParam(value = "console",required = false) String console,
                          @RequestParam(value = "quantity", required = false) Integer quantity, @RequestParam(value = "rating", required = false) String rating,
-                         @RequestParam(value = "playable mode", required = false) String mode, @RequestParam(value = "checked_out", required = false) boolean checkedOut) {
+                         @RequestParam(value = "playable mode", required = false) String mode, @RequestParam(value = "checked_out", required = false) boolean checkedOut,
+                         @RequestParam(value = "digital", required = false) boolean isDigital) {
         Game g = new Game();
         g.setTitle(title.toLowerCase());
 //        g.setDescription(description.toLowerCase());
@@ -84,12 +84,40 @@ public class GameController {
         g.setQuantity(q);
         if (rating != null) { g.setRating(rating);}
         g.setIsCheckedOut(checkedOut);
+        g.setIsDigital(isDigital);
         saveGenres(g, genreTitle.toLowerCase());
         saveConsoles(g, console.toLowerCase());
         savePlayableModes(g, mode.toLowerCase());
         gameService.saveOrUpdate(g);
     }
 
+    //TODO eventually postmapping
+    //TODO not doing desc yet until we can solve value too long problem
+    //TODO how to make this better?
+    @GetMapping("/editGame")
+    private String editGame(@RequestParam int gameId, @RequestParam(value = "title", required = false) String title,
+                          @RequestParam(value = "desc", required = false) String description,
+                          @RequestParam(value = "genre",required = false) String genreTitle,
+                          @RequestParam(value = "console",required = false) String console,
+                          @RequestParam(value = "quantity", required = false) Integer quantity,
+                          @RequestParam(value = "rating", required = false) String rating,
+                          @RequestParam(value = "playable mode", required = false) String mode,
+                          @RequestParam(value = "checked_out", required = false) boolean checkedOut,
+                          @RequestParam(value = "digital", required = false) boolean isDigital) {
+        Game game = gameService.getGameById(gameId);
+        if (game == null) { return "Error: Game not found by ID: " + gameId;}
+        if (title != null) {game.setTitle(title);}
+        if (genreTitle != null) { saveGenres(game, genreTitle);}
+        if (console != null) { saveConsoles(game, console);}
+        if (quantity != null) {game.setQuantity(quantity);}
+        if (rating != null) {game.setRating(rating);}
+        if (mode != null) {savePlayableModes(game, mode);}
+        if (checkedOut != game.getIsCheckedOut()) { game.setIsCheckedOut(checkedOut);}
+        if (isDigital != game.getIsDigital()) { game.setIsDigital(isDigital);}
+        gameService.saveOrUpdate(game);
+        return "Successfully edited game: ";
+
+    }
 
     @GetMapping("/addConsole")
     private List<Console> addConsole(@RequestParam String name) {
