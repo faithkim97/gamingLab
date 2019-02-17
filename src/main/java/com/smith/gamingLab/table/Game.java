@@ -18,6 +18,7 @@ public class Game {
     private boolean isDigital;
 
     public Game() {}
+    public Game(String title) { this.title = title;}
 
     public int getId() { return id; }
 

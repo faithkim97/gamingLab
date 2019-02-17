@@ -9,6 +9,7 @@ import com.smith.gamingLab.table.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 //TODO add in functionality for delete
 //TODO rating?? make into table as well??
@@ -51,14 +52,14 @@ public class GameController {
     }
 
     //TODO make this into a list of games
-    private Game saveGame(String gameTitle) {
-        Game g = gameService.getGameByTitle(gameTitle);
-        if (g == null) {
-            g = new Game();
-            g.setTitle(gameTitle);
+    private List<Game> saveGame(String gameTitle) {
+        List<Game> games = gameService.getGameByTitle(gameTitle);
+        if (games == null) {
+            games = new ArrayList<>();
+            games.add(new Game(gameTitle));
         }
-        gameService.saveOrUpdate(g);
-        return g;
+        games.forEach(g -> gameService.saveOrUpdate(g));
+        return games;
     }
 
     private void savePlayableModes(Game g, String mode) {
@@ -137,24 +138,24 @@ public class GameController {
     }
 
     //TODO make sure to map stuff to all games and not just one single instance
-//    @GetMapping("/mapConsole")
-//    private void addConsoleByGame(@RequestParam String gameTitle, @RequestParam String console) {
-//        Game g = saveGame(gameTitle);
-//        saveGenres(g, console);
-//    }
-//
-//    @GetMapping("/game_console")
-//    private List<GameConsoleMap> getGameConsoleMap() {
-//        return consoleService.getAllGameConsoleMapping();
-//    }
+    @GetMapping("/mapConsole")
+    private void addConsoleByGame(@RequestParam String gameTitle, @RequestParam String console) {
+        List<Game> games = saveGame(gameTitle);
+        games.forEach(g -> saveConsoles(g, console));
+    }
+
+    @GetMapping("/game_console")
+    private List<GameConsoleMap> getGameConsoleMap() {
+        return consoleService.getAllGameConsoleMapping();
+    }
 //
 //    //TODO tried to do @PostMapping but got a whitelist error
-//    @GetMapping("/mapGenre")
-//    private List<GameGenreMap> addGenrebyGame(@RequestParam String gameTitle, @RequestParam String genreTitle) {
-//        Game game = saveGame(gameTitle);
-//        saveGenres(game, genreTitle);
-//        return getAllGameGenres();
-//    }
+    @GetMapping("/mapGenre")
+    private List<GameGenreMap> addGenrebyGame(@RequestParam String gameTitle, @RequestParam String genreTitle) {
+        List<Game> games = saveGame(gameTitle);
+        games.forEach(g -> saveGenres(g, genreTitle));
+        return getAllGameGenres();
+    }
 
     @GetMapping("/addGenre")
     private List<Genre> addGenre(@RequestParam String genre) {
@@ -182,12 +183,8 @@ public class GameController {
     @GetMapping("/mapMode")
     private void mapPlayableMode(@RequestParam String gameName, @RequestParam String modeName) {
         PlayableMode p = playableModeService.getPlayableModeByTitle(modeName);
-        Game game = saveGame(gameName);
-        if (p == null) {
-            p = new PlayableMode(modeName);
-        }
-
-        playableModeService.saveMapping(new GamePlayableModeMap(game, p));
+        List<Game> games = saveGame(gameName);
+        games.forEach(g -> savePlayableModes(g, modeName));
     }
 
     @GetMapping("/modes")

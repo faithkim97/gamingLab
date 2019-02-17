@@ -44,8 +44,8 @@ public class GameService {
         return gameRepository.getGameIdByTitle(title);
     }
 
-    public Game getGameByTitle(String title) {
-        return gameRepository.getGameByTitle(title);
+    public List<Game> getGameByTitle(String title) {
+        return gameRepository.getGamesByExactTitle(title);
     }
 
     public List<Game> getGamesByTitle(String title) {
