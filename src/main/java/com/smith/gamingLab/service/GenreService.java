@@ -89,6 +89,7 @@ public class GenreService {
         return map;
     }
 
+
     public void deleteMappingByGameId(int gameId) {
         List<GameGenreMap> map = gameGenreMapRepository.getMappingByGameId(gameId);
         map.forEach(m -> deleteMapping(m.getId()));
@@ -109,8 +110,5 @@ public class GenreService {
     public void deleteMapping(int id) {
         gameGenreMapRepository.deleteById(id);
     }
-
-
-
 
 }

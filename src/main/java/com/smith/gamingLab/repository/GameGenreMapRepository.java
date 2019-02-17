@@ -17,4 +17,5 @@ public interface GameGenreMapRepository extends CrudRepository<GameGenreMap, Int
     @Query(value = "select * from game_genre_map where genre_id = ?1", nativeQuery = true)
     List<GameGenreMap> getMappingByGenreId(int genreId);
 
+
 }

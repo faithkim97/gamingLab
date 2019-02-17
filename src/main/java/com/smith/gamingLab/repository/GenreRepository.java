@@ -8,6 +8,7 @@ import java.util.List;
 
 public interface GenreRepository extends CrudRepository<Genre, Integer> {
 
+    @Deprecated
     @Query(value = "select * from genre where genre=?1", nativeQuery = true)
     Genre getGenreByTitle(String genre);
 

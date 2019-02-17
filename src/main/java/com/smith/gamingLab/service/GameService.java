@@ -1,5 +1,6 @@
 package com.smith.gamingLab.service;
 
+import com.smith.gamingLab.constant_enum.Rating;
 import com.smith.gamingLab.repository.GameRepository;
 import com.smith.gamingLab.table.Game;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,8 +52,7 @@ public class GameService {
         return gameRepository.getGamesByTitle(title);
     }
 
-    public List<Game> getGameByKey(String key) { return gameRepository.getGameByKeywords(key);}
-
-    public List<Game> getGameByKey(String key, Boolean checkedOut) { return gameRepository.getGameByKeywords(key, checkedOut);}
+    public List<Game> getGameByKey(String key, Boolean checkedOut, Boolean isDigital, String console, int rating, String mode)
+    { return gameRepository.getGameByKeywords(key, checkedOut, isDigital, console, rating, mode);}
 
 }

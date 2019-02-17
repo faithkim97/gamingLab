@@ -1,5 +1,6 @@
 package com.smith.gamingLab.controller;
 
+import com.smith.gamingLab.constant_enum.Rating;
 import com.smith.gamingLab.service.ConsoleService;
 import com.smith.gamingLab.service.GameService;
 import com.smith.gamingLab.service.GenreService;
@@ -49,9 +50,11 @@ public class GameController {
         }
     }
 
+    //TODO make this into a list of games
     private Game saveGame(String gameTitle) {
         Game g = gameService.getGameByTitle(gameTitle);
         if (g == null) {
+            g = new Game();
             g.setTitle(gameTitle);
         }
         gameService.saveOrUpdate(g);
@@ -107,13 +110,13 @@ public class GameController {
         Game game = gameService.getGameById(gameId);
         if (game == null) { return "Error: Game not found by ID: " + gameId;}
         if (title != null) {game.setTitle(title);}
-        if (genreTitle != null) { saveGenres(game, genreTitle);}
-        if (console != null) { saveConsoles(game, console);}
         if (quantity != null) {game.setQuantity(quantity);}
         if (rating != null) {game.setRating(rating);}
         if (mode != null) {savePlayableModes(game, mode);}
         if (checkedOut != game.getIsCheckedOut()) { game.setIsCheckedOut(checkedOut);}
         if (isDigital != game.getIsDigital()) { game.setIsDigital(isDigital);}
+        saveGenres(game, genreTitle);
+        saveConsoles(game, console);
         gameService.saveOrUpdate(game);
         return "Successfully edited game: ";
 
@@ -133,24 +136,25 @@ public class GameController {
         return consoleService.getAllConsoles();
     }
 
-    @GetMapping("/mapConsole")
-    private void addConsoleByGame(@RequestParam String gameTitle, @RequestParam String console) {
-        Game g = saveGame(gameTitle);
-        saveGenres(g, console);
-    }
-
-    @GetMapping("/game_console")
-    private List<GameConsoleMap> getGameConsoleMap() {
-        return consoleService.getAllGameConsoleMapping();
-    }
-
-    //TODO tried to do @PostMapping but got a whitelist error
-    @GetMapping("/mapGenre")
-    private List<GameGenreMap> addGenrebyGame(@RequestParam String gameTitle, @RequestParam String genreTitle) {
-        Game game = saveGame(gameTitle);
-        saveGenres(game, genreTitle);
-        return getAllGameGenres();
-    }
+    //TODO make sure to map stuff to all games and not just one single instance
+//    @GetMapping("/mapConsole")
+//    private void addConsoleByGame(@RequestParam String gameTitle, @RequestParam String console) {
+//        Game g = saveGame(gameTitle);
+//        saveGenres(g, console);
+//    }
+//
+//    @GetMapping("/game_console")
+//    private List<GameConsoleMap> getGameConsoleMap() {
+//        return consoleService.getAllGameConsoleMapping();
+//    }
+//
+//    //TODO tried to do @PostMapping but got a whitelist error
+//    @GetMapping("/mapGenre")
+//    private List<GameGenreMap> addGenrebyGame(@RequestParam String gameTitle, @RequestParam String genreTitle) {
+//        Game game = saveGame(gameTitle);
+//        saveGenres(game, genreTitle);
+//        return getAllGameGenres();
+//    }
 
     @GetMapping("/addGenre")
     private List<Genre> addGenre(@RequestParam String genre) {
@@ -198,9 +202,14 @@ public class GameController {
 
     //TODO finish this query
     @GetMapping("/findGame")
-    private List<Game> getByKey(@RequestParam String key, @RequestParam(required = false) Boolean checkedOut, @RequestParam(required = false)  String mode ) {
-        return gameService.getGameByKey(key, checkedOut);
+    private List<Game> getByKey(@RequestParam(required = false) String key, @RequestParam(required = false) boolean checkedOut,
+                                @RequestParam(required = false)  String mode, @RequestParam(required = false) String console,
+                                @RequestParam(required = false) boolean isDigital, @RequestParam(required = false) String rating ) {
+        return gameService.getGameByKey(key == null ? "" : key, checkedOut, isDigital,console == null ? "" : console,
+                rating == null ? -1 : Rating.valueOf(rating).ordinal(), mode == null ? "" : mode);
     }
+
+
 
     @GetMapping("/deleteGame")
     private void deleteGame(@RequestParam int gameId) {
@@ -208,6 +217,18 @@ public class GameController {
         genreService.deleteMappingByGameId(gameId);
         playableModeService.deleteMappingByGameId(gameId);
         gameService.deleteGame(gameId);
+    }
+
+    @GetMapping("/deleteConsole")
+    private void deleteConsole(@RequestParam int consoleId) {
+        consoleService.deleteMappingByConsoleId(consoleId);
+        consoleService.deleteConsole(consoleId);
+    }
+
+    @GetMapping("/deleteGenre")
+    private void deleteGenre(@RequestParam int genreId) {
+        genreService.deleteMappingByGenreId(genreId);
+        genreService.deleteGenre(genreId);
     }
 
 //    @GetMapping("/getMapping")
