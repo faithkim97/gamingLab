@@ -3,8 +3,10 @@ package com.smith.gamingLab.table;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "playable_mode")
 public class PlayableMode {
 
     @GeneratedValue

@@ -3,7 +3,7 @@ package com.smith.gamingLab.table;
 import javax.persistence.*;
 
 @Entity
-//TODO @Table(name = "game_genre")
+@Table(name = "game_genre")
 public class GameGenreMap {
     @GeneratedValue
     @Id
