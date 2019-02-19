@@ -72,10 +72,4 @@ public class GameController {
                 rating == null ? -1 : Rating.valueOf(rating).ordinal(), mode == null ? "" : mode);
     }
 
-
-    @GetMapping("/getMapping")
-    public List<PlayableMode> getModes(@RequestParam int gameId) {
-        return playableModeService.getModesByGameId(gameId);
-    }
-
 }
