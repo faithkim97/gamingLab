@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ConsoleService {
@@ -39,11 +40,15 @@ public class ConsoleService {
     }
 
     public Console getConsoleById(int id) {
-        return consoleRepository.findById(id).get();
+        Optional<Console> mightBeConsole = consoleRepository.findById(id);
+        if (mightBeConsole != null) {
+            return mightBeConsole.get();
+        }
+        return null;
     }
 
     public void saveConsole(Console console) {
-        consoleRepository.save(console);
+         consoleRepository.save(console);
     }
 
     public List<Console> getAllConsoles() {
