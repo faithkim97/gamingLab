@@ -38,7 +38,7 @@ public class ConsoleService {
         return consoles;
     }
 
-    public Console gameConsoleById(int id) {
+    public Console getConsoleById(int id) {
         return consoleRepository.findById(id).get();
     }
 

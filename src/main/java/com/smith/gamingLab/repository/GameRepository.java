@@ -17,6 +17,18 @@ public interface GameRepository extends CrudRepository<Game, Integer> {
             "left join game_mode on game.id = game_mode.game_id\n" +
             "left join playable_mode on game_mode.mode_id = playable_mode.id\n";
 
+    String selectByKeywords = "select g1.title, g1.description, g1.rating from game g1\n" +
+            "left join game_console gc1 on gc1.game_id = g1.id\n" +
+            "left join console c1 on c1.id = gc1.console_id\n" +
+            "left join console c2 on c2.console = ?1\n" +
+            "left join game_genre_map gg1 on gg1.game_id = g1.id\n" +
+            "left join genre gg2 on gg2.genre ?2\n" +
+            "left join game_mode gm1 on gm1.game_id = g1.id\n" +
+            "left join playable_mode pm1 on pm1.id = gm1.mode_id\n" +
+            "left join playable_mode pm2 on pm2.mode ?3\n" +
+            "left join game g2 on g2.is_checked_out = \n" +
+            "right join game g3 on g3.rating is not null";
+
 
     //TODO when doing description like Survive--not case sensitive in url but it is in query
     //so it doesn't query for tomb raider as well
@@ -34,9 +46,7 @@ public interface GameRepository extends CrudRepository<Game, Integer> {
     List<Game> getGamesByTitle(String title);
 
 
-    //TODO query doesn't work
-    @Query(value = full_table + "where (?1 is null or game.title like %?1%) or (?1 is null or genre.genre like %?1%) or (?1 is null or game.description like %?1%) and game.is_checked_out = ?2 "
-            +"and game.is_digital = ?3 and (?4 is null or console.console = ?4) and game.rating = ?5 and (?6 is null or playable_mode.mode = ?6)", nativeQuery = true)
+    @Query(value = "select * from game where description ?1", nativeQuery = true)
     List<Game> getGameByKeywords(String key, Boolean checkedOut, Boolean isDigital, String console, int rating, String mode);
 
 
