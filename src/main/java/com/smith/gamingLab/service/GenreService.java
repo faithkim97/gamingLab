@@ -96,7 +96,6 @@ public class GenreService {
     }
 
     /**Should only be used when deleting genre from genre table*/
-    //TODO unit test this
     public void deleteMappingByGenreId(int genreId) {
         List<GameGenreMap> map = gameGenreMapRepository.getMappingByGenreId(genreId);
         map.forEach(m-> deleteMapping(m.getId()));

@@ -64,13 +64,14 @@ public class ConsoleServiceTest {
         verify(consoleRepository).deleteById(id);
     }
 
+    //TODO redo
     @Test
     public void test_saveMapping() {
-//        List<Console> consoles = Arrays.asList(new Console("ps4"), new Console("nintendo switch"), new Console("PC"));
+        List<Console> consoles = Arrays.asList(new Console("ps4"), new Console("nintendo switch"), new Console("PC"));
         GameConsoleMap map = new GameConsoleMap( new Game("tomb raider"), new Console("ps4"));
         consoleService.saveGameConsoleMap(map);
-        verify(mapRepository, times(1)).save(map);
-//        consoleService.saveGameConsoleMap(new Game("tomb raider"), consoles);
+        consoleService.saveGameConsoleMap(new Game("tomb raider"), consoles);
+        verify(mapRepository, times(consoles.size()+1)).save(any(GameConsoleMap.class));
     }
 
     @Test

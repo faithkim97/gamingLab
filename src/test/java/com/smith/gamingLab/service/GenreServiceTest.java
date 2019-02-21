@@ -90,6 +90,82 @@ public class GenreServiceTest {
         }
     }
 
+    @Test
+    public void test_getGamesByGenreId() {
+        int id = 1;
+        Genre genre = new Genre("casual");
+        List<GameGenreMap> map = Arrays.asList(new GameGenreMap(new Game("tomb raider"),genre),
+                new GameGenreMap(new Game("uncharted"), genre));
+        when(mapRepository.getMappingByGenreId(anyInt())).thenReturn(map);
+        List<Game> expected = Arrays.asList(new Game("tomb raider"), new Game("uncharted"));
+        List<Game> actual = genreService.getGamesByGenreId(id);
+        assertEquals(expected.size(), actual.size());
+        for (int i = 0; i < expected.size(); i++) {
+            assertEquals(expected.get(i).getTitle(), actual.get(i).getTitle());
+        }
+    }
 
-    
+    @Test
+    public void test_saveGenre() {
+        Genre genre = new Genre("mock");
+        genreService.saveGenre(genre);
+        verify(genreRepository).save(genre);
+    }
+
+    @Test
+    public void test_saveGameGenreMap() {
+        GameGenreMap map = new GameGenreMap(new Game("mock game"), new Genre("mock genre"));
+        genreService.saveGameGenreMap(map);
+        verify(mapRepository).save(map);
+    }
+
+    @Test
+    public void test_saveGameGenresMap_byGenres() {
+        List<Genre> genres = Arrays.asList(new Genre("mock1"), new Genre("mock2"));
+        Game game = new Game("mock");
+        genreService.saveGameGenreMap(game, genres);
+        verify(mapRepository, times(genres.size())).save(any(GameGenreMap.class));
+    }
+
+    @Test
+    public void test_getAllGameGenreMap() {
+        List<GameGenreMap> map = Arrays.asList(new GameGenreMap(new Game("mock game1"), new Genre("mock1")),
+                new GameGenreMap(new Game("mock game 2"), new Genre("mock2")));
+        when(mapRepository.findAll()).thenReturn(map);
+        List<GameGenreMap> actual = genreService.getAllGameGenreMap();
+        assertEquals(map.size(), actual.size());
+        assertEquals(map, actual);
+    }
+
+    @Test
+    public void test_deleteMappingByGameId() {
+        List<GameGenreMap> map = Arrays.asList(new GameGenreMap(new Game("mock game1"), new Genre("mock1")),
+                new GameGenreMap(new Game("mock game 2"), new Genre("mock2")));
+        when(mapRepository.getMappingByGameId(anyInt())).thenReturn(map);
+        genreService.deleteMappingByGameId(anyInt());
+        verify(mapRepository, times(map.size())).deleteById(anyInt());
+    }
+
+    @Test
+    public void test_deleteMappingByGenreId() {
+        List<GameGenreMap> map = Arrays.asList(new GameGenreMap(new Game("mock game1"), new Genre("mock1")),
+                new GameGenreMap(new Game("mock game 2"), new Genre("mock2")));
+        when(mapRepository.getMappingByGenreId(anyInt())).thenReturn(map);
+        genreService.deleteMappingByGenreId(anyInt());
+        verify(mapRepository, times(map.size())).deleteById(anyInt());
+    }
+
+    @Test
+    public void test_deleteGenre() {
+        genreService.deleteGenre(anyInt());
+        verify(genreRepository).deleteById(anyInt());
+    }
+
+    @Test
+    public void test_deleteMapping() {
+        genreService.deleteMapping(anyInt());
+        verify(mapRepository).deleteById(anyInt());
+    }
+
+
 }//endclass
