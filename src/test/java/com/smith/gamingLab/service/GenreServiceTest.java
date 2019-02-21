@@ -2,6 +2,8 @@ package com.smith.gamingLab.service;
 
 import com.smith.gamingLab.repository.GameGenreMapRepository;
 import com.smith.gamingLab.repository.GenreRepository;
+import com.smith.gamingLab.table.Game;
+import com.smith.gamingLab.table.GameGenreMap;
 import com.smith.gamingLab.table.Genre;
 import org.junit.Before;
 import org.junit.Test;
@@ -9,6 +11,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -40,10 +43,53 @@ public class GenreServiceTest {
         for (int i = 0; i < expected.size(); i++) {
             assertEquals(expected.get(i).getGenre(), actual.get(i).getGenre());
         }
-
-       verify(genreRepository).getGenreByTitle("open world");
-       verify(genreRepository).getGenreByTitle("casual");
-       verify(genreRepository).getGenreByTitle("adventure");
-
+       expected.forEach(g -> verify(genreRepository).getGenreByTitle(g.getGenre()));
+       actual.forEach(g -> verify(genreRepository).save(g));
     }
-}
+
+    @Test
+    public void test_getGenresByTitleToken_titleEmpty() {
+        String genreTitle = "";
+        String token = ",";
+        List<Genre> expected = new ArrayList<>();
+        List<Genre> actual = genreService.getGenresByTitleToken(genreTitle, token);
+        assertEquals(expected.isEmpty(), actual.isEmpty());
+        verify(genreRepository, never()).getGenreByTitle("");
+        verify(genreRepository, never()).save(any(Genre.class));
+    }
+
+    @Test
+    public void test_getAllGenres() {
+        List<Genre> expected = Arrays.asList(new Genre("casual"), new Genre("indie"));
+        when(genreRepository.findAll()).thenReturn(expected);
+        List<Genre> actual = genreService.getAllGenres();
+        assertEquals(expected.size(), actual.size());
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void test_getGenres() {
+        List<Genre> expected = Arrays.asList(new Genre("tomb raider"), new Genre("tomb"), new Genre("life tomb bomb"));
+        when(genreRepository.getGenresByTitle(any(String.class))).thenReturn(expected);
+        List<Genre> actual = genreService.getGenres("tomb");
+        assertEquals(expected.size(), actual.size());
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void test_getGenresByGameId() {
+        int id = 0;
+        Game g = new Game("tomb raider");
+        List<GameGenreMap> map = Arrays.asList(new GameGenreMap(g, new Genre("casual")), new GameGenreMap(g, new Genre("adventure")));
+        List<Genre> expected = Arrays.asList(new Genre("casual"), new Genre("adventure"));
+        when(mapRepository.getMappingByGameId(anyInt())).thenReturn(map);
+        List<Genre> actual = genreService.getGenresByGameId(id);
+        assertEquals(expected.size(), actual.size());
+        for (int i = 0; i < expected.size(); i++) {
+            assertEquals(expected.get(i).getGenre(), actual.get(i).getGenre());
+        }
+    }
+
+
+    
+}//endclass

@@ -174,6 +174,8 @@ public class ConsoleServiceTest {
         for (int i = 0; i < consoles.size(); i++) {
             assertEquals(consoles.get(i).getConsole(), testConsoles.get(i).getConsole());
         }
+        consoles.forEach(c -> verify(consoleRepository).getConsoleByType(c.getConsole()));
+        testConsoles.forEach(c -> verify(consoleRepository).save(c));
     }
 
 }//endclass
