@@ -39,6 +39,7 @@ public class ConsoleService {
         return consoles;
     }
 
+
     public Console getConsoleById(int id) {
         Optional<Console> mightBeConsole = consoleRepository.findById(id);
         if (mightBeConsole != null) {

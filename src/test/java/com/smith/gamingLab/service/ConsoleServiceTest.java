@@ -83,7 +83,7 @@ public class ConsoleServiceTest {
     @Test
     public void test_getAllMapping() {
         List<GameConsoleMap> map = Arrays.asList(new GameConsoleMap(new Game("tomb raider"), new Console("ps4")),
-                                                    new GameConsoleMap(new Game("mario kart"), new Console("nintendo switch")));
+                new GameConsoleMap(new Game("mario kart"), new Console("nintendo switch")));
         when(mapRepository.findAll()).thenReturn(map);
         assertEquals(map, consoleService.getAllGameConsoleMapping());
     }
@@ -160,15 +160,27 @@ public class ConsoleServiceTest {
         verify(mapRepository).getMappingByConsoleId(id);
     }
 
+//    @Test
+//    public void test_getConsoleById() {
+//        int id = 1;
+//        Console c = new Console();
+//        c.setId(1);
+//        c.setConsole("ps4");
+//        when(consoleRepository.findById(any(Integer.class)).get()).thenReturn(c);
+//        assertEquals(c, consoleService.getConsoleById(id));
+//
+//    }
 
-
-
-
-
-
-
-
-
-
+    //TODO test with other tokens
+    @Test
+    public void test_getConsoles() {
+        String consoleName = "ps4,pc";
+        String token = ",";
+        List<Console> consoles = Arrays.asList(new Console("ps4"), new Console("pc"));
+        List<Console> testConsoles = consoleService.getConsoles(consoleName, token);
+        for (int i = 0; i < consoles.size(); i++) {
+            assertEquals(consoles.get(i).getConsole(), testConsoles.get(i).getConsole());
+        }
+    }
 
 }//endclass
