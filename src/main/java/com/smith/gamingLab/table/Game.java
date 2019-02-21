@@ -53,6 +53,8 @@ public class Game {
 
     public void setIsDigital(boolean isDigital) { this.isDigital = isDigital; }
 
+    public void setId(int id) {this.id = id;}
+
 
 
 }

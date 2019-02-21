@@ -190,8 +190,4 @@ public class AdminController {
         playableModeService.deletePlayableMode(modeId);
         return gameController.getAllModes();
     }
-
-
-
-
 }//endclass

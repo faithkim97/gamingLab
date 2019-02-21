@@ -36,7 +36,7 @@ public class ConsoleServiceTest {
     private ConsoleService consoleService;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         MockitoAnnotations.initMocks(this);
     }
 

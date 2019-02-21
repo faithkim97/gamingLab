@@ -36,10 +36,7 @@ public class GameService {
 //        return gameRepository.getGameByGenre(genre);
 //    }
 
-    public List<Game> getGameByFields(String title, String description) {
-        return gameRepository.getGames(title, description);
-    }
-
+    //TODO remove this??
     public int getIdByGameTitle(String title) {
         return gameRepository.getGameIdByTitle(title);
     }
@@ -52,6 +49,8 @@ public class GameService {
         return gameRepository.getGamesByTitle(title);
     }
 
+
+    //TODO fix query
     public List<Game> getGameByKey(String key, Boolean checkedOut, Boolean isDigital, String console, int rating, String mode)
     { return gameRepository.getGameByKeywords(key, checkedOut, isDigital, console, rating, mode);}
 
