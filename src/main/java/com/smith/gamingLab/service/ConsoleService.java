@@ -1,6 +1,6 @@
 package com.smith.gamingLab.service;
 
-import com.smith.gamingLab.Misc.StringParser;
+import com.smith.gamingLab.misc.StringParser;
 import com.smith.gamingLab.repository.ConsoleRepository;
 import com.smith.gamingLab.repository.GameConsoleMapRepository;
 import com.smith.gamingLab.table.Console;

@@ -50,8 +50,12 @@ public class GameService {
     }
 
 
-    //TODO fix query
-    public List<Game> getGameByKey(String key, Boolean checkedOut, Boolean isDigital, String console, int rating, String mode)
-    { return gameRepository.getGameByKeywords(key, checkedOut, isDigital, console, rating, mode);}
+//    //TODO fix query
+//    public List<Game> getGameByKey(String key, Boolean checkedOut, Boolean isDigital, String console, int rating, String mode)
+//    { return gameRepository.getGameByKeywords(key, checkedOut, isDigital, console, rating, mode);}
+
+    public List<Game> getGameByKey(String key) {
+        return gameRepository.getGameByKeywords(key);
+    }
 
 }

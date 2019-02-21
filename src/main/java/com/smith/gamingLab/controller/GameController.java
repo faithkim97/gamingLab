@@ -68,8 +68,10 @@ public class GameController {
     public List<Game> getByKey(@RequestParam(required = false) String key, @RequestParam(required = false) boolean checkedOut,
                                 @RequestParam(required = false)  String mode, @RequestParam(required = false) String console,
                                 @RequestParam(required = false) boolean isDigital, @RequestParam(required = false) String rating ) {
-        return gameService.getGameByKey(key == null ? "" : key, checkedOut, isDigital,console == null ? "" : console,
-                rating == null ? -1 : Rating.valueOf(rating).ordinal(), mode == null ? "" : mode);
+//        return gameService.getGameByKey(key == null ? "" : key, checkedOut, isDigital,console == null ? "" : console,
+//                rating == null ? -1 : Rating.valueOf(rating).ordinal(), mode == null ? "" : mode);
+
+        return gameService.getGameByKey(key);
     }
 
 }
