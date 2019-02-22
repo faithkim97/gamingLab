@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+
 //TODO create getgenrebyid
 @Service
 public class GenreService {
@@ -20,6 +22,15 @@ public class GenreService {
 
     @Autowired
     GameGenreMapRepository gameGenreMapRepository;
+
+
+    public Optional<Genre> getGenreById(int id) {
+        return genreRepository.findById(id);
+    }
+
+    public Optional<GameGenreMap> getMappingById(int id) {
+        return gameGenreMapRepository.findById(id);
+    }
 
     //TODO lowercase everything for genre
     public List<Genre> getGenresByTitleToken(String title, String token) {

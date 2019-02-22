@@ -36,16 +36,17 @@ public class PlayableModeTest {
 
     @Test
     public void test_getModeById() {
-        when(modeRepository.findById(anyInt())).thenReturn(Optional.of(new PlayableMode()));
-        modeService.getPlayableModeById(anyInt());
-        verify(modeRepository).findById(anyInt());
+        PlayableMode p = new PlayableMode("mock");
+        when(modeRepository.findById(anyInt())).thenReturn(Optional.of(p));
+        assertEquals(p, modeService.getPlayableModeById(anyInt()).get());
     }
 
     @Test
     public void test_getMappingById() {
-        when(mapRepository.findById(anyInt())).thenReturn(Optional.of(new GamePlayableModeMap()));
+        GamePlayableModeMap map = new GamePlayableModeMap();
+        when(mapRepository.findById(anyInt())).thenReturn(Optional.of(map));
         modeService.getMappingById(anyInt());
-        verify(mapRepository).findById(anyInt());
+        assertEquals(map, modeService.getMappingById(anyInt()).get());
     }
 
     @Test

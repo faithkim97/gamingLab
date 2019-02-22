@@ -14,6 +14,7 @@ import org.mockito.MockitoAnnotations;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import static junit.framework.TestCase.assertEquals;
 import static org.mockito.Mockito.*;
@@ -31,6 +32,20 @@ public class GenreServiceTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
+    }
+
+    @Test
+    public void test_getGenreById() {
+        Genre genre = new Genre("mock");
+        when(genreRepository.findById(anyInt())).thenReturn(Optional.of(new Genre("mock")));
+        assertEquals(genre.getGenre(), genreService.getGenreById(anyInt()).get().getGenre());
+    }
+
+    @Test
+    public void test_getMappingById() {
+        GameGenreMap map = new GameGenreMap();
+        when(mapRepository.findById(anyInt())).thenReturn(Optional.of(map));
+        assertEquals(map, genreService.getMappingById(anyInt()).get());
     }
 
     @Test

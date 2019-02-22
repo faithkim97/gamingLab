@@ -14,6 +14,7 @@ import org.mockito.MockitoAnnotations;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.*;
@@ -31,6 +32,21 @@ public class ConsoleServiceTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
+    }
+
+
+    @Test
+    public void test_getConsoleById() {
+        Console c = new Console("mock");
+        when(consoleRepository.findById(anyInt())).thenReturn(Optional.of(new Console("mock")));
+        assertEquals(c.getConsole(), consoleService.getConsoleById(anyInt()).get().getConsole());
+    }
+
+    @Test
+    public void test_getMappingById() {
+        GameConsoleMap map = new GameConsoleMap();
+        when(mapRepository.findById(anyInt())).thenReturn(Optional.of(map));
+        assertEquals(map, consoleService.getMappingById(anyInt()).get());
     }
 
     @Test
@@ -64,7 +80,6 @@ public class ConsoleServiceTest {
         verify(consoleRepository).deleteById(id);
     }
 
-    //TODO redo
     @Test
     public void test_saveMapping() {
         List<Console> consoles = Arrays.asList(new Console("ps4"), new Console("nintendo switch"), new Console("PC"));
@@ -153,17 +168,6 @@ public class ConsoleServiceTest {
         assertEquals(map, consoleService.getMappingByConsoleId(id));
         verify(mapRepository).getMappingByConsoleId(id);
     }
-
-//    @Test
-//    public void test_getConsoleById() {
-//        int id = 1;
-//        Console c = new Console();
-//        c.setId(1);
-//        c.setConsole("ps4");
-//        when(consoleRepository.findById(any(Integer.class)).get()).thenReturn(c);
-//        assertEquals(c, consoleService.getConsoleById(id));
-//
-//    }
 
     //TODO test with other tokens
     @Test
