@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-
+//TODO create getgenrebyid
 @Service
 public class GenreService {
 
@@ -100,12 +100,13 @@ public class GenreService {
         List<GameGenreMap> map = gameGenreMapRepository.getMappingByGenreId(genreId);
         map.forEach(m-> deleteMapping(m.getId()));
     }
-
+    //TODO catch invalid id error
     public void deleteGenre(int genreId) {
         deleteMappingByGenreId(genreId);
         genreRepository.deleteById(genreId);
     }
 
+    //TODO catch invalid id error
     public void deleteMapping(int id) {
         gameGenreMapRepository.deleteById(id);
     }

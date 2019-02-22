@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(path = "/admin")
@@ -69,8 +70,9 @@ public class AdminController {
                             @RequestParam(value = "playable mode", required = false) String mode,
                             @RequestParam(value = "checked_out", required = false) boolean checkedOut,
                             @RequestParam(value = "digital", required = false) boolean isDigital) {
-        Game game = gameService.getGameById(gameId);
-        if (game == null) { return "Error: Game not found by ID: " + gameId;}
+        Optional<Game> gameO = gameService.getGameById(gameId);
+        if (!gameO.isPresent()) { return "Error: Game not found by ID: " + gameId;}
+        Game game = gameO.get();
         if (title != null) {game.setTitle(title);}
         if (quantity != null) {game.setQuantity(quantity);}
         if (rating != null) {game.setRating(rating);}

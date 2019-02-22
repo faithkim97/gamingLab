@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PlayableModeService {
@@ -20,6 +21,10 @@ public class PlayableModeService {
 
     @Autowired
     private GamePlayableModeMapRepository mapRepository;
+
+    public Optional<GamePlayableModeMap> getMappingById(int id) {
+        return mapRepository.findById(id);
+    }
 
     public List<PlayableMode> getAllPlayableModes() {
         List<PlayableMode> modes = new ArrayList<>();
@@ -54,7 +59,7 @@ public class PlayableModeService {
             for (String p : parsed) {
                 pm = playableModeRepository.getMode(p);
                 if (pm == null) {
-                    pm = new PlayableMode(modeName);
+                    pm = new PlayableMode(p);
                 }
 
                 savePlayableMode(pm);
@@ -69,6 +74,9 @@ public class PlayableModeService {
         modes.forEach(m -> saveMapping(new GamePlayableModeMap(g, m)));
     }
 
+    public Optional<PlayableMode> getPlayableModeById(int id) {
+        return playableModeRepository.findById(id);
+    }
 
     public List<PlayableMode> getModesByGameId(int gameId) {
         List<PlayableMode> modes = new ArrayList<>();
@@ -93,6 +101,10 @@ public class PlayableModeService {
     }
 
     public void deletePlayableMode(int modeId) {
+        Optional<PlayableMode> mode = playableModeRepository.findById(modeId);
+        if (!mode.isPresent()) {
+            return;
+        }
         deleteMappingByModeId(modeId);
         playableModeRepository.deleteById(modeId);
     }
@@ -107,9 +119,13 @@ public class PlayableModeService {
         map.forEach(m->deleteMappingById(m.getId()));
     }
 
-    private void deleteMappingById(int id) {
+    public void deleteMappingById(int id) {
+        Optional<GamePlayableModeMap> map = mapRepository.findById(id);
+        if (!map.isPresent()) { return; }
         mapRepository.deleteById(id);
     }
+
+
 
 
 }

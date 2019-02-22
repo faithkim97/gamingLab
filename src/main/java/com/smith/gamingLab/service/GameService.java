@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+
 @Service
 public class GameService {
 
@@ -20,8 +22,8 @@ public class GameService {
         return games;
     }
 
-    public Game getGameById(int id) {
-        return gameRepository.findById(id).get();
+    public Optional<Game> getGameById(int id) {
+        return gameRepository.findById(id);
     }
 
     public void saveOrUpdate(Game game) {

@@ -40,12 +40,8 @@ public class ConsoleService {
     }
 
 
-    public Console getConsoleById(int id) {
-        Optional<Console> mightBeConsole = consoleRepository.findById(id);
-        if (mightBeConsole != null) {
-            return mightBeConsole.get();
-        }
-        return null;
+    public Optional<Console> getConsoleById(int id) {
+        return consoleRepository.findById(id);
     }
 
     public void saveConsole(Console console) {
