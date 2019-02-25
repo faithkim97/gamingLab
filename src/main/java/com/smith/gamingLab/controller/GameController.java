@@ -71,7 +71,7 @@ public class GameController {
 //        return gameService.getGameByKey(key == null ? "" : key, checkedOut, isDigital,console == null ? "" : console,
 //                rating == null ? -1 : Rating.valueOf(rating).ordinal(), mode == null ? "" : mode);
 
-        return gameService.getGameByKey(key, checkedOut, isDigital, console);
+        return gameService.getGameByKey(key, checkedOut, isDigital, console, mode, rating);
     }
 
 }

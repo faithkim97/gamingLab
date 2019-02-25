@@ -56,8 +56,9 @@ public class GameService {
 //    public List<Game> getGameByKey(String key, Boolean checkedOut, Boolean isDigital, String console, int rating, String mode)
 //    { return gameRepository.getGameByKeywords(key, checkedOut, isDigital, console, rating, mode);}
 
-    public List<Game> getGameByKey(String key, Boolean checkedOut, Boolean isDigital, String console) {
-        return gameRepository.getGameByKeywords(key, checkedOut, isDigital, console);
+    public List<Game> getGameByKey(String key, Boolean checkedOut, Boolean isDigital, String console, String mode, String rating) {
+        Rating rating_enum = rating != null ? Rating.valueOf(rating) : null;
+        return gameRepository.getGameByKeywords(key, checkedOut, isDigital, console, mode, rating_enum != null ? rating_enum.ordinal() : null);
     }
 
 }
