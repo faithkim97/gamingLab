@@ -56,8 +56,8 @@ public class GameService {
 //    public List<Game> getGameByKey(String key, Boolean checkedOut, Boolean isDigital, String console, int rating, String mode)
 //    { return gameRepository.getGameByKeywords(key, checkedOut, isDigital, console, rating, mode);}
 
-    public List<Game> getGameByKey(String key) {
-        return gameRepository.getGameByKeywords(key);
+    public List<Game> getGameByKey(String key, Boolean checkedOut, Boolean isDigital, String console) {
+        return gameRepository.getGameByKeywords(key, checkedOut, isDigital, console);
     }
 
 }

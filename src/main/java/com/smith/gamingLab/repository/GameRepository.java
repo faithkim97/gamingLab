@@ -10,12 +10,12 @@ import java.util.List;
 public interface GameRepository extends CrudRepository<Game, Integer> {
 
     String full_table = "select * from game \n" +
-            "left join game_genre_map on game.id = game_genre_map.game_id\n" +
-            "left join genre on game_genre_map.genre_id = genre.id \n" +
+            "left join game_genre on game.id = game_genre.game_id\n" +
+            "left join genre on game_genre.genre_id = genre.id \n" +
             "left join game_console on game.id = game_console.game_id\n" +
             "left join console on game_console.console_id = console.id\n" +
             "left join game_mode on game.id = game_mode.game_id\n" +
-            "left join playable_mode on game_mode.mode_id = playable_mode.id\n";
+            "left join playable_mode on game_mode.mode_id = playable_mode.id";
 
     String selectByKeywords = "select g1.title, g1.description, g1.rating from game g1\n" +
             "left join game_console gc1 on gc1.game_id = g1.id\n" +
@@ -49,8 +49,11 @@ public interface GameRepository extends CrudRepository<Game, Integer> {
 //    @Query(value = "select * from game where description ?1", nativeQuery = true)
     //use full_table + where query
 //    List<Game> getGameByKeywords(String key, Boolean checkedOut, Boolean isDigital, String console, int rating, String mode);
-    @Query(value = "select * from game where (?1 is null or title like %?1%)", nativeQuery = true)
-    List<Game> getGameByKeywords(String key);
+//    @Query(value = "select * from game where (?1 is null or title like %?1%)", nativeQuery = true)
+    @Query(value = full_table + " where (?1 is null or game.title like %?1% or game.description like %?1% or genre like %?1%)" +
+                                " and (?2 is null or game.is_checked_out = ?2) and (?3 is null or game.is_digital = ?3)" +
+                                " and (?4 is null or console = ?4)", nativeQuery = true)
+    List<Game> getGameByKeywords(String key, Boolean checkedOut, Boolean isDigital, String console);
 
 
 }
