@@ -2,7 +2,9 @@ package com.smith.gamingLab.service;
 
 import com.smith.gamingLab.constant_enum.Rating;
 import com.smith.gamingLab.repository.GameRepository;
+import com.smith.gamingLab.repository.MasterGameRepository;
 import com.smith.gamingLab.table.Game;
+import com.smith.gamingLab.table.MasterGame;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +17,15 @@ public class GameService {
 
     @Autowired
     GameRepository gameRepository;
+
+    @Autowired
+    MasterGameRepository masterGameRepository;
+
+    public List<MasterGame> getAllMasterGames() {
+        List<MasterGame> games = new ArrayList<>();
+        masterGameRepository.findAll().forEach( g -> games.add(g));
+        return games;
+    }
 
     public List<Game> getAllGames() {
         List<Game> games = new ArrayList<>();
@@ -30,13 +41,15 @@ public class GameService {
         gameRepository.save(game);
     }
 
+    public void saveMasterGame(MasterGame game) {
+        masterGameRepository.save(game);
+    }
+
+    public void deleteMasterGame(int id) {masterGameRepository.deleteById(id);}
+
     public void deleteGame(int id) {
         gameRepository.deleteById(id);
     }
-
-//    public List<Game> getGameByGenre(String genre) {
-//        return gameRepository.getGameByGenre(genre);
-//    }
 
     //TODO remove this??
     public int getIdByGameTitle(String title) {
@@ -51,14 +64,14 @@ public class GameService {
         return gameRepository.getGamesByTitle(title);
     }
 
-
-//    //TODO fix query
-//    public List<Game> getGameByKey(String key, Boolean checkedOut, Boolean isDigital, String console, int rating, String mode)
-//    { return gameRepository.getGameByKeywords(key, checkedOut, isDigital, console, rating, mode);}
-
     public List<Game> getGameByKey(String key, Boolean checkedOut, Boolean isDigital, String console, String mode, String rating) {
         Rating rating_enum = rating != null ? Rating.valueOf(rating) : null;
         return gameRepository.getGameByKeywords(key, checkedOut, isDigital, console, mode, rating_enum != null ? rating_enum.ordinal() : null);
+    }
+
+    public List<MasterGame> getMasterGameByKey(String key, Boolean checkedOut, Boolean isDigital, String console, String mode, String rating) {
+        Rating rating_enum = rating != null ? Rating.valueOf(rating) : null;
+        return masterGameRepository.getGamesByKeyword(key, checkedOut, isDigital, console, mode, rating_enum != null ? rating_enum.ordinal() : null);
     }
 
 }

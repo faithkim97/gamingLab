@@ -70,6 +70,10 @@ public class GenreService {
         return genres;
     }
 
+    public List<GameGenreMap> getMappingByGameId(int gameId) {
+        return gameGenreMapRepository.getMappingByGameId(gameId);
+    }
+
     public List<Game> getGamesByGenreId(int genreId) {
         List<Game> games = new ArrayList<>();
         List<GameGenreMap> map = gameGenreMapRepository.getMappingByGenreId(genreId);

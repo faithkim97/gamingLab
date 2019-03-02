@@ -85,6 +85,7 @@ public class PlayableModeService {
         return modes;
     }
 
+
     public List<Game> getGamesByPlayableModeId(int modeId) {
         List<Game> games = new ArrayList<>();
         List<GamePlayableModeMap> map = mapRepository.getMappingByPlayableId(modeId);

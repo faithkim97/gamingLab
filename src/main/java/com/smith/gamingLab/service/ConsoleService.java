@@ -111,6 +111,7 @@ public class ConsoleService {
         return games;
     }
 
+
     public List<GameConsoleMap> getMappingByGameId(int gameId) {
         return gameConsoleMapRepository.getMappingByGameId(gameId);
     }

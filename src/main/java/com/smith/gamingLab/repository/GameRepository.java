@@ -17,20 +17,6 @@ public interface GameRepository extends CrudRepository<Game, Integer> {
             "left join game_mode on game.id = game_mode.game_id\n" +
             "left join playable_mode on game_mode.mode_id = playable_mode.id";
 
-    String selectByKeywords = "select g1.title, g1.description, g1.rating from game g1\n" +
-            "left join game_console gc1 on gc1.game_id = g1.id\n" +
-            "left join console c1 on c1.id = gc1.console_id\n" +
-            "left join console c2 on c2.console = ?1\n" +
-            "left join game_genre_map gg1 on gg1.game_id = g1.id\n" +
-            "left join genre gg2 on gg2.genre ?2\n" +
-            "left join game_mode gm1 on gm1.game_id = g1.id\n" +
-            "left join playable_mode pm1 on pm1.id = gm1.mode_id\n" +
-            "left join playable_mode pm2 on pm2.mode ?3\n" +
-            "left join game g2 on g2.is_checked_out = \n" +
-            "right join game g3 on g3.rating is not null";
-
-
-    //TODO when doing description like Survive--not case sensitive in url but it is in query
     //so it doesn't query for tomb raider as well
     @Query(value = "select * from game where title like %?1% or description like %?2%", nativeQuery = true)
     List<Game> getGames(String title, String description);

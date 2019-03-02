@@ -55,6 +55,16 @@ public class AdminController {
         saveConsoles(g, console.toLowerCase());
         savePlayableModes(g, mode.toLowerCase());
         gameService.saveOrUpdate(g);
+        saveMasterGame(g);
+    }
+
+
+    private void saveMasterGame(Game game) {
+        MasterGame masterGame = new MasterGame();
+        int gameId = game.getId();
+        masterGame.setGenreMap(genreService.getMappingByGameId(gameId));
+        masterGame.setModeMap(playableModeService.getMappingByGameId(gameId));
+        gameService.saveMasterGame(masterGame);
     }
 
     //TODO eventually postmapping
@@ -101,7 +111,6 @@ public class AdminController {
         games.forEach(g -> saveConsoles(g, console));
     }
 
-    //TODO tried to do @PostMapping but got a whitelist error
     @GetMapping("/mapGenre")
     private List<GameGenreMap> addGenrebyGame(@RequestParam String gameTitle, @RequestParam String genreTitle) {
         List<Game> games = saveGame(gameTitle);
@@ -163,6 +172,8 @@ public class AdminController {
             playableModeService.saveMapping(g, modes);
         }
     }
+
+    //TODO delete mapping for master game
 
     @GetMapping("/deleteGame")
     private void deleteGame(@RequestParam int gameId) {
