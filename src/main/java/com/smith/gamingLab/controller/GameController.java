@@ -1,6 +1,5 @@
 package com.smith.gamingLab.controller;
 
-import com.smith.gamingLab.constant_enum.Rating;
 import com.smith.gamingLab.service.ConsoleService;
 import com.smith.gamingLab.service.GameService;
 import com.smith.gamingLab.service.GenreService;
@@ -68,9 +67,6 @@ public class GameController {
     public List<Game> getByKey(@RequestParam(required = false) String key, @RequestParam(required = false) Boolean checkedOut,
                                 @RequestParam(required = false)  String mode, @RequestParam(required = false) String console,
                                 @RequestParam(required = false) boolean isDigital, @RequestParam(required = false) String rating ) {
-//        return gameService.getGameByKey(key == null ? "" : key, checkedOut, isDigital,console == null ? "" : console,
-//                rating == null ? -1 : Rating.valueOf(rating).ordinal(), mode == null ? "" : mode);
-
         return gameService.getGameByKey(key, checkedOut, isDigital, console, mode, rating);
     }
 

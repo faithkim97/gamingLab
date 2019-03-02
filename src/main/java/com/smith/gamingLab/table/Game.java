@@ -14,6 +14,9 @@ public class Game {
     private Rating rating;
     private boolean isCheckedOut;
     private int quantity = 1;
+
+    @Column
+    @Lob
     private String description;
     private boolean isDigital;
 

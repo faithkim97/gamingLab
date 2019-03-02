@@ -10,6 +10,7 @@ import org.mockito.MockitoAnnotations;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import static junit.framework.TestCase.assertEquals;
 import static org.mockito.Mockito.when;
@@ -35,14 +36,12 @@ public class GameServiceTest {
         assertEquals(games, gameService.getAllGames());
     }
 
-//    @Test
-//    public void test_getGameById() {
-//        int id = 1;
-//        Game g = new Game("tomb raider");
-//        g.setId(1);
-//        when(gameRepository.findById(anyInt()).get()).thenReturn(g);
-//        assertEquals(g, gameService.getGameById(id));
-//    }
+    @Test
+    public void test_getGameById() {
+        Game g = new Game();
+        when(gameRepository.findById(anyInt())).thenReturn(Optional.of(g));
+        assertEquals(g, gameService.getGameById(anyInt()).get());
+    }
 
     @Test
     public void test_saveGame() {

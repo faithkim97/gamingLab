@@ -45,7 +45,7 @@ public class AdminController {
                          @RequestParam(value = "digital", required = false) boolean isDigital) {
         Game g = new Game();
         g.setTitle(title.toLowerCase());
-//        g.setDescription(description.toLowerCase());
+        g.setDescription(description.toLowerCase());
         int q = quantity == null ? 1 : quantity;
         g.setQuantity(q);
         if (rating != null) { g.setRating(rating);}
@@ -147,7 +147,6 @@ public class AdminController {
         }
     }
 
-    //TODO make this into a list of games
     private List<Game> saveGame(String gameTitle) {
         List<Game> games = gameService.getGameByTitle(gameTitle);
         if (games == null) {
