@@ -74,8 +74,4 @@ public class GameService {
         return masterGameRepository.getGamesByKeyword(key, checkedOut, isDigital, console, mode, rating_enum != null ? rating_enum.ordinal() : null);
     }
 
-    public List<MasterGame> test(String key, Boolean checkedOut, Boolean digital) {
-        return masterGameRepository.getGamesByKeyword(key, checkedOut, digital);
-    }
-
 }

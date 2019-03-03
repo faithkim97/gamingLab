@@ -71,7 +71,6 @@ public class GameController {
                                @RequestParam(required = false)  String mode, @RequestParam(required = false) Integer console,
                                @RequestParam(required = false) Boolean isDigital, @RequestParam(required = false) String rating ) {
         List<MasterGame> list = gameService.getMasterGameByKey(key, checkedOut, isDigital, console, mode, rating);
-        List<MasterGame> list2 = gameService.test(key, checkedOut, isDigital);
         return list;
     }
 
