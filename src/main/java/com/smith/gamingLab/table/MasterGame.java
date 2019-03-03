@@ -16,53 +16,83 @@ public class MasterGame {
     @ManyToOne(cascade = CascadeType.PERSIST)
     private Game game;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
-    private GameConsoleMap consoleMap;
 
     @ManyToOne(cascade = CascadeType.PERSIST)
-    private List<GameGenreMap> genreMap;
+    private GameGenreMap genreMap;
+
 
     @ManyToOne(cascade = CascadeType.PERSIST)
-    private List<GamePlayableModeMap> modeMap;
+    private GamePlayableModeMap modeMap;
 
+    //TODO console
 
     public MasterGame() {}
 
+    public MasterGame(Game g) { game = g;}
+
     public Game getGame() { return game; }
 
-    public Console getConsole() { return consoleMap.getConsole(); }
-
-    public List<Genre> getGenres() {
-        List<Genre> genres = new ArrayList<>();
-        if (genres.isEmpty()) {
-            genreMap.forEach(m -> genres.add(m.getGenre()));
-        }
-        return genres;
+    public void setModeMap(GamePlayableModeMap modeMap) {
+        this.modeMap = modeMap;
     }
 
-    public List<PlayableMode> getModes() {
-        List<PlayableMode> modes = new ArrayList<>();
-        if (modes.isEmpty()) {
-            modeMap.forEach(m -> modes.add(m.getPlayableMode()));
-        }
-        return modes;
+    public void setGenreMap(GameGenreMap genreMap) {
+        this.genreMap = genreMap;
     }
 
-    public void setGame(Game g) {
-        game = g;
+    public void setGame(Game game) {
+        this.game = game;
     }
 
-    public void setGenreMap(List<GameGenreMap> map) {
-        genreMap = map;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public void setPlayableModeMap(List<GamePlayableModeMap> map) {
-        modeMap = map;
+    public GamePlayableModeMap getModeMap() {
+        return modeMap;
     }
 
-    public void setConsoleMap(GameConsoleMap map) {
-        consoleMap = map;
+    public GameGenreMap getGenreMap() {
+        return genreMap;
     }
+
+    public int getId() {
+        return id;
+    }
+
+    //    public Console getConsole() { return consoleMap.getConsole(); }
+//
+//    public List<Genre> getGenres() {
+//        List<Genre> genres = new ArrayList<>();
+//        if (genres.isEmpty()) {
+//            genreMap.forEach(m -> genres.add(m.getGenre()));
+//        }
+//        return genres;
+//    }
+//
+//    public List<PlayableMode> getModes() {
+//        List<PlayableMode> modes = new ArrayList<>();
+//        if (modes.isEmpty()) {
+//            modeMap.forEach(m -> modes.add(m.getPlayableMode()));
+//        }
+//        return modes;
+//    }
+//
+//    public void setGame(Game g) {
+//        game = g;
+//    }
+//
+//    public void setGenreMap(List<GameGenreMap> map) {
+//        genreMap = map;
+//    }
+//
+//    public void setPlayableModeMap(List<GamePlayableModeMap> map) {
+//        modeMap = map;
+//    }
+//
+//    public void setConsoleMap(GameConsoleMap map) {
+//        consoleMap = map;
+//    }
 
 
 

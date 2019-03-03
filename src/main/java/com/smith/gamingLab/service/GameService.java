@@ -69,9 +69,9 @@ public class GameService {
         return gameRepository.getGameByKeywords(key, checkedOut, isDigital, console, mode, rating_enum != null ? rating_enum.ordinal() : null);
     }
 
-    public List<MasterGame> getMasterGameByKey(String key, Boolean checkedOut, Boolean isDigital, String console, String mode, String rating) {
-        Rating rating_enum = rating != null ? Rating.valueOf(rating) : null;
-        return masterGameRepository.getGamesByKeyword(key, checkedOut, isDigital, console, mode, rating_enum != null ? rating_enum.ordinal() : null);
-    }
+//    public List<MasterGame> getMasterGameByKey(String key, Boolean checkedOut, Boolean isDigital, String console, String mode, String rating) {
+//        Rating rating_enum = rating != null ? Rating.valueOf(rating) : null;
+//        return masterGameRepository.getGamesByKeyword(key, checkedOut, isDigital, console, mode, rating_enum != null ? rating_enum.ordinal() : null);
+//    }
 
 }

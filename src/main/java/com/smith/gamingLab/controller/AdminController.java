@@ -59,13 +59,19 @@ public class AdminController {
     }
 
 
+
     private void saveMasterGame(Game game) {
-        MasterGame masterGame = new MasterGame();
         int gameId = game.getId();
-        masterGame.setGenreMap(genreService.getMappingByGameId(gameId));
-        masterGame.setModeMap(playableModeService.getMappingByGameId(gameId));
-        gameService.saveMasterGame(masterGame);
+        List<GameGenreMap> genres = genreService.getMappingByGameId(gameId);
+        for (GameGenreMap genreMap : genres) {
+            MasterGame masterGame = new MasterGame(game);
+            masterGame.setGenreMap(genreMap);
+            gameService.saveMasterGame(masterGame);
+        }
     }
+
+
+
 
     //TODO eventually postmapping
     //TODO not doing desc yet until we can solve value too long problem
@@ -91,6 +97,7 @@ public class AdminController {
         if (isDigital != game.getIsDigital()) { game.setIsDigital(isDigital);}
         saveGenres(game, genreTitle);
         saveConsoles(game, console);
+
         gameService.saveOrUpdate(game);
         return "Successfully edited game: ";
 

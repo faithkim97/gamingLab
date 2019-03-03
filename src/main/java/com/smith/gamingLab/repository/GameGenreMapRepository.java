@@ -11,10 +11,10 @@ import java.util.List;
 //TODO move all genre/game queries to here
 public interface GameGenreMapRepository extends CrudRepository<GameGenreMap, Integer> {
 
-    @Query (value = "select * from game_genre_map where game_id = ?1", nativeQuery = true)
+    @Query (value = "select * from game_genre where game_id = ?1", nativeQuery = true)
     List<GameGenreMap> getMappingByGameId(int gameId);
 
-    @Query(value = "select * from game_genre_map where genre_id = ?1", nativeQuery = true)
+    @Query(value = "select * from game_genre where genre_id = ?1", nativeQuery = true)
     List<GameGenreMap> getMappingByGenreId(int genreId);
 
 

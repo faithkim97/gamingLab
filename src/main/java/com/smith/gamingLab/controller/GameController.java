@@ -65,12 +65,12 @@ public class GameController {
 //        return gameService.getGameByKey(key, checkedOut, isDigital, console, mode, rating);
 //    }
 
-    @GetMapping("/findGame")
-    public List<MasterGame> getMasterGamesByKey(@RequestParam(required = false) String key, @RequestParam(required = false) Boolean checkedOut,
-                               @RequestParam(required = false)  String mode, @RequestParam(required = false) String console,
-                               @RequestParam(required = false) boolean isDigital, @RequestParam(required = false) String rating ) {
-        return gameService.getMasterGameByKey(key, checkedOut, isDigital, console, mode, rating);
-    }
+//    @GetMapping("/findGame")
+//    public List<MasterGame> getMasterGamesByKey(@RequestParam(required = false) String key, @RequestParam(required = false) Boolean checkedOut,
+//                               @RequestParam(required = false)  String mode, @RequestParam(required = false) String console,
+//                               @RequestParam(required = false) boolean isDigital, @RequestParam(required = false) String rating ) {
+//        return gameService.getMasterGameByKey(key, checkedOut, isDigital, console, mode, rating);
+//    }
 
 
 
