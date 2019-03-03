@@ -72,6 +72,10 @@ public class GameController {
 //        return gameService.getMasterGameByKey(key, checkedOut, isDigital, console, mode, rating);
 //    }
 
+    @GetMapping("/masterGames")
+    public List<MasterGame> getMasterGames() {
+        return gameService.getAllMasterGames();
+    }
 
 
 }

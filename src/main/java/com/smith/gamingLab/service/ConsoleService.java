@@ -44,6 +44,7 @@ public class ConsoleService {
         return consoleRepository.findById(id);
     }
 
+
     public Optional<GameConsoleMap> getMappingById(int id) {
         return gameConsoleMapRepository.findById(id);
     }

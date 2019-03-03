@@ -58,19 +58,17 @@ public class AdminController {
         saveMasterGame(g);
     }
 
-
-
     private void saveMasterGame(Game game) {
+        MasterGame masterGame = new MasterGame(game);
         int gameId = game.getId();
-        List<GameGenreMap> genres = genreService.getMappingByGameId(gameId);
-        for (GameGenreMap genreMap : genres) {
-            MasterGame masterGame = new MasterGame(game);
-            masterGame.setGenreMap(genreMap);
-            gameService.saveMasterGame(masterGame);
-        }
+        List<Genre> genres = genreService.getGenresByGameId(gameId);
+        List<PlayableMode> modes = playableModeService.getModesByGameId(gameId);
+        List<GameConsoleMap> consoleMap = consoleService.getMappingByGameId(gameId);
+        masterGame.setGenres(genres);
+        masterGame.setModes(modes);
+        masterGame.setConsoleMap(!consoleMap.isEmpty() ? consoleMap.get(0) : null);
+        gameService.saveMasterGame(masterGame);
     }
-
-
 
 
     //TODO eventually postmapping
@@ -146,8 +144,6 @@ public class AdminController {
         List<Game> games = saveGame(gameName);
         games.forEach(g -> savePlayableModes(g, modeName));
     }
-
-
 
     private void saveGenres(Game g, String genreTitle) {
         if (genreTitle != null) {
