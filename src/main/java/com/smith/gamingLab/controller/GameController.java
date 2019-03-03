@@ -62,15 +62,19 @@ public class GameController {
 //    public List<Game> getByKey(@RequestParam(required = false) String key, @RequestParam(required = false) Boolean checkedOut,
 //                                @RequestParam(required = false)  String mode, @RequestParam(required = false) String console,
 //                                @RequestParam(required = false) boolean isDigital, @RequestParam(required = false) String rating ) {
-//        return gameService.getGameByKey(key, checkedOut, isDigital, console, mode, rating);
+//        List<Game> list =  gameService.getGameByKey(key, checkedOut, isDigital, console, mode, rating);
+//        return list;
 //    }
 
-//    @GetMapping("/findGame")
-//    public List<MasterGame> getMasterGamesByKey(@RequestParam(required = false) String key, @RequestParam(required = false) Boolean checkedOut,
-//                               @RequestParam(required = false)  String mode, @RequestParam(required = false) String console,
-//                               @RequestParam(required = false) boolean isDigital, @RequestParam(required = false) String rating ) {
-//        return gameService.getMasterGameByKey(key, checkedOut, isDigital, console, mode, rating);
-//    }
+    @GetMapping("/findMasterGame")
+    public List<MasterGame> getMasterGamesByKey(@RequestParam(required = false) String key, @RequestParam(required = false) Boolean checkedOut,
+                               @RequestParam(required = false)  String mode, @RequestParam(required = false) Integer console,
+                               @RequestParam(required = false) Boolean isDigital, @RequestParam(required = false) String rating ) {
+        List<MasterGame> list = gameService.getMasterGameByKey(key, checkedOut, isDigital, console, mode, rating);
+        List<MasterGame> list2 = gameService.test(key, checkedOut, isDigital);
+        return list;
+    }
+
 
     @GetMapping("/masterGames")
     public List<MasterGame> getMasterGames() {
