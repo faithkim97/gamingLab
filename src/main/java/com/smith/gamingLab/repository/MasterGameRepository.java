@@ -23,4 +23,7 @@ public interface MasterGameRepository extends CrudRepository<MasterGame, Integer
 
     @Query(value = "select * from master_game where console_map_id = ?1",nativeQuery = true)
     MasterGame getMasterGamesByConsoleMap(int consoleMapId);
+
+    @Query(value = "select * from master_game where genres like %?1%", nativeQuery = true)
+    List<MasterGame> getMasterGamesByGenre(String genre);
 }

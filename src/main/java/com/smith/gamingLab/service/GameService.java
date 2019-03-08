@@ -5,6 +5,7 @@ import com.smith.gamingLab.repository.GameRepository;
 import com.smith.gamingLab.repository.MasterGameRepository;
 import com.smith.gamingLab.table.Game;
 import com.smith.gamingLab.table.GameConsoleMap;
+import com.smith.gamingLab.table.Genre;
 import com.smith.gamingLab.table.MasterGame;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -63,7 +64,15 @@ public class GameService {
         return masterGameRepository.getMasterGamesByConsoleMap(mapId);
     }
 
-//    public void deleteConsoleMap()
+    public void deleteConsoleMap(List<GameConsoleMap> consoleMap) {
+        List<MasterGame> games = new ArrayList<>();
+        consoleMap.forEach( c -> games.add(getMasterGamesByConsoleMap(c.getId())));
+        games.forEach(g -> g.setConsoleMap(null));
+    }
+
+    public List<MasterGame> getMasterGamesByGenre(Genre genre) {
+        return masterGameRepository.getMasterGamesByGenre(genre.getGenre());
+    }
 
     public List<Game> getGameByTitle(String title) {
         return gameRepository.getGamesByExactTitle(title);

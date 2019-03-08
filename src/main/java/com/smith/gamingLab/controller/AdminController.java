@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(path = "/admin")
@@ -193,18 +194,34 @@ public class AdminController {
     @GetMapping("/deleteConsole")
     private void deleteConsole(@RequestParam int consoleId) {
         List<GameConsoleMap> consoleMap = consoleService.getMappingByConsoleId(consoleId);
-        List<MasterGame> games = new ArrayList<>();
-        consoleMap.forEach( c -> games.add(gameService.getMasterGamesByConsoleMap(c.getId())));
-        games.forEach(g -> g.setConsoleMap(null));
+        gameService.deleteConsoleMap(consoleMap);
         consoleService.deleteMappingByConsoleId(consoleId);
         consoleService.deleteConsole(consoleId);
     }
 
     @GetMapping("/deleteGenre")
     private void deleteGenre(@RequestParam int genreId) {
+        Optional<Genre> genreO = genreService.getGenreById(genreId);
+        if (genreO != null) {
+            deleteMasterGame(genreO.get());
+        }
         genreService.deleteMappingByGenreId(genreId);
         genreService.deleteGenre(genreId);
     }
+
+    private void deleteMasterGame(Genre genre) {
+        List<MasterGame> masterGames = gameService.getMasterGamesByGenre(genre);
+        for (MasterGame g : masterGames) {
+            List<Genre> genres = g.getGenres();
+            //TODO doesn't query for all of them
+//            genres.removeIf(e -> e.getGenre().equals(genre.getGenre()));
+            genres = genres.stream().filter(e -> !e.getGenre().replace(" ", "").equals(genre.getGenre().replace(" ", ""))).collect(Collectors.toList());
+            g.setGenres(genres);
+            gameService.saveMasterGame(g);
+        }
+
+    }
+
 
     //TODO delete playable mode
     @GetMapping("/deleteMode")

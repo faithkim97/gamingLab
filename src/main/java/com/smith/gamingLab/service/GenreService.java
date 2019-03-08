@@ -39,6 +39,7 @@ public class GenreService {
         if (parsed.length > 0) {
             Genre genre;
             for (String g : parsed) {
+                g = g.replace(" ", "");
                 genre = genreRepository.getGenreByTitle(g);
                 if (genre == null) {
                     genre = new Genre(g);
@@ -103,6 +104,7 @@ public class GenreService {
         gameGenreMapRepository.findAll().forEach(g -> map.add(g));
         return map;
     }
+
 
 
     public void deleteMappingByGameId(int gameId) {
