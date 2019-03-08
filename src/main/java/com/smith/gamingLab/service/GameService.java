@@ -4,6 +4,7 @@ import com.smith.gamingLab.constant_enum.Rating;
 import com.smith.gamingLab.repository.GameRepository;
 import com.smith.gamingLab.repository.MasterGameRepository;
 import com.smith.gamingLab.table.Game;
+import com.smith.gamingLab.table.GameConsoleMap;
 import com.smith.gamingLab.table.MasterGame;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -47,14 +48,22 @@ public class GameService {
 
     public void deleteMasterGame(int id) {masterGameRepository.deleteById(id);}
 
+    public Integer getMasterGameIdByGameId(int gameId) { return masterGameRepository.getMasterGameByGameId(gameId);}
+
     public void deleteGame(int id) {
         gameRepository.deleteById(id);
     }
 
-    //TODO remove this??
-    public int getIdByGameTitle(String title) {
-        return gameRepository.getGameIdByTitle(title);
+    public void deleteMasterGameByGameId(int gameId) {
+        Integer masterGameId = getMasterGameIdByGameId(gameId);
+        if (masterGameId != null) { deleteMasterGame(masterGameId);}
     }
+
+    public MasterGame getMasterGamesByConsoleMap(int mapId) {
+        return masterGameRepository.getMasterGamesByConsoleMap(mapId);
+    }
+
+//    public void deleteConsoleMap()
 
     public List<Game> getGameByTitle(String title) {
         return gameRepository.getGamesByExactTitle(title);
@@ -62,11 +71,6 @@ public class GameService {
 
     public List<Game> getGamesByTitle(String title) {
         return gameRepository.getGamesByTitle(title);
-    }
-
-    public List<Game> getGameByKey(String key, Boolean checkedOut, Boolean isDigital, String console, String mode, String rating) {
-        Rating rating_enum = rating != null ? Rating.valueOf(rating) : null;
-        return gameRepository.getGameByKeywords(key, checkedOut, isDigital, console, mode, rating_enum != null ? rating_enum.ordinal() : null);
     }
 
     public List<MasterGame> getMasterGameByKey(String key, Boolean checkedOut, Boolean isDigital, Integer console, String mode, String rating) {

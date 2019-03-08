@@ -35,8 +35,6 @@ public class MasterGame {
 
     public MasterGame(Game g) { game = g;}
 
-    public Console getConsole() { return consoleMap.getConsole();}
-
     public GameConsoleMap getConsoleMap() { return consoleMap; }
 
     public Game getGame() { return game; }

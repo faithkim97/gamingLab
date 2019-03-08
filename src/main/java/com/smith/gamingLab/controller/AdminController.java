@@ -116,7 +116,10 @@ public class AdminController {
     @GetMapping("/mapGenre")
     private List<GameGenreMap> addGenrebyGame(@RequestParam String gameTitle, @RequestParam String genreTitle) {
         List<Game> games = saveGame(gameTitle);
-        games.forEach(g -> saveGenres(g, genreTitle));
+        for (Game g : games) {
+            saveGenres(g, genreTitle);
+            saveMasterGame(g);
+        }
         return gameController.getAllGameGenres();
     }
 
@@ -136,10 +139,13 @@ public class AdminController {
     }
 
     @GetMapping("/mapMode")
-    private void mapPlayableMode(@RequestParam String gameName, @RequestParam String modeName) {
-        PlayableMode p = playableModeService.getPlayableModeByTitle(modeName);
+    private List<MasterGame> mapPlayableMode(@RequestParam String gameName, @RequestParam String modeName) {
         List<Game> games = saveGame(gameName);
-        games.forEach(g -> savePlayableModes(g, modeName));
+        for (Game g : games) {
+            savePlayableModes(g, modeName);
+            saveMasterGame(g);
+        }
+        return gameController.getAllGames();
     }
 
     private void saveGenres(Game g, String genreTitle) {
@@ -177,14 +183,19 @@ public class AdminController {
 
     @GetMapping("/deleteGame")
     private void deleteGame(@RequestParam int gameId) {
-        consoleService.deleteMappingByGameId(gameId);
         genreService.deleteMappingByGameId(gameId);
         playableModeService.deleteMappingByGameId(gameId);
+        gameService.deleteMasterGameByGameId(gameId);
+        consoleService.deleteMappingByGameId(gameId);
         gameService.deleteGame(gameId);
     }
 
     @GetMapping("/deleteConsole")
     private void deleteConsole(@RequestParam int consoleId) {
+        List<GameConsoleMap> consoleMap = consoleService.getMappingByConsoleId(consoleId);
+        List<MasterGame> games = new ArrayList<>();
+        consoleMap.forEach( c -> games.add(gameService.getMasterGamesByConsoleMap(c.getId())));
+        games.forEach(g -> g.setConsoleMap(null));
         consoleService.deleteMappingByConsoleId(consoleId);
         consoleService.deleteConsole(consoleId);
     }
