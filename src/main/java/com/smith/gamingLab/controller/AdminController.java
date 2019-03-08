@@ -30,12 +30,6 @@ public class AdminController {
     @Autowired
     GameController gameController;
 
-
-    //TODO put in @Nullable for all nullable fields
-    //TODO just fill all fields (checkedout, digital, etc...
-
-    //TODO value too long for description
-//    @GetMapping("/addGame")
     @PostMapping("/addGame")
     private void addGame(@RequestParam(value = "title") String title, @RequestParam(value = "desc", required = false) String description,
                          @RequestParam(value = "genre",required = false) String genreTitle,
@@ -95,8 +89,8 @@ public class AdminController {
         if (isDigital != game.getIsDigital()) { game.setIsDigital(isDigital);}
         saveGenres(game, genreTitle);
         saveConsoles(game, console);
-
         gameService.saveOrUpdate(game);
+        saveMasterGame(game);
         return "Successfully edited game: ";
 
     }
@@ -109,11 +103,14 @@ public class AdminController {
         return gameController.getConsoles();
     }
 
-    //TODO make sure to map stuff to all games and not just one single instance
     @GetMapping("/mapConsole")
-    private void addConsoleByGame(@RequestParam String gameTitle, @RequestParam String console) {
+    private List<MasterGame> addConsoleByGame(@RequestParam String gameTitle, @RequestParam String console) {
         List<Game> games = saveGame(gameTitle);
-        games.forEach(g -> saveConsoles(g, console));
+        for (Game g : games) {
+            saveConsoles(g, console);
+            saveMasterGame(g);
+        }
+        return gameController.getAllGames();
     }
 
     @GetMapping("/mapGenre")
@@ -161,7 +158,7 @@ public class AdminController {
 
     private List<Game> saveGame(String gameTitle) {
         List<Game> games = gameService.getGameByTitle(gameTitle);
-        if (games == null) {
+        if (games == null || games.isEmpty()) {
             games = new ArrayList<>();
             games.add(new Game(gameTitle));
         }

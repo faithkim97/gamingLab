@@ -23,8 +23,8 @@ public class GameController {
     PlayableModeService playableModeService;
 
     @GetMapping("/games")
-    public List<Game> getAllGames() {
-        return gameService.getAllGames();
+    public List<MasterGame> getAllGames() {
+        return gameService.getAllMasterGames();
     }
 
     @GetMapping("/consoles")
@@ -58,13 +58,6 @@ public class GameController {
         return playableModeService.getAllMapping();
     }
 
-//    @GetMapping("/findGame")
-//    public List<Game> getByKey(@RequestParam(required = false) String key, @RequestParam(required = false) Boolean checkedOut,
-//                                @RequestParam(required = false)  String mode, @RequestParam(required = false) String console,
-//                                @RequestParam(required = false) boolean isDigital, @RequestParam(required = false) String rating ) {
-//        List<Game> list =  gameService.getGameByKey(key, checkedOut, isDigital, console, mode, rating);
-//        return list;
-//    }
 
     @GetMapping("/findMasterGame")
     public List<MasterGame> getMasterGamesByKey(@RequestParam(required = false) String key, @RequestParam(required = false) Boolean checkedOut,
