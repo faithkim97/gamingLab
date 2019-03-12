@@ -27,7 +27,6 @@ public class MasterGame {
     @Convert(converter = PlayableModeListConverter.class)
     private List<PlayableMode> modes;
 
-    //TODO console
     @ManyToOne(cascade = CascadeType.PERSIST)
     private GameConsoleMap consoleMap;
 
