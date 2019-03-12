@@ -3,10 +3,7 @@ package com.smith.gamingLab.service;
 import com.smith.gamingLab.constant_enum.Rating;
 import com.smith.gamingLab.repository.GameRepository;
 import com.smith.gamingLab.repository.MasterGameRepository;
-import com.smith.gamingLab.table.Game;
-import com.smith.gamingLab.table.GameConsoleMap;
-import com.smith.gamingLab.table.Genre;
-import com.smith.gamingLab.table.MasterGame;
+import com.smith.gamingLab.table.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -85,6 +82,10 @@ public class GameService {
     public List<MasterGame> getMasterGameByKey(String key, Boolean checkedOut, Boolean isDigital, Integer console, String mode, String rating) {
         Rating rating_enum = rating != null ? Rating.valueOf(rating) : null;
         return masterGameRepository.getGamesByKeyword(key, checkedOut, isDigital, console, mode, rating_enum != null ? rating_enum.ordinal() : null);
+    }
+
+    public List<MasterGame> getMasterGamesByMode(PlayableMode mode) {
+        return masterGameRepository.getMasterGamesByMode(mode.getMode());
     }
 
 }

@@ -202,32 +202,43 @@ public class AdminController {
     @GetMapping("/deleteGenre")
     private void deleteGenre(@RequestParam int genreId) {
         Optional<Genre> genreO = genreService.getGenreById(genreId);
-        if (genreO != null) {
-            deleteMasterGame(genreO.get());
+        if (genreO.isPresent()) {
+            deleteMasterGameGenre(genreO.get());
         }
         genreService.deleteMappingByGenreId(genreId);
         genreService.deleteGenre(genreId);
     }
 
-    private void deleteMasterGame(Genre genre) {
+    private void deleteMasterGameGenre(Genre genre) {
         List<MasterGame> masterGames = gameService.getMasterGamesByGenre(genre);
         for (MasterGame g : masterGames) {
             List<Genre> genres = g.getGenres();
-            //TODO doesn't query for all of them
-//            genres.removeIf(e -> e.getGenre().equals(genre.getGenre()));
-            genres = genres.stream().filter(e -> !e.getGenre().replace(" ", "").equals(genre.getGenre().replace(" ", ""))).collect(Collectors.toList());
+            genres = genres.stream().filter(e -> !e.getGenre().equals(genre.getGenre())).collect(Collectors.toList());
             g.setGenres(genres);
             gameService.saveMasterGame(g);
         }
 
     }
 
+    private void deleteMasterGameMode(PlayableMode mode) {
+        List<MasterGame> masterGames = gameService.getMasterGamesByMode(mode);
+        for (MasterGame g : masterGames) {
+            List<PlayableMode> modes = g.getModes();
+            modes = modes.stream().filter( e -> !e.getMode().equals(mode.getMode())).collect(Collectors.toList());
+            g.setModes(modes);
+            gameService.saveMasterGame(g);
 
-    //TODO delete playable mode
+        }
+    }
+
+    //TODO we need to make sure that user inputs correctly with correct tokenizer. "," vs. ", "
     @GetMapping("/deleteMode")
-    private List<PlayableMode> deleteMode(@RequestParam int modeId) {
+    private void deleteMode(@RequestParam int modeId) {
+        Optional<PlayableMode> modeO = playableModeService.getPlayableModeById(modeId);
+        if (modeO.isPresent()) {
+            deleteMasterGameMode(modeO.get());
+        }
         playableModeService.deleteMappingByModeId(modeId);
         playableModeService.deletePlayableMode(modeId);
-        return gameController.getAllModes();
     }
 }//endclass

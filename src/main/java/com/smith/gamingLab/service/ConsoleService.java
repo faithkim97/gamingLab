@@ -28,6 +28,7 @@ public class ConsoleService {
         if (parsed.length > 0) {
             Console console;
             for (String c : parsed) {
+                c = c.replace(" ", "");
                 console = consoleRepository.getConsoleByType(c);
                 if (console == null) {
                     console = new Console(c);
