@@ -57,15 +57,23 @@ public class GameService {
         if (masterGameId != null) { deleteMasterGame(masterGameId);}
     }
 
-    public MasterGame getMasterGamesByConsoleMap(int mapId) {
+    //todo SHOULD BE A LIST
+    public List<MasterGame> getMasterGamesByConsoleMap(int mapId) {
         return masterGameRepository.getMasterGamesByConsoleMap(mapId);
     }
 
-    public void deleteConsoleMap(List<GameConsoleMap> consoleMap) {
-        List<MasterGame> games = new ArrayList<>();
-        consoleMap.forEach( c -> games.add(getMasterGamesByConsoleMap(c.getId())));
-        games.forEach(g -> g.setConsoleMap(null));
+    public List<MasterGame> getMasterGamesByGenreMap(int genreId) {
+        return masterGameRepository.getMasterGamesByGenreMap(genreId);
     }
+
+    public List<MasterGame> getMasterGamesByModeMap(int modeId) {
+        return masterGameRepository.getMasterGamesByModeMap(modeId);
+    }
+//    public void deleteConsoleMap(List<GameConsoleMap> consoleMap) {
+//        List<MasterGame> games = new ArrayList<>();
+//        consoleMap.forEach( c -> games.add(getMasterGamesByConsoleMap(c.getId())));
+//        games.forEach(g -> g.setConsoleMap(null));
+//    }
 
     public List<MasterGame> getMasterGamesByGenre(Genre genre) {
         return masterGameRepository.getMasterGamesByGenre(genre.getGenre());

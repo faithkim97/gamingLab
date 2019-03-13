@@ -22,9 +22,9 @@ public interface MasterGameRepository extends CrudRepository<MasterGame, Integer
             "left join genre on genre.id = game_genre.genre_id\n" +
             "left join playable_mode on playable_mode.id = game_mode.mode_id";
 
-    @Query(value = fullTable + " where (?1 is null or title like %?1% or description like %?1% or genres like %?1%)" +
-            " and (?2 is null or is_checked_out = ?2) and (?3 is null or is_digital = ?3)" +
-            " and (?4 is null or console_id = ?4) and (?5 is null or modes like %?5%)"+
+    @Query(value = fullTable +" where (?1 is null or game.title like %?1% or game.description like %?1% or genre like %?1%)" +
+            " and (?2 is null or game.is_checked_out = ?2) and (?3 is null or game.is_digital = ?3)" +
+            " and (?4 is null or console = ?4) and (?5 is null or mode like %?5%)"+
             " and (?6 is null or rating = ?6)", nativeQuery = true)
     List<MasterGame> getGamesByKeyword(String key, Boolean checkedOut, Boolean isDigital, Integer consoleId, String mode, Integer rating);
 
@@ -32,7 +32,7 @@ public interface MasterGameRepository extends CrudRepository<MasterGame, Integer
     Integer getMasterGameByGameId(int gameId);
 
     @Query(value = "select * from master_game where console_map_id = ?1",nativeQuery = true)
-    MasterGame getMasterGamesByConsoleMap(int consoleMapId);
+    List<MasterGame> getMasterGamesByConsoleMap(int consoleMapId);
 
     @Query(value = "select * from master_game where genres like %?1%", nativeQuery = true)
     List<MasterGame> getMasterGamesByGenre(String genre);
@@ -40,10 +40,11 @@ public interface MasterGameRepository extends CrudRepository<MasterGame, Integer
     @Query(value = "select * from master_game where modes like %?1%", nativeQuery = true)
     List<MasterGame> getMasterGamesByMode(String mode);
 
-    @Query(value = "select * from master_game where genreMap_id = ?1", nativeQuery = true)
-    MasterGame getMasterGameByGenreMap(int genreId);
+    @Query(value = "select * from master_game where genre_map_id = ?1", nativeQuery = true)
+    List<MasterGame> getMasterGamesByGenreMap(int genreId);
 
-    @Query( value = "select * from master_game where modeMap_id = ?1", nativeQuery = true)
-    MasterGame getMasterGameByModeId(int modeId);
+    @Query( value = "select * from master_game where mode_map_id = ?1", nativeQuery = true)
+    List<MasterGame> getMasterGamesByModeMap(int modeId);
+
 
 }

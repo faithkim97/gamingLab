@@ -112,20 +112,24 @@ public class GenreService {
         map.forEach(m -> deleteMapping(m.getId()));
     }
 
-    /**Should only be used when deleting genre from genre table*/
     public void deleteMappingByGenreId(int genreId) {
-        List<GameGenreMap> map = gameGenreMapRepository.getMappingByGenreId(genreId);
+        List<GameGenreMap> map = getMappingByGenreId(genreId);
         map.forEach(m-> deleteMapping(m.getId()));
     }
-    //TODO catch invalid id error
+
     public void deleteGenre(int genreId) {
         deleteMappingByGenreId(genreId);
         genreRepository.deleteById(genreId);
     }
 
-    //TODO catch invalid id error
     public void deleteMapping(int id) {
         gameGenreMapRepository.deleteById(id);
     }
+
+    public List<GameGenreMap> getMappingByGenreId(int genreId) {
+        return gameGenreMapRepository.getMappingByGenreId(genreId);
+    }
+
+
 
 }
