@@ -8,9 +8,19 @@ import java.util.List;
 
 public interface MasterGameRepository extends CrudRepository<MasterGame, Integer> {
 
-    String fullTable = "select * from master_game\n" +
+//    String fullTable = "select * from master_game\n" +
+//            "left join game on game.id = game_id\n" +
+//            "left join game_console on game_console.game_id = master_game.game_id\n" +
+//            "left join";
+
+    String fullTable = "select * from master_game \n" +
             "left join game on game.id = game_id\n" +
-            "left join game_console on game_console.game_id = master_game.game_id\n";
+            "left join game_console on game_console.id = console_map_id\n" +
+            "left join game_genre on game_genre.id = genre_map_id\n" +
+            "left join game_mode on game_mode.id = mode_map_id\n" +
+            "left join console on console.id = game_console.console_id\n" +
+            "left join genre on genre.id = game_genre.genre_id\n" +
+            "left join playable_mode on playable_mode.id = game_mode.mode_id";
 
     @Query(value = fullTable + " where (?1 is null or title like %?1% or description like %?1% or genres like %?1%)" +
             " and (?2 is null or is_checked_out = ?2) and (?3 is null or is_digital = ?3)" +
