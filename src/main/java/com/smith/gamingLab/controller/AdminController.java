@@ -54,15 +54,25 @@ public class AdminController {
     }
 
     private void saveMasterGame(Game game) {
-        MasterGame masterGame = new MasterGame(game);
+//        MasterGame masterGame = new MasterGame(game);
+        List<MasterGame> masterGames = new ArrayList<>();
         int gameId = game.getId();
-        List<Genre> genres = genreService.getGenresByGameId(gameId);
-        List<PlayableMode> modes = playableModeService.getModesByGameId(gameId);
+        List<GameGenreMap> genreMap = genreService.getMappingByGameId(gameId);
+        for (GameGenreMap g : genreMap) {
+            MasterGame mg = new MasterGame(game);
+            mg.setGenreMap(g);
+            masterGames.add(mg);
+        }
+        List<GamePlayableModeMap> modes = playableModeService.getMappingByGameId(gameId);
         List<GameConsoleMap> consoleMap = consoleService.getMappingByGameId(gameId);
-        masterGame.setGenres(genres);
-        masterGame.setModes(modes);
-        masterGame.setConsoleMap(!consoleMap.isEmpty() ? consoleMap.get(0) : null);
-        gameService.saveMasterGame(masterGame);
+        GameConsoleMap console = !consoleMap.isEmpty() ? consoleMap.get(0) : null;
+        for (GamePlayableModeMap mode : modes) {
+            for (MasterGame mg : masterGames) {
+                mg.setModeMap(mode);
+                mg.setConsoleMap(console);
+                gameService.saveMasterGame(mg);
+            }
+        }
     }
 
 
@@ -199,46 +209,46 @@ public class AdminController {
         consoleService.deleteConsole(consoleId);
     }
 
-    @GetMapping("/deleteGenre")
-    private void deleteGenre(@RequestParam int genreId) {
-        Optional<Genre> genreO = genreService.getGenreById(genreId);
-        if (genreO.isPresent()) {
-            deleteMasterGameGenre(genreO.get());
-        }
-        genreService.deleteMappingByGenreId(genreId);
-        genreService.deleteGenre(genreId);
-    }
+//    @GetMapping("/deleteGenre")
+//    private void deleteGenre(@RequestParam int genreId) {
+//        Optional<Genre> genreO = genreService.getGenreById(genreId);
+//        if (genreO.isPresent()) {
+//            deleteMasterGameGenre(genreO.get());
+//        }
+//        genreService.deleteMappingByGenreId(genreId);
+//        genreService.deleteGenre(genreId);
+//    }
 
-    private void deleteMasterGameGenre(Genre genre) {
-        List<MasterGame> masterGames = gameService.getMasterGamesByGenre(genre);
-        for (MasterGame g : masterGames) {
-            List<Genre> genres = g.getGenres();
-            genres = genres.stream().filter(e -> !e.getGenre().equals(genre.getGenre())).collect(Collectors.toList());
-            g.setGenres(genres);
-            gameService.saveMasterGame(g);
-        }
+//    private void deleteMasterGameGenre(Genre genre) {
+//        List<MasterGame> masterGames = gameService.getMasterGamesByGenre(genre);
+//        for (MasterGame g : masterGames) {
+//            List<Genre> genres = g.getGenres();
+//            genres = genres.stream().filter(e -> !e.getGenre().equals(genre.getGenre())).collect(Collectors.toList());
+//            g.setGenres(genres);
+//            gameService.saveMasterGame(g);
+//        }
+//
+//    }
 
-    }
+//    private void deleteMasterGameMode(PlayableMode mode) {
+//        List<MasterGame> masterGames = gameService.getMasterGamesByMode(mode);
+//        for (MasterGame g : masterGames) {
+//            List<PlayableMode> modes = g.getModes();
+//            modes = modes.stream().filter( e -> !e.getMode().equals(mode.getMode())).collect(Collectors.toList());
+//            g.setModes(modes);
+//            gameService.saveMasterGame(g);
+//
+//        }
+//    }
 
-    private void deleteMasterGameMode(PlayableMode mode) {
-        List<MasterGame> masterGames = gameService.getMasterGamesByMode(mode);
-        for (MasterGame g : masterGames) {
-            List<PlayableMode> modes = g.getModes();
-            modes = modes.stream().filter( e -> !e.getMode().equals(mode.getMode())).collect(Collectors.toList());
-            g.setModes(modes);
-            gameService.saveMasterGame(g);
-
-        }
-    }
-
-    //TODO we need to make sure that user inputs correctly with correct tokenizer. "," vs. ", "
-    @GetMapping("/deleteMode")
-    private void deleteMode(@RequestParam int modeId) {
-        Optional<PlayableMode> modeO = playableModeService.getPlayableModeById(modeId);
-        if (modeO.isPresent()) {
-            deleteMasterGameMode(modeO.get());
-        }
-        playableModeService.deleteMappingByModeId(modeId);
-        playableModeService.deletePlayableMode(modeId);
-    }
+//    //TODO we need to make sure that user inputs correctly with correct tokenizer. "," vs. ", "
+//    @GetMapping("/deleteMode")
+//    private void deleteMode(@RequestParam int modeId) {
+//        Optional<PlayableMode> modeO = playableModeService.getPlayableModeById(modeId);
+//        if (modeO.isPresent()) {
+//            deleteMasterGameMode(modeO.get());
+//        }
+//        playableModeService.deleteMappingByModeId(modeId);
+//        playableModeService.deletePlayableMode(modeId);
+//    }
 }//endclass

@@ -23,6 +23,10 @@ public class GameGenreMap {
         this.genre = genre;
     }
 
+    public GameGenreMap(Genre genre) {
+        this.genre = genre;
+    }
+
     public int getId() { return id; }
 
     public Game getGame() { return game; }

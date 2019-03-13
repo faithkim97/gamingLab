@@ -1,11 +1,8 @@
 package com.smith.gamingLab.table;
 
-import com.smith.gamingLab.misc.GenreListConverter;
-import com.smith.gamingLab.misc.PlayableModeListConverter;
+import com.smith.gamingLab.misc.GameGenreMapListConverter;
 
-import javax.annotation.Generated;
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -19,13 +16,19 @@ public class MasterGame {
     @ManyToOne(cascade = CascadeType.PERSIST)
     private Game game;
 
-    @Column
-    @Convert(converter = GenreListConverter.class)
-    private List<Genre> genres;
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    private GameGenreMap genreMap;
 
-    @Column
-    @Convert(converter = PlayableModeListConverter.class)
-    private List<PlayableMode> modes;
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    private GamePlayableModeMap modeMap;
+
+//    @Column
+//    @Convert(converter = GenreListConverter.class)
+//    private List<Genre> genres;
+//
+//    @Column
+//    @Convert(converter = PlayableModeListConverter.class)
+//    private List<PlayableMode> modes;
 
     @ManyToOne(cascade = CascadeType.PERSIST)
     private GameConsoleMap consoleMap;
@@ -38,13 +41,13 @@ public class MasterGame {
 
     public Game getGame() { return game; }
 
-    public List<Genre> getGenres() { return genres;}
+//    public List<Genre> getGenres() { return genres;}
 
-    public List<PlayableMode> getModes() { return modes; }
+//    public List<PlayableMode> getModes() { return modes; }
 
-    public void setGenres(List<Genre> genres) { this.genres = genres;}
+//    public void setGenres(List<Genre> genres) { this.genres = genres;}
 
-    public void setModes(List<PlayableMode> modes) { this.modes = modes;}
+//    public void setModes(List<PlayableMode> modes) { this.modes = modes;}
 
     public void setConsole(Console c) { consoleMap.setConsole(c);}
 
@@ -61,5 +64,15 @@ public class MasterGame {
     public int getId() {
         return id;
     }
+
+    public void setGenreMap(GameGenreMap genreMap) { this.genreMap = genreMap;}
+
+    public GameGenreMap getGenreMap() { return genreMap; }
+
+
+    public void setModeMap(GamePlayableModeMap modeMap) { this.modeMap = modeMap; }
+//
+    public GamePlayableModeMap getModeMap() { return modeMap; }
+
 
 }
