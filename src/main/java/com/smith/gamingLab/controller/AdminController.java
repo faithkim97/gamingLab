@@ -190,13 +190,11 @@ public class AdminController {
         }
     }
 
-    //TODO delete mapping for master game
-
     @GetMapping("/deleteGame")
     private void deleteGame(@RequestParam int gameId) {
+        gameService.deleteMasterGamesByGameId(gameId);
         genreService.deleteMappingByGameId(gameId);
         playableModeService.deleteMappingByGameId(gameId);
-        gameService.deleteMasterGameByGameId(gameId);
         consoleService.deleteMappingByGameId(gameId);
         gameService.deleteGame(gameId);
     }
@@ -245,14 +243,33 @@ public class AdminController {
         playableModeService.deletePlayableMode(modeId);
     }
 
-    @GetMapping("/deleteModeMapping")
-    private void deleteModeMapping(@RequestParam int modeId) {
-        List<MasterGame> games = gameService.getMasterGamesByModeMap(modeId);
+    @GetMapping("/deleteModeMap")
+    private void deleteModeMapping(@RequestParam int mapId) {
+        List<MasterGame> games = gameService.getMasterGamesByModeMap(mapId);
         for (MasterGame g : games) {
             g.setModeMap(null);
             gameService.saveMasterGame(g);
         }
+        playableModeService.deleteMappingById(mapId);
+    }
 
-        playableModeService.deleteMappingById(modeId);
+    @GetMapping("/deleteGenreMap")
+    private void deleteGenreMap(@RequestParam int mapId) {
+        List<MasterGame> games = gameService.getMasterGamesByGenreMap(mapId);
+        for(MasterGame g : games) {
+            g.setGenreMap(null);
+            gameService.saveMasterGame(g);
+        }
+        genreService.deleteMapping(mapId);
+    }
+
+    @GetMapping("/deleteConsoleMap")
+    private void deleteConsoleMap(@RequestParam int mapId) {
+        List<MasterGame> games = gameService.getMasterGamesByConsoleMap(mapId);
+        for(MasterGame g : games) {
+            g.setConsoleMap(null);
+            gameService.saveMasterGame(g);
+        }
+        consoleService.deleteMapping(mapId);
     }
 }//endclass

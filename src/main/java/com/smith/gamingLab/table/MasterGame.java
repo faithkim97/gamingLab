@@ -13,13 +13,13 @@ public class MasterGame {
     @Id
     private int id;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private Game game;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private GameGenreMap genreMap;
 
-    @ManyToOne(cascade = CascadeType.REMOVE)
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private GamePlayableModeMap modeMap;
 
 //    @Column
@@ -30,7 +30,7 @@ public class MasterGame {
 //    @Convert(converter = PlayableModeListConverter.class)
 //    private List<PlayableMode> modes;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private GameConsoleMap consoleMap;
 
     public MasterGame() {}

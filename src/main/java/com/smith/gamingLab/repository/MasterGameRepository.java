@@ -29,7 +29,7 @@ public interface MasterGameRepository extends CrudRepository<MasterGame, Integer
     List<MasterGame> getGamesByKeyword(String key, Boolean checkedOut, Boolean isDigital, Integer consoleId, String mode, Integer rating);
 
     @Query(value = "select id from master_game where game_id = ?1", nativeQuery = true)
-    Integer getMasterGameByGameId(int gameId);
+    List<Integer> getMasterGameByGameId(int gameId);
 
     @Query(value = "select * from master_game where console_map_id = ?1",nativeQuery = true)
     List<MasterGame> getMasterGamesByConsoleMap(int consoleMapId);
