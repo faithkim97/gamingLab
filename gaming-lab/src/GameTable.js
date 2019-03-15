@@ -6,21 +6,10 @@ import './GameTable.css';
 class GameTable extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      games: [{
-        title: "tomb raider",
-        description: "survive the horrors",
-        genres: "survival, horror",
-        console: "ps4",
-        mode: "single player"
-      },
-    ],
-
-  };
   }
 
   render() {
-    const gameMap = this.state.games.map( g => {
+    const gameMap = this.props.value.map( g => {
       return (
         <GameEntry value={g} />
       );
