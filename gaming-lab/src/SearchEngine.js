@@ -8,27 +8,55 @@ a Submit form that contains:
 -A radio button option for Console
 -radio button option for mode
 */
-class SearchEngine extends Component {
-  constructor(props) {
+
+
+interface IGame {
+  game: Array;
+
+}
+
+interface IGameListProps {}
+
+interface IGameListState{
+  games: Array<IGame>;
+  isLoading: boolean;
+}
+class SearchEngine extends Component<IGameListProps, IGameListState> {
+  constructor(props: IGameListProps) {
     super(props);
     this.state = {
-      games: [{
-        title: "tomb raider",
-        description: "survive the horrors",
-        genres: "survival, horror",
-        console: "ps4",
-        mode: "single player"
-      },
-    ],
+      games: [],
+      isLoading: false,
 
-  };
 
-  this.handleSubmit = this.handleSubmit.bind(this);
-}//endcon
-
-  handleSubmit() {
-    console.log("submitted");
+    };
   }
+
+    componentDidMount() {
+      this.setState({isLoading: true});
+      fetch('http://localhost:8080/game/games')
+     .then(response => response.json())
+     .then(data => this.setState({games: data, isLoading: false}));
+
+    }
+  //   this.state = {
+  //     games: [{
+  //       title: "tomb raider",
+  //       description: "survive the horrors",
+  //       genres: "survival, horror",
+  //       console: "ps4",
+  //       mode: "single player"
+  //     },
+  //   ],
+  //
+  // };
+
+  // this.handleSubmit = this.handleSubmit.bind(this);
+//endcon
+
+  // handleSubmit() {
+  //   console.log("submitted");
+  // }
 
 /*
 handleSubmit(e) {
@@ -63,22 +91,42 @@ handleSubmit(e) {
 					</form> */
 
   render() {
-    return (
-        // <form onSubmit={handleSubmit}>
-        <div>
-        <form onSubmit = {handleSubmit}>
-          <input type = 'text' />
-          <input type = "submit" value = "Search" />
-        </form>
-        <div>
-          <GameTable value={this.state.games} />
-        </div>
-        </div>
+    const {games, isLoading} = this.state;
+    if (isLoading) {
+      return (<p>Loading...</p>);
+    }
+
+    return(
+      <div>
+       <h2>Game List</h2>
+       {games.map((game: IGame) =>
+          <div key={game.id}>
+            {game.game.id}
+            {game.game.title}
+          </div>
+        )}
+     </div>
+    );
+  }
 
 
 
-  );
-}//endrender
+  //   return (
+  //       // <form onSubmit={handleSubmit}>
+  //       // <div>
+  //       // <form onSubmit = {handleSubmit}>
+  //       //   <input type = 'text' />
+  //       //   <input type = "submit" value = "Search" />
+  //       // </form>
+  //       // <div>
+  //       //   <GameTable value={this.state.games} />
+  //       // </div>
+  //       // </div>
+  //
+  //
+  //
+  // );
+//endrender
 }
 
 export default SearchEngine;

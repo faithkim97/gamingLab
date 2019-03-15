@@ -23,9 +23,11 @@ public class GameController {
     PlayableModeService playableModeService;
 
     @GetMapping("/games")
+    @CrossOrigin("http://localhost:3000")
     public List<MasterGame> getAllGames() {
         return gameService.getAllMasterGames();
     }
+
 
     @GetMapping("/consoles")
     public List<Console> getConsoles() {
