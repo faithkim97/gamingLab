@@ -244,7 +244,7 @@ public class AdminController {
     }
 
     @GetMapping("/deleteModeMap")
-    private void deleteModeMapping(@RequestParam int mapId) {
+    private void deleteModeMap(@RequestParam int mapId) {
         List<MasterGame> games = gameService.getMasterGamesByModeMap(mapId);
         for (MasterGame g : games) {
             g.setModeMap(null);
