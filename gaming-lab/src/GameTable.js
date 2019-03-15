@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import GameEntry from './GameEntry';
 import './GameTable.css';
+import SearchEngine from './SearchEngine';
 
 //TODO model after shopping list
 class GameTable extends Component {
@@ -8,10 +9,17 @@ class GameTable extends Component {
     super(props);
   }
 
+
+  // {games.map((game: Game) =>
+  //    <div key={game.id}>
+  //      // {game.game.id} {game.game.title} {game.genreMap.genre.genre}
+  //
+  //    </div>
+  //  )}
   render() {
-    const gameMap = this.props.value.map( g => {
+    const gameMap = this.props.value.map((game : Game) => {
       return (
-        <GameEntry value={g} />
+        <GameEntry value={game} />
       );
     });
     return (

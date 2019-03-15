@@ -10,9 +10,11 @@ a Submit form that contains:
 */
 
 
-interface IGame {
+interface Game {
   game: Array;
   genreMap: Array;
+  modeMap: Array;
+  consoleMap: Array;
 }
 
 class SearchEngine extends Component {
@@ -93,14 +95,19 @@ handleSubmit(e) {
     return(
       <div>
        <h2>Game List</h2>
-       {games.map((game: IGame) =>
-          <div key={game.id}>
-            {game.game.id} {game.game.title} {game.genreMap.genre.genre}
-          </div>
-        )}
+
+        <GameTable value = {games} />
      </div>
     );
   }
+
+
+  // {games.map((game: Game) =>
+  //    <div key={game.id}>
+  //      // {game.game.id} {game.game.title} {game.genreMap.genre.genre}
+  //
+  //    </div>
+  //  )}
 
 
 
