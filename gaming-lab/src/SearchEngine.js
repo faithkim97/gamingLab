@@ -12,17 +12,11 @@ a Submit form that contains:
 
 interface IGame {
   game: Array;
-
+  genreMap: Array;
 }
 
-interface IGameListProps {}
-
-interface IGameListState{
-  games: Array<IGame>;
-  isLoading: boolean;
-}
-class SearchEngine extends Component<IGameListProps, IGameListState> {
-  constructor(props: IGameListProps) {
+class SearchEngine extends Component {
+  constructor(props) {
     super(props);
     this.state = {
       games: [],
@@ -101,8 +95,7 @@ handleSubmit(e) {
        <h2>Game List</h2>
        {games.map((game: IGame) =>
           <div key={game.id}>
-            {game.game.id}
-            {game.game.title}
+            {game.game.id} {game.game.title} {game.genreMap.genre.genre}
           </div>
         )}
      </div>
