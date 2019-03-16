@@ -23,7 +23,7 @@ public class GameController {
     PlayableModeService playableModeService;
 
     @GetMapping("/games")
-    @CrossOrigin("http://localhost:3000")
+//    @CrossOrigin("http://localhost:3000")
     public List<MasterGame> getAllGames() {
         return gameService.getAllMasterGames();
     }
@@ -61,7 +61,8 @@ public class GameController {
     }
 
 
-    @GetMapping("/findMasterGame")
+    @GetMapping("/findgame")
+    @CrossOrigin("http://localhost:3000")
     public List<MasterGame> getMasterGamesByKey(@RequestParam(required = false) String key, @RequestParam(required = false) Boolean checkedOut,
                                @RequestParam(required = false)  String mode, @RequestParam(required = false) Integer console,
                                @RequestParam(required = false) Boolean isDigital, @RequestParam(required = false) String rating ) {

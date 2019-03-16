@@ -10,12 +10,6 @@ class GameTable extends Component {
   }
 
 
-  // {games.map((game: Game) =>
-  //    <div key={game.id}>
-  //      // {game.game.id} {game.game.title} {game.genreMap.genre.genre}
-  //
-  //    </div>
-  //  )}
   render() {
     const gameMap = this.props.value.map((game : Game) => {
       return (
