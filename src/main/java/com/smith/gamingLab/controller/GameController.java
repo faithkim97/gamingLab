@@ -1,5 +1,7 @@
 package com.smith.gamingLab.controller;
 
+import com.smith.gamingLab.constant_enum.Rating;
+import com.smith.gamingLab.misc.Query;
 import com.smith.gamingLab.service.*;
 import com.smith.gamingLab.table.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,13 +63,25 @@ public class GameController {
     }
 
 
-    @GetMapping("/findgame")
+//    @GetMapping("/findgame")
+//    @CrossOrigin(origins = "http://localhost:3000")
+//    public List<MasterGame> getMasterGamesByKey(@RequestParam(required = false) String key, @RequestParam(required = false) Boolean checkedOut,
+//                               @RequestParam(required = false)  String mode, @RequestParam(required = false) Integer console,
+//                               @RequestParam(required = false) Boolean isDigital, @RequestParam(required = false) String rating ) {
+//        List<MasterGame> list = gameService.getMasterGameByKey(key, checkedOut, isDigital, console, mode, rating);
+//        return list;
+//    }
+
+    //TODO numberformat exception with console id = ?1
+    @PostMapping("/findgame")
     @CrossOrigin(origins = "http://localhost:3000")
-    public List<MasterGame> getMasterGamesByKey(@RequestParam(required = false) String key, @RequestParam(required = false) Boolean checkedOut,
-                               @RequestParam(required = false)  String mode, @RequestParam(required = false) Integer console,
-                               @RequestParam(required = false) Boolean isDigital, @RequestParam(required = false) String rating ) {
-        List<MasterGame> list = gameService.getMasterGameByKey(key, checkedOut, isDigital, console, mode, rating);
-        return list;
+    public @ResponseBody List<MasterGame> getGame(@RequestBody Query query) {
+        Game game = query.getGame();
+        Rating rating = game.getRating();
+        Console console = query.getConsole();
+        PlayableMode mode = query.getMode();
+        return gameService.getMasterGameByKey(query.getKeyword(), game.getIsCheckedOut(), game.getIsDigital(), console != null
+                ? console.getId() : null, mode != null ? mode.getMode() : null, rating != null ? rating.toString() : null);
     }
 
     @GetMapping("/masterGames")

@@ -12,13 +12,13 @@ public class Game {
 
     private String title;
     private Rating rating;
-    private boolean isCheckedOut;
+    private Boolean isCheckedOut;
     private int quantity = 1;
 
     @Column
     @Lob
     private String description;
-    private boolean isDigital;
+    private Boolean isDigital;
 
     public Game() {}
     public Game(String title) { this.title = title;}
@@ -29,13 +29,13 @@ public class Game {
 
     public Rating getRating() { return rating; }
 
-    public boolean getIsCheckedOut() { return isCheckedOut; }
+    public Boolean getIsCheckedOut() { return isCheckedOut; }
 
     public int getQuantity() { return quantity; }
 
     public String getDescription() { return description; }
 
-    public boolean getIsDigital() { return isDigital; }
+    public Boolean getIsDigital() { return isDigital; }
 
     public void setRating(Rating rating) { this.rating = rating; }
 
@@ -48,13 +48,13 @@ public class Game {
 
     public void setTitle(String title) { this.title = title; }
 
-    public void setIsCheckedOut(boolean isCheckedOut) { this.isCheckedOut = isCheckedOut; }
+    public void setIsCheckedOut(Boolean isCheckedOut) { this.isCheckedOut = isCheckedOut; }
 
     public void setQuantity(int q) { quantity = q;}
 
     public void setDescription(String description) { this.description = description; }
 
-    public void setIsDigital(boolean isDigital) { this.isDigital = isDigital; }
+    public void setIsDigital(Boolean isDigital) { this.isDigital = isDigital; }
 
     public void setId(int id) {this.id = id;}
 

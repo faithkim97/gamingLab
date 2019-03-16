@@ -23,37 +23,40 @@ class SearchEngine extends Component {
     this.state = {
       games: [],
       isSearch: false,
-      key: '',
+      key: "stream",
+      checkedOut: null,
+      digital: null,
+      console: "ps4",
+
+
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleKey = this.handleKey.bind(this);
   }
 
-    // componentDidMount() {
-    //   //TODO change the path
-    //   this.setState({isSearch: true});
-    //   fetch('http://localhost:8080/game/findgame')
-    //  .then(response => response.json())
-    //  .then(data => this.setState({games: data, isSearch: false}));
-    //
-    // }
-
   handleSubmit(e) {
+    console.log(this.state.key);
     e.preventDefault();
     this.setState({isSearch: true});
-    fetch('http://localhost:8080/game/findgame?key='+this.state.key)
-   .then(response => response.json())
-   .then(data => this.setState({games: data, isSearch: true}));
-
-   console.log(this.state.games);
+    fetch('http://localhost:8080/game/findgame',
+    {method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json"},
+    body: JSON.stringify({
+      keyword:this.state.key,
+      game: {
+        isCheckedOut: this.state.checkedOut,
+        isDigital: this.state.digital
+      },
+    })
+    }).then(response => response.json())
+    .then(data => this.setState({games: data, isSearch: true})).catch(function() {console.log("error")});
   }
 
   handleKey(e) {
     this.setState({key: e.target.value});
   }
-
-
-
 
   render() {
     const {games, isSearch} = this.state;
@@ -71,32 +74,6 @@ class SearchEngine extends Component {
     );
   }
 
-
-  // {games.map((game: Game) =>
-  //    <div key={game.id}>
-  //      // {game.game.id} {game.game.title} {game.genreMap.genre.genre}
-  //
-  //    </div>
-  //  )}
-
-
-
-  //   return (
-  //       // <form onSubmit={handleSubmit}>
-  //       // <div>
-  //       // <form onSubmit = {handleSubmit}>
-  //       //   <input type = 'text' />
-  //       //   <input type = "submit" value = "Search" />
-  //       // </form>
-  //       // <div>
-  //       //   <GameTable value={this.state.games} />
-  //       // </div>
-  //       // </div>
-  //
-  //
-  //
-  // );
-//endrender
 }
 
 export default SearchEngine;
