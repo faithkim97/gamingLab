@@ -62,14 +62,13 @@ public class GameController {
 
 
     @GetMapping("/findgame")
-    @CrossOrigin("http://localhost:3000")
+    @CrossOrigin(origins = "http://localhost:3000")
     public List<MasterGame> getMasterGamesByKey(@RequestParam(required = false) String key, @RequestParam(required = false) Boolean checkedOut,
                                @RequestParam(required = false)  String mode, @RequestParam(required = false) Integer console,
                                @RequestParam(required = false) Boolean isDigital, @RequestParam(required = false) String rating ) {
         List<MasterGame> list = gameService.getMasterGameByKey(key, checkedOut, isDigital, console, mode, rating);
         return list;
     }
-
 
     @GetMapping("/masterGames")
     public List<MasterGame> getMasterGames() {

@@ -23,23 +23,33 @@ class SearchEngine extends Component {
     this.state = {
       games: [],
       isSearch: false,
+      key: '',
     };
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleKey = this.handleKey.bind(this);
   }
 
     // componentDidMount() {
     //   //TODO change the path
-    //   fetch('http://localhost:8080/game/games')
+    //   this.setState({isSearch: true});
+    //   fetch('http://localhost:8080/game/findgame')
     //  .then(response => response.json())
-    //  .then(data => this.setState({games: data, isLoading: false}));
+    //  .then(data => this.setState({games: data, isSearch: false}));
     //
     // }
 
   handleSubmit(e) {
+    e.preventDefault();
     this.setState({isSearch: true});
-    fetch('http://localhost:8080/game/findgame')
+    fetch('http://localhost:8080/game/findgame?key='+this.state.key)
    .then(response => response.json())
-   .then(data => this.setState({games: data, isLoading: false}));
+   .then(data => this.setState({games: data, isSearch: true}));
+
+   console.log(this.state.games);
+  }
+
+  handleKey(e) {
+    this.setState({key: e.target.value});
   }
 
 
@@ -47,20 +57,16 @@ class SearchEngine extends Component {
 
   render() {
     const {games, isSearch} = this.state;
-    if (!isSearch) {
-      return (
-        <form onSubmit={this.handleSubmit}>
-          <input type = 'text'/>
-          <input type = 'submit' value = "Search"/>
-        </form>
-
-      );
-    }
+    const gameList = isSearch === false ? null :
+    <GameTable value = {games}/>
 
     return(
       <div>
-       <h2>Game List</h2>
-        <GameTable value = {games} />
+        <form onSubmit={this.handleSubmit}>
+          <input type = 'text' value={this.state.key} onChange={this.handleKey}/>
+          <input type = 'submit' value = "Search"/>
+        </form>
+       {gameList}
      </div>
     );
   }

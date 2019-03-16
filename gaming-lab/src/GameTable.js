@@ -18,13 +18,15 @@ class GameTable extends Component {
     });
     return (
       <table>
-        <tr>
-        <th>Title</th>
-        <th>Description</th>
-        <th>Genre</th>
-        <th>Console</th>
-        <th>Playable Modes</th>
-      </tr>
+        <tbody>
+          <tr>
+          <th>Title</th>
+          <th>Description</th>
+          <th>Genre</th>
+          <th>Console</th>
+          <th>Playable Modes</th>
+        </tr>
+        </tbody>
       {gameMap}
       </table>
     );

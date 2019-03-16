@@ -96,6 +96,7 @@ public class GameService {
         return masterGameRepository.getGamesByKeyword(key, checkedOut, isDigital, console, mode, rating_enum != null ? rating_enum.ordinal() : null);
     }
 
+
     public List<MasterGame> getMasterGamesByMode(PlayableMode mode) {
         return masterGameRepository.getMasterGamesByMode(mode.getMode());
     }
