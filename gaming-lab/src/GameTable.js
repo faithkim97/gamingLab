@@ -3,7 +3,6 @@ import GameEntry from './GameEntry';
 import './GameTable.css';
 import SearchEngine from './SearchEngine';
 
-//TODO model after shopping list
 class GameTable extends Component {
   constructor(props) {
     super(props);

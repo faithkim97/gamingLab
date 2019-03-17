@@ -8,7 +8,7 @@ import javax.persistence.Id;
 public class Console {
     @GeneratedValue
     @Id
-    private int id;
+    private Integer id;
 
     private String console;
 

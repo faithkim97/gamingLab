@@ -32,6 +32,7 @@ public class GameController {
 
 
     @GetMapping("/consoles")
+    @CrossOrigin(origins = "http://localhost:3000")
     public List<Console> getConsoles() {
         return consoleService.getAllConsoles();
     }
