@@ -91,9 +91,9 @@ public class GameService {
         return gameRepository.getGamesByTitle(title);
     }
 
-    public List<MasterGame> getMasterGameByKey(String key, Boolean checkedOut, Boolean isDigital, Integer console, String mode, String rating) {
+    public List<MasterGame> getMasterGameByKey(String key, Boolean checkedOut, Boolean isDigital, Integer console, Integer modeId, String rating) {
         Rating rating_enum = rating != null ? Rating.valueOf(rating) : null;
-        return masterGameRepository.getGamesByKeyword(key, checkedOut, isDigital, console, mode, rating_enum != null ? rating_enum.ordinal() : null);
+        return masterGameRepository.getGamesByKeyword(key, checkedOut, isDigital, console, modeId, rating_enum != null ? rating_enum.ordinal() : null);
     }
 
 

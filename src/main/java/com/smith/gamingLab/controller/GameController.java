@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 @RestController
 @RequestMapping(path="/game")
+//@CrossOrigin(origins = "http://localhost:3000")
 public class GameController {
 
     @Autowired
@@ -54,6 +55,7 @@ public class GameController {
 
 
     @GetMapping("/modes")
+    @CrossOrigin(origins = "http://localhost:3000")
     public List<PlayableMode> getAllModes() {
         return playableModeService.getAllPlayableModes();
     }
@@ -73,7 +75,6 @@ public class GameController {
 //        return list;
 //    }
 
-    //TODO numberformat exception with console id = ?1
     @PostMapping("/findgame")
     @CrossOrigin(origins = "http://localhost:3000")
     public @ResponseBody List<MasterGame> getGame(@RequestBody Query query) {
@@ -81,8 +82,10 @@ public class GameController {
         Rating rating = game.getRating();
         Console console = query.getConsole();
         PlayableMode mode = query.getMode();
-        return gameService.getMasterGameByKey(query.getKeyword(), game.getIsCheckedOut(), game.getIsDigital(), console != null
-                ? console.getId() : null, mode != null ? mode.getMode() : null, rating != null ? rating.toString() : null);
+        List<MasterGame> list =  gameService.getMasterGameByKey(query.getKeyword(), game.getIsCheckedOut(), game.getIsDigital(), console != null
+               && console.getId() != -1 ? console.getId() : null, mode != null && mode.getId() != -1 ?  mode.getId() : null,
+                rating != null ? rating.toString() : null);
+        return list;
     }
 
     @GetMapping("/masterGames")
