@@ -29,21 +29,21 @@ interface PlayableMode {
 }
 
 
-
-
 class SearchEngine extends Component {
   constructor(props) {
     super(props);
     this.state = {
       games: [],
       consoles: [],
+      ratings:[],
       modes: [],
       isSearch: false,
       key: null,
       checkedOut: null,
       digital: null,
       console_id: -1,
-      mode_id: -1
+      mode_id: -1,
+      rating: null,
 
 
     };
@@ -51,6 +51,7 @@ class SearchEngine extends Component {
     this.handleKey = this.handleKey.bind(this);
     this.handleConsole = this.handleConsole.bind(this);
     this.handleMode = this.handleMode.bind(this);
+    this.handleRating = this.handleRating.bind(this);
   }
 
   componentDidMount() {
@@ -60,6 +61,8 @@ class SearchEngine extends Component {
     fetch('http://localhost:8080/game/modes').then(response => response.json())
     .then(data => this.setState({modes: data})).catch(console.log("could not retrieve playable modes"));
 
+    fetch('http://localhost:8080/game/ratings').then(response => response.json())
+    .then(data => this.setState({ratings: data})).catch(console.log("could not retrieve rating"));
   }
 
   handleSubmit(e) {
@@ -74,7 +77,8 @@ class SearchEngine extends Component {
       keyword:this.state.key,
       game: {
         isCheckedOut: this.state.checkedOut,
-        isDigital: this.state.digital
+        isDigital: this.state.digital,
+        rating: this.state.rating,
       },
       console: {
         id: this.state.console_id,
@@ -82,6 +86,7 @@ class SearchEngine extends Component {
       mode: {
         id: this.state.mode_id,
       }
+
     })
     }).then(response => response.json())
     .then(data => this.setState({games: data, isSearch: true})).catch(function() {console.log("error")});
@@ -99,9 +104,13 @@ class SearchEngine extends Component {
     this.setState({mode_id: e.target.value});
   }
 
+  handleRating(e) {
+    this.setState({rating: e.target.value});
+  }
+
 
   render() {
-    const {games, isSearch, consoles, modes} = this.state;
+    const {games, isSearch, consoles, modes, ratings} = this.state;
     const gameList = isSearch === false ? null :
     <GameTable value = {games}/>
 
@@ -121,15 +130,22 @@ class SearchEngine extends Component {
       );
     });
 
-
-
+    const ratingMap = ratings.map((r) => {
+      return(
+        <div>
+        <input type = "radio" value={r} name = "rating" onChange={this.handleRating} /> {r}
+        </div>
+      );
+    });
 
     return(
       <div>
         <form onSubmit={this.handleSubmit}>
           <input type = 'text' value={this.state.key} onChange={this.handleKey}/>
           <input type = 'submit' value = "Search"/>
-          {consoleMap} {modeMap}
+          {consoleMap}
+          {modeMap}
+          {ratingMap}
         </form>
        {gameList}
      </div>

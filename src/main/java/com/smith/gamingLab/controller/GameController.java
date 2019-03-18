@@ -7,10 +7,10 @@ import com.smith.gamingLab.table.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Arrays;
 import java.util.List;
 @RestController
 @RequestMapping(path="/game")
-//@CrossOrigin(origins = "http://localhost:3000")
 public class GameController {
 
     @Autowired
@@ -82,10 +82,9 @@ public class GameController {
         Rating rating = game.getRating();
         Console console = query.getConsole();
         PlayableMode mode = query.getMode();
-        List<MasterGame> list =  gameService.getMasterGameByKey(query.getKeyword(), game.getIsCheckedOut(), game.getIsDigital(), console != null
+        return  gameService.getMasterGameByKey(query.getKeyword(), game.getIsCheckedOut(), game.getIsDigital(), console != null
                && console.getId() != -1 ? console.getId() : null, mode != null && mode.getId() != -1 ?  mode.getId() : null,
                 rating != null ? rating.toString() : null);
-        return list;
     }
 
     @GetMapping("/masterGames")
@@ -93,5 +92,12 @@ public class GameController {
         return gameService.getAllMasterGames();
     }
 
+
+    @GetMapping("/ratings")
+    @CrossOrigin(origins = "http://localhost:3000")
+    public List<Rating> getAllRatings() {
+        List<Rating> ratings =  Arrays.asList(Rating.values());
+        return ratings;
+    }
 
 }
