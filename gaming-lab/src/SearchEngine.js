@@ -37,6 +37,7 @@ class SearchEngine extends Component {
     this.state = {
       games: [],
       consoles: [],
+      ratings:[],
       modes: [],
       isSearch: false,
       key: null,
@@ -44,7 +45,7 @@ class SearchEngine extends Component {
       digital: null,
       console_id: -1,
       mode_id: -1,
-      rating: null,
+      rating:'NO_RATING',
 
 
     };
@@ -62,11 +63,13 @@ class SearchEngine extends Component {
     fetch('http://localhost:8080/game/modes').then(response => response.json())
     .then(data => this.setState({modes: data})).catch(console.log("could not retrieve playable modes"));
 
-    // fetch('http://localhost:8080/game/ratings').then(response => response.json())
-    // .then(data => this.setState({ratings: data})).catch(console.log("could not retrieve rating"));
+    fetch('http://localhost:8080/game/ratings').then(response => response.json())
+    .then(data => this.setState({ratings: data})).catch(console.log("could not retrieve rating"));
   }
 
   handleSubmit(e) {
+    console.log("what is rating: " + this.state.rating);
+
     e.preventDefault();
     this.setState({isSearch: true});
     fetch('http://localhost:8080/game/findgame',
@@ -79,6 +82,7 @@ class SearchEngine extends Component {
       game: {
         isCheckedOut: this.state.checkedOut,
         isDigital: this.state.digital,
+        rating: this.state.rating,
       },
       console: {
         id: this.state.console_id,
@@ -111,6 +115,7 @@ class SearchEngine extends Component {
 
 
   render() {
+
     const {games, isSearch, consoles, modes, ratings} = this.state;
     const gameList = isSearch === false ? null :
     <GameTable value = {games}/>
@@ -131,13 +136,13 @@ class SearchEngine extends Component {
       );
     });
 
-    // const ratingMap = ratings.map((r) => {
-    //   return(
-    //     <div>
-    //     <input type = "radio" value={r} name = "rating" onChange={this.handleRating} /> {r}
-    //     </div>
-    //   );
-    // });
+    const ratingMap = ratings.map((r) => {
+      return(
+        <div>
+        <input type = "radio" value={r} name = "rating" onChange={this.handleRating} /> {r}
+        </div>
+      );
+    });
 
     return(
       <div>
@@ -148,6 +153,8 @@ class SearchEngine extends Component {
           {consoleMap}
           <h3>Playable Modes</h3>
           {modeMap}
+          <h3>Rating</h3>
+          {ratingMap}
         </form>
        {gameList}
      </div>

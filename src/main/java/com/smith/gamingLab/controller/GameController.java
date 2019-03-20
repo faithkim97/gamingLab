@@ -84,7 +84,7 @@ public class GameController {
         PlayableMode mode = query.getMode();
         return  gameService.getMasterGameByKey(query.getKeyword(), game.getIsCheckedOut(), game.getIsDigital(), console != null
                && console.getId() != -1 ? console.getId() : null, mode != null && mode.getId() != -1 ?  mode.getId() : null,
-                rating != null ? rating.toString() : null);
+                rating != Rating.NONE ? rating.toString() : null);
     }
 
     @GetMapping("/masterGames")
