@@ -45,7 +45,7 @@ class SearchEngine extends Component {
       digital: null,
       console_id: -1,
       mode_id: -1,
-      rating:'NO_RATING',
+      rating:'NONE',
 
 
     };
@@ -137,11 +137,13 @@ class SearchEngine extends Component {
     });
 
     const ratingMap = ratings.map((r) => {
+      if(r != 'NONE') {
       return(
         <div>
-        <input type = "radio" value={r} name = "rating" onChange={this.handleRating} /> {r}
-        </div>
+          <input type = "radio" value={r} name = "rating" onChange={this.handleRating} /> {r}
+          </div>
       );
+    }
     });
 
     return(
