@@ -17,6 +17,8 @@ interface Game {
   consoleMap: Array;
 }
 
+
+//TODO can i consolidate between console and playable mode bc they have basically same fields?
 interface Console {
   console: String,
   id: number
@@ -143,8 +145,11 @@ class SearchEngine extends Component {
         <form onSubmit={this.handleSubmit}>
           <input type = 'text' value={this.state.key} onChange={this.handleKey}/>
           <input type = 'submit' value = "Search"/>
+          <h3>Consoles</h3>
           {consoleMap}
+          <h3>Playable Modes</h3>
           {modeMap}
+          <h3>Ratings</h3>
           {ratingMap}
         </form>
        {gameList}
