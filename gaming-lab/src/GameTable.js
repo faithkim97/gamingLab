@@ -10,7 +10,7 @@ class GameTable extends Component {
 
 
   render() {
-    const gameMap = this.props.value.map((game : Game) => {
+    const gameMap = this.props.value.map((game) => {
       return (
         <GameEntry value={game} />
       );
@@ -20,10 +20,11 @@ class GameTable extends Component {
         <tbody>
           <tr>
           <th>Title</th>
-          <th>Description</th>
           <th>Genre</th>
           <th>Console</th>
+          <th>Rating</th>
           <th>Playable Modes</th>
+          <th>Description</th>
         </tr>
         </tbody>
       {gameMap}

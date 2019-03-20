@@ -1,35 +1,5 @@
 import React, { Component } from 'react';
 import GameTable from './GameTable';
-/*
-Things to create:
-
-a Submit form that contains:
--A search bar (title, desc, genre)
--A radio button option for Console
--radio button option for mode
-*/
-
-
-interface Game {
-  game: Array;
-  genreMap: Array;
-  modeMap: Array;
-  consoleMap: Array;
-}
-
-
-//TODO can i consolidate between console and playable mode bc they have basically same fields?
-interface Console {
-  console: String,
-  id: number
-
-}
-
-interface PlayableMode {
-  mode: String,
-  id: number
-}
-
 
 class SearchEngine extends Component {
   constructor(props) {
@@ -120,7 +90,7 @@ class SearchEngine extends Component {
     const gameList = isSearch === false ? null :
     <GameTable value = {games}/>
 
-    const consoleMap = consoles.map((c : Console) => {
+    const consoleMap = consoles.map((c) => {
       return(
         <div key={c.id}>
         <input type = 'radio' value = {c.id} name="console" onChange={this.handleConsole}/ >{c.console}
@@ -128,7 +98,7 @@ class SearchEngine extends Component {
       );
     });
 
-    const modeMap = modes.map((m : PlayableMode) => {
+    const modeMap = modes.map((m) => {
       return(
         <div key = {m.id}>
           <input type = 'radio' value = {m.id} name= "mode" onChange={this.handleMode} />{m.mode}
