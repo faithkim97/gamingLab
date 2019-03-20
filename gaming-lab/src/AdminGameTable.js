@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import AdminGameEntry from './AdminGameEntry';
+import EditGameForm from './EditGameForm';
 
 function showGameTable(gameMap) {
  return(<table>
@@ -28,12 +29,15 @@ class AdminGameTable extends Component {
       games: [],
       showGames: false,
     };
-    this.handleClick = this.handleClick.bind(this);
+    this.handleEditGame = this.handleEditGame.bind(this);
     this.handleShowGames = this.handleShowGames.bind(this);
+    this.editGameForm = null;
   }//endcon
 
-  handleClick() {
-    console.log("hello");
+  handleEditGame(masterGame) {
+    console.log("game: " + masterGame.game.id);
+    this.setState({showGames: false});
+    this.editGameForm = <EditGameForm value={masterGame}/>
   }
 
   componentDidMount() {
@@ -51,7 +55,7 @@ class AdminGameTable extends Component {
     const {games, showGames} = this.state;
     const gameMap = games.map(g => {
       return(
-        <AdminGameEntry value = {g} onClick={this.handleClick}/>
+        <AdminGameEntry value = {g} onClick={() => this.handleEditGame(g)}/>
       );
     });
 
@@ -60,6 +64,7 @@ class AdminGameTable extends Component {
       <div>
       <button onClick={this.handleShowGames}>Games</button>
       {gameTable}
+      {this.editGameForm}
       </div>
     );
   }//endrender

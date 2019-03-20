@@ -124,7 +124,7 @@ class SearchEngine extends Component {
     return(
       <div>
         <form onSubmit={this.handleSubmit}>
-          <input type = 'text' defaultChecked={this.state.key} onChange={this.handleKey}/>
+          <input type = 'text' value={this.state.key} onChange={this.handleKey}/>
           <input type = 'submit' value = "Search"/>
           <h3>Consoles</h3>
           {consoleMap}
