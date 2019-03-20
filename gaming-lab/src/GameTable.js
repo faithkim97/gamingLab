@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import GameEntry from './GameEntry';
 import './GameTable.css';
-import SearchEngine from './SearchEngine';
 
 class GameTable extends Component {
   constructor(props) {

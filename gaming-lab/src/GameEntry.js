@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 function GameEntry(props) {
   const systemConsole = props.value.consoleMap == null ? 'N/A'

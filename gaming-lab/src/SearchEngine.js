@@ -16,14 +16,14 @@ class SearchEngine extends Component {
       console_id: -1,
       mode_id: -1,
       rating:'NONE',
-
-
     };
+
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleKey = this.handleKey.bind(this);
     this.handleConsole = this.handleConsole.bind(this);
     this.handleMode = this.handleMode.bind(this);
     this.handleRating = this.handleRating.bind(this);
+    this.handleCheckedOut = this.handleCheckedOut.bind(this);
   }
 
   componentDidMount() {
@@ -38,8 +38,7 @@ class SearchEngine extends Component {
   }
 
   handleSubmit(e) {
-    console.log("what is rating: " + this.state.rating);
-
+    console.log("checked out: " + this.state.checkedOut);
     e.preventDefault();
     this.setState({isSearch: true});
     fetch('http://localhost:8080/game/findgame',
@@ -53,6 +52,7 @@ class SearchEngine extends Component {
         isCheckedOut: this.state.checkedOut,
         isDigital: this.state.digital,
         rating: this.state.rating,
+        isCheckedOut: this.state.checkedOut,
       },
       console: {
         id: this.state.console_id,
@@ -81,6 +81,11 @@ class SearchEngine extends Component {
 
   handleRating(e) {
     this.setState({rating: e.target.value});
+  }
+
+  handleCheckedOut(e) {
+    console.log(e.target.value);
+    this.setState({checkedOut: e.target.value});
   }
 
 
@@ -119,7 +124,7 @@ class SearchEngine extends Component {
     return(
       <div>
         <form onSubmit={this.handleSubmit}>
-          <input type = 'text' value={this.state.key} onChange={this.handleKey}/>
+          <input type = 'text' defaultChecked={this.state.key} onChange={this.handleKey}/>
           <input type = 'submit' value = "Search"/>
           <h3>Consoles</h3>
           {consoleMap}
