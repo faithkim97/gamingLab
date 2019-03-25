@@ -1,25 +1,40 @@
 import React, { Component } from 'react';
 
 function AdminGameEntry(props) {
-  const systemConsole = props.value.consoleMap == null ? 'N/A'
-        : props.value.consoleMap.console.console;
-  const genre = props.value.genreMap == null ? 'N/A' : props.value.genreMap.genre.genre;
-  const mode = props.value.modeMap == null ? 'N/A' : props.value.modeMap.playableMode.mode;
+  const games = props.value;
+  const masterGame = games[0];
+  const systemConsole = masterGame.consoleMap == null ? 'N/A'
+       : masterGame.consoleMap.console.console;
+
+  const checkedOut = masterGame.game.isCheckedOut ? "true" : "false";
+  const isDigital = masterGame.game.isDigital ? "true" : "false";
+
+  const genres = [];
+  const modes = [];
+  games.map(g=>{
+    if(g.genreMap != null) {
+      genres.push(" " + g.genreMap.genre.genre);
+    }
+
+    if(g.modeMap != null && !modes.includes(g.modeMap.playableMode.mode)) {
+      modes.push(" " + g.modeMap.playableMode.mode);
+    }
+  });
 
   return(
-    <tr>
-      <td>{props.value.game.id}</td>
-      <td> {props.value.game.title} </td>
-      <td>{genre}</td>
-      <td>{systemConsole}</td>
-      <td>{props.value.game.rating}</td>
-      <td> {mode} </td>
-      <td>{props.value.game.isCheckedOut} </td>
-      <td>{props.value.game.isDigital}</td>
-      <td> {props.value.game.description}</td>
-      <td><button onClick={props.onClick}>Edit Game</button></td>
-    </tr>
-  );
+  <tr>
+    <td>{masterGame.game.id}</td>
+    <td> {masterGame.game.title} </td>
+    <td>{genres}</td>
+    <td>{systemConsole}</td>
+    <td>{masterGame.game.rating}</td>
+    <td>{modes}</td>
+    <td>{checkedOut}</td>
+    <td>{isDigital}</td>
+    <td>{masterGame.game.description}</td>
+    <td><button onClick={props.onClick}>Edit Game</button></td>
+  </tr>
+);
 }
 
 export default AdminGameEntry;

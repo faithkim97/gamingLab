@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import AdminGameEntry from './AdminGameEntry';
 import EditGameForm from './EditGameForm';
 
+
 function showGameTable(gameMap) {
  return(<table>
    <tbody>
@@ -53,11 +54,28 @@ class AdminGameTable extends Component {
 
   render() {
     const {games, showGames} = this.state;
-    const gameMap = games.map(g => {
-      return(
-        <AdminGameEntry value = {g} onClick={() => this.handleEditGame(g)}/>
-      );
-    });
+
+    const seenIds = new Set([14]);
+    let subgames = [];
+    const gameMap = games.map(g=> {
+      if(!seenIds.has(g.game.id)){
+        seenIds.add(g.game.id);
+        const subgames1 = subgames.slice();
+        subgames = [];
+        subgames.push(g);
+        return (<AdminGameEntry value = {subgames1} onClick={() => this.handleEditGame(g)}/>);
+
+      }
+      subgames.push(g);
+    })
+
+
+    // genres.map(g => console.log(g));
+    // const gameMap = games.map(g => {
+    //   return(
+    //     <AdminGameEntry value = {g} onClick={() => this.handleEditGame(g)}/>
+    //   );
+    // });
 
     const gameTable = showGames ? showGameTable(gameMap) : null;
     return(
