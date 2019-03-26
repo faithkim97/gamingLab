@@ -35,10 +35,10 @@ class AdminGameTable extends Component {
     this.editGameForm = null;
   }//endcon
 
-  handleEditGame(masterGame) {
-    console.log("game: " + masterGame.game.id);
+  handleEditGame(masterGames) {
+    console.log("game: " + masterGames[0].game.id);
     this.setState({showGames: false});
-    this.editGameForm = <EditGameForm value={masterGame}/>
+    this.editGameForm = <EditGameForm value={masterGames}/>
   }
 
   componentDidMount() {
@@ -54,7 +54,7 @@ class AdminGameTable extends Component {
 
   render() {
     const {games, showGames} = this.state;
-
+    //TODO don't hardcode 14. set it by the first id in json
     const seenIds = new Set([14]);
     let subgames = [];
     const gameMap = games.map(g=> {
@@ -63,7 +63,7 @@ class AdminGameTable extends Component {
         const subgames1 = subgames.slice();
         subgames = [];
         subgames.push(g);
-        return (<AdminGameEntry value = {subgames1} onClick={() => this.handleEditGame(g)}/>);
+        return (<AdminGameEntry value = {subgames1} onClick={() => this.handleEditGame(subgames1)}/>);
 
       }
       subgames.push(g);

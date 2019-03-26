@@ -38,7 +38,6 @@ class SearchEngine extends Component {
   }
 
   handleSubmit(e) {
-    console.log("checked out: " + this.state.checkedOut);
     e.preventDefault();
     this.setState({isSearch: true});
     fetch('http://localhost:8080/game/findgame',
