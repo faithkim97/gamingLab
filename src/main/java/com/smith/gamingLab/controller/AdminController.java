@@ -134,6 +134,17 @@ public class AdminController {
         return gameController.getAllGameGenres();
     }
 
+    @GetMapping("/mapGenreByGameId")
+    @CrossOrigin(origins = "http://localhost:3000")
+    private void mapGenreByGameId(@RequestParam int gameId, @RequestParam String genreTitle) {
+        Optional<Game> gameO = gameService.getGameById(gameId);
+        if (gameO.isPresent()) {
+            Game game = gameO.get();
+            saveGenres(game, genreTitle);
+            saveMasterGame(game);
+        }
+    }
+
     @GetMapping("/addGenre")
     private List<Genre> addGenre(@RequestParam String genre) {
         Genre g = new Genre(genre);
