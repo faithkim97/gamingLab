@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import EditGenreEntry from './EditGenreEntry';
+import GameFieldEntry from './GameFieldEntry';
 import GenreDropdown from './GenreDropdown';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
@@ -35,15 +35,6 @@ class EditGenreTable extends Component {
 
     constructor(props) {
       super(props);
-      this.state = {
-        genres: [],
-      };
-    }
-
-    componentDidMount() {
-      fetch('http://localhost:8080/game/genres').then(response => response.json())
-      .then(data => this.setState({genres: data})).catch(console.log("could not retrieve genres"));
-
     }
 
     deleteGenreMapping(e, mapId){
@@ -57,7 +48,7 @@ class EditGenreTable extends Component {
       const genreEntries = masterGames.map(mg => {
         if (mg.genreMap != null) {
           return(
-            <EditGenreEntry value={mg} onClick={e =>this.deleteGenreMapping(e, mg.genreMap.id)}/>
+            <GameFieldEntry id={mg.genreMap.id} field = {mg.genreMap != null ? mg.genreMap.genre.genre : null} onClick={e =>this.deleteGenreMapping(e, mg.genreMap.id)}/>
           );
         }
       });

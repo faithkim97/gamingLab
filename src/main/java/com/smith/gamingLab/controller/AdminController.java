@@ -151,11 +151,26 @@ public class AdminController {
         Optional<Game> gameO = gameService.getGameById(gameId);
         if (gameO.isPresent()) {
             List<Genre> genres = new ArrayList<>();
+            //TODO probs check if optional present
             genreIds.forEach(id -> genres.add(genreService.getGenreById(id).get()));
             genreService.saveGameGenreMap(gameO.get(), genres);
             saveMasterGame(gameO.get());
         }
     }
+
+    @GetMapping("/mapModeByModeGameIds")
+    @CrossOrigin(origins = "http://localhost:3000")
+    private void mapModeByGameModeIds(@RequestParam int gameId, @RequestParam List<Integer> modeIds) {
+        Optional<Game> gameO = gameService.getGameById(gameId);
+        if (gameO.isPresent()) {
+            List<PlayableMode> modes = new ArrayList<>();
+            modeIds.forEach(id ->modes.add(playableModeService.getPlayableModeById(id).get()));
+            playableModeService.saveMapping(gameO.get(), modes);
+            saveMasterGame(gameO.get());
+        }
+    }
+
+
 
     @GetMapping("/addGenre")
     private List<Genre> addGenre(@RequestParam String genre) {
@@ -267,6 +282,7 @@ public class AdminController {
     }
 
     @GetMapping("/deleteModeMap")
+    @CrossOrigin(origins ="http://localhost:3000" )
     private void deleteModeMap(@RequestParam int mapId) {
         List<MasterGame> games = gameService.getMasterGamesByModeMap(mapId);
         for (MasterGame g : games) {

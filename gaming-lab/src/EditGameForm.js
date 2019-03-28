@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import EditGenreTable from './EditGenreTable';
+import EditModeTable from './EditModeTable';
 
 class EditGameForm extends Component {
   constructor(props) {
@@ -27,6 +28,8 @@ class EditGameForm extends Component {
            <input type = "text" value={game.game.title}/>
            Genre:
            <EditGenreTable value = {masterGames} />
+           Playable Modes:
+           <EditModeTable value = {masterGames} />
            <input type = "submit" value = "Update" />
         </form>
       </div>
