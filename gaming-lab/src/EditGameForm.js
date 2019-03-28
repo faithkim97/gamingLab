@@ -8,12 +8,8 @@ class EditGameForm extends Component {
       genres: '',
     };
     this.handleUpdate = this.handleUpdate.bind(this);
-    this.handleGenre = this.handleGenre.bind(this);
   }
 
-  handleGenre(e) {
-    console.log(e.target.value);
-  }
 
   handleUpdate(e){
     e.preventDefault();
@@ -30,7 +26,7 @@ class EditGameForm extends Component {
           Title:
            <input type = "text" value={game.game.title}/>
            Genre:
-           <EditGenreTable value = {masterGames} onClick = {this.handleGenre}/>
+           <EditGenreTable value = {masterGames} />
            <input type = "submit" value = "Update" />
         </form>
       </div>

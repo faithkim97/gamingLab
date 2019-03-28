@@ -48,7 +48,7 @@ class EditGenreTable extends Component {
 
     deleteGenreMapping(e, mapId){
       fetch('http://localhost:8080/admin//deleteGenreMap?mapId='+mapId);
-      console.log("deleting genre map: "+ mapId);
+      window.location.reload();
     }
 
     render() {

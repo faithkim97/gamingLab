@@ -55,7 +55,7 @@ class AdminGameTable extends Component {
   render() {
     const {games, showGames} = this.state;
     //TODO don't hardcode 14. set it by the first id in json
-    const seenIds = new Set([14]);
+    const seenIds = new Set([games[0] ? games[0].game.id : null]);
     let subgames = [];
     const gameMap = games.map(g=> {
       if(!seenIds.has(g.game.id)){
