@@ -7,9 +7,7 @@ import com.smith.gamingLab.table.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class GameService {
@@ -23,6 +21,8 @@ public class GameService {
     public List<MasterGame> getAllMasterGames() {
         List<MasterGame> games = new ArrayList<>();
         masterGameRepository.findAll().forEach( g -> games.add(g));
+        Comparator<MasterGame> comparator = (MasterGame g1, MasterGame g2)->Integer.compare(g1.getGame().getId(), g2.getGame().getId());
+        Collections.sort(games, comparator);
         return games;
     }
 

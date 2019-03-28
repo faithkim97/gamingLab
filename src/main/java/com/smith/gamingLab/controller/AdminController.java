@@ -70,9 +70,9 @@ public class AdminController {
             for (MasterGame mg : masterGames) {
                 mg.setModeMap(mode);
                 mg.setConsoleMap(console);
-                gameService.saveMasterGame(mg);
             }
         }
+        masterGames.forEach(mg -> gameService.saveMasterGame(mg));
     }
 
 
@@ -142,6 +142,18 @@ public class AdminController {
             Game game = gameO.get();
             saveGenres(game, genreTitle);
             saveMasterGame(game);
+        }
+    }
+
+    @GetMapping("/mapGenreByGameGenreIds")
+    @CrossOrigin(origins = "http://localhost:3000")
+    private void mapGenreByGameGenreIds(@RequestParam int gameId, @RequestParam List<Integer> genreIds) {
+        Optional<Game> gameO = gameService.getGameById(gameId);
+        if (gameO.isPresent()) {
+            List<Genre> genres = new ArrayList<>();
+            genreIds.forEach(id -> genres.add(genreService.getGenreById(id).get()));
+            genreService.saveGameGenreMap(gameO.get(), genres);
+            saveMasterGame(gameO.get());
         }
     }
 
@@ -265,6 +277,7 @@ public class AdminController {
     }
 
     @GetMapping("/deleteGenreMap")
+    @CrossOrigin(origins ="http://localhost:3000" )
     private void deleteGenreMap(@RequestParam int mapId) {
         List<MasterGame> games = gameService.getMasterGamesByGenreMap(mapId);
         for(MasterGame g : games) {

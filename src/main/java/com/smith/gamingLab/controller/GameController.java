@@ -44,6 +44,7 @@ public class GameController {
     }
 
     @GetMapping("/genres")
+    @CrossOrigin(origins = "http://localhost:3000")
     public List<Genre> getAllGenres() {
         return genreService.getAllGenres();
     }
@@ -74,6 +75,8 @@ public class GameController {
 //        List<MasterGame> list = gameService.getMasterGameByKey(key, checkedOut, isDigital, console, mode, rating);
 //        return list;
 //    }
+
+
 
     @PostMapping("/findgame")
     @CrossOrigin(origins = "http://localhost:3000")

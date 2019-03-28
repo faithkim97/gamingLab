@@ -25,7 +25,7 @@ public class MasterGame {
 //    @Column
 //    @Convert(converter = GenreListConverter.class)
 //    private List<Genre> genres;
-//
+
 //    @Column
 //    @Convert(converter = PlayableModeListConverter.class)
 //    private List<PlayableMode> modes;

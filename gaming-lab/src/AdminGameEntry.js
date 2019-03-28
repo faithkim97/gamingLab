@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 function AdminGameEntry(props) {
   const games = props.value;
+  const admin = props.admin;
   const masterGame = games[0];
   const systemConsole = masterGame.consoleMap == null ? 'N/A'
        : masterGame.consoleMap.console.console;
@@ -29,8 +30,12 @@ function AdminGameEntry(props) {
     <td>{systemConsole}</td>
     <td>{masterGame.game.rating}</td>
     <td>{modes}</td>
-    <td>{checkedOut}</td>
+    {(admin) ?
+      <td>{checkedOut}</td>
+    : null}
+    {(admin) ?
     <td>{isDigital}</td>
+    : null}
     <td>{masterGame.game.description}</td>
     <td><button onClick={props.onClick}>Edit Game</button></td>
   </tr>

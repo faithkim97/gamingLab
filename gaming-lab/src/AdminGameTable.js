@@ -63,7 +63,7 @@ class AdminGameTable extends Component {
         const subgames1 = subgames.slice();
         subgames = [];
         subgames.push(g);
-        return (<AdminGameEntry value = {subgames1} onClick={() => this.handleEditGame(subgames1)}/>);
+        return (<AdminGameEntry admin={this.props.admin} value = {subgames1} onClick={() => this.handleEditGame(subgames1)}/>);
 
       }
       subgames.push(g);

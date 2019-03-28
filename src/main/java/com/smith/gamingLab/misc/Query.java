@@ -28,8 +28,15 @@ public class Query {
         this.genre = genre;
     }
 
+    public static String nullIfEmpty(String input) {
+        if (input == null) return null;
+        if (input.trim().isEmpty()) {
+            return null;
+        }
+        return input;
+    }
 
-    public String getKeyword() { return keyword; }
+    public String getKeyword() { return nullIfEmpty(keyword); }
 
     public Game getGame() { return game; }
 

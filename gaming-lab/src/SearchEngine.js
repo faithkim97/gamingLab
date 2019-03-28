@@ -19,7 +19,7 @@ class SearchEngine extends Component {
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleKey = this.handleKey.bind(this);
+    //this.handleKey = this.handleKey.bind(this);
     this.handleConsole = this.handleConsole.bind(this);
     this.handleMode = this.handleMode.bind(this);
     this.handleRating = this.handleRating.bind(this);
@@ -123,7 +123,7 @@ class SearchEngine extends Component {
     return(
       <div>
         <form onSubmit={this.handleSubmit}>
-          <input type = 'text' value={this.state.key} onChange={this.handleKey}/>
+          <input type = 'text' value={this.state.key} onChange={e => this.handleKey(e)}/>
           <input type = 'submit' value = "Search"/>
           <h3>Consoles</h3>
           {consoleMap}

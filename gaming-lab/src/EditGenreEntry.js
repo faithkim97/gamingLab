@@ -16,17 +16,6 @@ class EditGenreEntry extends Component {
     this.setState({value: e.target.value});
   }
 
-  handleClickChange(e) {
-
-    e.preventDefault();
-    // console.log(this.state.gameId);
-    const gameId = 14;
-
-    //IT'S WORKING AHHH
-    fetch('http://localhost:8080/admin/mapGenreByGameId?gameId='+gameId+"&genreTitle="+
-    "war")
-  }
-
   render() {
 
     const genreMap = this.props.value.genreMap;
@@ -35,10 +24,7 @@ class EditGenreEntry extends Component {
       <tr>
         <td>{genreMap.id}</td>
         <td>{genreMap.genre.genre}</td>
-        <td><input type = "text" value = {this.state.value} onChange={this.handleChange}/>
-        <button onClick={this.handleClickChange}>Change Genre </button></td>
-
-        <td><button>Delete</button></td>
+        <td><button onClick={this.props.onClick}>Delete</button></td>
       </tr>
 
 
