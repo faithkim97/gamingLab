@@ -55,25 +55,43 @@ public class AdminController {
         saveMasterGame(g);
     }
 
-    private void saveMasterGame(Game game) {
-//        MasterGame masterGame = new MasterGame(game);
+    //TODO fix this: need to take into consideration what happens when modes.size() > genres.size()
+    //TODO take setocnsolemap out of the loop
+
+    private List<MasterGame> createMasterGameList(Game game, int size1, int size2) {
         List<MasterGame> masterGames = new ArrayList<>();
+        int mgSize = size1 > size2 ? size1 : size2;
+        for (int i = 0; i < mgSize; i++) {
+            masterGames.add(new MasterGame(game));
+        }
+        return masterGames;
+    }
+
+    private void setGenreMapInMasterGameList(List<MasterGame> masterGames, List<GameGenreMap> genreMap) {
+        for (int i = 0; i < genreMap.size(); i++) {
+            masterGames.get(i).setGenreMap(genreMap.get(i));
+        }
+    }
+
+    private void setModeMapInMasterGameList(List<MasterGame> masterGames, List<GamePlayableModeMap> modeMap) {
+        for (int i = 0; i < modeMap.size(); i++) {
+            masterGames.get(i).setModeMap(modeMap.get(i));
+        }
+    }
+
+
+    private void saveMasterGame(Game game) {
         int gameId = game.getId();
-        List<GameGenreMap> genreMap = genreService.getMappingByGameId(gameId);
-        for (GameGenreMap g : genreMap) {
-            MasterGame mg = new MasterGame(game);
-            mg.setGenreMap(g);
-            masterGames.add(mg);
-        }
-        List<GamePlayableModeMap> modes = playableModeService.getMappingByGameId(gameId);
+        List<GamePlayableModeMap> modeMap = playableModeService.getMappingByGameId(gameId);
         List<GameConsoleMap> consoleMap = consoleService.getMappingByGameId(gameId);
+        List<GameGenreMap> genreMap = genreService.getMappingByGameId(gameId);
+
+        List<MasterGame> masterGames = createMasterGameList(game, genreMap.size(), modeMap.size());
+        setGenreMapInMasterGameList(masterGames, genreMap);
+        setModeMapInMasterGameList(masterGames, modeMap);
+        //game always has only 1 console mapped
         GameConsoleMap console = !consoleMap.isEmpty() ? consoleMap.get(0) : null;
-        for (GamePlayableModeMap mode : modes) {
-            for (MasterGame mg : masterGames) {
-                mg.setModeMap(mode);
-                mg.setConsoleMap(console);
-            }
-        }
+        masterGames.forEach(mg -> mg.setConsoleMap(console));
         masterGames.forEach(mg -> gameService.saveMasterGame(mg));
     }
 
@@ -240,18 +258,12 @@ public class AdminController {
         if(consoleMapO.isPresent()) {
             consoleMap = consoleMapO.get();
             consoleMap.setConsole(console);
+            List<MasterGame> mg = gameService.getMasterGamesByConsoleMap(mapId);
         } else {
             consoleMap = new GameConsoleMap(game, console);
         }
         consoleService.saveGameConsoleMap(consoleMap);
-//        if (consoleMapO.isPresent()) {
-//            List<MasterGame> masterGames = gameService.getMasterGamesByConsoleMap(mapId);
-//            for (MasterGame mg : masterGames) {
-//                mg.setConsoleMap(consoleMap);
-//                gameService.saveMasterGame(mg);
-//            }
-//        } else { saveMasterGame(game);}
-
+        saveMasterGame(game);
     }
 
     @GetMapping("/deleteGame")

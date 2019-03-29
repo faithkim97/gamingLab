@@ -4,14 +4,20 @@ function AdminGameEntry(props) {
   const games = props.value;
   const admin = props.admin;
   const masterGame = games[0];
-  const systemConsole = masterGame.consoleMap == null ? 'N/A'
-       : masterGame.consoleMap.console.console;
+  let systemConsole = null;
+  for (let i = 0; i < games.length; i++) {
+    if (games[i].consoleMap != null) {
+      systemConsole = games[i].consoleMap.console.console;
+    }
+  }
 
   const checkedOut = masterGame.game.isCheckedOut ? "true" : "false";
   const isDigital = masterGame.game.isDigital ? "true" : "false";
 
   const genres = [];
   const modes = [];
+  //I think this prints repeitive mapping
+  //the includes doesn't work
   games.map(g=>{
     if(g.genreMap != null) {
       genres.push(" " + g.genreMap.genre.genre);
