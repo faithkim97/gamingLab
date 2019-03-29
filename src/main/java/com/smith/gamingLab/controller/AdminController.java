@@ -31,6 +31,8 @@ public class AdminController {
     @Autowired
     GameController gameController;
 
+    final String url = "http://localhost:3000";
+
     @PostMapping("/addGame")
     private void addGame(@RequestParam(value = "title") String title, @RequestParam(value = "desc", required = false) String description,
                          @RequestParam(value = "genre",required = false) String genreTitle,
@@ -135,7 +137,7 @@ public class AdminController {
     }
 
     @GetMapping("/mapGenreByGameId")
-    @CrossOrigin(origins = "http://localhost:3000")
+    @CrossOrigin(origins = url)
     private void mapGenreByGameId(@RequestParam int gameId, @RequestParam String genreTitle) {
         Optional<Game> gameO = gameService.getGameById(gameId);
         if (gameO.isPresent()) {
@@ -146,7 +148,7 @@ public class AdminController {
     }
 
     @GetMapping("/mapGenreByGameGenreIds")
-    @CrossOrigin(origins = "http://localhost:3000")
+    @CrossOrigin(origins = url)
     private void mapGenreByGameGenreIds(@RequestParam int gameId, @RequestParam List<Integer> genreIds) {
         Optional<Game> gameO = gameService.getGameById(gameId);
         if (gameO.isPresent()) {
@@ -228,6 +230,30 @@ public class AdminController {
         }
     }
 
+    @GetMapping("/replaceConsoleMap")
+    @CrossOrigin(origins = url)
+    private void replaceConsoleMap(@RequestParam int mapId, @RequestParam int consoleId, @RequestParam int gameId) {
+        Optional<GameConsoleMap> consoleMapO = consoleService.getMappingById(mapId);
+        Game game = gameService.getGameById(gameId).get();
+        Console console = consoleService.getConsoleById(consoleId).get();
+        GameConsoleMap consoleMap;
+        if(consoleMapO.isPresent()) {
+            consoleMap = consoleMapO.get();
+            consoleMap.setConsole(console);
+        } else {
+            consoleMap = new GameConsoleMap(game, console);
+        }
+        consoleService.saveGameConsoleMap(consoleMap);
+//        if (consoleMapO.isPresent()) {
+//            List<MasterGame> masterGames = gameService.getMasterGamesByConsoleMap(mapId);
+//            for (MasterGame mg : masterGames) {
+//                mg.setConsoleMap(consoleMap);
+//                gameService.saveMasterGame(mg);
+//            }
+//        } else { saveMasterGame(game);}
+
+    }
+
     @GetMapping("/deleteGame")
     private void deleteGame(@RequestParam int gameId) {
         gameService.deleteMasterGamesByGameId(gameId);
@@ -282,7 +308,7 @@ public class AdminController {
     }
 
     @GetMapping("/deleteModeMap")
-    @CrossOrigin(origins ="http://localhost:3000" )
+    @CrossOrigin(origins = url)
     private void deleteModeMap(@RequestParam int mapId) {
         List<MasterGame> games = gameService.getMasterGamesByModeMap(mapId);
         for (MasterGame g : games) {
@@ -293,7 +319,7 @@ public class AdminController {
     }
 
     @GetMapping("/deleteGenreMap")
-    @CrossOrigin(origins ="http://localhost:3000" )
+    @CrossOrigin(origins = url)
     private void deleteGenreMap(@RequestParam int mapId) {
         List<MasterGame> games = gameService.getMasterGamesByGenreMap(mapId);
         for(MasterGame g : games) {
@@ -304,6 +330,7 @@ public class AdminController {
     }
 
     @GetMapping("/deleteConsoleMap")
+    @CrossOrigin(origins = url)
     private void deleteConsoleMap(@RequestParam int mapId) {
         List<MasterGame> games = gameService.getMasterGamesByConsoleMap(mapId);
         for(MasterGame g : games) {

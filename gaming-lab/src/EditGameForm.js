@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
 import EditGenreTable from './EditGenreTable';
 import EditModeTable from './EditModeTable';
+import EditConsole from './EditConsole';
 
 class EditGameForm extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      genres: '',
-    };
     this.handleUpdate = this.handleUpdate.bind(this);
   }
 
@@ -26,12 +24,16 @@ class EditGameForm extends Component {
         <form onSubmit={this.handleUpdate}>
           Title:
            <input type = "text" value={game.game.title}/>
-           Genre:
-           <EditGenreTable value = {masterGames} />
-           Playable Modes:
-           <EditModeTable value = {masterGames} />
+
+
            <input type = "submit" value = "Update" />
         </form>
+        Genre:
+        <EditGenreTable value = {masterGames} />
+        Playable Modes:
+        <EditModeTable value = {masterGames} />
+        Consoles:
+        <EditConsole value = {masterGames} />
       </div>
 
 

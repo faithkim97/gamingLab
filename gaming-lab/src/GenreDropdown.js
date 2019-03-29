@@ -41,7 +41,7 @@ class GenreDropdown extends Component {
     const genreButtons = genres.map(g=>{
       return(
         <div>
-        <input type = "checkbox" value ={g.id} onChange={e=>this.handleGenreCheck(e)} checked={false}/>
+        <input type = "checkbox" value ={g.id} onChange={e=>this.handleGenreCheck(e)} />
         {g.genre}
         </div>
       );
