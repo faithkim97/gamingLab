@@ -5,6 +5,7 @@ function AdminGameEntry(props) {
   const admin = props.admin;
   const masterGame = games[0];
   let systemConsole = null;
+  //finding mastergame with no null console
   for (let i = 0; i < games.length; i++) {
     if (games[i].consoleMap != null) {
       systemConsole = games[i].consoleMap.console.console;

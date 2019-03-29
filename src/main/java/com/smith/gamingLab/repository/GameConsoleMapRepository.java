@@ -16,4 +16,7 @@ public interface GameConsoleMapRepository extends CrudRepository<GameConsoleMap,
     @Query(value = "select * from game_console where console_id = ?1", nativeQuery = true)
     List<GameConsoleMap> getMappingByConsoleId(int consoleId);
 
+    @Query(value = "select * from game_console where console_id = ?1 and game_id = ?2", nativeQuery = true)
+    List<GameConsoleMap> getMappingByConsoleAndGameId(int consoleId, int gameId);
+
 }

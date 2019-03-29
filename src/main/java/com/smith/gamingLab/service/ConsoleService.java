@@ -65,7 +65,10 @@ public class ConsoleService {
     }
 
     public void saveGameConsoleMap(GameConsoleMap gameConsoleMap) {
-        gameConsoleMapRepository.save(gameConsoleMap);
+        List<GameConsoleMap> map = gameConsoleMapRepository.getMappingByConsoleAndGameId(gameConsoleMap.getConsole().getId(), gameConsoleMap.getGame().getId());
+        if (map.isEmpty()) {
+            gameConsoleMapRepository.save(gameConsoleMap);
+        }
     }
 
     public void saveGameConsoleMap(Game game, List<Console> consoles) {
