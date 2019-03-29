@@ -1,46 +1,40 @@
 import React, { Component } from 'react';
-import EditGenreTable from './EditGenreTable';
-import EditModeTable from './EditModeTable';
-import EditConsole from './EditConsole';
 
 class EditGameForm extends Component {
-  constructor(props) {
+  constuctor(props) {
     super(props);
-    this.handleUpdate = this.handleUpdate.bind(this);
+    this.game = this.props.value;
+    this.state = {
+      newTitle:  this.game.title,
+      checkedOut: this.game.isCheckedOut,
+      digital: this.game.isDigital,
+      description: this.game.description,
+      quantity: this.game.quantity,
+    };
+  }
+
+  changeTitle(e) {
+    this.setState({newTitle: e.target.value});
+  }
+
+  changeCheckedOut(e) {
+    let c = this.state.checkedOut;
+    this.setState({checkedOut: !c});
+  }
+
+  changeDigital(e) {
+    let d = this.state.digital;
+    this.setState({digital: !d});
+  }
+
+  changeQuantity(e) {
+    this.setState({quantity: e.target.value});
+  }
+
+  changeDescription(e) {
+    this.setState({description: e.target.value});
   }
 
 
-  handleUpdate(e){
-    e.preventDefault();
-
-  }
-
-  render() {
-    //passing a list of master games set by id
-    const masterGames = this.props.value;
-    const game = masterGames[0];
-
-    return(
-      <div>
-        <form onSubmit={this.handleUpdate}>
-          Title:
-           <input type = "text" value={game.game.title}/>
-           <input type = "submit" value = "Update" />
-        </form>
-        Genre:
-        <EditGenreTable value = {masterGames} />
-        Playable Modes:
-        <EditModeTable value = {masterGames} />
-        Consoles:
-        <EditConsole value = {masterGames} />
-      </div>
-
-
-    );
-
-
-  }
 
 }
-
-export default EditGameForm;

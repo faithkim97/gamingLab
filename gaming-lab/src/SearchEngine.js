@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import GameTable from './GameTable';
+import GameFieldRadioMenu from './GameFieldRadioMenu';
 
 class SearchEngine extends Component {
   constructor(props) {
@@ -94,30 +95,13 @@ class SearchEngine extends Component {
     const gameList = isSearch === false ? null :
     <GameTable admin = {false} games = {games}/>
 
-    const consoleMap = consoles.map((c) => {
-      return(
-        <div key={c.id}>
-        <input type = 'radio' value = {c.id} name="console" onChange={this.handleConsole}/ >{c.console}
-        </div>
-      );
-    });
-
-    const modeMap = modes.map((m) => {
-      return(
-        <div key = {m.id}>
-          <input type = 'radio' value = {m.id} name= "mode" onChange={this.handleMode} />{m.mode}
-        </div>
-      );
-    });
-
     const ratingMap = ratings.map((r) => {
-      if(r != 'NONE') {
       return(
         <div>
           <input type = "radio" value={r} name = "rating" onChange={this.handleRating} /> {r}
           </div>
       );
-    }
+
     });
 
     return(
@@ -126,9 +110,9 @@ class SearchEngine extends Component {
           <input type = 'text' value={this.state.key} onChange={e => this.handleKey(e)}/>
           <input type = 'submit' value = "Search"/>
           <h3>Consoles</h3>
-          {consoleMap}
+          <GameFieldRadioMenu field={consoles} type="console" onChange={e =>this.handleConsole(e)} />
           <h3>Playable Modes</h3>
-          {modeMap}
+          <GameFieldRadioMenu field = {modes} type="mode" onChange={this.handleMode} />
           <h3>Rating</h3>
           {ratingMap}
         </form>

@@ -8,6 +8,7 @@ import com.smith.gamingLab.table.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -95,36 +96,48 @@ public class AdminController {
         masterGames.forEach(mg -> gameService.saveMasterGame(mg));
     }
 
+//
+//    //TODO eventually postmapping
+//    //TODO not doing desc yet until we can solve value too long problem
+//    //TODO how to make this better?
+//    @GetMapping("/editGame")
+//    private String editGame(@RequestParam int gameId, @RequestParam(value = "title", required = false) String title,
+//                            @RequestParam(value = "desc", required = false) String description,
+//                            @RequestParam(value = "genre",required = false) String genreTitle,
+//                            @RequestParam(value = "console",required = false) String console,
+//                            @RequestParam(value = "quantity", required = false) Integer quantity,
+//                            @RequestParam(value = "rating", required = false) String rating,
+//                            @RequestParam(value = "playable mode", required = false) String mode,
+//                            @RequestParam(value = "checked_out", required = false) boolean checkedOut,
+//                            @RequestParam(value = "digital", required = false) boolean isDigital) {
+//        Optional<Game> gameO = gameService.getGameById(gameId);
+//        if (!gameO.isPresent()) { return "Error: Game not found by ID: " + gameId;}
+//        Game game = gameO.get();
+//        if (title != null) {game.setTitle(title);}
+//        if (quantity != null) {game.setQuantity(quantity);}
+//        if (rating != null) {game.setRating(rating);}
+//        if (mode != null) {savePlayableModes(game, mode);}
+//        if (checkedOut != game.getIsCheckedOut()) { game.setIsCheckedOut(checkedOut);}
+//        if (isDigital != game.getIsDigital()) { game.setIsDigital(isDigital);}
+//        saveGenres(game, genreTitle);
+//        saveConsoles(game, console);
+//        gameService.saveOrUpdate(game);
+//        saveMasterGame(game);
+//        return "Successfully edited game: ";
+//
+//    }
 
-    //TODO eventually postmapping
-    //TODO not doing desc yet until we can solve value too long problem
-    //TODO how to make this better?
-    @GetMapping("/editGame")
-    private String editGame(@RequestParam int gameId, @RequestParam(value = "title", required = false) String title,
-                            @RequestParam(value = "desc", required = false) String description,
-                            @RequestParam(value = "genre",required = false) String genreTitle,
-                            @RequestParam(value = "console",required = false) String console,
-                            @RequestParam(value = "quantity", required = false) Integer quantity,
-                            @RequestParam(value = "rating", required = false) String rating,
-                            @RequestParam(value = "playable mode", required = false) String mode,
-                            @RequestParam(value = "checked_out", required = false) boolean checkedOut,
-                            @RequestParam(value = "digital", required = false) boolean isDigital) {
-        Optional<Game> gameO = gameService.getGameById(gameId);
-        if (!gameO.isPresent()) { return "Error: Game not found by ID: " + gameId;}
-        Game game = gameO.get();
-        if (title != null) {game.setTitle(title);}
-        if (quantity != null) {game.setQuantity(quantity);}
-        if (rating != null) {game.setRating(rating);}
-        if (mode != null) {savePlayableModes(game, mode);}
-        if (checkedOut != game.getIsCheckedOut()) { game.setIsCheckedOut(checkedOut);}
-        if (isDigital != game.getIsDigital()) { game.setIsDigital(isDigital);}
-        saveGenres(game, genreTitle);
-        saveConsoles(game, console);
-        gameService.saveOrUpdate(game);
-        saveMasterGame(game);
-        return "Successfully edited game: ";
-
-    }
+//    @PostMapping("/editgame")
+//    private void editGame(@RequestBody @NotNull Game game) {
+//        Optional<Game> oldGameO = gameService.getGameById(game.getId());
+//        if (oldGameO.isPresent()) {
+//            Game editGame = oldGameO.get();
+//            editGame.setTitle(game.getTitle());
+//            editGame.setQuantity(game);
+//
+//        }
+//
+//    }
 
     @GetMapping("/addConsole")
     private List<Console> addConsole(@RequestParam String name) {
