@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import AdminGameEntry from './AdminGameEntry';
 import EditGameForm from './EditGameForm';
+import GameEntry from './GameEntry';
 
 
 function showGameTable(gameMap) {
@@ -63,19 +63,11 @@ class AdminGameTable extends Component {
         const subgames1 = subgames.slice();
         subgames = [];
         subgames.push(g);
-        return (<AdminGameEntry admin={this.props.admin} value = {subgames1} onClick={() => this.handleEditGame(subgames1)}/>);
+        return (<GameEntry admin={this.props.admin} value = {subgames1} onClick={() => this.handleEditGame(subgames1)}/>);
 
       }
       subgames.push(g);
     })
-
-
-    // genres.map(g => console.log(g));
-    // const gameMap = games.map(g => {
-    //   return(
-    //     <AdminGameEntry value = {g} onClick={() => this.handleEditGame(g)}/>
-    //   );
-    // });
 
     const gameTable = showGames ? showGameTable(gameMap) : null;
     return(

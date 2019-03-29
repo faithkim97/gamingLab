@@ -92,7 +92,7 @@ class SearchEngine extends Component {
 
     const {games, isSearch, consoles, modes, ratings} = this.state;
     const gameList = isSearch === false ? null :
-    <GameTable value = {games}/>
+    <GameTable admin = {false} games = {games}/>
 
     const consoleMap = consoles.map((c) => {
       return(

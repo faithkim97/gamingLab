@@ -9,11 +9,22 @@ class GameTable extends Component {
 
 
   render() {
-    const gameMap = this.props.value.map((game) => {
-      return (
-        <GameEntry value={game} />
-      );
-    });
+    const games = this.props.games;
+    const seenIds = new Set([games[0] ? games[0].game.id : null]);
+    let subgames = [];
+    const gameMap = games.map(g=> {
+      if(!seenIds.has(g.game.id)){
+        seenIds.add(g.game.id);
+        const subgames1 = subgames.slice();
+        subgames = [];
+        subgames.push(g);
+        return (<GameEntry admin={this.props.admin} value = {subgames1} onClick={() => this.handleEditGame(subgames1)}/>);
+
+      }
+      subgames.push(g);
+    })
+
+
     return (
       <table>
         <tbody>
