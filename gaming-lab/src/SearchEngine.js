@@ -96,15 +96,6 @@ class SearchEngine extends Component {
     const gameList = isSearch === false ? null :
     <GameTable admin = {false} games = {games}/>
 
-    // const ratingMap = ratings.map((r) => {
-    //   return(
-    //     <div>
-    //       <input type = "radio" value={r} name = "rating" onChange={this.handleRating} /> {r}
-    //       </div>
-    //   );
-    //
-    // });
-
     return(
       <div>
         <form onSubmit={this.handleSubmit}>
