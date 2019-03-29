@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import GameTable from './GameTable';
 import GameFieldRadioMenu from './GameFieldRadioMenu';
+import RatingDropdown from './RatingDropdown';
 
 class SearchEngine extends Component {
   constructor(props) {
@@ -95,14 +96,14 @@ class SearchEngine extends Component {
     const gameList = isSearch === false ? null :
     <GameTable admin = {false} games = {games}/>
 
-    const ratingMap = ratings.map((r) => {
-      return(
-        <div>
-          <input type = "radio" value={r} name = "rating" onChange={this.handleRating} /> {r}
-          </div>
-      );
-
-    });
+    // const ratingMap = ratings.map((r) => {
+    //   return(
+    //     <div>
+    //       <input type = "radio" value={r} name = "rating" onChange={this.handleRating} /> {r}
+    //       </div>
+    //   );
+    //
+    // });
 
     return(
       <div>
@@ -114,7 +115,7 @@ class SearchEngine extends Component {
           <h3>Playable Modes</h3>
           <GameFieldRadioMenu field = {modes} type="mode" onChange={this.handleMode} />
           <h3>Rating</h3>
-          {ratingMap}
+          <RatingDropdown onChange={this.handleRating} />
         </form>
        {gameList}
      </div>

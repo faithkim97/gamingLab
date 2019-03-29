@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 class EditGameForm extends Component {
-  constuctor(props) {
+  constructor(props) {
     super(props);
     this.game = this.props.value;
     this.state = {
@@ -35,6 +35,28 @@ class EditGameForm extends Component {
     this.setState({description: e.target.value});
   }
 
+  render() {
+    return(
+      <div>
+        <form onSubmit={e => this.handleUpdate(e)}>
+          Title:
+           <input type = "text" value={this.state.newTitle} onChange={e => this.changeTitle(e)}/>
+           Checked Out:
+           <input type = "checkbox" checked = {this.state.checkedOut} name = "checkedout" onChange={e => this.changeCheckedOut(e)}/>
+           Digital:
+           <input type = "checkbox" checked = {this.state.digital} name="digital" onChange={e=> this.changeDigital(e)}/>
+           Quantity:
+           <input type = "number" value = {this.state.quantity} name="quantity" onChange={e => this.changeQuantity(e)} />
+           Description:
+           <textarea value ={this.state.description} name="decription" onChange={e => this.changeDescription(e)} />
+           <input type = "submit" value = "Update" />
+        </form>
+      </div>
+    );
+  }
 
 
-}
+
+}//endclass
+
+export default EditGameForm;
