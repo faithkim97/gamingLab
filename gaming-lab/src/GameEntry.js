@@ -43,6 +43,7 @@ function GameEntry(props) {
     {(admin) ?
     <td>{isDigital}</td>
     : null}
+    {admin ? (<td>{masterGame.game.quantity}</td>) : (null)}
     <td>{masterGame.game.description}</td>
     {admin ? (<td><button onClick={props.onClick}>Edit Game</button></td>) : (null)}
   </tr>

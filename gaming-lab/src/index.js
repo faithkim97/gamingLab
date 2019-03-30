@@ -2,11 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import SearchEngine from './SearchEngine';
-import AdminGameTable from './AdminGameTable';
+import HomePage from './HomePage';
 import * as serviceWorker from './serviceWorker';
+import Admin from './Admin'
 
 //ReactDOM.render(<AdminGameTable admin=true />, document.getElementById('root'));
-ReactDOM.render(<AdminGameTable admin={true}/>, document.getElementById('root'));
+ReactDOM.render(<SearchEngine admin={true} />, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

@@ -29,6 +29,9 @@ class SearchEngine extends Component {
   }
 
   componentDidMount() {
+    fetch('http://localhost:8080/game/games').then(response => response.json())
+    .then(data => this.setState({games: data})).catch(console.log("could not retrieve games"));
+    
     fetch('http://localhost:8080/game/consoles').then(response => response.json())
     .then(data => this.setState({consoles: data})).catch(console.log("could not retrieve consoles"));
 
@@ -94,7 +97,7 @@ class SearchEngine extends Component {
 
     const {games, isSearch, consoles, modes, ratings} = this.state;
     const gameList = isSearch === false ? null :
-    <GameTable admin = {false} games = {games}/>
+    <GameTable admin = {this.props.admin} games = {games}/>
 
     return(
       <div>
