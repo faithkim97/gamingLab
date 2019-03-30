@@ -51,14 +51,13 @@ class GameTable extends Component {
   render() {
     const admin = this.props.admin;
     const games = this.props.games;
-    const seenIds = new Set([games[0] ? games[0].game.id : null]);
+    let seenIds = new Set([games[0] ? games[0].game.id : null]);
     let subgames = [];
+    let subgames1 = [];
     const gameMap = games.map(g=> {
-      // console.log(g);
-
       if(!seenIds.has(g.game.id)){
         seenIds.add(g.game.id);
-        const subgames1 = subgames.slice();
+        subgames1 = subgames.slice();
         subgames = [];
         subgames.push(g);
         return (<GameEntry admin={admin} value = {subgames1} onClick={this.handleEditGame.bind(this, subgames1)}/>);
@@ -66,6 +65,11 @@ class GameTable extends Component {
       }
       subgames.push(g);
     });
+    //getting the last game 
+    if (subgames.length > 0) {
+      gameMap.push(<GameEntry admin={admin} value = {subgames} onClick={this.handleEditGame.bind(this, subgames)}/>);
+    }
+
 
     const gameTable = showGameTable(gameMap, admin);
 
