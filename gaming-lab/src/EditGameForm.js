@@ -9,7 +9,7 @@ class EditGameForm extends Component {
       newTitle:  this.game.title,
       checkedOut: this.game.isCheckedOut,
       digital: this.game.isDigital,
-      description: this.game.description,
+      description: this.game.description == null ? '' : this.game.description,
       quantity: this.game.quantity,
       rating: this.game.rating,
     };
@@ -43,7 +43,7 @@ class EditGameForm extends Component {
 
   handleUpdate(e) {
     e.preventDefault();
-    const {checkedOut, newTitle, digital, descr, quantity, rating} = this.state;
+    const {checkedOut, newTitle, digital, description, quantity, rating} = this.state;
     fetch('http://localhost:8080/admin/editgame',
     {
       method: "POST",
@@ -55,7 +55,7 @@ class EditGameForm extends Component {
         isCheckedOut: checkedOut,
         title: newTitle,
         isDigital: digital,
-        descripton: descr,
+        description: this.state.description,
         quantity: quantity,
         rating: rating,
       })
@@ -77,7 +77,7 @@ class EditGameForm extends Component {
            Quantity:
            <input type = "number" value = {this.state.quantity} name="quantity" onChange={e => this.changeQuantity(e)} />
            Description:
-           <textarea value ={this.state.description} name="decription" onChange={e => this.changeDescription(e)} />
+           <textarea value ={this.state.description} onChange={e => this.changeDescription(e)} />
            Rating:
            <RatingDropdown onChange={e => this.changeRating(e)}/>
            <input type = "submit" value = "Update" />
