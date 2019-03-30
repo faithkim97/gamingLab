@@ -127,17 +127,21 @@ public class AdminController {
 //
 //    }
 
-//    @PostMapping("/editgame")
-//    private void editGame(@RequestBody @NotNull Game game) {
-//        Optional<Game> oldGameO = gameService.getGameById(game.getId());
-//        if (oldGameO.isPresent()) {
-//            Game editGame = oldGameO.get();
-//            editGame.setTitle(game.getTitle());
-//            editGame.setQuantity(game);
-//
-//        }
-//
-//    }
+    @PostMapping("/editgame")
+    @CrossOrigin(origins = url)
+    private void editGame(@RequestBody Game game) {
+        Optional<Game> oldGameO = gameService.getGameById(game.getId());
+        if (oldGameO.isPresent()) {
+            Game editGame = oldGameO.get();
+            editGame.setTitle(game.getTitle());
+            editGame.setQuantity(game.getQuantity());
+            editGame.setRating(game.getRating());
+            editGame.setDescription(game.getDescription());
+            editGame.setIsCheckedOut(game.getIsCheckedOut());
+            editGame.setIsDigital(game.getIsDigital());
+            gameService.saveOrUpdate(editGame);
+        }
+    }
 
     @GetMapping("/addConsole")
     private List<Console> addConsole(@RequestParam String name) {

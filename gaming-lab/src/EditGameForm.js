@@ -1,15 +1,17 @@
 import React, { Component } from 'react';
+import RatingDropdown from './RatingDropdown';
 
 class EditGameForm extends Component {
   constructor(props) {
     super(props);
-    this.game = this.props.value;
+    this.game = this.props.value.game;
     this.state = {
       newTitle:  this.game.title,
       checkedOut: this.game.isCheckedOut,
       digital: this.game.isDigital,
       description: this.game.description,
       quantity: this.game.quantity,
+      rating: this.game.rating,
     };
   }
 
@@ -35,6 +37,33 @@ class EditGameForm extends Component {
     this.setState({description: e.target.value});
   }
 
+  changeRating(e) {
+    this.setState({rating: e.target.value});
+  }
+
+  handleUpdate(e) {
+    e.preventDefault();
+    const {checkedOut, newTitle, digital, descr, quantity, rating} = this.state;
+    fetch('http://localhost:8080/admin/editgame',
+    {
+      method: "POST",
+      headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json"},
+      body: JSON.stringify({
+        id: this.game.id,
+        isCheckedOut: checkedOut,
+        title: newTitle,
+        isDigital: digital,
+        descripton: descr,
+        quantity: quantity,
+        rating: rating,
+      })
+
+    });
+  }//endupdate
+
+
   render() {
     return(
       <div>
@@ -49,6 +78,8 @@ class EditGameForm extends Component {
            <input type = "number" value = {this.state.quantity} name="quantity" onChange={e => this.changeQuantity(e)} />
            Description:
            <textarea value ={this.state.description} name="decription" onChange={e => this.changeDescription(e)} />
+           Rating:
+           <RatingDropdown onChange={e => this.changeRating(e)}/>
            <input type = "submit" value = "Update" />
         </form>
       </div>
