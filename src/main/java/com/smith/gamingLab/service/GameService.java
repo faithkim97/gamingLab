@@ -61,7 +61,6 @@ public class GameService {
         }
     }
 
-    //todo SHOULD BE A LIST
     public List<MasterGame> getMasterGamesByConsoleMap(int mapId) {
         return masterGameRepository.getMasterGamesByConsoleMap(mapId);
     }

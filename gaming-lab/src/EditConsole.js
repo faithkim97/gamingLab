@@ -23,6 +23,8 @@ class EditConsole extends Component {
   changeConsole(e, mapId, gameId) {
     fetch('http://localhost:8080/admin/replaceConsoleMap?mapId='+mapId+"&consoleId="+this.state.pickedConsole
   +"&gameId="+gameId);
+  window.location.reload();
+  
 
   }
 

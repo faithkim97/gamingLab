@@ -76,18 +76,38 @@ public class GameController {
 //        return list;
 //    }
 
+    private String getNullable(String key) {
+        if (key == null || key.isEmpty()) {
+            return null;
+        }
+
+        return key;
+    }
+
 
 
     @PostMapping("/findgame")
     @CrossOrigin(origins = "http://localhost:3000")
     public @ResponseBody List<MasterGame> getGame(@RequestBody Query query) {
+        if (isEmptyQuery(query)) {
+            return getAllGames();
+        }
         Game game = query.getGame();
         Rating rating = game.getRating();
         Console console = query.getConsole();
         PlayableMode mode = query.getMode();
-        return  gameService.getMasterGameByKey(query.getKeyword(), game.getIsCheckedOut(), game.getIsDigital(), console != null
+        return  gameService.getMasterGameByKey(getNullable(query.getKeyword()), game.getIsCheckedOut(), game.getIsDigital(), console != null
                && console.getId() != -1 ? console.getId() : null, mode != null && mode.getId() != -1 ?  mode.getId() : null,
                 rating != Rating.NONE ? rating.toString() : null);
+    }
+
+    private boolean isEmptyQuery(Query query) {
+        Game game = query.getGame();
+        Console console = query.getConsole();
+        PlayableMode mode = query.getMode();
+        return (getNullable(query.getKeyword()) == null && game.getIsCheckedOut() == null && game.getIsDigital() == null &&
+                console.getId() == -1 && mode.getId() == -1 && game.getRating() == Rating.NONE);
+
     }
 
     @GetMapping("/masterGames")

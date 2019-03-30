@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 function createGenreList(masterGames) {
   const genreMaps = [];
+  //Todo only 2 elements when expected 14
   masterGames.map(mg => {
     if (mg.genreMap != null) {
       genreMaps.push(mg.genreMap);

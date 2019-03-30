@@ -11,6 +11,13 @@ function GameFieldRadioMenu(props) {
     )
   });
 
+  menu.push(
+    <div>
+      <input type = 'radio' value = {-1} name = {props.type} onChange={props.onChange} />
+      None
+    </div>
+  );
+
   return menu;
 
 

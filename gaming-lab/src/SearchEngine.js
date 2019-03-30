@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import GameTable from './GameTable';
 import GameFieldRadioMenu from './GameFieldRadioMenu';
 import RatingDropdown from './RatingDropdown';
-
+//SEARCH QUERY WHEN ALL FIELDS ARE EMPTYY---> ONLY RETURNS A SUBSET
 class SearchEngine extends Component {
   constructor(props) {
     super(props);
@@ -21,17 +21,10 @@ class SearchEngine extends Component {
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
-    //this.handleKey = this.handleKey.bind(this);
-    this.handleConsole = this.handleConsole.bind(this);
-    this.handleMode = this.handleMode.bind(this);
-    this.handleRating = this.handleRating.bind(this);
     this.handleCheckedOut = this.handleCheckedOut.bind(this);
   }
 
   componentDidMount() {
-    fetch('http://localhost:8080/game/games').then(response => response.json())
-    .then(data => this.setState({games: data})).catch(console.log("could not retrieve games"));
-    
     fetch('http://localhost:8080/game/consoles').then(response => response.json())
     .then(data => this.setState({consoles: data})).catch(console.log("could not retrieve consoles"));
 
@@ -56,7 +49,6 @@ class SearchEngine extends Component {
         isCheckedOut: this.state.checkedOut,
         isDigital: this.state.digital,
         rating: this.state.rating,
-        isCheckedOut: this.state.checkedOut,
       },
       console: {
         id: this.state.console_id,
@@ -94,22 +86,20 @@ class SearchEngine extends Component {
 
 
   render() {
-
     const {games, isSearch, consoles, modes, ratings} = this.state;
     const gameList = isSearch === false ? null :
     <GameTable admin = {this.props.admin} games = {games}/>
-
     return(
       <div>
-        <form onSubmit={this.handleSubmit}>
+        <form onSubmit={e=>this.handleSubmit(e)}>
           <input type = 'text' value={this.state.key} onChange={e => this.handleKey(e)}/>
           <input type = 'submit' value = "Search"/>
           <h3>Consoles</h3>
           <GameFieldRadioMenu field={consoles} type="console" onChange={e =>this.handleConsole(e)} />
           <h3>Playable Modes</h3>
-          <GameFieldRadioMenu field = {modes} type="mode" onChange={this.handleMode} />
+          <GameFieldRadioMenu field = {modes} type="mode" onChange={e => this.handleMode(e)} />
           <h3>Rating</h3>
-          <RatingDropdown onChange={this.handleRating} />
+          <RatingDropdown onChange={e => this.handleRating(e)} />
         </form>
        {gameList}
      </div>

@@ -2,6 +2,7 @@ import React from 'react';
 
 function GameEntry(props) {
   const games = props.value;
+
   const admin = props.admin;
   const masterGame = games[0];
   let systemConsole = null;
@@ -17,19 +18,25 @@ function GameEntry(props) {
 
   const genres = [];
   const modes = [];
+  const seen = new Set();
   //I think this prints repeitive mapping
   //the includes doesn't work
   games.map(g=>{
-    if(g.genreMap != null) {
+    if(g.genreMap != null && !seen.has(g.genreMap.genre.genre)) {
+      seen.add(g.genreMap.genre.genre);
       genres.push(" " + g.genreMap.genre.genre);
     }
 
-    if(g.modeMap != null && !modes.includes(g.modeMap.playableMode.mode)) {
+    if(g.modeMap != null && !seen.has(g.modeMap.playableMode.mode)) {
+      seen.add(g.modeMap.playableMode.mode);
       modes.push(" " + g.modeMap.playableMode.mode);
     }
   });
+  // console.log(genres);
+
 
   return(
+    <tbody>
   <tr>
     {admin ? (<td>{masterGame.game.id}</td>) : (null)}
     <td> {masterGame.game.title} </td>
@@ -47,6 +54,7 @@ function GameEntry(props) {
     <td>{masterGame.game.description}</td>
     {admin ? (<td><button onClick={props.onClick}>Edit Game</button></td>) : (null)}
   </tr>
+  </tbody>
 );
 }
 

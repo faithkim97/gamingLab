@@ -34,9 +34,10 @@ class GameTable extends Component {
     this.editGamePage = null;
   }
 
-  handleEditGame(masterGames) {
+  handleEditGame(subgames1) {
+    //STILL 2 items for id = 4
     this.setState({showGames: false});
-    this.editGamePage = <EditGamePage value={masterGames}/>
+    this.editGamePage = <EditGamePage value={subgames1}/>
   }
 
 
@@ -53,12 +54,14 @@ class GameTable extends Component {
     const seenIds = new Set([games[0] ? games[0].game.id : null]);
     let subgames = [];
     const gameMap = games.map(g=> {
+      // console.log(g);
+
       if(!seenIds.has(g.game.id)){
         seenIds.add(g.game.id);
         const subgames1 = subgames.slice();
         subgames = [];
         subgames.push(g);
-        return (<GameEntry admin={admin} value = {subgames1} onClick={() => this.handleEditGame(subgames1)}/>);
+        return (<GameEntry admin={admin} value = {subgames1} onClick={this.handleEditGame.bind(this, subgames1)}/>);
 
       }
       subgames.push(g);
@@ -68,7 +71,6 @@ class GameTable extends Component {
 
     return (
       <div>
-        {admin ? (<button onClick={e => this.handleShowGames(e)}>Games</button>) : (null)}
         {gameTable}
         {admin ? (this.editGamePage) : (null)}
       </div>
