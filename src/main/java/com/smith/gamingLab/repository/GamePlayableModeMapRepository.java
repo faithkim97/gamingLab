@@ -16,6 +16,9 @@ public interface GamePlayableModeMapRepository extends CrudRepository<GamePlayab
     @Query(value = "select * from game_mode where game_id = ?1", nativeQuery = true)
     List<GamePlayableModeMap> getMappingByGameId(int id);
 
+    @Query(value = "select * from game_mode where game_id = ?1 and mode_id = ?2", nativeQuery = true)
+    List<GamePlayableModeMap> getMappingByGameAndModeIds (int gameId, int modeId);
+
 
 
 

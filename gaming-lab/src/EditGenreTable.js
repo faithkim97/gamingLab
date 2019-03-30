@@ -6,7 +6,6 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 function createGenreList(masterGames) {
   const genreMaps = [];
-  //Todo only 2 elements when expected 14
   masterGames.map(mg => {
     if (mg.genreMap != null) {
       genreMaps.push(mg.genreMap);
@@ -46,8 +45,10 @@ class EditGenreTable extends Component {
     render() {
       const masterGames = this.props.value;
       const genres = createGenreList(masterGames);
+      const seen = new Set();
       const genreEntries = masterGames.map(mg => {
-        if (mg.genreMap != null) {
+        if (mg.genreMap != null && !seen.has(mg.genreMap.id)) {
+          seen.add(mg.genreMap.id);
           return(
             <GameFieldEntry id={mg.genreMap.id} field = {mg.genreMap != null ? mg.genreMap.genre.genre : null} onClick={e =>this.deleteGenreMapping(e, mg.genreMap.id)}/>
           );

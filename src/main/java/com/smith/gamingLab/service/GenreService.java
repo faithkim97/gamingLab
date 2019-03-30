@@ -32,6 +32,10 @@ public class GenreService {
         return gameGenreMapRepository.findById(id);
     }
 
+    public List<GameGenreMap> getMappingByGameAndGenreIds(int genreId, int gameId) {
+        return gameGenreMapRepository.getMappingByGameAndGenreIds(genreId, gameId);
+    }
+
     //TODO lowercase everything for genre
     public List<Genre> getGenresByTitleToken(String title, String token) {
         List<Genre> genres = new ArrayList<>();

@@ -101,6 +101,8 @@ public class PlayableModeService {
         return mapRepository.getMappingByPlayableId(id);
     }
 
+    public List<GamePlayableModeMap> getMappingByGameAndModeIds(int gameId, int modeId) { return mapRepository.getMappingByGameAndModeIds(gameId, modeId);}
+
     public void deletePlayableMode(int modeId) {
         Optional<PlayableMode> mode = playableModeRepository.findById(modeId);
         if (!mode.isPresent()) {

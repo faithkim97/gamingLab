@@ -7,8 +7,8 @@ import * as serviceWorker from './serviceWorker';
 import Admin from './Admin'
 
 //ReactDOM.render(<AdminGameTable admin=true />, document.getElementById('root'));
-ReactDOM.render(<SearchEngine admin={false} />, document.getElementById('root'));
-// ReactDOM.render(<Admin />, document.getElementById('root'));
+// ReactDOM.render(<SearchEngine admin={false} />, document.getElementById('root'));
+ReactDOM.render(<Admin />, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

@@ -188,11 +188,18 @@ public class AdminController {
         Optional<Game> gameO = gameService.getGameById(gameId);
         if (gameO.isPresent()) {
             List<Genre> genres = new ArrayList<>();
-            //TODO probs check if optional present
-            genreIds.forEach(id -> genres.add(genreService.getGenreById(id).get()));
+            for (Integer genreId : genreIds) {
+                if (emptyGenreMapping(gameId, genreId)) {
+                    genres.add(genreService.getGenreById(genreId).get());
+                }
+            }
             genreService.saveGameGenreMap(gameO.get(), genres);
             saveMasterGame(gameO.get());
         }
+    }
+
+    private boolean emptyGenreMapping(int gameId, int genreId) {
+        return genreService.getMappingByGameAndGenreIds(genreId, gameId).isEmpty();
     }
 
     @GetMapping("/mapModeByModeGameIds")
@@ -201,10 +208,18 @@ public class AdminController {
         Optional<Game> gameO = gameService.getGameById(gameId);
         if (gameO.isPresent()) {
             List<PlayableMode> modes = new ArrayList<>();
-            modeIds.forEach(id ->modes.add(playableModeService.getPlayableModeById(id).get()));
+            for (Integer modeId : modeIds) {
+                if (emptyModeMapping(gameId, modeId)) {
+                    modes.add(playableModeService.getPlayableModeById(modeId).get());
+                }
+            }
             playableModeService.saveMapping(gameO.get(), modes);
             saveMasterGame(gameO.get());
         }
+    }
+
+    private boolean emptyModeMapping(int gameId, int modeId) {
+        return playableModeService.getMappingByGameAndModeIds(gameId, modeId).isEmpty();
     }
 
 

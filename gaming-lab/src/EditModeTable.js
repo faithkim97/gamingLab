@@ -33,9 +33,10 @@ class EditModeTable extends Component {
   render() {
     const masterGames = this.props.value;
     const modes = createModeList(masterGames);
-
+    const seen = new Set();
     const modeEntries = masterGames.map(mg => {
-      if (mg.modeMap != null){
+      if (mg.modeMap != null && !seen.has(mg.modeMap.id)){
+        seen.add(mg.modeMap.id);
         return (
           <GameFieldEntry id={mg.modeMap != null ? mg.modeMap.id : null} field = {mg.modeMap != null ? mg.modeMap.playableMode.mode : null}
            onClick = {e=> this.deleteModeMapping(e, mg.modeMap.id)}/>
