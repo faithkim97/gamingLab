@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import GameTable from './GameTable';
 import GameFieldRadioMenu from './GameFieldRadioMenu';
 import RatingDropdown from './RatingDropdown';
-//SEARCH QUERY WHEN ALL FIELDS ARE EMPTYY---> ONLY RETURNS A SUBSET
+import BooleanOptions from './BooleanOptions';
+
+
 class SearchEngine extends Component {
   constructor(props) {
     super(props);
@@ -21,7 +23,6 @@ class SearchEngine extends Component {
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleCheckedOut = this.handleCheckedOut.bind(this);
   }
 
   componentDidMount() {
@@ -80,9 +81,14 @@ class SearchEngine extends Component {
   }
 
   handleCheckedOut(e) {
-    console.log(e.target.value);
     this.setState({checkedOut: e.target.value});
   }
+
+  handleDigital(e) {
+    this.setState({digital: e.target.value});
+  }
+
+
 
 
   render() {
@@ -100,6 +106,10 @@ class SearchEngine extends Component {
           <GameFieldRadioMenu field = {modes} type="mode" onChange={e => this.handleMode(e)} />
           <h3>Rating</h3>
           <RatingDropdown onChange={e => this.handleRating(e)} />
+          Checked Out:
+          <BooleanOptions name="checkedOut" onChange={e => this.handleCheckedOut(e)} />
+          Digital:
+          <BooleanOptions name = "digital" onChange={e => this.handleDigital(e)} />
         </form>
        {gameList}
      </div>
