@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 @RestController
 @RequestMapping(path="/game")
@@ -30,6 +32,7 @@ public class GameController {
     public List<MasterGame> getAllGames() {
         return gameService.getAllMasterGames();
     }
+
 
 
     @GetMapping("/consoles")
@@ -96,9 +99,10 @@ public class GameController {
         Rating rating = game.getRating();
         Console console = query.getConsole();
         PlayableMode mode = query.getMode();
-        return  gameService.getMasterGameByKey(getNullable(query.getKeyword()), game.getIsCheckedOut(), game.getIsDigital(), console != null
+        List<MasterGame> queriedGames =  gameService.getMasterGameByKey(getNullable(query.getKeyword()), game.getIsCheckedOut(), game.getIsDigital(), console != null
                && console.getId() != -1 ? console.getId() : null, mode != null && mode.getId() != -1 ?  mode.getId() : null,
                 rating != Rating.NONE ? rating.toString() : null);
+        return queriedGames;
     }
 
     private boolean isEmptyQuery(Query query) {

@@ -21,9 +21,13 @@ public class GameService {
     public List<MasterGame> getAllMasterGames() {
         List<MasterGame> games = new ArrayList<>();
         masterGameRepository.findAll().forEach( g -> games.add(g));
+        return sortMasterGameByGameId(games);
+    }
+
+    private List<MasterGame> sortMasterGameByGameId(List<MasterGame> masterGames) {
         Comparator<MasterGame> comparator = (MasterGame g1, MasterGame g2)->Integer.compare(g1.getGame().getId(), g2.getGame().getId());
-        Collections.sort(games, comparator);
-        return games;
+        Collections.sort(masterGames, comparator);
+        return masterGames;
     }
 
     public List<Game> getAllGames() {

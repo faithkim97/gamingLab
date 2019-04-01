@@ -92,6 +92,7 @@ class SearchEngine extends Component {
 
 
   render() {
+    console.log(this.state.games);
     const {games, isSearch, consoles, modes, ratings} = this.state;
     const gameList = isSearch === false ? null :
     <GameTable admin = {this.props.admin} games = {games}/>
