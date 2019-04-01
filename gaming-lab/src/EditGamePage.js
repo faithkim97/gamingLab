@@ -19,7 +19,7 @@ class EditGamePage extends Component {
         Edit Game:
         <EditGameForm value={game}/>
         Genre:
-        <EditGenreTable value = {masterGames} />
+        <EditGenreTable value = {masterGames}/>
         Playable Modes:
         <EditModeTable value = {masterGames} />
         Consoles:

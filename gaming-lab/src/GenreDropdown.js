@@ -23,10 +23,13 @@ class GenreDropdown extends Component {
   }
 
   handleGenreCheck(e) {
-    e.preventDefault();
     const pickedGenres = this.state.pickedGenres.slice();
     pickedGenres.push(e.target.value);
     this.setState({pickedGenres: pickedGenres});
+    if(!this.props.editMode) {
+      const onAdd = this.props.onAdd;
+      onAdd(this.state.pickedGenres);
+    }
   }
 
   showMenu(e) {
@@ -37,10 +40,11 @@ class GenreDropdown extends Component {
 
   render() {
     const genres = this.state.genres;
+    const useId = this.props.useId;
     const genreButtons = genres.map(g=>{
       return(
         <div>
-        <input type = "checkbox" value ={g.id} onChange={e=>this.handleGenreCheck(e)} />
+        <input type = "checkbox" value ={useId ? g.id : g.genre} onChange={e=>this.handleGenreCheck(e)} />
         {g.genre}
         </div>
       );
@@ -63,10 +67,16 @@ class GenreDropdown extends Component {
             )
 
       }
-      <div>
-        <button onClick={e=>this.handleClickAdd(e)}>Add Genre</button>
+      { this.props.editMode ?
+        (<div>
+          <button onClick={e=>this.handleClickAdd(e)}>Add Genre</button>
+        </div>)
+        :
+        (null)
+      }
       </div>
-      </div>
+
+
 
 
     );

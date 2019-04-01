@@ -75,7 +75,7 @@ class EditGenreTable extends Component {
           </tr>
         </tbody>
       </table>
-        <GenreDropdown value = {masterGames[0].game} onAdd={e => this.handleAddGenre(e)}/>
+        <GenreDropdown value = {masterGames[0].game} onAdd={e => this.handleAddGenre(e)} useId={true} editMode={true}/>
       </div>
 
       );

@@ -17,10 +17,13 @@ class ModeDropdown extends Component {
 
 
   handleModeCheck(e) {
-    e.preventDefault();
     const picked = this.state.pickedModes.slice();
     picked.push(e.target.value);
     this.setState({pickedModes: picked});
+    if(!this.props.editMode) {
+      const onAdd = this.props.onAdd;
+      onAdd(this.state.pickedModes);
+    }
   }
 
 
@@ -38,10 +41,11 @@ class ModeDropdown extends Component {
 
   render() {
     const modes = this.state.modes;
+    const useId = this.props.useId;
     const modeButtons = modes.map(m=> {
       return(
         <div>
-          <input type = "checkbox" value = {m.id} onChange={e => this.handleModeCheck(e)} checked = {false} />
+          <input type = "checkbox" value = {useId ? m.id : m.mode} onChange={e => this.handleModeCheck(e)} />
           {m.mode}
         </div>
       );
@@ -66,9 +70,13 @@ class ModeDropdown extends Component {
           )
 
         }
-        <div>
-          <button onClick = {e=>this.onAddMode(e)}>Add Playable Mode</button>
-        </div>
+        {this.props.editMode ?
+          (<div>
+            <button onClick = {e=>this.onAddMode(e)}>Add Playable Mode</button>
+          </div>)
+          :
+          (null)
+        }
       </div>
 
 

@@ -59,7 +59,7 @@ class EditModeTable extends Component {
             {modeEntries}
           </tbody>
         </table>
-        <ModeDropdown value = {masterGames[0].game} onAdd={e=>this.handleAddMode(e)}/>
+        <ModeDropdown value = {masterGames[0].game} onAdd={e=>this.handleAddMode(e)} useId={true} editMode={true}/>
       </div>
     );
 
