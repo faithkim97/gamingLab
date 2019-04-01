@@ -29,6 +29,9 @@ class EditModeTable extends Component {
     fetch('http://localhost:8080/admin//deleteModeMap?mapId='+mapId);
     window.location.reload();
   }
+  handleAddMode(pickedModes) {
+    fetch('http://localhost:8080/admin/mapModeByModeGameIds?gameId='+this.props.value[0].game.id+"&modeIds="+pickedModes);
+  }
 
   render() {
     const masterGames = this.props.value;
@@ -56,7 +59,7 @@ class EditModeTable extends Component {
             {modeEntries}
           </tbody>
         </table>
-        <ModeDropdown value = {masterGames[0].game} />
+        <ModeDropdown value = {masterGames[0].game} onAdd={e=>this.handleAddMode(e)}/>
       </div>
     );
 

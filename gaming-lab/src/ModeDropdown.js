@@ -23,8 +23,11 @@ class ModeDropdown extends Component {
     this.setState({pickedModes: picked});
   }
 
-  handleAddMode(e, game) {
-    fetch('http://localhost:8080/admin/mapModeByModeGameIds?gameId='+game.id+"&modeIds="+this.state.pickedModes);
+
+
+  onAddMode() {
+    const onAdd = this.props.onAdd;
+    onAdd(this.state.pickedModes);
   }
 
   showMenu(e) {
@@ -64,7 +67,7 @@ class ModeDropdown extends Component {
 
         }
         <div>
-          <button onClick = {e => this.handleAddMode(e, this.props.value)}>Add Playable Mode</button>
+          <button onClick = {e=>this.onAddMode(e)}>Add Playable Mode</button>
         </div>
       </div>
 
