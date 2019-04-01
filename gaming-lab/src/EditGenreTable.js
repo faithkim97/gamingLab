@@ -42,6 +42,11 @@ class EditGenreTable extends Component {
       window.location.reload();
     }
 
+    handleAddGenre(list) {
+      fetch('http://localhost:8080/admin/mapGenreByGameGenreIds?gameId='+this.props.value[0].game.id+"&genreIds="+list);
+
+    }
+
     render() {
       const masterGames = this.props.value;
       const genres = createGenreList(masterGames);
@@ -70,7 +75,7 @@ class EditGenreTable extends Component {
           </tr>
         </tbody>
       </table>
-        <GenreDropdown value = {masterGames[0].game}/>
+        <GenreDropdown value = {masterGames[0].game} onAdd={e => this.handleAddGenre(e)}/>
       </div>
 
       );

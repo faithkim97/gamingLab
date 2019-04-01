@@ -17,10 +17,9 @@ class GenreDropdown extends Component {
 
   }
 
-  handleAddGenre(e, game) {
-    e.preventDefault();
-    fetch('http://localhost:8080/admin/mapGenreByGameGenreIds?gameId='+game.id+"&genreIds="+this.state.pickedGenres);
-
+  handleClickAdd(e) {
+    const onAdd = this.props.onAdd;
+    onAdd(this.state.pickedGenres);
   }
 
   handleGenreCheck(e) {
@@ -65,7 +64,7 @@ class GenreDropdown extends Component {
 
       }
       <div>
-        <button onClick = {e => this.handleAddGenre(e, this.props.value)}>Add Genre</button>
+        <button onClick={e=>this.handleClickAdd(e)}>Add Genre</button>
       </div>
       </div>
 
