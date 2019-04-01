@@ -3,6 +3,7 @@ import EditGenreTable from './EditGenreTable';
 import EditModeTable from './EditModeTable';
 import EditConsole from './EditConsole';
 import EditGameForm from './EditGameForm';
+import DeleteGame from './DeleteGame';
 
 class EditGamePage extends Component {
   constructor(props) {
@@ -23,6 +24,7 @@ class EditGamePage extends Component {
         <EditModeTable value = {masterGames} />
         Consoles:
         <EditConsole value = {masterGames} />
+        <DeleteGame value ={game.game} />
       </div>
 
 

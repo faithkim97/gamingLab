@@ -299,6 +299,7 @@ public class AdminController {
     }
 
     @GetMapping("/deleteGame")
+    @CrossOrigin(origins = url)
     private void deleteGame(@RequestParam int gameId) {
         gameService.deleteMasterGamesByGameId(gameId);
         genreService.deleteMappingByGameId(gameId);
