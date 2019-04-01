@@ -6,6 +6,8 @@ import com.smith.gamingLab.table.Genre;
 import com.smith.gamingLab.table.PlayableMode;
 import org.aspectj.apache.bcel.util.Play;
 
+import java.util.List;
+
 /** Fields used to make queries for the game*/
 public class Query {
     private String keyword;
@@ -14,18 +16,18 @@ public class Query {
 
     private Console console;
 
-    private PlayableMode mode;
+    private List<PlayableMode> modes;
 
-    private Genre genre;
+    private List<Genre> genres;
 
     public Query() {}
 
-    public Query(String key, Game game, Console console, PlayableMode mode, Genre genre) {
+    public Query(String key, Game game, Console console, List<PlayableMode> modes, List<Genre> genres) {
         this.keyword = key;
         this.game = game;
         this.console = console;
-        this.mode = mode;
-        this.genre = genre;
+        this.modes = modes;
+        this.genres = genres;
     }
 
     public static String nullIfEmpty(String input) {
@@ -42,9 +44,9 @@ public class Query {
 
     public Console getConsole() { return console; }
 
-    public PlayableMode getMode() { return mode; }
+    public List<PlayableMode> getModes() { return modes; }
 
-    public Genre getGenre() { return genre; }
+    public List<Genre> getGenres() { return genres; }
 
 
     public void setKeyword(String key) { this.keyword = key; }
@@ -53,9 +55,9 @@ public class Query {
 
     public void setConsole(Console console) { this.console = console; }
 
-    public void setMode(PlayableMode mode) { this.mode = mode; }
+    public void setModes(List<PlayableMode> modes) { this.modes = modes; }
 
-    public void setGenre(Genre genre) { this.genre = genre; }
+    public void setGenres(List<Genre> genres) { this.genres = genres; }
 
 
 }

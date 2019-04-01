@@ -54,9 +54,9 @@ class SearchEngine extends Component {
       console: {
         id: this.state.console_id,
       },
-      mode: {
+      modes: [{
         id: this.state.mode_id,
-      }
+      }],
 
     })
     }).then(response => response.json())
@@ -92,7 +92,6 @@ class SearchEngine extends Component {
 
 
   render() {
-    console.log(this.state.games);
     const {games, isSearch, consoles, modes, ratings} = this.state;
     const gameList = isSearch === false ? null :
     <GameTable admin = {this.props.admin} games = {games}/>

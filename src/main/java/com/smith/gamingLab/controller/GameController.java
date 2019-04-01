@@ -98,7 +98,7 @@ public class GameController {
         Game game = query.getGame();
         Rating rating = game.getRating();
         Console console = query.getConsole();
-        PlayableMode mode = query.getMode();
+        PlayableMode mode = query.getModes() != null || !query.getModes().isEmpty()? query.getModes().get(0) : null;
         List<MasterGame> queriedGames =  gameService.getMasterGameByKey(getNullable(query.getKeyword()), game.getIsCheckedOut(), game.getIsDigital(), console != null
                && console.getId() != -1 ? console.getId() : null, mode != null && mode.getId() != -1 ?  mode.getId() : null,
                 rating != Rating.NONE ? rating.toString() : null);
@@ -108,9 +108,9 @@ public class GameController {
     private boolean isEmptyQuery(Query query) {
         Game game = query.getGame();
         Console console = query.getConsole();
-        PlayableMode mode = query.getMode();
+        PlayableMode mode = query.getModes() != null || !query.getModes().isEmpty()? query.getModes().get(0) : null;
         return (getNullable(query.getKeyword()) == null && game.getIsCheckedOut() == null && game.getIsDigital() == null &&
-                console.getId() == -1 && mode.getId() == -1 && game.getRating() == Rating.NONE);
+                console.getId() == -1 && (mode == null || mode.getId() == -1) && game.getRating() == Rating.NONE);
 
     }
 
