@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import GenreDropdown from './GenreDropdown';
 import RatingDropdown from './RatingDropdown';
 import ModeDropdown from './ModeDropdown';
+import ConsoleDropdown from './ConsoleDropdown';
+
 
 //TODO put in console dropdwon
 class AddGameForm extends Component {
@@ -14,7 +16,7 @@ class AddGameForm extends Component {
       description: null,
       checkedOut: false,
       digital: false,
-      console: null,
+      console: -1,
       genres: [],
       modes: [],
 
@@ -24,7 +26,7 @@ class AddGameForm extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    const {title, checkedOut, digital, quantity, description, rating,genres, modes} = this.state;
+    const {title, checkedOut, digital, quantity, description, rating,genres, modes, console} = this.state;
     fetch('http://localhost:8080/admin/addgame',
     {
       method: "POST",
@@ -43,6 +45,9 @@ class AddGameForm extends Component {
 
         genres: genres,
         modes: modes,
+        console: {
+          id: console,
+        }
       })
 
     });
@@ -81,7 +86,10 @@ class AddGameForm extends Component {
 
   addMode(modes) {
     this.setState({modes: modes});
+  }
 
+  changeConsole(console) {
+    this.setState({console: console});
   }
 
   render(){
@@ -103,7 +111,10 @@ class AddGameForm extends Component {
           <RatingDropdown onChange={e => this.changeRating(e)} useId={false}/>
           Genre:
           <GenreDropdown onAdd={e => this.addGenre(e)} useId={false} editMode={false} onAdd={e=>this.addGenre(e)}/>
+          Playable Mode:
           <ModeDropdown onAdd={e=>this.addMode(e)} useId={false} editMode={false} onAdd={e=>this.addMode(e)}/>
+          Console:
+          <ConsoleDropdown onAdd={e=>this.addConsole(e)} useId={true} editMode={false} />
         </form>
       </div>
 

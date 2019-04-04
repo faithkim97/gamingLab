@@ -1,5 +1,16 @@
 import React, { Component } from 'react';
 
+
+function removeFromPickedGenres(itemToRemove, genres) {
+    for (let i = 0; i < genres.length; i++) {
+      if (itemToRemove.id == genres[i].id) {
+        genres.splice(i,1);
+      }
+    }
+
+    return genres;
+}
+
 class GenreDropdown extends Component {
   constructor(props) {
     super(props);
@@ -7,13 +18,21 @@ class GenreDropdown extends Component {
       showMenu: false,
       genres: [],
       pickedGenres: [],
+      checkedMap: {},
     };
 
   }
 
   componentDidMount() {
     fetch('http://localhost:8080/game/genres').then(response => response.json())
-    .then(data => this.setState({genres: data})).catch(console.log("could not retrieve genres"));
+    .then(data => this.setState({genres: data},()=>{
+      const checkedMap = {};
+      const genres = this.state.genres;
+      genres.forEach(g =>{
+        checkedMap[g.id] = false;
+      });
+      this.setState({checkedMap: checkedMap});
+    }))
 
   }
 
@@ -22,16 +41,27 @@ class GenreDropdown extends Component {
     onAdd(this.state.pickedGenres);
   }
 
-  handleGenreCheck(genre) {
-    console.log(genre);
-    const pickedGenres = this.state.pickedGenres.slice();
-    pickedGenres.push(genre);
-    this.setState({pickedGenres: pickedGenres}, () =>{
-      if(!this.props.editMode) {
-        const onAdd = this.props.onAdd;
-        onAdd(this.state.pickedGenres);
-      }
-    });
+  handleGenreCheck(e, genre) {
+    const checkedMap = this.state.checkedMap;
+    const checked = e.target.checked;
+    checkedMap[genre.id] = !e.target.checked == false ? true : false;
+    this.setState({checkedMap: checkedMap});
+    
+    if (!e.target.checked) {
+      const pickedGenres = removeFromPickedGenres(genre, this.state.pickedGenres);
+      this.setState({pickedGenres: pickedGenres});
+    } else {
+      const pickedGenres = this.state.pickedGenres.slice();
+      pickedGenres.push(genre);
+      this.setState({
+        pickedGenres: pickedGenres,
+      }, () =>{
+        if(!this.props.editMode) {
+          const onAdd = this.props.onAdd;
+          onAdd(this.state.pickedGenres);
+        }
+      });
+    }
   }
 
   showMenu(e) {
@@ -43,10 +73,10 @@ class GenreDropdown extends Component {
   render() {
     const genres = this.state.genres;
     const useId = this.props.useId;
-    const genreButtons = genres.map(g=>{
+    const genreButtons = genres.map((g,i)=>{
       return(
         <div>
-        <input type = "checkbox" value ={useId ? g.id : g} onChange={()=>this.handleGenreCheck(g)} />
+        <input type = "checkbox" checked={this.state.checkedMap[g.id]} value ={useId ? g.id : g} onChange={(e)=>this.handleGenreCheck(e, g)} />
         {g.genre}
         </div>
       );

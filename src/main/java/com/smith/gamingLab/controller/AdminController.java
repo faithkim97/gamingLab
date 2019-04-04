@@ -9,11 +9,9 @@ import com.smith.gamingLab.table.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(path = "/admin")
@@ -64,7 +62,15 @@ public class AdminController {
         gameService.saveOrUpdate(game);
         mapGenresByQuery(game, query.getGenres());
         mapModesByQuery(game, query.getModes());
+        mapConsoleByQuery(game, query.getConsole());
         saveMasterGame(game);
+    }
+
+    private void mapConsoleByQuery(Game game, Console queryConsole) {
+        if (queryConsole != null || queryConsole.getId() != -1) {
+            Console consoleToMap = consoleService.getConsoleById(queryConsole.getId()).get();
+            consoleService.saveGameConsoleMap(new GameConsoleMap(game, consoleToMap));
+        }
     }
 
     private void mapModesByQuery(Game game, List<PlayableMode> queryModes) {

@@ -15,12 +15,17 @@ class ConsoleDropdown extends Component{
   }
 
   changeConsole(e) {
-    this.setState({pickedConsole: e.target.value});
+    this.setState({pickedConsole: e.target.value}, () => {
+      if(this.props.editMode) {
+        const onAdd = this.props.onAdd;
+        onAdd(this.state.pickedConsole);
+      }
+    });
   }
 
 
   render() {
-
+    const useId = this.props.useId;
     const consoleMenu = this.state.consoles.map(c => {
       return(
         <div>
@@ -30,9 +35,17 @@ class ConsoleDropdown extends Component{
       );
     })
 
+    return(
+      <div>
+        {consoleMenu}
+      </div>
+    );
+
   }
 
 
 
 
 }
+
+export default ConsoleDropdown;
