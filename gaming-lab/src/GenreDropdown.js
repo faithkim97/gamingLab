@@ -43,10 +43,9 @@ class GenreDropdown extends Component {
 
   handleGenreCheck(e, genre) {
     const checkedMap = this.state.checkedMap;
-    const checked = e.target.checked;
+    //check that current input is false. if it is, then when we clicked it, we need to make it true
     checkedMap[genre.id] = !e.target.checked == false ? true : false;
     this.setState({checkedMap: checkedMap});
-    
     if (!e.target.checked) {
       const pickedGenres = removeFromPickedGenres(genre, this.state.pickedGenres);
       this.setState({pickedGenres: pickedGenres});
@@ -81,6 +80,7 @@ class GenreDropdown extends Component {
         </div>
       );
     });
+
     return(
       <div>
         <div>

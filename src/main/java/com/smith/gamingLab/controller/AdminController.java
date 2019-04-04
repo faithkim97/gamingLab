@@ -61,8 +61,8 @@ public class AdminController {
         Game game = query.getGame();
         gameService.saveOrUpdate(game);
         mapGenresByQuery(game, query.getGenres());
-        mapModesByQuery(game, query.getModes());
-        mapConsoleByQuery(game, query.getConsole());
+//        mapModesByQuery(game, query.getModes());
+//        mapConsoleByQuery(game, query.getConsole());
         saveMasterGame(game);
     }
 

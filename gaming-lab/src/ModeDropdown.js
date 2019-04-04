@@ -1,5 +1,15 @@
 import React, { Component } from 'react';
-//mapModeByModeGameIds
+
+function removeFromPickedModes(itemToRemove, modes) {
+    for (let i = 0; i < modes.length; i++) {
+      if (itemToRemove.id == modes[i].id) {
+        modes.splice(i,1);
+      }
+    }
+
+    return modes;
+}
+
 class ModeDropdown extends Component {
   constructor(props) {
     super(props);
@@ -7,24 +17,42 @@ class ModeDropdown extends Component {
       showMenu: false,
       modes: [],
       pickedModes: [],
+      checkedMap: {},
     };
   }
 
   componentDidMount() {
     fetch('http://localhost:8080/game/modes').then(response => response.json())
-    .then(data => this.setState({modes: data})).catch(console.log("could not retrieve modes"));
+    .then(data => this.setState({modes: data}, () => {
+      const checkedMap = {};
+      const modes = this.state.modes;
+      modes.forEach(m =>{
+        checkedMap[m.id] = false;
+      });
+      this.setState({checkedMap: checkedMap});
+    }
+
+    )).catch(console.log("could not retrieve modes"));
   }
 
 
-  handleModeCheck(mode) {
-    const picked = this.state.pickedModes.slice();
-    picked.push(mode);
-    this.setState({pickedModes: picked}, () => {
-      if(!this.props.editMode) {
-        const onAdd = this.props.onAdd;
-        onAdd(this.state.pickedModes);
-      }
-    });
+  handleModeCheck(e, mode) {
+    const checkedMap = this.state.checkedMap;
+    checkedMap[mode.id] = !e.target.checked == false ? true : false;
+    this.setState({checkedMap: checkedMap});
+    if (!e.target.checked) {
+      const pickedModes = removeFromPickedModes(mode, this.state.pickedModes);
+      this.setState({pickedModes: pickedModes});
+    } else {
+      const picked = this.state.pickedModes.slice();
+      picked.push(mode);
+      this.setState({pickedModes: picked}, () => {
+        if(!this.props.editMode) {
+          const onAdd = this.props.onAdd;
+          onAdd(this.state.pickedModes);
+        }
+      });
+    }//endelse
   }
 
 
@@ -46,7 +74,8 @@ class ModeDropdown extends Component {
     const modeButtons = modes.map(m=> {
       return(
         <div>
-          <input type = "checkbox" value = {useId ? m.id : m} onChange={e => this.handleModeCheck(m)} />
+          <input type = "checkbox" checked={this.state.checkedMap[m.id]}
+          value = {useId ? m.id : m} onChange={e => this.handleModeCheck(e, m)} />
           {m.mode}
         </div>
       );
