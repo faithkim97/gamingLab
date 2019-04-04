@@ -33,4 +33,6 @@ public class GamePlayableModeMap {
     public void setGame(Game g) { game = g;}
 
     public void setPlayableMode(PlayableMode mode) { this.mode = mode; }
+
+    public void setId(int id) {this.id = id;}
 }

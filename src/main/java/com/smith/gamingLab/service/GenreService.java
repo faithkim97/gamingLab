@@ -55,6 +55,9 @@ public class GenreService {
         return genres;
     }
 
+    public Genre getGenreByTitle(Genre genre) {
+       return genreRepository.getGenreByTitle(genre.getGenre());
+    }
 
 
     public List<Genre> getAllGenres() {

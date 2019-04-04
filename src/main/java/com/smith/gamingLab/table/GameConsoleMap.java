@@ -39,6 +39,8 @@ public class GameConsoleMap {
 
     public void setConsole(Console console) {this.console = console;}
 
+    public void setId(int id) { this.id = id; }
+
 
 
 }

@@ -37,4 +37,6 @@ public class GameGenreMap {
 
     public void setGenre(Genre genre) { this.genre = genre;}
 
+    public void setId(int id) { this.id = id; }
+
 }

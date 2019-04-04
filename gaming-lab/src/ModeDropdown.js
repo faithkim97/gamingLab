@@ -16,14 +16,15 @@ class ModeDropdown extends Component {
   }
 
 
-  handleModeCheck(e) {
+  handleModeCheck(mode) {
     const picked = this.state.pickedModes.slice();
-    picked.push(e.target.value);
-    this.setState({pickedModes: picked});
-    if(!this.props.editMode) {
-      const onAdd = this.props.onAdd;
-      onAdd(this.state.pickedModes);
-    }
+    picked.push(mode);
+    this.setState({pickedModes: picked}, () => {
+      if(!this.props.editMode) {
+        const onAdd = this.props.onAdd;
+        onAdd(this.state.pickedModes);
+      }
+    });
   }
 
 
@@ -45,7 +46,7 @@ class ModeDropdown extends Component {
     const modeButtons = modes.map(m=> {
       return(
         <div>
-          <input type = "checkbox" value = {useId ? m.id : m.mode} onChange={e => this.handleModeCheck(e)} />
+          <input type = "checkbox" value = {useId ? m.id : m} onChange={e => this.handleModeCheck(m)} />
           {m.mode}
         </div>
       );

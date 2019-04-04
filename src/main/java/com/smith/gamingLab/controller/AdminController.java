@@ -1,5 +1,6 @@
 package com.smith.gamingLab.controller;
 
+import com.smith.gamingLab.misc.Query;
 import com.smith.gamingLab.service.ConsoleService;
 import com.smith.gamingLab.service.GameService;
 import com.smith.gamingLab.service.GenreService;
@@ -34,30 +35,54 @@ public class AdminController {
 
     final String url = "http://localhost:3000";
 
-    @PostMapping("/addGame")
-    private void addGame(@RequestParam(value = "title") String title, @RequestParam(value = "desc", required = false) String description,
-                         @RequestParam(value = "genre",required = false) String genreTitle,
-                         @RequestParam(value = "console",required = false) String console,
-                         @RequestParam(value = "quantity", required = false) Integer quantity, @RequestParam(value = "rating", required = false) String rating,
-                         @RequestParam(value = "playable mode", required = false) String mode, @RequestParam(value = "checked_out", required = false) boolean checkedOut,
-                         @RequestParam(value = "digital", required = false) boolean isDigital) {
-        Game g = new Game();
-        g.setTitle(title.toLowerCase());
-        g.setDescription(description.toLowerCase());
-        int q = quantity == null ? 1 : quantity;
-        g.setQuantity(q);
-        if (rating != null) { g.setRating(rating);}
-        g.setIsCheckedOut(checkedOut);
-        g.setIsDigital(isDigital);
-        saveGenres(g, genreTitle.toLowerCase());
-        saveConsoles(g, console.toLowerCase());
-        savePlayableModes(g, mode.toLowerCase());
-        gameService.saveOrUpdate(g);
-        saveMasterGame(g);
+//    @PostMapping("/addGame")
+//    private void addGame(@RequestParam(value = "title") String title, @RequestParam(value = "desc", required = false) String description,
+//                         @RequestParam(value = "genre",required = false) String genreTitle,
+//                         @RequestParam(value = "console",required = false) String console,
+//                         @RequestParam(value = "quantity", required = false) Integer quantity, @RequestParam(value = "rating", required = false) String rating,
+//                         @RequestParam(value = "playable mode", required = false) String mode, @RequestParam(value = "checked_out", required = false) boolean checkedOut,
+//                         @RequestParam(value = "digital", required = false) boolean isDigital) {
+//        Game g = new Game();
+//        g.setTitle(title.toLowerCase());
+//        g.setDescription(description.toLowerCase());
+//        int q = quantity == null ? 1 : quantity;
+//        g.setQuantity(q);
+//        if (rating != null) { g.setRating(rating);}
+//        g.setIsCheckedOut(checkedOut);
+//        g.setIsDigital(isDigital);
+//        saveGenres(g, genreTitle.toLowerCase());
+//        saveConsoles(g, console.toLowerCase());
+//        savePlayableModes(g, mode.toLowerCase());
+//        gameService.saveOrUpdate(g);
+//        saveMasterGame(g);
+//    }
+
+    @PostMapping("/addgame")
+    @CrossOrigin(origins = url)
+    private void addGame(@RequestBody Query query) {
+        Game game = query.getGame();
+        gameService.saveOrUpdate(game);
+        mapGenresByQuery(game, query.getGenres());
+        mapModesByQuery(game, query.getModes());
+        saveMasterGame(game);
     }
 
-    //TODO fix this: need to take into consideration what happens when modes.size() > genres.size()
-    //TODO take setocnsolemap out of the loop
+    private void mapModesByQuery(Game game, List<PlayableMode> queryModes) {
+        if (queryModes != null || !queryModes.isEmpty()) {
+            List<PlayableMode> modesToMap = new ArrayList<>();
+            queryModes.forEach(m -> modesToMap.add(playableModeService.getPlayableModeById(m.getId()).get()));
+            playableModeService.saveMapping(game, modesToMap);
+        }
+
+    }
+
+    private void mapGenresByQuery(Game game, List<Genre> queryGenres) {
+        if (queryGenres != null || !queryGenres.isEmpty()) {
+            List<Genre> genresToMap = new ArrayList<>();
+            queryGenres.forEach(g -> genresToMap.add(genreService.getGenreById(g.getId()).get()));
+            genreService.saveGameGenreMap(game, genresToMap);
+        }
+    }
 
     private List<MasterGame> createMasterGameList(Game game, int size1, int size2) {
         List<MasterGame> masterGames = new ArrayList<>();

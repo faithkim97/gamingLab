@@ -36,6 +36,7 @@ class GameTable extends Component {
 
   handleEditGame(subgames1) {
     //STILL 2 items for id = 4
+    window.history.pushState("/editGame", {id: subgames1.id})
     this.setState({showGames: false});
     this.editGamePage = <EditGamePage value={subgames1}/>
   }
@@ -65,7 +66,7 @@ class GameTable extends Component {
       }
       subgames.push(g);
     });
-    //getting the last game 
+    //getting the last game
     if (subgames.length > 0) {
       gameMap.push(<GameEntry admin={admin} value = {subgames} onClick={this.handleEditGame.bind(this, subgames)}/>);
     }

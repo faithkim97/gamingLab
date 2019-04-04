@@ -22,14 +22,16 @@ class GenreDropdown extends Component {
     onAdd(this.state.pickedGenres);
   }
 
-  handleGenreCheck(e) {
+  handleGenreCheck(genre) {
+    console.log(genre);
     const pickedGenres = this.state.pickedGenres.slice();
-    pickedGenres.push(e.target.value);
-    this.setState({pickedGenres: pickedGenres});
-    if(!this.props.editMode) {
-      const onAdd = this.props.onAdd;
-      onAdd(this.state.pickedGenres);
-    }
+    pickedGenres.push(genre);
+    this.setState({pickedGenres: pickedGenres}, () =>{
+      if(!this.props.editMode) {
+        const onAdd = this.props.onAdd;
+        onAdd(this.state.pickedGenres);
+      }
+    });
   }
 
   showMenu(e) {
@@ -44,7 +46,7 @@ class GenreDropdown extends Component {
     const genreButtons = genres.map(g=>{
       return(
         <div>
-        <input type = "checkbox" value ={useId ? g.id : g.genre} onChange={e=>this.handleGenreCheck(e)} />
+        <input type = "checkbox" value ={useId ? g.id : g} onChange={()=>this.handleGenreCheck(g)} />
         {g.genre}
         </div>
       );

@@ -3,6 +3,7 @@ import GenreDropdown from './GenreDropdown';
 import RatingDropdown from './RatingDropdown';
 import ModeDropdown from './ModeDropdown';
 
+//TODO put in console dropdwon
 class AddGameForm extends Component {
   constructor(props) {
     super(props);
@@ -23,6 +24,28 @@ class AddGameForm extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
+    const {title, checkedOut, digital, quantity, description, rating,genres, modes} = this.state;
+    fetch('http://localhost:8080/admin/addgame',
+    {
+      method: "POST",
+      headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json"},
+      body: JSON.stringify({
+        game: {
+          isCheckedOut: checkedOut,
+          title: title,
+          isDigital: digital,
+          description: description,
+          quantity: quantity,
+          rating: rating,
+        },
+
+        genres: genres,
+        modes: modes,
+      })
+
+    });
   }
 
   changeTitle(e) {
@@ -65,6 +88,7 @@ class AddGameForm extends Component {
     return(
       <div>
         <form onSubmit={e => this.handleSubmit(e)}>
+          <input type="submit" value="Add Game"/>
           Title:
           <input type = "text" name = "title" value={this.state.title} onChange={e=>this.changeTitle(e)} />
           Description:
