@@ -15,7 +15,6 @@ class ConsoleDropdown extends Component{
   }
 
   changeConsole(e) {
-    console.log(e.target.value);
     this.setState({pickedConsole: e.target.value}, () => {
       if(!this.props.editMode) {
         const onAdd = this.props.onAdd;

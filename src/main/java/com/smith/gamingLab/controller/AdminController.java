@@ -1,5 +1,6 @@
 package com.smith.gamingLab.controller;
 
+import com.smith.gamingLab.constant_enum.Rating;
 import com.smith.gamingLab.misc.Query;
 import com.smith.gamingLab.service.ConsoleService;
 import com.smith.gamingLab.service.GameService;
@@ -59,6 +60,9 @@ public class AdminController {
     @CrossOrigin(origins = url)
     private void addGame(@RequestBody Query query) {
         Game game = query.getGame();
+        Rating rating = game.getRating();
+        rating = rating == null || rating == Rating.NONE ? null : rating;
+        game.setRating(rating);
         gameService.saveOrUpdate(game);
         mapGenresByQuery(game, query.getGenres());
         mapModesByQuery(game, query.getModes());
@@ -123,7 +127,6 @@ public class AdminController {
         setModeMapInMasterGameList(masterGames, modeMap);
         //game always has only 1 console mapped
         GameConsoleMap console = !consoleMap.isEmpty() ? consoleMap.get(0) : null;
-        //SOLUTION TO DO --> MASTERGAME EMPTY
         if (masterGames.isEmpty() && console != null) { masterGames.add(new MasterGame(game));}
         masterGames.forEach(mg -> mg.setConsoleMap(console));
         masterGames.forEach(mg -> gameService.saveMasterGame(mg));
