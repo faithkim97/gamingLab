@@ -29,8 +29,9 @@ class EditModeTable extends Component {
     fetch('http://localhost:8080/admin//deleteModeMap?mapId='+mapId);
     window.location.reload();
   }
-  handleAddMode(e, pickedModes) {
-    fetch('http://localhost:8080/admin/mapModeByModeGameIds?gameId='+this.props.value[0].game.id+"&modeIds="+pickedModes);
+  handleAddMode(e) {
+    console.log(e);
+    fetch('http://localhost:8080/admin/mapModeByModeGameIds?gameId='+this.props.value[0].game.id+"&modeIds="+e);
   }
 
   render() {

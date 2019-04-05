@@ -59,7 +59,16 @@ class ModeDropdown extends Component {
 
   onAddMode() {
     const onAdd = this.props.onAdd;
-    onAdd(this.state.pickedModes);
+    if (this.props.useId) {
+      const modeIds = [];
+      this.state.pickedModes.forEach(m => {
+        modeIds.push(m.id)
+      });
+      onAdd(modeIds);
+    } else {
+      onAdd(this.state.pickedModes);
+
+    }
   }
 
   showMenu(e) {
