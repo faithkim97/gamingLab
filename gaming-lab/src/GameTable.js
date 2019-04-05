@@ -35,8 +35,7 @@ class GameTable extends Component {
   }
 
   handleEditGame(subgames1) {
-    //STILL 2 items for id = 4
-    window.history.pushState("/editGame", {id: subgames1.id})
+    // window.history.pushState("/admin/editGame", {gameId: subgames1[0].game.id})
     this.setState({showGames: false});
     this.editGamePage = <EditGamePage value={subgames1}/>
   }

@@ -2,7 +2,6 @@ import React from 'react';
 
 function GameEntry(props) {
   const games = props.value;
-
   const admin = props.admin;
   const masterGame = games[0];
   let systemConsole = null;
