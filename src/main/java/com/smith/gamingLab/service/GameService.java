@@ -48,6 +48,10 @@ public class GameService {
         masterGameRepository.save(game);
     }
 
+    public List<MasterGame> getMasterGamesByGameId(int gameId) {
+        return masterGameRepository.getMasterGamesByGameId(gameId);
+    }
+
     public void deleteMasterGame(int id) {masterGameRepository.deleteById(id);}
 
     public List<Integer> getMasterGameIdsByGameId(int gameId) { return masterGameRepository.getMasterGameByGameId(gameId);}

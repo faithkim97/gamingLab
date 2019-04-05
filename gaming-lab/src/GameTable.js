@@ -34,11 +34,11 @@ class GameTable extends Component {
     this.editGamePage = null;
   }
 
-  handleEditGame(subgames1) {
-    // window.history.pushState("/admin/editGame", {gameId: subgames1[0].game.id})
-    this.setState({showGames: false});
-    this.editGamePage = <EditGamePage value={subgames1}/>
-  }
+  // handleEditGame(subgames1) {
+  //   // window.history.pushState("/admin/editGame", {gameId: subgames1[0].game.id})
+  //   this.setState({showGames: false});
+  //   // this.editGamePage = <EditGamePage value={subgames1}/>
+  // }
 
 
   handleShowGames(e) {
@@ -60,14 +60,14 @@ class GameTable extends Component {
         subgames1 = subgames.slice();
         subgames = [];
         subgames.push(g);
-        return (<GameEntry admin={admin} value = {subgames1} onClick={this.handleEditGame.bind(this, subgames1)}/>);
+        return (<GameEntry admin={admin} value = {subgames1}/>);
 
       }
       subgames.push(g);
     });
     //getting the last game
     if (subgames.length > 0) {
-      gameMap.push(<GameEntry admin={admin} value = {subgames} onClick={this.handleEditGame.bind(this, subgames)}/>);
+      gameMap.push(<GameEntry admin={admin} value = {subgames}/>);
     }
 
 

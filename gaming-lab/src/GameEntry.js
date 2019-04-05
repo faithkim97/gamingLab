@@ -33,6 +33,7 @@ function GameEntry(props) {
   });
   // console.log(genres);
 
+  const url = "/editgame/"+masterGame.game.id;
 
   return(
     <tbody>
@@ -51,7 +52,7 @@ function GameEntry(props) {
     : null}
     {admin ? (<td>{masterGame.game.quantity}</td>) : (null)}
     <td>{masterGame.game.description}</td>
-    {admin ? (<td><button onClick={props.onClick}>Edit Game</button></td>) : (null)}
+    {admin ? (<td><a href ={url} ><button>Edit Game</button></a></td>) : (null)}
   </tr>
   </tbody>
 );

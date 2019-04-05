@@ -127,4 +127,10 @@ public class GameController {
         return ratings;
     }
 
+    @GetMapping("/masterGamesByGameId")
+    @CrossOrigin(origins = "http://localhost:3000")
+    public List<MasterGame> getMasterGamesByGameId(@RequestParam int gameId) {
+        return gameService.getMasterGamesByGameId(gameId);
+    }
+
 }

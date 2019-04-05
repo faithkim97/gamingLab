@@ -71,14 +71,14 @@ public class AdminController {
     }
 
     private void mapConsoleByQuery(Game game, Console queryConsole) {
-        if (queryConsole != null || queryConsole.getId() != -1) {
+        if (queryConsole != null && queryConsole.getId() != -1) {
             Console consoleToMap = consoleService.getConsoleById(queryConsole.getId()).get();
             consoleService.saveGameConsoleMap(new GameConsoleMap(game, consoleToMap));
         }
     }
 
     private void mapModesByQuery(Game game, List<PlayableMode> queryModes) {
-        if (queryModes != null || !queryModes.isEmpty()) {
+        if (queryModes != null && !queryModes.isEmpty()) {
             List<PlayableMode> modesToMap = new ArrayList<>();
             queryModes.forEach(m -> modesToMap.add(playableModeService.getPlayableModeById(m.getId()).get()));
             playableModeService.saveMapping(game, modesToMap);
@@ -87,7 +87,7 @@ public class AdminController {
     }
 
     private void mapGenresByQuery(Game game, List<Genre> queryGenres) {
-        if (queryGenres != null || !queryGenres.isEmpty()) {
+        if (queryGenres != null && !queryGenres.isEmpty()) {
             List<Genre> genresToMap = new ArrayList<>();
             queryGenres.forEach(g -> genresToMap.add(genreService.getGenreById(g.getId()).get()));
             genreService.saveGameGenreMap(game, genresToMap);

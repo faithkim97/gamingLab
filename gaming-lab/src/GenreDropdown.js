@@ -38,7 +38,18 @@ class GenreDropdown extends Component {
 
   handleClickAdd(e) {
     const onAdd = this.props.onAdd;
-    onAdd(this.state.pickedGenres);
+    if (this.props.useId) {
+      const genreIds = [];
+      this.state.pickedGenres.forEach(g => {
+        genreIds.push(g.id)
+      });
+      onAdd(genreIds);
+    } else{
+      console.log(onAdd);
+      onAdd(this.state.pickedGenres);
+
+    }
+
   }
 
   handleGenreCheck(e, genre) {

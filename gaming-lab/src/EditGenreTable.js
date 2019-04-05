@@ -38,12 +38,13 @@ class EditGenreTable extends Component {
     }
 
     deleteGenreMapping(e, mapId){
-      fetch('http://localhost:8080/admin//deleteGenreMap?mapId='+mapId);
+      fetch('http://localhost:8080/admin/deleteGenreMap?mapId='+mapId);
       window.location.reload();
     }
 
-    handleAddGenre(list) {
-      fetch('http://localhost:8080/admin/mapGenreByGameGenreIds?gameId='+this.props.value[0].game.id+"&genreIds="+list);
+    handleAddGenre(e) {
+      console.log(e);
+      fetch('http://localhost:8080/admin/mapGenreByGameGenreIds?gameId='+this.props.value[0].game.id+"&genreIds="+e);
 
     }
 
