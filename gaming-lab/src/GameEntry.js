@@ -33,7 +33,7 @@ function GameEntry(props) {
   });
   // console.log(genres);
 
-  const url = "/editgame/"+masterGame.game.id;
+  const url = "/admin/editgame/gameId="+masterGame.game.id;
 
   return(
     <tbody>

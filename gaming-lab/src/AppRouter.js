@@ -9,7 +9,7 @@ function Search(admin) {
 }
 
 function Home() {
-  return (<h1> Hello World! </h1>);
+  return (<h1> Welcome to the Gaming Lab! </h1>);
 }
 
 
@@ -17,25 +17,24 @@ function AppRouter() {
   return(
     <Router>
       <li>
-        <Link to="/">Home</Link>
+        <Link to="/home">Home</Link>
       </li>
       <li>
         <Link to="/search">Search</Link>
       </li>
       <li>
-        <Link to = "/admin">Admin</Link>
+        <Link to = "/admin/search">Admin</Link>
       </li>
 
       <li>
         <Link to = "/addgame">Add Game</Link>
       </li>
 
-
-      <Route path="/" component={Home} />
+      <Route path="/home" component={Home} />
       <Route path="/search" component={()=>Search(false)} />
-      <Route path="/admin" component={()=>Search(true)} />
-      <Route path="/editgame/:gameId" component={EditGamePage} />
-      <Route path = "/addgame" component={AddGameForm} />
+      <Route path="/admin/search" component={()=>Search(true)} />
+      <Route path="/admin/editgame/:gameId" component={EditGamePage} />
+      <Route path = "/admin/addgame" component={AddGameForm} />
     </Router>
 
   );
