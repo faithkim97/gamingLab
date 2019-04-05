@@ -47,7 +47,7 @@ class AddGameForm extends Component {
         modes: modes,
         console: {
           id: console,
-        }
+        },
       })
 
     });
@@ -92,6 +92,7 @@ class AddGameForm extends Component {
     this.setState({console: console});
   }
 
+
   render(){
     return(
       <div>
@@ -114,7 +115,7 @@ class AddGameForm extends Component {
           Playable Mode:
           <ModeDropdown onAdd={e=>this.addMode(e)} useId={false} editMode={false} onAdd={e=>this.addMode(e)}/>
           Console:
-          <ConsoleDropdown onAdd={e=>this.addConsole(e)} useId={true} editMode={false} />
+          <ConsoleDropdown  useId={true} editMode={false} onAdd={e=>this.changeConsole(e)} />
         </form>
       </div>
 

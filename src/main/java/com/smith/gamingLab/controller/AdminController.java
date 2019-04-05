@@ -61,8 +61,8 @@ public class AdminController {
         Game game = query.getGame();
         gameService.saveOrUpdate(game);
         mapGenresByQuery(game, query.getGenres());
-//        mapModesByQuery(game, query.getModes());
-//        mapConsoleByQuery(game, query.getConsole());
+        mapModesByQuery(game, query.getModes());
+        mapConsoleByQuery(game, query.getConsole());
         saveMasterGame(game);
     }
 
@@ -123,6 +123,8 @@ public class AdminController {
         setModeMapInMasterGameList(masterGames, modeMap);
         //game always has only 1 console mapped
         GameConsoleMap console = !consoleMap.isEmpty() ? consoleMap.get(0) : null;
+        //SOLUTION TO DO --> MASTERGAME EMPTY
+        if (masterGames.isEmpty() && console != null) { masterGames.add(new MasterGame(game));}
         masterGames.forEach(mg -> mg.setConsoleMap(console));
         masterGames.forEach(mg -> gameService.saveMasterGame(mg));
     }
