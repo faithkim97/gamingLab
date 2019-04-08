@@ -262,17 +262,16 @@ public class AdminController {
 
     @GetMapping("/addGenre")
     @CrossOrigin(origins = url)
-    private List<Genre> addGenre(@RequestParam String genre) {
+    private void addGenre(@RequestParam String genre) {
         genreService.getGenresByTitleToken(genre, ",");
-        return gameController.getAllGenres();
     }
 
 
 
     @GetMapping("/addMode")
+    @CrossOrigin(origins = url)
     private void addPlayableMode(@RequestParam String mode) {
-        PlayableMode m = new PlayableMode(mode);
-        playableModeService.savePlayableMode(m);
+        playableModeService.getPlayableModes(mode, ",");
     }
 
     @GetMapping("/mapMode")
@@ -375,6 +374,7 @@ public class AdminController {
 
 
     @GetMapping("/deleteMode")
+    @CrossOrigin(origins = url)
     private void deleteMode(@RequestParam int modeId) {
         List<GamePlayableModeMap> modeMaps = playableModeService.getMappingByModeId(modeId);
         for (GamePlayableModeMap m : modeMaps) {

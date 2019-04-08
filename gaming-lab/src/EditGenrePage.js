@@ -22,10 +22,10 @@ class EditGenrePage extends Component {
 
     return(
       <div>
-      <h1>Edit Genres </h1>
-      <GenreTable />
-      <input type = "text" value={this.state.newGenre} onChange={e => this.handleChange(e)}/>
-      <button onClick={e => this.handleClick(e)}>Add New Genre </button>
+        <h1>Edit Genres</h1>
+        <GenreTable />
+        <input type = "text" value={this.state.newGenre} onChange={e => this.handleChange(e)}/>
+        <button onClick={e => this.handleClick(e)}>Add New Genre </button>
       </div>
 
     );
