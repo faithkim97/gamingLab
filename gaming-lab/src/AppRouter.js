@@ -13,6 +13,7 @@ function Home() {
 }
 
 
+
 function AppRouter() {
   return(
     <Router>
@@ -27,14 +28,14 @@ function AppRouter() {
       </li>
 
       <li>
-        <Link to = "/addgame">Add Game</Link>
+        <Link to = "/admin/addgame">Add Game</Link>
       </li>
 
       <Route path="/home" component={Home} />
       <Route path="/search" component={()=>Search(false)} />
       <Route path="/admin/search" component={()=>Search(true)} />
-      <Route path="/admin/editgame/:gameId" component={EditGamePage} />
       <Route path = "/admin/addgame" component={AddGameForm} />
+      <Route path = "/admin/editgame/gameId=:gameId" component = {EditGamePage} />
     </Router>
 
   );

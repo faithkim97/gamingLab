@@ -261,9 +261,9 @@ public class AdminController {
 
 
     @GetMapping("/addGenre")
+    @CrossOrigin(origins = url)
     private List<Genre> addGenre(@RequestParam String genre) {
-        Genre g = new Genre(genre);
-        genreService.saveGenre(g);
+        genreService.getGenresByTitleToken(genre, ",");
         return gameController.getAllGenres();
     }
 

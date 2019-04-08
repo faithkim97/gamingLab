@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import SearchEngine from './SearchEngine';
 import AppRouter from './AppRouter';
+import EditGenrePage from './EditGenrePage';
 import * as serviceWorker from './serviceWorker';
 
 // pages = {
