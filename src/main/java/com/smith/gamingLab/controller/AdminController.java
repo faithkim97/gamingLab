@@ -180,11 +180,9 @@ public class AdminController {
     }
 
     @GetMapping("/addConsole")
-    private List<Console> addConsole(@RequestParam String name) {
-        Console c = new Console();
-        c.setConsole(name);
-        consoleService.saveConsole(c);
-        return gameController.getConsoles();
+    @CrossOrigin(origins = url)
+    private void addConsole(@RequestParam String console) {
+        consoleService.getConsoles(console, ",");
     }
 
     @GetMapping("/mapConsole")

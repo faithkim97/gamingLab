@@ -3,8 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import SearchEngine from './SearchEngine';
 import AppRouter from './AppRouter';
-import EditGenrePage from './EditGenrePage';
-import EditModePage from './EditModePage';
+import EditConsolePage from './EditConsolePage';
 import * as serviceWorker from './serviceWorker';
 
 // pages = {
@@ -20,7 +19,7 @@ import * as serviceWorker from './serviceWorker';
 //
 // }
 // ReactDOM.render(<SearchEngine admin={true} />, document.getElementById('root'));
-ReactDOM.render(<EditModePage />, document.getElementById('root'));
+ReactDOM.render(<EditConsolePage />, document.getElementById('root'));
 // ReactDOM.render(<AppRouter />, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
