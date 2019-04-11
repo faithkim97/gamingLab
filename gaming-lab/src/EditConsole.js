@@ -29,7 +29,10 @@ class EditConsole extends Component {
   }
 
   handleDeleteConsole(e, mapId) {
-    fetch("http://localhost:8080/admin/deleteConsoleMap?mapId="+mapId)
+    e.preventDefault();
+    console.log(mapId);
+    // fetch("http://localhost:8080/admin/deleteConsoleMap?mapId="+mapId);
+    // window.location.reload();
   }
 
 
