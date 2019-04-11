@@ -418,4 +418,6 @@ public class AdminController {
         }
         consoleService.deleteMapping(mapId);
     }
+
+
 }//endclass
