@@ -127,7 +127,7 @@ public class AdminController {
         setModeMapInMasterGameList(masterGames, modeMap);
         //game always has only 1 console mapped
         GameConsoleMap console = !consoleMap.isEmpty() ? consoleMap.get(0) : null;
-        if (masterGames.isEmpty() && console != null) { masterGames.add(new MasterGame(game));}
+        if (masterGames.isEmpty()) { masterGames.add(new MasterGame(game));}
         masterGames.forEach(mg -> mg.setConsoleMap(console));
         masterGames.forEach(mg -> gameService.saveMasterGame(mg));
     }
