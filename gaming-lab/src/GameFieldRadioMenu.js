@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
+import {Dropdown, DropdownButton} from 'react-bootstrap';
 
 function GameFieldRadioMenu(props) {
   const field = props.field;
   const menu = field.map( f => {
     return(
       <div key = {f.id}>
-        <input type = 'radio' value = {f.id} name = {props.type} onChange={props.onChange} />
-        { props.type === "console" ? (f.console ): (f.mode)}
+          <Dropdown.Item><input type = 'radio' value = {f.id} name = {props.type} onChange={props.onChange} />
+        { props.type === "console" ? (f.console ): (f.mode)}</Dropdown.Item>
       </div>
     )
   });
@@ -18,7 +19,11 @@ function GameFieldRadioMenu(props) {
     </div>
   );
 
-  return menu;
+  return (
+      <DropdownButton title={props.name}>
+          {menu}
+      </DropdownButton>
+  );
 
 
 }
