@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {Dropdown, DropdownButton} from 'react-bootstrap';
 
 class RatingDropdown extends Component {
   constructor(props) {
@@ -17,14 +18,16 @@ class RatingDropdown extends Component {
     const ratingMap = this.state.ratings.map((r) => {
       return(
         <div key={r}>
-          <input type = "radio" value={r} name = "rating" onChange={this.props.onChange} /> {r}
+          <Dropdown.Item><input type = "radio" value={r} name = "rating" onChange={this.props.onChange} /> {r} </Dropdown.Item>
           </div>
       );
 
     });
     return(
       <div>
+        <DropdownButton title="Rating">
         {ratingMap}
+        </DropdownButton>
       </div>
     );
   }//endrender

@@ -100,11 +100,8 @@ class SearchEngine extends Component {
         <form onSubmit={e=>this.handleSubmit(e)}>
           <input type = 'text' value={this.state.key} onChange={e => this.handleKey(e)}/>
           <input type = 'submit' value = "Search"/>
-          <h3>Consoles</h3>
           <GameFieldRadioMenu name="Consoles" field={consoles} type="console" onChange={e =>this.handleConsole(e)} />
-          <h3>Playable Modes</h3>
           <GameFieldRadioMenu name="Playable Modes" field = {modes} type="mode" onChange={e => this.handleMode(e)} />
-          <h3>Rating</h3>
           <RatingDropdown onChange={e => this.handleRating(e)} />
           Checked Out:
           <BooleanOptions name="checkedOut" onChange={e => this.handleCheckedOut(e)} />
