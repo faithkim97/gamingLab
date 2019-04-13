@@ -56,6 +56,12 @@ public class AdminController {
 //        saveMasterGame(g);
 //    }
 
+    @GetMapping("/")
+    @CrossOrigin(origins = url)
+    private  String admin() {
+        return "none";
+}
+
     @PostMapping("/addgame")
     @CrossOrigin(origins = url)
     private void addGame(@RequestBody Query query) {

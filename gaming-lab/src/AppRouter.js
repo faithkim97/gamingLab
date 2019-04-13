@@ -6,7 +6,9 @@ import AddGameForm from './AddGameForm';
 import EditModePage from './EditModePage';
 import EditGenrePage from './EditGenrePage';
 import EditConsolePage from './EditConsolePage';
+import Admin from './Admin';
 import AppRouterStyle from './AppRouterStyle.css';
+import {Nav} from 'react-bootstrap';
 
 function Search(admin) {
   return(
@@ -19,42 +21,49 @@ function Search(admin) {
    );
 }
 
-function Admin() {
-  return(
-    <div>
-      <li>
-        <a href="/home">Home</a>
-      </li>
-      <li>
-        <a href="/admin/search">Search Games</a>
-      </li>
-      <li>
-        <a href="/admin/addgame">Add New Game</a>
-      </li>
-      <div class="dropdown">
-        <button class="dropbtn">Edit Game Fields</button>
-        <div class="dropdown-content">
-          <a href="/admin/editgenre">Genre</a>
-          <a href="/admin/editconsole">Console</a>
-          <a href="/admin/editmode">Playable Mode</a>
-        </div>
-      </div>
-    </div>
-  );
+function AdminPage() {
+    return(
+       <Admin />
+    );
+
 }
 
 function Home() {
-  return (
-    <div>
-      <h1> Welcome to the Gaming Lab! </h1>
-        <li>
-          <a href="/game/search">Find Games!</a>
-        </li>
-        <li>
-          <a href="/admin">Admin</a>
-        </li>
-    </div>
-  );
+  // return (
+  //   <div>
+  //     <h1> Welcome to the Gaming Lab! </h1>
+  //       <li>
+  //         <a href="/game/search">Find Games!</a>
+  //       </li>
+  //       <li>
+  //         <a href="/admin">Admin</a>
+  //       </li>
+  //   </div>
+  // );
+
+    return (
+        <div>
+        <h1 className="text-center">The Gaming Lab At Smith College</h1>
+        <Nav fill variant="tabs" defaultActiveKey="/home">
+            <Nav.Item>
+                <Nav.Link href="/home">Home</Nav.Link>
+            </Nav.Item>
+            <Nav.Item>
+                <Nav.Link href="/game/search">Find Games</Nav.Link>
+            </Nav.Item>
+            <Nav.Item>
+                <Nav.Link href="/admin">Admin</Nav.Link>
+            </Nav.Item>
+        </Nav>
+        <Image />
+        </div>
+    );
+}
+
+function Image() {
+    return(
+        <img src ="https://images5.alphacoders.com/860/thumb-1920-860842.jpg"/>
+    );
 }
 
 
@@ -63,7 +72,7 @@ function AppRouter() {
   return(
     <Router>
       <Route path="/home" component={Home} />
-      <Route path="/admin" component={Admin}/>
+      <Route path="/admin" component={AdminPage}/>
       <Route path="/admin/editgenre" component={EditGenrePage} />
       <Route path="/admin/editconsole" component={EditConsolePage} />
       <Route path="/admin/editmode" component={EditModePage} />
