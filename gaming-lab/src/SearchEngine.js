@@ -3,6 +3,7 @@ import GameTable from './GameTable';
 import GameFieldRadioMenu from './GameFieldRadioMenu';
 import RatingDropdown from './RatingDropdown';
 import BooleanOptions from './BooleanOptions';
+import {InputGroup, FormControl,Nav,Navbar, Form} from 'react-bootstrap';
 
 
 class SearchEngine extends Component {
@@ -98,16 +99,32 @@ class SearchEngine extends Component {
     return(
       <div>
         <form onSubmit={e=>this.handleSubmit(e)}>
-          <input type = 'text' value={this.state.key} onChange={e => this.handleKey(e)}/>
-          <input type = 'submit' value = "Search"/>
-          <GameFieldRadioMenu name="Consoles" field={consoles} type="console" onChange={e =>this.handleConsole(e)} />
-          <GameFieldRadioMenu name="Playable Modes" field = {modes} type="mode" onChange={e => this.handleMode(e)} />
-          <RatingDropdown onChange={e => this.handleRating(e)} />
+          {/*<input type = 'text' value={this.state.key} onChange={e => this.handleKey(e)}/>*/}
+
+            <Navbar bg="dark" variant="dark">
+            <Nav>
+                <Nav.Item><GameFieldRadioMenu name="Consoles" field={consoles} type="console" onChange={e =>this.handleConsole(e)} /></Nav.Item>
+                <Nav.Item><GameFieldRadioMenu name="Playable Modes" field = {modes} type="mode" onChange={e => this.handleMode(e)} /></Nav.Item>
+                <Nav.Item> <RatingDropdown onChange={e => this.handleRating(e)} /></Nav.Item>
+            </Nav>
+                <InputGroup size="sm">
+                    <InputGroup.Prepend>
+                        <InputGroup.Text id="inputGroup-sizing-sm">Search Keywords</InputGroup.Text>
+                    </InputGroup.Prepend>
+                    <Form inline>
+                        <FormControl width="50%" value={this.state.key}
+                                     onChange={e => this.handleKey(e)} aria-label="Small" aria-describedby="inputGroup-sizing-sm" />
+                    </Form>
+                </InputGroup>
+            </Navbar>
+
           Checked Out:
           <BooleanOptions name="checkedOut" onChange={e => this.handleCheckedOut(e)} />
           Digital:
           <BooleanOptions name = "digital" onChange={e => this.handleDigital(e)} />
+          <input type = 'submit' value = "Search"/>
         </form>
+
        {gameList}
      </div>
     );

@@ -8,7 +8,7 @@ import EditGenrePage from './EditGenrePage';
 import EditConsolePage from './EditConsolePage';
 import Admin from './Admin';
 import AppRouterStyle from './AppRouterStyle.css';
-import {Nav} from 'react-bootstrap';
+import {Nav, Carousel} from 'react-bootstrap';
 
 function Search(admin) {
   return(
@@ -55,11 +55,55 @@ function Home() {
                 <Nav.Link href="/admin">Admin</Nav.Link>
             </Nav.Item>
         </Nav>
-        <Image />
+        {/*<Image />*/}
+        <Carous />
+
         </div>
     );
 }
 
+function Carous() {
+    return(
+        <Carousel>
+            <Carousel.Item>
+                <img
+                    className="d-block w-100"
+                    src="https://images5.alphacoders.com/860/thumb-1920-860842.jpg"
+                    alt="First slide"
+                />
+                <Carousel.Caption>
+                    <h3>Uncharted: The Lost Legacy</h3>
+                    <p>On the PS4 at the Gaming Lab</p>
+                </Carousel.Caption>
+            </Carousel.Item>
+            <Carousel.Item>
+                <img
+                    className="d-block w-100"
+                    src="https://i.imgur.com/ezlIxS8.jpg?fb"
+                    alt="Third slide"
+                />
+
+                <Carousel.Caption>
+                    <h3>Mario Kart 8 Deluxe</h3>
+                    <p>On the Nintendo Switch at the Gaming Lab</p>
+                </Carousel.Caption>
+            </Carousel.Item>
+            <Carousel.Item>
+                <img
+                    className="d-block w-100"
+                    src="https://steamcdn-a.akamaihd.net/steam/apps/611660/capsule_616x353.jpg?t=1522898983"
+                    alt="Third slide"
+                />
+
+                <Carousel.Caption>
+                    <h3>Fallout 4 on VR</h3>
+                    <p>On HTC Vive at the Gaming Lab</p>
+                </Carousel.Caption>
+            </Carousel.Item>
+        </Carousel>
+
+    );
+}
 function Image() {
     return(
         <img src ="https://images5.alphacoders.com/860/thumb-1920-860842.jpg"/>
