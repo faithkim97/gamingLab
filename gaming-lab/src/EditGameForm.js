@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import RatingDropdown from './RatingDropdown';
+import {Form, Row, Col} from 'react-bootstrap';
 
 class EditGameForm extends Component {
   constructor(props) {
@@ -65,25 +66,64 @@ class EditGameForm extends Component {
 
 
   render() {
+    // return(
+    //   {/*<div>*/}
+    //   {/*  <Form onSubmit={e=>this.handleUpdate(e)}>*/}
+    //   {/*    Title:*/}
+    //   {/*     <input type = "text" value={this.state.newTitle} onChange={e => this.changeTitle(e)}/>*/}
+    //   {/*     Checked Out:*/}
+    //   {/*     <input type = "checkbox" checked = {this.state.checkedOut} name = "checkedout" onChange={e => this.changeCheckedOut(e)}/>*/}
+    //   {/*     Digital:*/}
+    //   {/*     <input type = "checkbox" checked = {this.state.digital} name="digital" onChange={e=> this.changeDigital(e)}/>*/}
+    //   {/*     Quantity:*/}
+    //   {/*     <input type = "number" value = {this.state.quantity} name="quantity" onChange={e => this.changeQuantity(e)} />*/}
+    //   {/*     Description:*/}
+    //   {/*     <textarea value ={this.state.description} onChange={e => this.changeDescription(e)} />*/}
+    //   {/*     <RatingDropdown onChange={e => this.changeRating(e)}/>*/}
+    //   {/*     <input type = "submit" value = "Update" />*/}
+    //   {/*  </Form>*/}
+    //   {/*</div>*/}
+    //
+    //
+    // );
+
     return(
-      <div>
-        <form onSubmit={e => this.handleUpdate(e)}>
-          Title:
-           <input type = "text" value={this.state.newTitle} onChange={e => this.changeTitle(e)}/>
-           Checked Out:
-           <input type = "checkbox" checked = {this.state.checkedOut} name = "checkedout" onChange={e => this.changeCheckedOut(e)}/>
-           Digital:
-           <input type = "checkbox" checked = {this.state.digital} name="digital" onChange={e=> this.changeDigital(e)}/>
-           Quantity:
-           <input type = "number" value = {this.state.quantity} name="quantity" onChange={e => this.changeQuantity(e)} />
-           Description:
-           <textarea value ={this.state.description} onChange={e => this.changeDescription(e)} />
-           Rating:
-           <RatingDropdown onChange={e => this.changeRating(e)}/>
-           <input type = "submit" value = "Update" />
-        </form>
-      </div>
-    );
+        <div style={{backgroundColor: 'purple', width:"50%"}}>
+          <border>
+          <Form onSubmit={e=>this.handleUpdate(e)} className="block-example border border-secondary">
+            <Form.Group>
+              <Form.Label>Title</Form.Label>
+              <Form.Control size="sm" value={this.state.newTitle} onChange={e=>this.changeTitle(e)}/>
+            </Form.Group>
+
+            <Form.Group>
+              <Row>
+                <Col>
+                  <Form.Label>Checked Out</Form.Label>
+                  <Form.Check checked={this.state.checkedOut} name="checkedout" onChange={e=>this.changeCheckedOut(e)}/>
+                </Col>
+                <Col>
+                  <Form.Label>Digital</Form.Label>
+                  <Form.Check checked={this.state.digital} name="digital" onChange={e=>this.changeDigital(e)}/>
+                </Col>
+              </Row>
+            </Form.Group>
+            <Form.Group>
+              <Form.Label>Quantity</Form.Label>
+              <input type="number" value={this.state.quantity} name="quantity" onChange={e=>this.changeQuantity(e)} />
+            </Form.Group>
+            <Form.Group>
+              <RatingDropdown onChange={e=>this.changeRating(e)} />
+            </Form.Group>
+            <Form.Group>
+              <Form.Label>Description</Form.Label>
+              <Form.Control as="textarea" rows="4"/>
+            </Form.Group>
+            <input type="submit" value="Update Game Info" />
+          </Form>
+          </border>
+        </div>
+    )
   }
 
 
