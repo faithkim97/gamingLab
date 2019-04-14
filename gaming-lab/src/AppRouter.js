@@ -29,18 +29,6 @@ function AdminPage() {
 }
 
 function Home() {
-  // return (
-  //   <div>
-  //     <h1> Welcome to the Gaming Lab! </h1>
-  //       <li>
-  //         <a href="/game/search">Find Games!</a>
-  //       </li>
-  //       <li>
-  //         <a href="/admin">Admin</a>
-  //       </li>
-  //   </div>
-  // );
-
     return (
         <div>
         <h1 className="text-center">The Gaming Lab At Smith College</h1>
@@ -55,7 +43,6 @@ function Home() {
                 <Nav.Link href="/admin">Admin</Nav.Link>
             </Nav.Item>
         </Nav>
-        {/*<Image />*/}
         <Carous />
 
         </div>
@@ -102,11 +89,6 @@ function Carous() {
             </Carousel.Item>
         </Carousel>
 
-    );
-}
-function Image() {
-    return(
-        <img src ="https://images5.alphacoders.com/860/thumb-1920-860842.jpg"/>
     );
 }
 

@@ -82,7 +82,9 @@ class SearchEngine extends Component {
   }
 
   handleCheckedOut(e) {
-    this.setState({checkedOut: e.target.value});
+    this.setState({
+        checkedOut: e.target.value,
+    }, () => {console.log(this.state.checkedOut)});
   }
 
   handleDigital(e) {
@@ -118,10 +120,8 @@ class SearchEngine extends Component {
                 </InputGroup>
             </Navbar>
 
-          Checked Out:
-          <BooleanOptions name="checkedOut" onChange={e => this.handleCheckedOut(e)} />
-          Digital:
-          <BooleanOptions name = "digital" onChange={e => this.handleDigital(e)} />
+          <BooleanOptions title="Checked Out?" name="checkedOut" onChange={e => this.handleCheckedOut(e)} />
+          <BooleanOptions title="Digital" name = "digital" onChange={e => this.handleDigital(e)} />
           <input type = 'submit' value = "Search"/>
         </form>
 
