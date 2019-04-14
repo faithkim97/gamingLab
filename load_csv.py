@@ -8,6 +8,6 @@ with open(path) as fp:
   for row in csvReader:
     data = dict(zip(header, row))
     print(data)
-    requests.post('http://localhost:8080/admin/addGame', data=data)
+    requests.post('http://localhost:8080/admin/addGameCSV', data=data)
 
 

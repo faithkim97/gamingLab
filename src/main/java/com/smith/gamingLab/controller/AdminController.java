@@ -34,47 +34,42 @@ public class AdminController {
 
     final String url = "http://localhost:3000";
 
-//    @PostMapping("/addGame")
-//    private void addGame(@RequestParam(value = "title") String title, @RequestParam(value = "desc", required = false) String description,
-//                         @RequestParam(value = "genre",required = false) String genreTitle,
-//                         @RequestParam(value = "console",required = false) String console,
-//                         @RequestParam(value = "quantity", required = false) Integer quantity, @RequestParam(value = "rating", required = false) String rating,
-//                         @RequestParam(value = "playable mode", required = false) String mode, @RequestParam(value = "checked_out", required = false) boolean checkedOut,
-//                         @RequestParam(value = "digital", required = false) boolean isDigital) {
-//        Game g = new Game();
-//        g.setTitle(title.toLowerCase());
-//        g.setDescription(description.toLowerCase());
-//        int q = quantity == null ? 1 : quantity;
-//        g.setQuantity(q);
-//        if (rating != null) { g.setRating(rating);}
-//        g.setIsCheckedOut(checkedOut);
-//        g.setIsDigital(isDigital);
-//        saveGenres(g, genreTitle.toLowerCase());
-//        saveConsoles(g, console.toLowerCase());
-//        savePlayableModes(g, mode.toLowerCase());
-//        gameService.saveOrUpdate(g);
-//        saveMasterGame(g);
-//    }
-
-    @GetMapping("/")
-    @CrossOrigin(origins = url)
-    private  String admin() {
-        return "none";
-}
-
-    @PostMapping("/addgame")
-    @CrossOrigin(origins = url)
-    private void addGame(@RequestBody Query query) {
-        Game game = query.getGame();
-        Rating rating = game.getRating();
-        rating = rating == null || rating == Rating.NONE ? null : rating;
-        game.setRating(rating);
-        gameService.saveOrUpdate(game);
-        mapGenresByQuery(game, query.getGenres());
-        mapModesByQuery(game, query.getModes());
-        mapConsoleByQuery(game, query.getConsole());
-        saveMasterGame(game);
+    @PostMapping("/addGameCSV")
+    private void addGame(@RequestParam(value = "title") String title, @RequestParam(value = "desc", required = false) String description,
+                         @RequestParam(value = "genre",required = false) String genreTitle,
+                         @RequestParam(value = "console",required = false) String console,
+                         @RequestParam(value = "quantity", required = false) Integer quantity, @RequestParam(value = "rating", required = false) String rating,
+                         @RequestParam(value = "playable mode", required = false) String mode, @RequestParam(value = "checked_out", required = false) boolean checkedOut,
+                         @RequestParam(value = "digital", required = false) boolean isDigital) {
+        Game g = new Game();
+        g.setTitle(title.toLowerCase());
+        g.setDescription(description.toLowerCase());
+        int q = quantity == null ? 1 : quantity;
+        g.setQuantity(q);
+        if (rating != null) { g.setRating(rating);}
+        g.setIsCheckedOut(checkedOut);
+        g.setIsDigital(isDigital);
+        saveGenres(g, genreTitle.toLowerCase());
+        saveConsoles(g, console.toLowerCase());
+        savePlayableModes(g, mode.toLowerCase());
+        gameService.saveOrUpdate(g);
+        saveMasterGame(g);
     }
+
+
+//    @PostMapping("/addgame")
+//    @CrossOrigin(origins = url)
+//    private void addGame(@RequestBody Query query) {
+//        Game game = query.getGame();
+//        Rating rating = game.getRating();
+//        rating = rating == null || rating == Rating.NONE ? null : rating;
+//        game.setRating(rating);
+//        gameService.saveOrUpdate(game);
+//        mapGenresByQuery(game, query.getGenres());
+//        mapModesByQuery(game, query.getModes());
+//        mapConsoleByQuery(game, query.getConsole());
+//        saveMasterGame(game);
+//    }
 
     private void mapConsoleByQuery(Game game, Console queryConsole) {
         if (queryConsole != null && queryConsole.getId() != -1) {
