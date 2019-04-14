@@ -88,7 +88,7 @@ class EditGameForm extends Component {
     // );
 
     return(
-        <div style={{backgroundColor: 'purple', width:"50%"}}>
+        <div style={{backgroundColor: 'purple', width:"50%", padding:'1%'}}>
           <border>
           <Form onSubmit={e=>this.handleUpdate(e)} className="block-example border border-secondary">
             <Form.Group>
@@ -109,11 +109,15 @@ class EditGameForm extends Component {
               </Row>
             </Form.Group>
             <Form.Group>
-              <Form.Label>Quantity</Form.Label>
-              <input type="number" value={this.state.quantity} name="quantity" onChange={e=>this.changeQuantity(e)} />
-            </Form.Group>
-            <Form.Group>
-              <RatingDropdown onChange={e=>this.changeRating(e)} />
+              <Row>
+                <Col>
+                  <Form.Label>Quantity</Form.Label>
+                  <input type="number" value={this.state.quantity} name="quantity" onChange={e=>this.changeQuantity(e)} />
+                </Col>
+                <Col>
+                  <RatingDropdown onChange={e=>this.changeRating(e)} />
+                </Col>
+              </Row>
             </Form.Group>
             <Form.Group>
               <Form.Label>Description</Form.Label>
