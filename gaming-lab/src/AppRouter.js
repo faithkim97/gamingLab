@@ -13,9 +13,7 @@ import {Nav, Carousel} from 'react-bootstrap';
 function Search(admin) {
   return(
     <div>
-      <li>
-        <a href="/home">Home</a>
-      </li>
+        {admin ? (null) : <HomeNav active="/game/search" />}
       <SearchEngine admin={admin} />
     </div>
    );
@@ -32,7 +30,16 @@ function Home() {
     return (
         <div>
         <h1 className="text-center">The Gaming Lab At Smith College</h1>
-        <Nav fill variant="tabs" defaultActiveKey="/home">
+        <HomeNav active="/home" />
+        <Carous />
+
+        </div>
+    );
+}
+
+function HomeNav(props) {
+    return(
+        <Nav fill variant="tabs" defaultActiveKey={props.active}>
             <Nav.Item>
                 <Nav.Link href="/home">Home</Nav.Link>
             </Nav.Item>
@@ -43,9 +50,6 @@ function Home() {
                 <Nav.Link href="/admin">Admin</Nav.Link>
             </Nav.Item>
         </Nav>
-        <Carous />
-
-        </div>
     );
 }
 
