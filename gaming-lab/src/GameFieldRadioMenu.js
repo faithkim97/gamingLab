@@ -6,16 +6,16 @@ function GameFieldRadioMenu(props) {
   const menu = field.map( f => {
     return(
       <div key = {f.id}>
-          <Dropdown.Item><input type = 'radio' value = {f.id} name = {props.type} onChange={props.onChange} />
-        { props.type === "console" ? (f.console ): (f.mode)}</Dropdown.Item>
+          <input type = 'radio' value = {f.id} name = {props.type} onChange={props.onChange} />
+        { props.type === "console" ? (f.console ): (f.mode)}
+        <Dropdown.Divider/>
       </div>
     )
   });
 
   menu.push(
     <div>
-      <Dropdown.Item><input type = 'radio' value = {-1} name = {props.type} onChange={props.onChange} />
-          None</Dropdown.Item>
+      <input type = 'radio' value = {-1} name = {props.type} onChange={props.onChange} /> None
     </div>
   );
 
