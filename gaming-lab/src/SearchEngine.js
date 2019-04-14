@@ -106,13 +106,18 @@ class SearchEngine extends Component {
             <Navbar bg="dark" variant="dark">
             <Nav>
                 <Nav.Item><GameFieldRadioMenu variant="warning" size="sm" name="Consoles" field={consoles} type="console" onChange={e =>this.handleConsole(e)} /></Nav.Item>
+                &nbsp;
                 <Nav.Item><GameFieldRadioMenu size ="sm" variant="info" name="Playable Modes" field = {modes} type="mode" onChange={e => this.handleMode(e)} /></Nav.Item>
+                &nbsp;
                 <Nav.Item> <RatingDropdown variant="warning" size="sm" onChange={e => this.handleRating(e)} /></Nav.Item>
+                &nbsp;
                 <Nav.Item><BooleanOptions size="sm" variant="info" title="Checked Out?" name="checkedOut" onChange={e => this.handleCheckedOut(e)} /></Nav.Item>
+                &nbsp;
                 <Nav.Item> <BooleanOptions variant="warning" size="sm" title="Digital" name = "digital" onChange={e => this.handleDigital(e)} />
                 </Nav.Item>
 
             </Nav>
+                &nbsp;
                 <InputGroup size="sm">
                     <InputGroup.Prepend>
                         <InputGroup.Text id="inputGroup-sizing-sm">Keywords</InputGroup.Text>
@@ -121,8 +126,9 @@ class SearchEngine extends Component {
                         <FormControl width="50%" value={this.state.key}
                                      onChange={e => this.handleKey(e)} aria-label="Small" aria-describedby="inputGroup-sizing-sm" />
                     </Form>
+                    &nbsp;
+                    <input type = 'submit' value = "Search"/>
                 </InputGroup>
-                <input type = 'submit' value = "Search"/>
 
             </Navbar>
 
