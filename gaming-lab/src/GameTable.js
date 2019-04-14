@@ -2,11 +2,12 @@ import React, { Component } from 'react';
 import GameEntry from './GameEntry';
 import './GameTable.css';
 import EditGamePage from './EditGamePage';
+import {Table} from 'react-bootstrap';
 
 function showGameTable(gameMap, admin) {
   return(
-    <table>
-      <tbody>
+    <Table striped bordered hover variant="dark">
+      <thead>
         <tr>
         {admin ? (<th>ID</th>) : (null)}
         <th>Title</th>
@@ -19,9 +20,9 @@ function showGameTable(gameMap, admin) {
         {admin ? (<th>Quantity</th>) : (null)}
         <th>Description</th>
       </tr>
-      </tbody>
+      </thead>
     {gameMap}
-    </table>
+    </Table>
   );
 }
 
