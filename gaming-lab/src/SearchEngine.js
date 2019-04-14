@@ -105,17 +105,17 @@ class SearchEngine extends Component {
 
             <Navbar bg="dark" variant="dark">
             <Nav>
-                <Nav.Item><GameFieldRadioMenu name="Consoles" field={consoles} type="console" onChange={e =>this.handleConsole(e)} /></Nav.Item>
-                <Nav.Item><GameFieldRadioMenu name="Playable Modes" field = {modes} type="mode" onChange={e => this.handleMode(e)} /></Nav.Item>
-                <Nav.Item> <RatingDropdown onChange={e => this.handleRating(e)} /></Nav.Item>
-                <Nav.Item><BooleanOptions title="Checked Out?" name="checkedOut" onChange={e => this.handleCheckedOut(e)} /></Nav.Item>
-                <Nav.Item> <BooleanOptions title="Digital" name = "digital" onChange={e => this.handleDigital(e)} />
+                <Nav.Item><GameFieldRadioMenu variant="warning" size="sm" name="Consoles" field={consoles} type="console" onChange={e =>this.handleConsole(e)} /></Nav.Item>
+                <Nav.Item><GameFieldRadioMenu size ="sm" variant="info" name="Playable Modes" field = {modes} type="mode" onChange={e => this.handleMode(e)} /></Nav.Item>
+                <Nav.Item> <RatingDropdown variant="warning" size="sm" onChange={e => this.handleRating(e)} /></Nav.Item>
+                <Nav.Item><BooleanOptions size="sm" variant="info" title="Checked Out?" name="checkedOut" onChange={e => this.handleCheckedOut(e)} /></Nav.Item>
+                <Nav.Item> <BooleanOptions variant="warning" size="sm" title="Digital" name = "digital" onChange={e => this.handleDigital(e)} />
                 </Nav.Item>
 
             </Nav>
                 <InputGroup size="sm">
                     <InputGroup.Prepend>
-                        <InputGroup.Text id="inputGroup-sizing-sm">Search Keywords</InputGroup.Text>
+                        <InputGroup.Text id="inputGroup-sizing-sm">Keywords</InputGroup.Text>
                     </InputGroup.Prepend>
                     <Form inline>
                         <FormControl width="50%" value={this.state.key}

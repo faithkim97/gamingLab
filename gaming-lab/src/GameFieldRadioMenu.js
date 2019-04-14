@@ -20,7 +20,7 @@ function GameFieldRadioMenu(props) {
   );
 
   return (
-      <DropdownButton title={props.name}>
+      <DropdownButton title={props.name} size={props.size} variant={props.variant}>
           {menu}
       </DropdownButton>
   );

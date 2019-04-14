@@ -6,7 +6,7 @@ import {DropdownButton, Dropdown} from 'react-bootstrap';
 
     function BooleanOptions(props) {
         return (
-            <DropdownButton title={props.title}>
+            <DropdownButton title={props.title} variant={props.variant} size={props.size}>
                <input type="radio" value={true} name={props.name} onChange={props.onChange}/> Yes
                 <Dropdown.Divider/>
                 <input type="radio" value={false} name={props.name} onChange={props.onChange}/>No

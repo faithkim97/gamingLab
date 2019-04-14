@@ -15,10 +15,11 @@ class RatingDropdown extends Component {
   }
 
   render() {
+      const props = this.props;
     const ratingMap = this.state.ratings.map((r) => {
       return(
         <div key={r}>
-          <input type = "radio" value={r} name = "rating" onChange={this.props.onChange} /> {r}
+          <input type = "radio" value={r} name = "rating" onChange={props.onChange} /> {r}
           <Dropdown.Divider/>
           </div>
       );
@@ -26,7 +27,7 @@ class RatingDropdown extends Component {
     });
     return(
       <div>
-        <DropdownButton title="Rating">
+        <DropdownButton title="Rating" size={props.size} variant={props.variant}>
         {ratingMap}
         </DropdownButton>
       </div>
