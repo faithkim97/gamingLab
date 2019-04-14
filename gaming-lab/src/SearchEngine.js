@@ -108,6 +108,10 @@ class SearchEngine extends Component {
                 <Nav.Item><GameFieldRadioMenu name="Consoles" field={consoles} type="console" onChange={e =>this.handleConsole(e)} /></Nav.Item>
                 <Nav.Item><GameFieldRadioMenu name="Playable Modes" field = {modes} type="mode" onChange={e => this.handleMode(e)} /></Nav.Item>
                 <Nav.Item> <RatingDropdown onChange={e => this.handleRating(e)} /></Nav.Item>
+                <Nav.Item><BooleanOptions title="Checked Out?" name="checkedOut" onChange={e => this.handleCheckedOut(e)} /></Nav.Item>
+                <Nav.Item> <BooleanOptions title="Digital" name = "digital" onChange={e => this.handleDigital(e)} />
+                </Nav.Item>
+
             </Nav>
                 <InputGroup size="sm">
                     <InputGroup.Prepend>
@@ -118,11 +122,11 @@ class SearchEngine extends Component {
                                      onChange={e => this.handleKey(e)} aria-label="Small" aria-describedby="inputGroup-sizing-sm" />
                     </Form>
                 </InputGroup>
+                <input type = 'submit' value = "Search"/>
+
             </Navbar>
 
-          <BooleanOptions title="Checked Out?" name="checkedOut" onChange={e => this.handleCheckedOut(e)} />
-          <BooleanOptions title="Digital" name = "digital" onChange={e => this.handleDigital(e)} />
-          <input type = 'submit' value = "Search"/>
+
         </form>
 
        {gameList}
