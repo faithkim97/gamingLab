@@ -4,6 +4,7 @@ import EditModeTable from './EditModeTable';
 import EditConsole from './EditConsole';
 import EditGameForm from './EditGameForm';
 import DeleteGame from './DeleteGame';
+import {Row, Col} from 'react-bootstrap';
 
 class EditGamePage extends Component {
   constructor(props) {
@@ -26,15 +27,13 @@ class EditGamePage extends Component {
     if ( game != null) {
       return(
         <div>
-          Edit Game:
+            <DeleteGame value ={game.game} />
+            <Row>
           <EditGameForm value={game}/>
-          Genre:
           <EditGenreTable value = {masterGames}/>
-          Playable Modes:
           <EditModeTable value = {masterGames} />
-          Consoles:
           <EditConsole value = {masterGames} />
-          <DeleteGame value ={game.game} />
+            </Row>
         </div>
 
       );

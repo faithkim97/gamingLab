@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import GameFieldEntry from './GameFieldEntry';
 import GenreDropdown from './GenreDropdown';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-
+import {Form, Table} from 'react-bootstrap';
 
 function createGenreList(masterGames) {
   const genreMaps = [];
@@ -62,20 +62,17 @@ class EditGenreTable extends Component {
       });
 
       return(
-        <div>
-      <table>
-        <tbody>
+        <div style={{backgroundColor: "#00ffbf", width:"50%", padding: "2%"}}>
+      <Table striped bordered hover variant="dark" size="sm">
+        <thead>
           <tr>
             <th>Map Id</th>
             <th>Genre</th>
             <th></th>
           </tr>
           {genreEntries}
-          <tr>
-            <th>Add Genre</th>
-          </tr>
-        </tbody>
-      </table>
+        </thead>
+      </Table>
         <GenreDropdown value = {masterGames[0].game} onAdd={e => this.handleAddGenre(e)} useId={true} editMode={true}/>
       </div>
 

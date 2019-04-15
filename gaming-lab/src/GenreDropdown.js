@@ -112,7 +112,7 @@ class GenreDropdown extends Component {
       }
       { this.props.editMode ?
         (<div>
-          <button onClick={e=>this.handleClickAdd(e)}>Add Genre</button>
+          <button onClick={e=>this.handleClickAdd(e)}>Add Genre(s)</button>
         </div>)
         :
         (null)

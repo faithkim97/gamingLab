@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import GameFieldEntry from './GameFieldEntry';
 import ModeDropdown from './ModeDropdown';
+import {Table} from 'react-bootstrap';
 
 function createModeList(masterGames) {
   const modeMaps = [];
@@ -49,8 +50,8 @@ class EditModeTable extends Component {
     });
 
     return(
-      <div>
-        <table>
+      <div style={{backgroundColor: "#00ffbf", width: "50%", padding:"2%"}}>
+        <Table striped bordered hover variant="dark" size="sm">
           <tbody>
             <tr>
               <th>Map Id</th>
@@ -59,7 +60,7 @@ class EditModeTable extends Component {
             </tr>
             {modeEntries}
           </tbody>
-        </table>
+        </Table>
         <ModeDropdown value = {masterGames[0].game} onAdd={e=>this.handleAddMode(e)} useId={true} editMode={true}/>
       </div>
     );

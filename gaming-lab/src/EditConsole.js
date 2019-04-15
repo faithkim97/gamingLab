@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import GameFieldEntry from './GameFieldEntry';
+import {Table} from 'react-bootstrap';
 
 class EditConsole extends Component {
   constructor(props) {
@@ -65,17 +66,17 @@ class EditConsole extends Component {
 
 
     return(
-      <div>
-        <table>
-          <tbody>
+      <div style={{backgroundColor: "#00ffff", width:"50%", padding:"2%"}}>
+        <Table striped bordered hover variant="dark" size="sm">
+          <thead>
             <tr>
               <th>Map Id</th>
               <th>Console</th>
               <th></th>
             </tr>
             {consoleEntry}
-          </tbody>
-        </table>
+          </thead>
+        </Table>
         {consoleMenu}
         <button onClick={e => this.changeConsole(e, consoleMap != null ? consoleMap.id : -1
           , masterGames[0].game.id)}>Change Console</button>
