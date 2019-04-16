@@ -97,7 +97,8 @@ class AddGameForm extends Component {
 
   render(){
     return(
-      <div style={{width:"60%", margin:"0 auto"}}>
+      <div style={{backgroundColor: "white", width:"60%", margin:"0 auto", padding:"1%"}}>
+        <h1 style={{textAlign:"center"}}>Add New Game</h1>
         <Form onSubmit={e => this.handleSubmit(e)}>
           <Form.Group>
             <Form.Label>Title</Form.Label>

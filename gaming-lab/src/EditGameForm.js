@@ -62,7 +62,7 @@ class EditGameForm extends Component {
       })
 
     });
-    window.location.reload();
+    // window.location.reload();
   }//endupdate
 
 
