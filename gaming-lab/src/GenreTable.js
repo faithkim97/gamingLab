@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import GameFieldEntry from './GameFieldEntry';
+import {Table} from 'react-bootstrap';
 
 class GenreTable extends Component {
   constructor(props) {
@@ -28,17 +29,17 @@ class GenreTable extends Component {
     });
 
     return(
-      <div>
-        <table>
-          <tbody>
+      <div style={{width:"50%", margin:"0 auto"}}>
+        <Table striped bordered hover variant="dark">
+          <thead>
             <tr>
               <th>Genre ID</th>
               <th>Genre</th>
               <th></th>
             </tr>
-            {genreMap}
-          </tbody>
-        </table>
+          </thead>
+          {genreMap}
+        </Table>
       </div>
 
     );

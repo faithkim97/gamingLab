@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ConsoleTable from './ConsoleTable';
+import {Form, Button} from 'react-bootstrap';
 
 class EditConsolePage extends Component {
   constructor(props) {
@@ -20,11 +21,16 @@ class EditConsolePage extends Component {
 
   render() {
     return(
-      <div>
-        <h1>Edit Consoles</h1>
+      <div style={{backgroundColor: "white", width:"80%", margin:"0 auto"}}>
+        <h1 style={{textAlign:"center"}}>Edit Consoles</h1>
         <ConsoleTable />
-        <input type = "text" value={this.state.newConsole} onChange={e=>this.handleChange(e)} />
-        <button onClick={e=>this.handleClick(e)}>Add New Console</button>
+        <div style={{width:"30%", margin:"0 auto"}}>
+          <Form.Group >
+            <Form.Control value={this.state.newConsole} onChange={e=>this.handleChange(e)} />
+          {/*<input type = "text" value={this.state.newConsole} onChange={e=>this.handleChange(e)} />*/}
+          <Button onClick={e=>this.handleClick(e)}>Add New Console</Button>
+          </Form.Group>
+        </div>
       </div>
     );
   }

@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import GenreTable from './GenreTable';
+import {Form, Button} from 'react-bootstrap';
 
 class EditGenrePage extends Component {
   constructor(props) {
@@ -21,11 +22,15 @@ class EditGenrePage extends Component {
   render() {
 
     return(
-      <div>
-        <h1>Edit Genres</h1>
+      <div style={{backgroundColor: "white", width:"80%", margin:"0 auto"}}>
+        <h1 style={{textAlign:"center"}}>Edit Genres</h1>
         <GenreTable />
-        <input type = "text" value={this.state.newGenre} onChange={e => this.handleChange(e)}/>
-        <button onClick={e => this.handleClick(e)}>Add New Genre </button>
+        <div style={{width:"30%", margin:"0 auto"}}>
+          <Form.Group>
+            <Form.Control value={this.state.newGenre} onChange={e=>this.handleChange(e)} />
+            <Button style={{margin:"0 auto"}} onClick={e => this.handleClick(e)}>Add New Genre</Button>
+          </Form.Group>
+        </div>
       </div>
 
     );

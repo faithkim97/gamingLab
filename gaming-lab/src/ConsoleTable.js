@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import GameFieldEntry from './GameFieldEntry';
+import {Table} from 'react-bootstrap';
 
 class ConsoleTable extends Component {
   constructor(props) {
@@ -29,15 +30,17 @@ class ConsoleTable extends Component {
     });
 
     return(
-      <div>
-        <table>
-          <tr>
-            <th>Console ID</th>
-            <th>Console</th>
-            <th></th>
-          </tr>
+      <div style={{width:"50%", margin:"0 auto"}}>
+        <Table striped bordered hover variant="dark">
+          <thead>
+            <tr>
+              <th>Console ID</th>
+              <th>Console</th>
+              <th></th>
+            </tr>
+          </thead>
           {consoleMap}
-        </table>
+        </Table>
       </div>
     );
 
