@@ -15,8 +15,7 @@ class EditGenrePage extends Component {
   }
 
   handleClick(e) {
-    fetch('http://localhost:8080/admin/addGenre?genre='+this.state.newGenre);
-    window.location.reload();
+    fetch('http://localhost:8080/admin/addGenre?genre='+this.state.newGenre).then(()=>{window.location.reload()});
   }
 
   render() {

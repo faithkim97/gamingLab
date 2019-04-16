@@ -15,8 +15,7 @@ class EditConsolePage extends Component {
   }
 
   handleClick(e) {
-    fetch('http://localhost:8080/admin/addConsole?console='+this.state.newConsole);
-    window.location.reload();
+    fetch('http://localhost:8080/admin/addConsole?console='+this.state.newConsole).then(() => {window.location.reload()});
   }
 
   render() {

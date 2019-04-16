@@ -17,8 +17,7 @@ class ConsoleTable extends Component {
 
   deleteConsole(e, consoleId) {
     console.log(consoleId);
-    fetch('http://localhost:8080/admin/deleteConsole?consoleId='+consoleId);
-    window.location.reload();
+    fetch('http://localhost:8080/admin/deleteConsole?consoleId='+consoleId).then(() => {window.location.reload()});
   }
 
   render() {

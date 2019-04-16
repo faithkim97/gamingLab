@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import GameFieldEntry from './GameFieldEntry';
+import {Table} from 'react-bootstrap';
 
 class ModeTable extends Component {
 
@@ -16,8 +17,8 @@ class ModeTable extends Component {
   }
 
   deleteMode(e, modeId) {
-    fetch('http://localhost:8080/admin/deleteMode?modeId='+modeId);
-    window.location.reload();
+    fetch('http://localhost:8080/admin/deleteMode?modeId='+modeId).then(() => {window.location.reload()});
+
   }
 
   render() {
@@ -29,17 +30,17 @@ class ModeTable extends Component {
     });
 
     return(
-      <div>
-        <table>
-          <tbody>
+      <div style={{width:"50%", margin:"0 auto"}}>
+        <Table striped bordered hover variant="dark">
+          <thead>
             <tr>
               <th>Playable Mode ID</th>
               <th>Genre</th>
               <th></th>
             </tr>
-            {modeMap}
-          </tbody>
-        </table>
+          </thead>
+          {modeMap}
+        </Table>
       </div>
     );
 

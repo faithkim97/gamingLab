@@ -1,5 +1,6 @@
 import React, { Component  } from 'react';
 import ModeTable from './ModeTable';
+import {Form, Button} from 'react-bootstrap';
 
 class EditModePage extends Component {
   constructor(props) {
@@ -14,17 +15,21 @@ class EditModePage extends Component {
   }
 
   handleClick(e) {
-    fetch('http://localhost:8080/admin/addMode?mode='+this.state.newMode);
-    window.location.reload();
+    fetch('http://localhost:8080/admin/addMode?mode='+this.state.newMode).then(() => {window.location.reload()});
   }
 
   render() {
     return(
-      <div>
-        <h1>Edit Playable Modes</h1>
+      <div style={{backgroundColor: "white", width:"80%", margin:"0 auto"}}>
+        <h1 style={{textAlign:"center"}}>Edit Playable Modes</h1>
         <ModeTable />
-        <input type = "text" value={this.state.newMode} onChange={e=>this.handleChange(e)} />
-        <button onClick={e=>this.handleClick(e)}>Add Playable Mode</button>
+        <div style={{width:"30%", margin:"0 auto"}}>
+          <Form.Group>
+            <Form.Control value={this.state.newMode} onChange={e=>this.handleChange(e)} />
+            <Button onClick={e=>this.handleClick(e)}>Add Playable Mode</Button>
+          </Form.Group>
+        </div>
+        {/*<input type = "text" value={this.state.newMode} onChange={e=>this.handleChange(e)} />*/}
       </div>
     );
 

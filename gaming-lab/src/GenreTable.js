@@ -16,8 +16,7 @@ class GenreTable extends Component {
   }
 
   deleteGenre(e, genreId) {
-    fetch('http://localhost:8080/admin/deleteGenre?genreId='+genreId);
-    window.location.reload();
+    fetch('http://localhost:8080/admin/deleteGenre?genreId='+genreId).then(()=>{window.location.reload()});
   }
 
   render() {
