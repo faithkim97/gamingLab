@@ -4,7 +4,7 @@ import EditModeTable from './EditModeTable';
 import EditConsole from './EditConsole';
 import EditGameForm from './EditGameForm';
 import DeleteGame from './DeleteGame';
-import {Row, Col} from 'react-bootstrap';
+import {Row} from 'react-bootstrap';
 
 class EditGamePage extends Component {
   constructor(props) {

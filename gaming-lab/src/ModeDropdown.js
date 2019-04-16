@@ -93,25 +93,13 @@ class ModeDropdown extends Component {
 
     return(
       <div>
-        <div>
-          <button onClick={e => {this.showMenu(e)}}>Playable Modes</button>
+        <div className="menu">
+          {modeButtons}
         </div>
-        {
-          this.state.showMenu ?
-          (
-            <div className="menu">
-              {modeButtons}
-            </div>
 
-          ) :
-          (
-            null
-          )
-
-        }
         {this.props.editMode ?
           (<div>
-            <button onClick = {e=>this.onAddMode(e)}>Add Playable Mode</button>
+            <button onClick = {e=>this.onAddMode(e)}>Add Playable Mode(s)</button>
           </div>)
           :
           (null)

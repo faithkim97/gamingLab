@@ -94,22 +94,9 @@ class GenreDropdown extends Component {
 
     return(
       <div>
-        <div>
-          <button onClick={e => {this.showMenu(e)}}>Genres</button>
-        </div>
-        {
-          this.state.showMenu ?
-          (
-            <div className="menu">
-              {genreButtons}
-            </div>
-          )
-            :
-            (
-              null
-            )
-
-      }
+      <div className="menu">
+        {genreButtons}
+      </div>
       { this.props.editMode ?
         (<div>
           <button onClick={e=>this.handleClickAdd(e)}>Add Genre(s)</button>

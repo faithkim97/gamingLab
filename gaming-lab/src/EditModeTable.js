@@ -33,6 +33,7 @@ class EditModeTable extends Component {
   handleAddMode(e) {
     console.log(e);
     fetch('http://localhost:8080/admin/mapModeByModeGameIds?gameId='+this.props.value[0].game.id+"&modeIds="+e);
+    window.location.reload();
   }
 
   render() {

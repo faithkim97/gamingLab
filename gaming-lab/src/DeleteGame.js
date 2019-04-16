@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {Button} from 'react-bootstrap';
 
 class DeleteGame extends Component {
   constructor(props) {
@@ -13,9 +14,9 @@ class DeleteGame extends Component {
   render() {
     return(
       <div>
-        <button onClick={e => this.handleDelete(e)}>
+        <Button variant="danger" onClick={e => this.handleDelete(e)}>
           Delete Game
-        </button>
+        </Button>
       </div>
     );
 

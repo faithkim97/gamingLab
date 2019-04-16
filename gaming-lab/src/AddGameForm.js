@@ -3,6 +3,7 @@ import GenreDropdown from './GenreDropdown';
 import RatingDropdown from './RatingDropdown';
 import ModeDropdown from './ModeDropdown';
 import ConsoleDropdown from './ConsoleDropdown';
+import {Form, Row, Col} from 'react-bootstrap';
 
 
 //TODO put in console dropdwon
@@ -51,6 +52,7 @@ class AddGameForm extends Component {
       })
 
     });
+
   }
 
   changeTitle(e) {
@@ -95,28 +97,61 @@ class AddGameForm extends Component {
 
   render(){
     return(
-      <div>
-        <form onSubmit={e => this.handleSubmit(e)}>
+      <div style={{width:"60%", margin:"0 auto"}}>
+        <Form onSubmit={e => this.handleSubmit(e)}>
+          <Form.Group>
+            <Form.Label>Title</Form.Label>
+            <Form.Control size ="sm" name="title" value={this.state.title} onChange={e=>this.changeTitle(e)}/>
+          </Form.Group>
+
+          <Form.Group>
+            <Row>
+              <Col>
+                <Form.Label>Checked Out</Form.Label>
+                <Form.Check checked={this.state.checkedOut} name="checkedout" onChange={e=>this.changeCheckedOut(e)}/>
+              </Col>
+              <Col>
+                <Form.Label>Digital</Form.Label>
+                <Form.Check checked={this.state.digital} name="digital" onChange={e=>this.changeDigital(e)}/>
+              </Col>
+            </Row>
+          </Form.Group>
+
+          <Form.Group>
+            <Row>
+              <Col>
+              <Form.Label>Quantity</Form.Label>
+              <input type = "number" value = {this.state.quantity} name="quantity" onChange={e => this.changeQuantity(e)} />
+              </Col>
+              <Col>
+              <RatingDropdown onChange={e => this.changeRating(e)} useId={false}/>
+              </Col>
+            </Row>
+
+          </Form.Group>
+          <Form.Group>
+            <Form.Label>Description</Form.Label>
+            <Form.Control as="textarea" rows="4" value={this.state.description} onChange={e=>this.changeDesc(e)} />
+          </Form.Group>
+
+          <Form.Group>
+            <Row>
+              <Col>
+                <Form.Label>Genres</Form.Label>
+                <GenreDropdown onAdd={e => this.addGenre(e)} useId={false} editMode={false} onAdd={e=>this.addGenre(e)}/>
+              </Col>
+              <Col>
+                <Form.Label>Playable Modes</Form.Label>
+                <ModeDropdown onAdd={e=>this.addMode(e)} useId={false} editMode={false} onAdd={e=>this.addMode(e)}/>
+              </Col>
+              <Col>
+                <Form.Label>Console</Form.Label>
+                <ConsoleDropdown  useId={true} editMode={false} onAdd={e=>this.changeConsole(e)} />
+              </Col>
+            </Row>
+          </Form.Group>
           <input type="submit" value="Add Game"/>
-          Title:
-          <input type = "text" name = "title" value={this.state.title} onChange={e=>this.changeTitle(e)} />
-          Description:
-          <textarea name="description" value={this.state.description} onChange={e=>this.changeDesc(e)} />
-          Checked Out:
-          <input type = "checkbox" checked = {this.state.checkedOut} name = "checkedout" onChange={e => this.changeCheckedOut(e)}/>
-          Digital:
-          <input type = "checkbox" checked = {this.state.digital} name="digital" onChange={e=> this.changeDigital(e)}/>
-          Quantity:
-          <input type = "number" value = {this.state.quantity} name="quantity" onChange={e => this.changeQuantity(e)} />
-          Rating:
-          <RatingDropdown onChange={e => this.changeRating(e)} useId={false}/>
-          Genre:
-          <GenreDropdown onAdd={e => this.addGenre(e)} useId={false} editMode={false} onAdd={e=>this.addGenre(e)}/>
-          Playable Mode:
-          <ModeDropdown onAdd={e=>this.addMode(e)} useId={false} editMode={false} onAdd={e=>this.addMode(e)}/>
-          Console:
-          <ConsoleDropdown  useId={true} editMode={false} onAdd={e=>this.changeConsole(e)} />
-        </form>
+        </Form>
       </div>
 
 

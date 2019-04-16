@@ -57,19 +57,19 @@ public class AdminController {
     }
 
 
-//    @PostMapping("/addgame")
-//    @CrossOrigin(origins = url)
-//    private void addGame(@RequestBody Query query) {
-//        Game game = query.getGame();
-//        Rating rating = game.getRating();
-//        rating = rating == null || rating == Rating.NONE ? null : rating;
-//        game.setRating(rating);
-//        gameService.saveOrUpdate(game);
-//        mapGenresByQuery(game, query.getGenres());
-//        mapModesByQuery(game, query.getModes());
-//        mapConsoleByQuery(game, query.getConsole());
-//        saveMasterGame(game);
-//    }
+    @PostMapping("/addgame")
+    @CrossOrigin(origins = url)
+    private void addGame(@RequestBody Query query) {
+        Game game = query.getGame();
+        Rating rating = game.getRating();
+        rating = rating == null || rating == Rating.NONE ? null : rating;
+        game.setRating(rating);
+        gameService.saveOrUpdate(game);
+        mapGenresByQuery(game, query.getGenres());
+        mapModesByQuery(game, query.getModes());
+        mapConsoleByQuery(game, query.getConsole());
+        saveMasterGame(game);
+    }
 
     private void mapConsoleByQuery(Game game, Console queryConsole) {
         if (queryConsole != null && queryConsole.getId() != -1) {
