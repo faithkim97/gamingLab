@@ -1,12 +1,14 @@
 import React, {Component} from 'react';
 import GameFieldEntry from './GameFieldEntry';
-import {Table} from 'react-bootstrap';
+import {Table, Modal,Button} from 'react-bootstrap';
 
 class GenreTable extends Component {
   constructor(props) {
     super(props);
     this.state = {
       genres: [],
+      showAlert: false,
+      idToDelete: -1,
     };
   }
 
@@ -16,14 +18,29 @@ class GenreTable extends Component {
   }
 
   deleteGenre(e, genreId) {
-    fetch('http://localhost:8080/admin/deleteGenre?genreId='+genreId).then(()=>{window.location.reload()});
+    fetch('http://localhost:8080/admin/deleteGenre?genreId='+genreId)
+        .then(()=>{this.setState({showAlert: false});}).then(() => {window.location.reload();
+    });
+
+  }
+
+  handleShow(e, genreId) {
+    console.log(genreId);
+    this.setState({
+      showAlert: true,
+      idToDelete: genreId,
+    });
+  }
+
+  handleClose() {
+    this.setState({showAlert: false});
   }
 
   render() {
     const genres = this.state.genres;
     const genreMap = genres.map( g => {
       return(
-        <GameFieldEntry id={g.id} field={g.genre} onClick={e=>this.deleteGenre(e, g.id)} />
+        <GameFieldEntry id={g.id} field={g.genre} onClick={e=>this.handleShow(e, g.id)} />
       );
     });
 
@@ -39,6 +56,21 @@ class GenreTable extends Component {
           </thead>
           {genreMap}
         </Table>
+
+        <Modal show={this.state.showAlert} onHide={e=>this.handleClose(e)}>
+          <Modal.Header closeButton>
+            WARNING
+          </Modal.Header>
+          <Modal.Body>
+              You are about to delete a genre. If do so, then the mapping of this genre to all the
+            other games will also be erased. Are you sure you want to delete it?
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="danger" onClick={e=>this.deleteGenre(e, this.state.idToDelete)}>Delete Genre</Button>
+            <Button variant="secondary" onClick={e=>this.handleClose(e)}>Nevermind</Button>
+          </Modal.Footer>
+
+        </Modal>
       </div>
 
     );

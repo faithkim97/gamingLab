@@ -357,6 +357,7 @@ public class AdminController {
     }
 
     @GetMapping("/deleteGenre")
+    @CrossOrigin(origins = url)
     private void deleteGenre(@RequestParam int genreId) {
         List<GameGenreMap> genreMaps = genreService.getMappingByGenreId(genreId);
         for (GameGenreMap m : genreMaps) {
