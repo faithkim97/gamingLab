@@ -34,6 +34,12 @@ public class AdminController {
 
     final String url = "http://localhost:3000";
 
+    @GetMapping("/fake.css")
+    @ResponseBody
+    public String fakeCSS() {
+        return "/* test */";
+    }
+
     @PostMapping("/addGameCSV")
     private void addGame(@RequestParam(value = "title") String title, @RequestParam(value = "desc", required = false) String description,
                          @RequestParam(value = "genre",required = false) String genreTitle,
@@ -58,7 +64,7 @@ public class AdminController {
 
 
     @PostMapping("/addgame")
-    @CrossOrigin(origins = url)
+    @CrossOrigin(origins = "*")
     private void addGame(@RequestBody Query query) {
         Game game = query.getGame();
         Rating rating = game.getRating();

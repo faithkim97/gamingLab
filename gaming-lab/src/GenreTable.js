@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import GameFieldEntry from './GameFieldEntry';
 import {Table, Modal,Button} from 'react-bootstrap';
+import Admin, {adminFetch} from "./Admin";
+
 
 class GenreTable extends Component {
   constructor(props) {
@@ -17,6 +19,7 @@ class GenreTable extends Component {
     .then(data => this.setState({genres: data}));
   }
 
+  //TODO do adminFetch
   deleteGenre(e, genreId) {
     fetch('http://localhost:8080/admin/deleteGenre?genreId='+genreId)
         .then(()=>{this.setState({showAlert: false});}).then(() => {window.location.reload();

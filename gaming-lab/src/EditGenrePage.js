@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import GenreTable from './GenreTable';
 import {Form, Button} from 'react-bootstrap';
+import Admin, {adminFetch} from "./Admin"
 
 class EditGenrePage extends Component {
   constructor(props) {
@@ -15,7 +16,14 @@ class EditGenrePage extends Component {
   }
 
   handleClick(e) {
-    fetch('http://localhost:8080/admin/addGenre?genre='+this.state.newGenre).then(()=>{window.location.reload()});
+    adminFetch("http://localhost:8080/admin/fake.css").then(t => console.log(t)).catch(r => console.log(r))
+    let url = 'http://localhost:8080/admin/addGenre?genre='+this.state.newGenre;
+    console.log(url);
+    e.preventDefault();
+    //console.log(adminFetch);
+    adminFetch(url)
+        .then(th => console.log("then", th))
+        .catch(ct => console.log(ct));
   }
 
   render() {

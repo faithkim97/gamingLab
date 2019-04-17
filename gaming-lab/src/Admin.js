@@ -1,15 +1,47 @@
 import React, { Component } from 'react';
 import {Nav, Dropdown, DropdownButton} from "react-bootstrap";
 
+function getPassword() {
+  return window.localStorage.getItem("admin-password");
+}
+
+export function adminFetch(url) {
+  let password = getPassword();
+  console.log(url, password);
+
+  if (!password) {
+    // TODO redirect to login page
+    console.log("TO REDIRECT")
+    return null;
+  }
+  let headers = new Headers();
+  headers.set('Authorization', 'Basic ' + btoa("admin:" + password))
+  return fetch(url, {
+    headers: headers,
+  });
+}
+
+function setPassword(password) {
+  let headers = new Headers();
+  headers.set('Authorization', 'Basic ' + btoa("admin:" + password))
+  fetch("http://localhost:8080/admin/fake.css", {
+    headers: headers,
+  }).then((data) => {
+    window.localStorage.setItem("admin-password", password);
+  }).error((data) => {
+    // TODO redirect to bad password page
+  });
+}
+
 class Admin extends Component {
   constructor(props) {
     super(props);
   }
 
   //TODO we don't have admin fetch anymore in backend
-  // componentDidMount() {
-  //   fetch("http://localhost:8080/admin/");
-  // }
+  componentDidMount() {
+    adminFetch("http://localhost:8080/admin/fake.css");
+  }
 
   render() {
       return(
