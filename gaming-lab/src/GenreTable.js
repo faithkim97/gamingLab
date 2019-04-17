@@ -62,7 +62,7 @@ class GenreTable extends Component {
             WARNING
           </Modal.Header>
           <Modal.Body>
-              You are about to delete a genre. If do so, then the mapping of this genre to all the
+              You are about to delete a genre. If you do so, then the mapping of this genre to all the
             other games will also be erased. Are you sure you want to delete it?
           </Modal.Body>
           <Modal.Footer>
