@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import GameFieldEntry from './GameFieldEntry';
-import {Table} from 'react-bootstrap';
+import {Table, Modal, Button} from 'react-bootstrap';
 
 class ConsoleTable extends Component {
   constructor(props) {
     super(props);
     this.state = {
       consoles: [],
+      showAlert: false,
+      idToDelete: -1,
     };
   }
 
@@ -20,11 +22,22 @@ class ConsoleTable extends Component {
     fetch('http://localhost:8080/admin/deleteConsole?consoleId='+consoleId).then(() => {window.location.reload()});
   }
 
+  handleShow(e, consoleId) {
+    this.setState({
+      showAlert: true,
+      idToDelete: consoleId,
+    });
+  }
+
+  handleClose() {
+    this.setState({showAlert: false});
+  }
+
   render() {
     const consoles = this.state.consoles;
     const consoleMap = consoles.map(c => {
       return(
-        <GameFieldEntry id={c.id} field={c.console} onClick={e => this.deleteConsole(e, c.id)} />
+        <GameFieldEntry id={c.id} field={c.console} onClick={e => this.handleShow(e, c.id)} />
       );
     });
 
@@ -40,6 +53,19 @@ class ConsoleTable extends Component {
           </thead>
           {consoleMap}
         </Table>
+        <Modal show={this.state.showAlert} onHide={e=>this.handleClose()}>
+          <Modal.Header closeButton>
+            WARNING
+          </Modal.Header>
+          <Modal.Body>
+            You are about to delete a console. If you do so, then the mapping of this console to all the
+            other games will also be erased. Are you sure you want to delete it?
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="danger" onClick={e=>this.deleteConsole(e, this.state.idToDelete)}>Delete Console</Button>
+            <Button variant="secondary">Nevermind</Button>
+          </Modal.Footer>
+        </Modal>
       </div>
     );
 

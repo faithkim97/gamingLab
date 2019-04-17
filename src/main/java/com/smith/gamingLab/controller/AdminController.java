@@ -343,6 +343,7 @@ public class AdminController {
     }
 
     @GetMapping("/deleteConsole")
+    @CrossOrigin(origins = url)
     private void deleteConsole(@RequestParam int consoleId) {
         List<GameConsoleMap> consoleMaps = consoleService.getMappingByConsoleId(consoleId);
         for (GameConsoleMap m : consoleMaps) {
