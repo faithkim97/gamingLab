@@ -22,7 +22,6 @@ class AddGameForm extends Component {
       modes: [],
 
     };
-    this.gameAdded = null;
   }
 
   handleSubmit(e) {
@@ -51,7 +50,7 @@ class AddGameForm extends Component {
         },
       })
 
-    });
+    }).then(() =>{window.location.reload()});
 
   }
 
@@ -99,7 +98,7 @@ class AddGameForm extends Component {
     return(
       <div style={{backgroundColor: "white", width:"60%", margin:"0 auto", padding:"1%"}}>
         <h1 style={{textAlign:"center"}}>Add New Game</h1>
-        <Form onSubmit={e => this.handleSubmit(e)}>
+        <form onSubmit={e => this.handleSubmit(e)}>
           <Form.Group>
             <Form.Label>Title</Form.Label>
             <Form.Control size ="sm" name="title" value={this.state.title} onChange={e=>this.changeTitle(e)}/>
@@ -152,7 +151,7 @@ class AddGameForm extends Component {
             </Row>
           </Form.Group>
           <input type="submit" value="Add Game"/>
-        </Form>
+        </form>
       </div>
 
 
