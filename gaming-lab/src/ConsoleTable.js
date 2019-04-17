@@ -63,7 +63,7 @@ class ConsoleTable extends Component {
           </Modal.Body>
           <Modal.Footer>
             <Button variant="danger" onClick={e=>this.deleteConsole(e, this.state.idToDelete)}>Delete Console</Button>
-            <Button variant="secondary">Nevermind</Button>
+            <Button variant="secondary" onClick={e=>this.handleClose()}>Nevermind</Button>
           </Modal.Footer>
         </Modal>
       </div>
