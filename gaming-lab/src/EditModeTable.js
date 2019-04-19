@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import GameFieldEntry from './GameFieldEntry';
 import ModeDropdown from './ModeDropdown';
 import {Table} from 'react-bootstrap';
+import {adminFetch} from "./Admin";
 
 function createModeList(masterGames) {
   const modeMaps = [];
@@ -27,13 +28,12 @@ class EditModeTable extends Component {
   }
 
   deleteModeMapping(e, mapId) {
-    fetch('http://localhost:8080/admin//deleteModeMap?mapId='+mapId);
-    window.location.reload();
+    let url = 'http://localhost:8080/admin/deleteModeMap?mapId='+mapId;
+    adminFetch(url).then(() => {window.location.reload();});
   }
   handleAddMode(e) {
-    console.log(e);
-    fetch('http://localhost:8080/admin/mapModeByModeGameIds?gameId='+this.props.value[0].game.id+"&modeIds="+e);
-    window.location.reload();
+    let url = 'http://localhost:8080/admin/mapModeByModeGameIds?gameId='+this.props.value[0].game.id+"&modeIds="+e;
+    adminFetch(url).then(() => {window.location.reload();});
   }
 
   render() {
