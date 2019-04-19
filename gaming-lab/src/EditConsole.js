@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import GameFieldEntry from './GameFieldEntry';
 import {Table} from 'react-bootstrap';
+import {adminFetch} from './Admin';
 
 class EditConsole extends Component {
   constructor(props) {
@@ -22,16 +23,22 @@ class EditConsole extends Component {
   }
 
   changeConsole(e, mapId, gameId) {
-    fetch('http://localhost:8080/admin/replaceConsoleMap?mapId='+mapId+"&consoleId="+this.state.pickedConsole
-  +"&gameId="+gameId);
-  window.location.reload();
+    let url = 'http://localhost:8080/admin/replaceConsoleMap?mapId='+mapId+"&consoleId="+this.state.pickedConsole
+        +"&gameId="+gameId;
+  //   fetch('http://localhost:8080/admin/replaceConsoleMap?mapId='+mapId+"&consoleId="+this.state.pickedConsole
+  // +"&gameId="+gameId);
+  // window.location.reload();
+    adminFetch(url).then(()=> {window.location.reload();});
+
 
 
   }
 
   handleDeleteConsole(e, mapId) {
-    fetch("http://localhost:8080/admin/deleteConsoleMap?mapId="+mapId);
-    window.location.reload();
+    let url = "http://localhost:8080/admin/deleteConsoleMap?mapId="+mapId;
+    // fetch("http://localhost:8080/admin/deleteConsoleMap?mapId="+mapId);
+    // window.location.reload();
+    adminFetch(url).then(()=>{window.location.reload();});
   }
 
 
