@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import GameFieldEntry from './GameFieldEntry';
 import {Table, Modal, Button} from 'react-bootstrap';
+import Admin, {adminFetch} from "./Admin";
 
 class ModeTable extends Component {
 
@@ -19,7 +20,8 @@ class ModeTable extends Component {
   }
 
   deleteMode(e, modeId) {
-    fetch('http://localhost:8080/admin/deleteMode?modeId='+modeId).then(() => {window.location.reload()});
+    let url = 'http://localhost:8080/admin/deleteMode?modeId='+modeId;
+    adminFetch(url).then(() => {window.location.reload()});
   }
 
   handleShow(e, modeId) {

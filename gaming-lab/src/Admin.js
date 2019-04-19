@@ -11,7 +11,6 @@ export function adminFetch(url) {
   let password = getPassword();
 
   if (!password) {
-    // TODO redirect to login page
       window.location = '/login';
     return null;
   }

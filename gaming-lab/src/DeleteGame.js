@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {Button} from 'react-bootstrap';
+import Admin, {adminFetch} from "./Admin";
 
 class DeleteGame extends Component {
   constructor(props) {
@@ -7,8 +8,8 @@ class DeleteGame extends Component {
   }
 
   handleDelete(e) {
-    fetch('http://localhost:8080/admin/deleteGame?gameId='+this.props.value.id);
-    window.location.reload();
+    let url = 'http://localhost:8080/admin/deleteGame?gameId='+this.props.value.id;
+    adminFetch(url).then(() => {window.location.reload();});
   }
 
   render() {

@@ -1,6 +1,7 @@
 import React, { Component  } from 'react';
 import ModeTable from './ModeTable';
 import {Form, Button} from 'react-bootstrap';
+import Admin, {adminFetch} from "./Admin";
 
 class EditModePage extends Component {
   constructor(props) {
@@ -15,7 +16,8 @@ class EditModePage extends Component {
   }
 
   handleClick(e) {
-    fetch('http://localhost:8080/admin/addMode?mode='+this.state.newMode).then(() => {window.location.reload()});
+    let url = 'http://localhost:8080/admin/addMode?mode='+this.state.newMode;
+    adminFetch(url).then(() => {window.location.reload()});
   }
 
   render() {

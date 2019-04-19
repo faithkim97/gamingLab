@@ -3,6 +3,7 @@ import GameFieldEntry from './GameFieldEntry';
 import GenreDropdown from './GenreDropdown';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import {Form, Table} from 'react-bootstrap';
+import Admin, {adminFetch} from "./Admin";
 
 function createGenreList(masterGames) {
   const genreMaps = [];
@@ -38,13 +39,13 @@ class EditGenreTable extends Component {
     }
 
     deleteGenreMapping(e, mapId){
-      fetch('http://localhost:8080/admin/deleteGenreMap?mapId='+mapId);
-      window.location.reload();
+      let url = 'http://localhost:8080/admin/deleteGenreMap?mapId='+mapId;
+      adminFetch(url).then(()=>{window.location.reload();});
     }
 
     handleAddGenre(e) {
-      console.log(e);
-      fetch('http://localhost:8080/admin/mapGenreByGameGenreIds?gameId='+this.props.value[0].game.id+"&genreIds="+e);
+      let url = 'http://localhost:8080/admin/mapGenreByGameGenreIds?gameId='+this.props.value[0].game.id+"&genreIds="+e;
+      adminFetch(url).then(() => {window.location.reload();});
 
     }
 
