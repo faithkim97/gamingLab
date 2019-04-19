@@ -4,6 +4,7 @@ import RatingDropdown from './RatingDropdown';
 import ModeDropdown from './ModeDropdown';
 import ConsoleDropdown from './ConsoleDropdown';
 import {Form, Row, Col} from 'react-bootstrap';
+import Admin, {adminFetch} from "./Admin";
 
 
 //TODO put in console dropdwon
@@ -23,6 +24,7 @@ class AddGameForm extends Component {
 
     };
   }
+
 
   handleSubmit(e) {
     e.preventDefault();

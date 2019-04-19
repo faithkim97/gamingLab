@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import {Nav, Dropdown, DropdownButton} from "react-bootstrap";
+import LoginPage from './LoginPage';
+
 
 function getPassword() {
   return window.localStorage.getItem("admin-password");
@@ -7,11 +9,10 @@ function getPassword() {
 
 export function adminFetch(url) {
   let password = getPassword();
-  console.log(url, password);
 
   if (!password) {
     // TODO redirect to login page
-    console.log("TO REDIRECT")
+      window.location = '/login';
     return null;
   }
   let headers = new Headers();
@@ -21,21 +22,25 @@ export function adminFetch(url) {
   });
 }
 
-function setPassword(password) {
+export function setPassword(password) {
   let headers = new Headers();
   headers.set('Authorization', 'Basic ' + btoa("admin:" + password))
   fetch("http://localhost:8080/admin/fake.css", {
     headers: headers,
   }).then((data) => {
-    window.localStorage.setItem("admin-password", password);
-  }).error((data) => {
-    // TODO redirect to bad password page
+      if (data.status == 401) {
+          window.location ='/home';
+      } else {
+          window.localStorage.setItem("admin-password", password);
+          window.location = '/admin';
+      }
   });
 }
 
 class Admin extends Component {
   constructor(props) {
     super(props);
+    // this.state = { login: null};
   }
 
   //TODO we don't have admin fetch anymore in backend
@@ -45,6 +50,7 @@ class Admin extends Component {
 
   render() {
       return(
+          <div>
           <Nav fill variant="tabs" defaultActivekey="/admin">
               <Nav.Item>
                   <Nav.Link href="/home">Home</Nav.Link>
@@ -62,10 +68,8 @@ class Admin extends Component {
                       <Dropdown.Item href="/admin/editmode">Edit Playable Mode</Dropdown.Item>
                   </DropdownButton>
               </Nav.Item>
-
-
           </Nav>
-
+          </div>
       );
 
   }

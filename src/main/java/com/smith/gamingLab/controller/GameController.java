@@ -28,7 +28,7 @@ public class GameController {
     PlayableModeService playableModeService;
 
     @GetMapping("/games")
-    @CrossOrigin("http://localhost:3000")
+    @CrossOrigin(origins="*")
     public List<MasterGame> getAllGames() {
         return gameService.getAllMasterGames();
     }
@@ -90,7 +90,7 @@ public class GameController {
 
 
     @PostMapping("/findgame")
-    @CrossOrigin(origins = "http://localhost:3000")
+    @CrossOrigin(origins = "*")
     public @ResponseBody List<MasterGame> getGame(@RequestBody Query query) {
         if (isEmptyQuery(query)) {
             return getAllGames();

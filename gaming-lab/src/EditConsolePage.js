@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ConsoleTable from './ConsoleTable';
 import {Form, Button} from 'react-bootstrap';
+import Admin, {adminFetch} from "./Admin";
 
 class EditConsolePage extends Component {
   constructor(props) {
@@ -15,7 +16,8 @@ class EditConsolePage extends Component {
   }
 
   handleClick(e) {
-    fetch('http://localhost:8080/admin/addConsole?console='+this.state.newConsole).then(() => {window.location.reload()});
+    let url = 'http://localhost:8080/admin/addConsole?console='+this.state.newConsole;
+    adminFetch(url).then(() => {window.location.reload()});
   }
 
   render() {

@@ -21,7 +21,8 @@ class GenreTable extends Component {
 
   //TODO do adminFetch
   deleteGenre(e, genreId) {
-    fetch('http://localhost:8080/admin/deleteGenre?genreId='+genreId)
+    let url = 'http://localhost:8080/admin/deleteGenre?genreId='+genreId;
+    adminFetch(url)
         .then(()=>{this.setState({showAlert: false});}).then(() => {window.location.reload();
     });
 

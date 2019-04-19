@@ -9,6 +9,7 @@ import EditConsolePage from './EditConsolePage';
 import Admin from './Admin';
 import AppRouterStyle from './AppRouterStyle.css';
 import {Nav, Carousel} from 'react-bootstrap';
+import LoginPage from './LoginPage';
 
 function Search(admin) {
   return(
@@ -110,6 +111,7 @@ function AppRouter() {
       <Route path="/admin/search" component={()=>Search(true)} />
       <Route path = "/admin/addgame" component={AddGameForm} />
       <Route path = "/admin/editgame/gameId=:gameId" component = {EditGamePage} />
+      <Route path="/login" component={LoginPage}/>
     </Router>
 
   );

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import GameFieldEntry from './GameFieldEntry';
 import {Table, Modal, Button} from 'react-bootstrap';
+import Admin, {adminFetch} from "./Admin";
 
 class ConsoleTable extends Component {
   constructor(props) {
@@ -18,8 +19,8 @@ class ConsoleTable extends Component {
   }
 
   deleteConsole(e, consoleId) {
-    console.log(consoleId);
-    fetch('http://localhost:8080/admin/deleteConsole?consoleId='+consoleId).then(() => {window.location.reload()});
+    let url = 'http://localhost:8080/admin/deleteConsole?consoleId='+consoleId;
+    adminFetch(url).then(() => {window.location.reload()});
   }
 
   handleShow(e, consoleId) {

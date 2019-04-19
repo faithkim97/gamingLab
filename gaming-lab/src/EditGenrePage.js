@@ -16,11 +16,7 @@ class EditGenrePage extends Component {
   }
 
   handleClick(e) {
-    adminFetch("http://localhost:8080/admin/fake.css").then(t => console.log(t)).catch(r => console.log(r))
     let url = 'http://localhost:8080/admin/addGenre?genre='+this.state.newGenre;
-    console.log(url);
-    e.preventDefault();
-    //console.log(adminFetch);
     adminFetch(url)
         .then(th => console.log("then", th))
         .catch(ct => console.log(ct));

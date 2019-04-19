@@ -39,12 +39,14 @@ class SearchEngine extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
+
     this.setState({isSearch: true});
     fetch('http://localhost:8080/game/findgame',
     {method: "POST",
     headers: {
       Accept: "application/json",
-      "Content-Type": "application/json"},
+      "Content-Type": "application/json",
+    },
     body: JSON.stringify({
       keyword:this.state.key,
       game: {
