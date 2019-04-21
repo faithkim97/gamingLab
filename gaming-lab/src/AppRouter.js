@@ -10,6 +10,7 @@ import Admin from './Admin';
 import AppRouterStyle from './AppRouterStyle.css';
 import {Nav, Carousel} from 'react-bootstrap';
 import LoginPage from './LoginPage';
+import Fonts from './Fonts.css';
 
 function Search(admin) {
   return(
@@ -30,7 +31,6 @@ function AdminPage() {
 function Home() {
     return (
         <div>
-        <h1 className="text-center">The Gaming Lab At Smith College</h1>
         <HomeNav active="/home" />
         <Carous />
 
@@ -40,7 +40,7 @@ function Home() {
 
 function HomeNav(props) {
     return(
-        <Nav fill variant="tabs" defaultActiveKey={props.active}>
+        <Nav fill variant="tabs" defaultActiveKey={props.active} style={{fontFamily: "Share Tech Mono, monospace"}}>
             <Nav.Item>
                 <Nav.Link href="/home">Home</Nav.Link>
             </Nav.Item>
@@ -101,6 +101,8 @@ function Carous() {
 
 function AppRouter() {
   return(
+      <div>
+      <h1 className="text-center" style={{fontFamily:"Share Tech Mono, monospace", fontSize:"70px"}}><b>The Gaming Lab At Smith College</b></h1>
     <Router>
       <Route path="/home" component={Home} />
       <Route path="/admin" component={AdminPage}/>
@@ -113,6 +115,7 @@ function AppRouter() {
       <Route path = "/admin/editgame/gameId=:gameId" component = {EditGamePage} />
       <Route path="/login" component={LoginPage}/>
     </Router>
+    </div>
 
   );
 

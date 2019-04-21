@@ -13,7 +13,7 @@
 //     console.log(this.searchEngine);
 //   }
 //
-//   render() {
+//   render()
 //     return(
 //       <div>
 //         <button value={true} onClick={e => this.handleClick(e)}>Admin</button>

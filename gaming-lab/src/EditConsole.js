@@ -71,7 +71,7 @@ class EditConsole extends Component {
 
 
     return(
-      <div style={{backgroundColor: "#00ffff", width:"50%", padding:"2%"}}>
+      <div style={{backgroundColor: "#7579B0", width:"50%", padding:"2%"}}>
         <Table striped bordered hover variant="dark" size="sm">
           <thead>
             <tr>

@@ -69,7 +69,7 @@ class EditGameForm extends Component {
   render() {
 
     return(
-        <div style={{backgroundColor: '#00ffff', width:"50%", padding:'1%'}}>
+        <div style={{backgroundColor: '#7579B0', width:"50%", padding:'1%'}}>
           <border>
           <Form onSubmit={e=>this.handleUpdate(e)} className="block-example border border-secondary">
             <Form.Group>

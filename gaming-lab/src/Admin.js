@@ -15,10 +15,33 @@ export function adminFetch(url) {
     return null;
   }
   let headers = new Headers();
-  headers.set('Authorization', 'Basic ' + btoa("admin:" + password))
+  headers.set('Authorization', 'Basic ' + btoa("admin:" + password));
   return fetch(url, {
     headers: headers,
   });
+}
+
+export function adminFetchPost(url, body) {
+    //the body is getting passed in fine, and should work
+    let password = getPassword();
+    if (!password) {
+        window.location = '/login';
+        return null;
+    }
+    let headers = new Headers();
+    headers.set('Authorization', 'Basic' + btoa("admin:" +password));
+    headers.set("Accept", "application/json");
+    headers.set("Content-Type", "application/json");
+    return fetch(url, {
+        method: "POST",
+        headers:{
+            "Accept":"application/json",
+            "Content-Type": "application/json",
+            "Authorization":'Basic' + btoa("admin:" +password),
+
+        },
+        body: JSON.stringify({body}),
+    });
 }
 
 export function setPassword(password) {

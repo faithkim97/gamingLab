@@ -64,7 +64,7 @@ public class AdminController {
 
 
     @PostMapping("/addgame")
-    @CrossOrigin(origins = url)
+    @CrossOrigin(origins = "http://localhost:3000")
     private void addGame(@RequestBody Query query) {
         Game game = query.getGame();
         Rating rating = game.getRating();

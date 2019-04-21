@@ -4,7 +4,7 @@ import RatingDropdown from './RatingDropdown';
 import ModeDropdown from './ModeDropdown';
 import ConsoleDropdown from './ConsoleDropdown';
 import {Form, Row, Col} from 'react-bootstrap';
-import Admin, {adminFetch} from "./Admin";
+import  {adminFetch, adminFetchPost} from "./Admin";
 
 
 //TODO put in console dropdwon
@@ -29,30 +29,49 @@ class AddGameForm extends Component {
   handleSubmit(e) {
     e.preventDefault();
     const {title, checkedOut, digital, quantity, description, rating,genres, modes, console} = this.state;
-    fetch('http://localhost:8080/admin/addgame',
-    {
-      method: "POST",
-      headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json"},
-      body: JSON.stringify({
-        game: {
-          isCheckedOut: checkedOut,
-          title: title,
-          isDigital: digital,
-          description: description,
-          quantity: quantity,
-          rating: rating,
-        },
+    let url = 'http://localhost:8080/admin/addgame';
+    // fetch('http://localhost:8080/admin/addgame',
+    // {
+    //   method: "POST",
+    //   headers: {
+    //   Accept: "application/json",
+    //   "Content-Type": "application/json"},
+    //   body: JSON.stringify({
+    //     game: {
+    //       isCheckedOut: checkedOut,
+    //       title: title,
+    //       isDigital: digital,
+    //       description: description,
+    //       quantity: quantity,
+    //       rating: rating,
+    //     },
+    //
+    //     genres: genres,
+    //     modes: modes,
+    //     console: {
+    //       id: console,
+    //     },
+    //   })
+    //
+    // }).then(() =>{window.location.reload()});
+    let body ={
+      game: {
+        isCheckedOut: checkedOut,
+        title: title,
+        isDigital: digital,
+        description: description,
+        quantity: quantity,
+        rating: rating,
+      },
 
-        genres: genres,
-        modes: modes,
-        console: {
-          id: console,
-        },
-      })
-
-    }).then(() =>{window.location.reload()});
+      genres: genres,
+      modes: modes,
+      console: {
+        id: console,
+      },
+    };
+    adminFetchPost('http://localhost:8080/admin/addgame', body);
+    // adminFetch(url);
 
   }
 

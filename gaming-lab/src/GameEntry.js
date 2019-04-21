@@ -52,7 +52,7 @@ function GameEntry(props) {
     : null}
     {admin ? (<td>{masterGame.game.quantity}</td>) : (null)}
     <td>{masterGame.game.description}</td>
-    {admin ? (<td><a href ={url} ><button>Edit Game</button></a></td>) : (null)}
+    {admin ? (<td><a href ={url} style={{color: "blue"}}><button style={{color: "blue"}}>Edit Game</button></a></td>) : (null)}
   </tr>
   </tbody>
 );

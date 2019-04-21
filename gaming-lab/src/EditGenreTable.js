@@ -63,7 +63,7 @@ class EditGenreTable extends Component {
       });
 
       return(
-        <div style={{backgroundColor: "#00ffbf", width:"50%", padding: "2%"}}>
+        <div style={{backgroundColor: "#CDD0FF", width:"50%", padding: "2%"}}>
       <Table striped bordered hover variant="dark" size="sm">
         <thead>
           <tr>
