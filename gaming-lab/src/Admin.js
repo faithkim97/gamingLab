@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import {Nav, Dropdown, DropdownButton} from "react-bootstrap";
 import LoginPage from './LoginPage';
 
-
 function getPassword() {
   return window.localStorage.getItem("admin-password");
 }
@@ -59,10 +58,27 @@ export function setPassword(password) {
   });
 }
 
+// function activeLink(currLink) {
+//     let url = "http://localhost:3000";
+//     switch(currLink) {
+//         case url+"/admin/search":
+//             return "/admin/search";
+//         case url+"/admin/addgame":
+//             return "/admin/addgame";
+//     }
+//
+//     return '';
+//
+// }
+
+
 class Admin extends Component {
+
   constructor(props) {
     super(props);
-    // this.state = { login: null};
+    this.state = {
+        active: '',
+    }
   }
 
   //TODO we don't have admin fetch anymore in backend
@@ -73,7 +89,7 @@ class Admin extends Component {
   render() {
       return(
           <div>
-          <Nav fill variant="tabs" defaultActivekey="/admin">
+          <Nav fill variant="tabs" defaultActivekey={this.state.active} style={{fontFamily:  "Share Tech Mono, monospace"}}>
               <Nav.Item>
                   <Nav.Link href="/home">Home</Nav.Link>
               </Nav.Item>

@@ -60,36 +60,37 @@ function Carous() {
             <Carousel.Item>
                 <img
                     className="d-block w-100"
-                    src="https://images5.alphacoders.com/860/thumb-1920-860842.jpg"
+                    src="https://images.pexels.com/photos/687811/pexels-photo-687811.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
                     alt="First slide"
                 />
                 <Carousel.Caption>
-                    <h3>Uncharted: The Lost Legacy</h3>
-                    <p>On the PS4 at the Gaming Lab</p>
+                    <h3>Play the PS4 at the Gaming Lab</h3>
                 </Carousel.Caption>
             </Carousel.Item>
             <Carousel.Item>
                 <img
                     className="d-block w-100"
-                    src="https://i.imgur.com/ezlIxS8.jpg?fb"
+                    src="https://images.pexels.com/photos/371924/pexels-photo-371924.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
                     alt="Third slide"
+                    style={{height:"750px"}}
                 />
 
                 <Carousel.Caption>
-                    <h3>Mario Kart 8 Deluxe</h3>
-                    <p>On the Nintendo Switch at the Gaming Lab</p>
+                    <h3>Play Mario Kart 8</h3>
+                    <p>On the Nintendo Switch in the Gaming Lab</p>
                 </Carousel.Caption>
             </Carousel.Item>
             <Carousel.Item>
                 <img
                     className="d-block w-100"
-                    src="https://steamcdn-a.akamaihd.net/steam/apps/611660/capsule_616x353.jpg?t=1522898983"
+                    src="https://cdn.pixabay.com/photo/2017/08/17/01/25/nes-2649705_1280.jpg"
                     alt="Third slide"
+                    style={{height:"750px"}}
                 />
 
                 <Carousel.Caption>
-                    <h3>Fallout 4 on VR</h3>
-                    <p>On HTC Vive at the Gaming Lab</p>
+                    <h3>Play Retro Games</h3>
+                    <p>On SNES at the Gaming Lab</p>
                 </Carousel.Caption>
             </Carousel.Item>
         </Carousel>

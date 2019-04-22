@@ -7,7 +7,7 @@ body {
 }
 
 
-a  {
+a href {
   color: darkblue;
   background: -webkit-linear-gradient(blue,purple );
   -webkit-background-clip: text;
@@ -19,5 +19,5 @@ h1 {
   background: -webkit-linear-gradient(black,purple );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-
 }
+
