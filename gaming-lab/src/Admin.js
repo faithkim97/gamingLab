@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {Nav, Dropdown, DropdownButton} from "react-bootstrap";
 import LoginPage from './LoginPage';
 
-function getPassword() {
+export function getPassword() {
   return window.localStorage.getItem("admin-password");
 }
 
@@ -39,7 +39,7 @@ export function adminFetchPost(url, body) {
             "Content-Type": "application/json",
             "Authorization":'Basic ' + btoa("admin:" +password),
         },
-        body: JSON.stringify({body}),
+        body: JSON.stringify(body),
     });
 }
 

@@ -30,30 +30,6 @@ class AddGameForm extends Component {
     e.preventDefault();
     const {title, checkedOut, digital, quantity, description, rating,genres, modes, console} = this.state;
     let url = 'http://localhost:8080/admin/addgame';
-    // fetch('http://localhost:8080/admin/addgame',
-    // {
-    //   method: "POST",
-    //   headers: {
-    //   Accept: "application/json",
-    //   "Content-Type": "application/json"},
-    //   body: JSON.stringify({
-    //     game: {
-    //       isCheckedOut: checkedOut,
-    //       title: title,
-    //       isDigital: digital,
-    //       description: description,
-    //       quantity: quantity,
-    //       rating: rating,
-    //     },
-    //
-    //     genres: genres,
-    //     modes: modes,
-    //     console: {
-    //       id: console,
-    //     },
-    //   })
-    //
-    // }).then(() =>{window.location.reload()});
     let body ={
       game: {
         isCheckedOut: checkedOut,
@@ -70,9 +46,7 @@ class AddGameForm extends Component {
         id: console,
       },
     };
-    adminFetchPost(url, body);
-    // adminFetch(url);
-
+    adminFetchPost(url, body).then(() => window.location.reload());
   }
 
   changeTitle(e) {
