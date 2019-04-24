@@ -12,7 +12,7 @@ import org.springframework.security.web.authentication.www.BasicAuthenticationFi
 public class GuestConfigurationAdapter extends WebSecurityConfigurerAdapter {
 
     protected void configure(HttpSecurity http) throws Exception {
-//        http.csrf().disable();
+        http.csrf().disable();
         http.antMatcher("/game/**")
                 .authorizeRequests().anyRequest().permitAll();
         http.addFilterBefore(new CorsFilter(), BasicAuthenticationFilter.class);

@@ -4,7 +4,7 @@ import RatingDropdown from './RatingDropdown';
 import ModeDropdown from './ModeDropdown';
 import ConsoleDropdown from './ConsoleDropdown';
 import {Form, Row, Col} from 'react-bootstrap';
-import  {adminFetch, adminFetchPost} from "./Admin";
+import  {getPassword, adminFetch, adminFetchPost} from "./Admin";
 
 
 //TODO put in console dropdwon
@@ -70,7 +70,7 @@ class AddGameForm extends Component {
         id: console,
       },
     };
-    adminFetchPost('http://localhost:8080/admin/addgame', body);
+    adminFetchPost(url, body);
     // adminFetch(url);
 
   }

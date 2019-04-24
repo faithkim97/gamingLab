@@ -31,13 +31,13 @@ export function adminFetchPost(url, body) {
     headers.set('Authorization', 'Basic' + btoa("admin:" +password));
     headers.set("Accept", "application/json");
     headers.set("Content-Type", "application/json");
+    console.log(body);
     return fetch(url, {
         method: "POST",
-        headers:{
+        headers: {
             "Accept":"application/json",
             "Content-Type": "application/json",
-            "Authorization":'Basic' + btoa("admin:" +password),
-
+            "Authorization":'Basic ' + btoa("admin:" +password),
         },
         body: JSON.stringify({body}),
     });

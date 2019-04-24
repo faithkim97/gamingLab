@@ -21,7 +21,7 @@ public class AdminConfigurationAdapter extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
-        //http.csrf().disable();
+        http.csrf().disable();
         http.antMatcher("/admin/**")
                 .authorizeRequests().anyRequest().hasRole("ADMIN")
                 .and().httpBasic().authenticationEntryPoint(authenticationEntryPoint());
