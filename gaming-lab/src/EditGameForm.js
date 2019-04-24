@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import RatingDropdown from './RatingDropdown';
 import {Form, Row, Col} from 'react-bootstrap';
+import {adminFetchPost} from './Admin';
 
 class EditGameForm extends Component {
   constructor(props) {
@@ -44,25 +45,19 @@ class EditGameForm extends Component {
 
   handleUpdate(e) {
     e.preventDefault();
+    let url = 'http://localhost:8080/admin/editgame';
     const {checkedOut, newTitle, digital, description, quantity, rating} = this.state;
-    fetch('http://localhost:8080/admin/editgame',
-    {
-      method: "POST",
-      headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json"},
-      body: JSON.stringify({
-        id: this.game.id,
-        isCheckedOut: checkedOut,
-        title: newTitle,
-        isDigital: digital,
-        description: this.state.description,
-        quantity: quantity,
-        rating: rating,
-      })
+    let body = {
+      id: this.game.id,
+      isCheckedOut: checkedOut,
+      title: newTitle,
+      isDigital: digital,
+      description: this.state.description,
+      quantity: quantity,
+      rating: rating,
+    }
 
-    });
-    // window.location.reload();
+    adminFetchPost(url, body).then(() => window.location.reload());
   }//endupdate
 
 
