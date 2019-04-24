@@ -11,6 +11,7 @@ import AppRouterStyle from './AppRouterStyle.css';
 import {Nav, Carousel} from 'react-bootstrap';
 import LoginPage from './LoginPage';
 import Fonts from './Fonts.css';
+import About from './About';
 
 function Search(admin) {
   return(
@@ -46,6 +47,9 @@ function HomeNav(props) {
             </Nav.Item>
             <Nav.Item>
                 <Nav.Link href="/game/search">Find Games</Nav.Link>
+            </Nav.Item>
+            <Nav.Item>
+                <Nav.Link href="/game/about">About</Nav.Link>
             </Nav.Item>
             <Nav.Item>
                 <Nav.Link href="/admin">Admin</Nav.Link>
@@ -98,6 +102,14 @@ function Carous() {
     );
 }
 
+function AboutGamingLab() {
+    return(
+        <div>
+            <HomeNav active="/game/about"/>
+            <About />
+        </div>
+    );
+}
 
 
 function AppRouter() {
@@ -115,6 +127,7 @@ function AppRouter() {
       <Route path = "/admin/addgame" component={AddGameForm} />
       <Route path = "/admin/editgame/gameId=:gameId" component = {EditGamePage} />
       <Route path="/login" component={LoginPage}/>
+      <Route path="/game/about" component={AboutGamingLab} />
     </Router>
     </div>
 
