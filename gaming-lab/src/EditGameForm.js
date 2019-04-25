@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import RatingDropdown from './RatingDropdown';
-import {Form, Row, Col} from 'react-bootstrap';
+import {Button, Form, Row, Col} from 'react-bootstrap';
 import {adminFetchPost} from './Admin';
 
 class EditGameForm extends Component {
@@ -99,7 +99,7 @@ class EditGameForm extends Component {
               <Form.Label>Description</Form.Label>
               <Form.Control as="textarea" rows="4" value={this.state.description} onChange={e=>this.changeDescription(e)}/>
             </Form.Group>
-            <input type="submit" value="Update Game Info" />
+            <Button variant="warning" type="submit">Update Game Info</Button>
           </Form>
           </border>
         </div>

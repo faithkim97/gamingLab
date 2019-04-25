@@ -1,4 +1,5 @@
 import React from 'react';
+import {Button} from 'react-bootstrap';
 
 function GameEntry(props) {
   const games = props.value;
@@ -52,7 +53,7 @@ function GameEntry(props) {
     : null}
     {admin ? (<td>{masterGame.game.quantity}</td>) : (null)}
     <td>{masterGame.game.description}</td>
-    {admin ? (<td><a href ={url} style={{color: "blue"}}><button style={{color: "blue"}}>Edit Game</button></a></td>) : (null)}
+    {admin ? (<td><a href ={url} style={{color: "blue"}}><Button style={{backgroundColor: "yellow", color:"black"}}>Edit Game</Button></a></td>) : (null)}
   </tr>
   </tbody>
 );

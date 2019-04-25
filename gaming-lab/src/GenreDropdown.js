@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {Button} from 'react-bootstrap';
 
 
 function removeFromPickedGenres(itemToRemove, genres) {
@@ -99,7 +100,7 @@ class GenreDropdown extends Component {
       </div>
       { this.props.editMode ?
         (<div>
-          <button onClick={e=>this.handleClickAdd(e)}>Add Genre(s)</button>
+          <Button variant="warning" onClick={e=>this.handleClickAdd(e)}>Add Genre(s)</Button>
         </div>)
         :
         (null)

@@ -3,7 +3,7 @@ import GameTable from './GameTable';
 import GameFieldRadioMenu from './GameFieldRadioMenu';
 import RatingDropdown from './RatingDropdown';
 import BooleanOptions from './BooleanOptions';
-import {InputGroup, FormControl,Nav,Navbar, Form} from 'react-bootstrap';
+import {InputGroup, FormControl,Nav,Navbar, Form, Button} from 'react-bootstrap';
 
 
 class SearchEngine extends Component {
@@ -129,7 +129,7 @@ class SearchEngine extends Component {
                                      onChange={e => this.handleKey(e)} aria-label="Small" aria-describedby="inputGroup-sizing-sm" />
                     </Form>
                     &nbsp;
-                    <input type = 'submit' value = "Search"/>
+                    <Button type ="search" style={{backgroundColor:'pink', color:'purple'}}>Search</Button>
                 </InputGroup>
 
             </Navbar>

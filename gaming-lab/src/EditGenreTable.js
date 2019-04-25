@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import GameFieldEntry from './GameFieldEntry';
 import GenreDropdown from './GenreDropdown';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import {Form, Table} from 'react-bootstrap';
+import { Form, Table} from 'react-bootstrap';
 import Admin, {adminFetch} from "./Admin";
 
 function createGenreList(masterGames) {

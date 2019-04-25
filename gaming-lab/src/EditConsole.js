@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import GameFieldEntry from './GameFieldEntry';
-import {Table} from 'react-bootstrap';
+import {Button, Table} from 'react-bootstrap';
 import {adminFetch} from './Admin';
 
 class EditConsole extends Component {
@@ -83,8 +83,8 @@ class EditConsole extends Component {
           </thead>
         </Table>
         {consoleMenu}
-        <button onClick={e => this.changeConsole(e, consoleMap != null ? consoleMap.id : -1
-          , masterGames[0].game.id)}>Change Console</button>
+        <Button variant="warning" onClick={e => this.changeConsole(e, consoleMap != null ? consoleMap.id : -1
+          , masterGames[0].game.id)}>Change Console</Button>
       </div>
 
     );

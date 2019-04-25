@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {Button} from 'react-bootstrap';
 
 function removeFromPickedModes(itemToRemove, modes) {
     for (let i = 0; i < modes.length; i++) {
@@ -99,7 +100,7 @@ class ModeDropdown extends Component {
 
         {this.props.editMode ?
           (<div>
-            <button onClick = {e=>this.onAddMode(e)}>Add Playable Mode(s)</button>
+            <Button variant="warning" onClick = {e=>this.onAddMode(e)}>Add Playable Mode(s)</Button>
           </div>)
           :
           (null)
