@@ -66,7 +66,6 @@ public class AdminController {
     @PostMapping("/addgame")
     @CrossOrigin(origins = "*")
     private void addGame(@RequestBody Query query) {
-        System.out.println("addGame: "+query);
         Game game = query.getGame();
         Rating rating = game.getRating();
         rating = rating == null || rating == Rating.NONE ? null : rating;

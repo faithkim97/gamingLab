@@ -16,9 +16,13 @@ public class SecurityConfig  {
     @Bean
     public UserDetailsService userDetailsService() throws Exception {
         InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
+        String password = System.getenv("ADMIN_PASSWORD");
+        if (password == null) {
+            password = "adminPass";
+        }
         manager.createUser(User
                 .withUsername("admin")
-                .password(encoder().encode("adminPass"))
+                .password(encoder().encode(password))
                 .roles("ADMIN").build());
         return manager;
     }
