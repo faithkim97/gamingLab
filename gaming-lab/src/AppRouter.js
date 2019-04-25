@@ -66,9 +66,10 @@ function Carous() {
                     className="d-block w-100"
                     src="https://images.pexels.com/photos/687811/pexels-photo-687811.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
                     alt="First slide"
+                    style={{height:"750px"}}
                 />
                 <Carousel.Caption>
-                    <h3>Play the PS4 at the Gaming Lab</h3>
+                    <h3 style={{fontFamily: "Montserrat"}}>Play the PS4 at the Gaming Lab</h3>
                 </Carousel.Caption>
             </Carousel.Item>
             <Carousel.Item>
@@ -80,21 +81,20 @@ function Carous() {
                 />
 
                 <Carousel.Caption>
-                    <h3>Play Mario Kart 8</h3>
-                    <p>On the Nintendo Switch in the Gaming Lab</p>
+                    <h3 style={{fontFamily: "Montserrat"}}>Play Mario Kart 8</h3>
+                    <p style={{fontFamily:"Montserrat"}}>On the Nintendo Switch in the Gaming Lab</p>
                 </Carousel.Caption>
             </Carousel.Item>
             <Carousel.Item>
                 <img
                     className="d-block w-100"
-                    src="https://cdn.pixabay.com/photo/2017/08/17/01/25/nes-2649705_1280.jpg"
+                    src="https://images.pexels.com/photos/139038/pexels-photo-139038.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
                     alt="Third slide"
                     style={{height:"750px"}}
                 />
 
                 <Carousel.Caption>
-                    <h3>Play Retro Games</h3>
-                    <p>On SNES at the Gaming Lab</p>
+                    <h3 style={{fontFamily:"Montserrat"}}>Play Xbox One at the Gaming Lab</h3>
                 </Carousel.Caption>
             </Carousel.Item>
         </Carousel>
