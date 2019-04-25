@@ -29,7 +29,6 @@ class GenreTable extends Component {
   }
 
   handleShow(e, genreId) {
-    console.log(genreId);
     this.setState({
       showAlert: true,
       idToDelete: genreId,
