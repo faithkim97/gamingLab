@@ -33,8 +33,6 @@ public class GameController {
         return gameService.getAllMasterGames();
     }
 
-
-
     @GetMapping("/consoles")
     @CrossOrigin(origins = "http://localhost:3000")
     public List<Console> getConsoles() {
