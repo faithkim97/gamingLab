@@ -176,21 +176,21 @@ public class PlayableModeTest {
         verify(modeRepository, never()).deleteById(-1);
     }
 
-    @Test
-    public void test_deleteMappingByGameId() {
-        List<GamePlayableModeMap> map = Arrays.asList(new GamePlayableModeMap(new Game("mock1"), new PlayableMode("Mock1")));
-        when(mapRepository.getMappingByGameId(anyInt())).thenReturn(map);
-        modeService.deleteMappingByGameId(anyInt());
-        verify(mapRepository, times(map.size())).deleteById(anyInt());
-    }
-
-    @Test
-    public void test_deleteMappingByModeId() {
-        List<GamePlayableModeMap> map = Arrays.asList(new GamePlayableModeMap(new Game("mock1"), new PlayableMode("Mock1")));
-        when(mapRepository.getMappingByPlayableId(anyInt())).thenReturn(map);
-        modeService.deleteMappingByModeId(anyInt());
-        verify(mapRepository, times(map.size())).deleteById(anyInt());
-    }
+//    @Test
+//    public void test_deleteMappingByGameId() {
+//        List<GamePlayableModeMap> map = Arrays.asList(new GamePlayableModeMap(new Game("mock1"), new PlayableMode("Mock1")));
+//        when(mapRepository.getMappingByGameId(anyInt())).thenReturn(map);
+//        modeService.deleteMappingByGameId(anyInt());
+//        verify(mapRepository, times(map.size())).deleteById(anyInt());
+//    }
+//
+//    @Test
+//    public void test_deleteMappingByModeId() {
+//        List<GamePlayableModeMap> map = Arrays.asList(new GamePlayableModeMap(new Game("mock1"), new PlayableMode("Mock1")));
+//        when(mapRepository.getMappingByPlayableId(anyInt())).thenReturn(map);
+//        modeService.deleteMappingByModeId(anyInt());
+//        verify(mapRepository, times(map.size())).deleteById(anyInt());
+//    }
 
     @Test
     public void test_deleteMappingByModeId_emptyMap() {

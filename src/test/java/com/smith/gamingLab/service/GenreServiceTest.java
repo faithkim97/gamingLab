@@ -48,19 +48,19 @@ public class GenreServiceTest {
         assertEquals(map, genreService.getMappingById(anyInt()).get());
     }
 
-    @Test
-    public void test_getGenresByTitleToken() {
-        String genreTitles = "open world,casual,adventure";
-        String token = ",";
-        List<Genre> expected = Arrays.asList(new Genre("open world"), new Genre("casual"), new Genre("adventure"));
-        List<Genre> actual = genreService.getGenresByTitleToken(genreTitles, token);
-        assertEquals(expected.size(), actual.size());
-        for (int i = 0; i < expected.size(); i++) {
-            assertEquals(expected.get(i).getGenre(), actual.get(i).getGenre());
-        }
-       expected.forEach(g -> verify(genreRepository).getGenreByTitle(g.getGenre()));
-       actual.forEach(g -> verify(genreRepository).save(g));
-    }
+//    @Test
+//    public void test_getGenresByTitleToken() {
+//        String genreTitles = "open world,casual,adventure";
+//        String token = ",";
+//        List<Genre> expected = Arrays.asList(new Genre("open world"), new Genre("casual"), new Genre("adventure"));
+//        List<Genre> actual = genreService.getGenresByTitleToken(genreTitles, token);
+//        assertEquals(expected.size(), actual.size());
+//        for (int i = 0; i < expected.size(); i++) {
+//            assertEquals(expected.get(i).getGenre(), actual.get(i).getGenre());
+//        }
+//       expected.forEach(g -> verify(genreRepository).getGenreByTitle(g.getGenre()));
+//       actual.forEach(g -> verify(genreRepository).save(g));
+//    }
 
     @Test
     public void test_getGenresByTitleToken_titleEmpty() {
