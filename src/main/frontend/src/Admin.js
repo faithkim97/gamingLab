@@ -83,7 +83,7 @@ class Admin extends Component {
 
   //TODO we don't have admin fetch anymore in backend
   componentDidMount() {
-    adminFetch("http://localhost:8080/admin/fake.css");
+    // adminFetch("http://localhost:8080/admin/fake.css");
   }
 
   render() {
