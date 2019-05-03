@@ -128,6 +128,7 @@ function AppRouter() {
       <Route path = "/admin/editgame/gameId=:gameId" component = {EditGamePage} />
       <Route path="/login" component={LoginPage}/>
       <Route path="/game/about" component={AboutGamingLab} />
+      <Route path="/" component={Home} />
     </Router>
     </div>
 
