@@ -7,12 +7,12 @@ export function getPassword() {
 }
 
 export function adminFetch(url) {
-  // let password = getPassword();
-  //
-  // if (!password) {
-  //     window.location = '/login';
-  //   return null;
-  // }
+  let password = getPassword();
+
+  if (!password) {
+      window.location = '/login';
+    return null;
+  }
   let headers = new Headers();
   headers.set('Authorization', 'Basic ' + btoa("admin:" + password));
   return fetch(url, {
