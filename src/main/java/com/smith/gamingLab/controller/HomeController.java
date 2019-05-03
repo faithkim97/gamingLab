@@ -23,6 +23,59 @@ public class HomeController {
         return new ClassPathResource("/index.html");
     }
 
-    
+    @RequestMapping("/admin")
+    @ResponseBody
+    private ClassPathResource admin() {
+        return new ClassPathResource("/index.html");
+    }
+
+    @RequestMapping("/game/about")
+    @ResponseBody
+    private ClassPathResource about() {
+        return new ClassPathResource("/index.html");
+    }
+
+    @RequestMapping("/login")
+    @ResponseBody
+    private ClassPathResource login() {
+        return new ClassPathResource("/index.html");
+    }
+
+    @RequestMapping("/admin/addgame")
+    @ResponseBody
+    private ClassPathResource addgame() {
+        return new ClassPathResource("/index.html");
+    }
+
+
+    @RequestMapping("/admin/search")
+    @ResponseBody
+    private ClassPathResource admingSearch() {
+        return new ClassPathResource("/index.html");
+    }
+
+    @RequestMapping("/admin/editgenre")
+    @ResponseBody
+    private ClassPathResource editGenre() {
+        return new ClassPathResource("/index.html");
+    }
+
+    @RequestMapping("/admin/editconsole")
+    @ResponseBody
+    private ClassPathResource editConsole() {
+        return new ClassPathResource("/index.html");
+    }
+
+    @RequestMapping("/admin/editmode")
+    @ResponseBody
+    private ClassPathResource editMode() {
+        return new ClassPathResource("/index.html");
+    }
+
+    @RequestMapping("/admin/editgame/gameId=")
+    @ResponseBody
+    private ClassPathResource editGame() {
+        return new ClassPathResource("/index.html");
+    }
 
 }
