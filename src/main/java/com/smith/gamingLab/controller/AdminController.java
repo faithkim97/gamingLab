@@ -8,6 +8,7 @@ import com.smith.gamingLab.service.GenreService;
 import com.smith.gamingLab.service.PlayableModeService;
 import com.smith.gamingLab.table.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -34,11 +35,18 @@ public class AdminController {
 
     final String url = "http://localhost:3000";
 
-    @GetMapping("/fake.css")
+//    @GetMapping("/fake.css")
+//    @ResponseBody
+//    public String fakeCSS() {
+//        return "/* test */";
+//    }
+
+    @GetMapping("/")
     @ResponseBody
-    public String fakeCSS() {
-        return "/* test */";
+    public ClassPathResource fakeCSS() {
+        return new ClassPathResource("/index.html");
     }
+
 
     @PostMapping("/addGameCSV")
     private void addGame(@RequestParam(value = "title") String title, @RequestParam(value = "desc", required = false) String description,

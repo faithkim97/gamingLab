@@ -24,11 +24,11 @@ public class HomeController {
         return new ClassPathResource("/index.html");
     }
 
-    @RequestMapping("/admin")
-    @ResponseBody
-    private ClassPathResource admin() {
-        return new ClassPathResource("/index.html");
-    }
+//    @RequestMapping("/admin")
+//    @ResponseBody
+//    private ClassPathResource admin() {
+//        return new ClassPathResource("/index.html");
+//    }
 
     @RequestMapping("/game/about")
     @ResponseBody
