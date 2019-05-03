@@ -35,7 +35,7 @@ public class AdminController {
 
     final String url = "http://localhost:3000";
 
-    @GetMapping("/fake.css")
+    @GetMapping("/fake")
     @ResponseBody
     public String fakeCSS() {
         return "/* test */";
