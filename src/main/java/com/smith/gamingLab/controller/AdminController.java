@@ -35,17 +35,17 @@ public class AdminController {
 
     final String url = "http://localhost:3000";
 
-//    @GetMapping("/fake.css")
-//    @ResponseBody
-//    public String fakeCSS() {
-//        return "/* test */";
-//    }
-
-    @GetMapping("/")
+    @GetMapping("/fake.css")
     @ResponseBody
-    public ClassPathResource fakeCSS() {
-        return new ClassPathResource("/index.html");
+    public String fakeCSS() {
+        return "/* test */";
     }
+
+//    @GetMapping("/")
+//    @ResponseBody
+//    public ClassPathResource admin() {
+//        return new ClassPathResource("/index.html");
+//    }
 
 
     @PostMapping("/addGameCSV")
