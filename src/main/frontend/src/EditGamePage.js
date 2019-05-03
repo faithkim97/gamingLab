@@ -21,6 +21,7 @@ class EditGamePage extends Component {
   }
 
   render() {
+
     //passing a list of master games set by id
     const masterGames = this.state.masterGames;
     const game = masterGames[0];

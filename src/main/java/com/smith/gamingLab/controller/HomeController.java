@@ -4,6 +4,7 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -72,9 +73,9 @@ public class HomeController {
         return new ClassPathResource("/index.html");
     }
 
-    @RequestMapping("/admin/editgame/gameId=")
+    @RequestMapping("/admin/editgame")
     @ResponseBody
-    private ClassPathResource editGame() {
+    private ClassPathResource editGame(@RequestParam int gameId) {
         return new ClassPathResource("/index.html");
     }
 

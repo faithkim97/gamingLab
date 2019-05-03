@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
 @SpringBootApplication
-public class GamingLabApplication extends SpringBootServletInitializer {
+public class GamingLabApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(GamingLabApplication.class, args);
