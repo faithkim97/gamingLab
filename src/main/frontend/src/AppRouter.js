@@ -117,7 +117,7 @@ function AppRouter() {
       <div>
       <h1 className="text-center" style={{fontFamily:"Share Tech Mono, monospace", fontSize:"70px"}}><b>The Gaming Lab At Smith College</b></h1>
     <Router>
-      <Route path="/" component={Home} />
+      <Route path="/home" component={Home} />
       <Route path="/admin" component={AdminPage}/>
       <Route path="/admin/editgenre" component={EditGenrePage} />
       <Route path="/admin/editconsole" component={EditConsolePage} />

@@ -14,8 +14,8 @@ public class HomeController {
 
     @RequestMapping("/home")
     @ResponseBody
-    private ClassPathResource home() {
-        return new ClassPathResource("/index.html");
+    private String home() {
+        return "/index.html";
     }
 
     @RequestMapping("/game/search")
