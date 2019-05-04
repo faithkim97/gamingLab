@@ -8,7 +8,7 @@ password = "adminPass"
 if 'ADMIN_PASSWORD' in os.environ:
   password = os.environ['ADMIN_PASSWORD'];
 
-path = "Gaming Lab Inventory - Games.csv"
+path = "gaminglabinventoryTRUE.csv"
 with open(path) as fp:
   csvReader = csv.reader(fp)
   header = next(csvReader)
