@@ -10,7 +10,7 @@ class RatingDropdown extends Component {
   }
 
   componentDidMount() {
-    fetch('http://localhost:8080/game/ratings').then(response => response.json())
+    fetch('/game/ratings').then(response => response.json())
     .then(data => this.setState({ratings: data})).catch(console.log("could not retrieve rating"));
   }
 
