@@ -27,13 +27,13 @@ class SearchEngine extends Component {
   }
 
   componentDidMount() {
-    fetch('http://localhost:8080/game/consoles').then(response => response.json())
+    fetch('/game/consoles').then(response => response.json())
     .then(data => this.setState({consoles: data})).catch(console.log("could not retrieve consoles"));
 
-    fetch('http://localhost:8080/game/modes').then(response => response.json())
+    fetch('/game/modes').then(response => response.json())
     .then(data => this.setState({modes: data})).catch(console.log("could not retrieve playable modes"));
 
-    fetch('http://localhost:8080/game/ratings').then(response => response.json())
+    fetch('/game/ratings').then(response => response.json())
     .then(data => this.setState({ratings: data})).catch(console.log("could not retrieve rating"));
   }
 
@@ -41,7 +41,7 @@ class SearchEngine extends Component {
     e.preventDefault();
 
     this.setState({isSearch: true});
-    fetch('http://localhost:8080/game/findgame',
+    fetch('/game/findgame',
     {method: "POST",
     headers: {
       Accept: "application/json",

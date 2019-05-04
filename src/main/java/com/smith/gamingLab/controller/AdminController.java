@@ -41,12 +41,6 @@ public class AdminController {
         return "/* test */";
     }
 
-//    @GetMapping("/")
-//    @ResponseBody
-//    public ClassPathResource admin() {
-//        return new ClassPathResource("/index.html");
-//    }
-
 
     @PostMapping("/addGameCSV")
     private void addGame(@RequestParam(value = "title") String title, @RequestParam(value = "desc", required = false) String description,
