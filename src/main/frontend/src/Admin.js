@@ -46,7 +46,7 @@ export function adminFetchPost(url, body) {
 export function setPassword(password) {
   let headers = new Headers();
   headers.set('Authorization', 'Basic ' + btoa("admin:" + password))
-  fetch("http://localhost:8080/admin", {
+  fetch("/admin/fake", {
     headers: headers,
   }).then((data) => {
       if (data.status == 401) {
@@ -83,7 +83,7 @@ class Admin extends Component {
 
   //TODO we don't have admin fetch anymore in backend
   componentDidMount() {
-    // adminFetch("http://localhost:8080/admin/fake.css");
+    adminFetch("http://localhost:8080/admin/fake");
   }
 
   render() {
