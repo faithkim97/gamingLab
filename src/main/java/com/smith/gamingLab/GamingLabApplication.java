@@ -17,31 +17,3 @@ public class GamingLabApplication {
 
 }
 
-//public class GamingLabApplication extends SpringBootServletInitializer {
-//
-//	public static void main(String[] args) {
-//		System.err.println("WATS UP");
-//		startH2Server();
-//		SpringApplication.run(GamingLabApplication.class, args);
-//	}
-//
-//
-//	@Override
-//	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-//		startH2Server();
-//		return application.sources(GamingLabApplication.class);
-//	}
-//
-//	private static void startH2Server() {
-//		try {
-////			"-tcpAllowOthers","-webAllowOthers"
-//			Server h2Server = Server.createTcpServer("-webAllowOthers","-tcpAllowOthers").start();
-//			System.out.println(h2Server);
-//		} catch (SQLException e) {
-//			throw new RuntimeException("Failed to start H2 server: ", e);
-//		}
-//	}
-
-
-//}
-
