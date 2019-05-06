@@ -16,7 +16,7 @@ class EditGamePage extends Component {
 
   componentDidMount() {
     const {gameId} = this.props.match.params;
-    fetch('http://localhost:8080/game/masterGamesByGameId?gameId='+gameId).then(response => response.json())
+    fetch('/game/masterGamesByGameId?gameId='+gameId).then(response => response.json())
     .then(data => this.setState({masterGames: data}));
   }
 

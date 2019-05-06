@@ -15,13 +15,13 @@ class GenreTable extends Component {
   }
 
   componentDidMount() {
-    fetch('http://localhost:8080/game/genres').then(response => response.json())
+    fetch('/game/genres').then(response => response.json())
     .then(data => this.setState({genres: data}));
   }
 
   //TODO do adminFetch
   deleteGenre(e, genreId) {
-    let url = 'http://localhost:8080/admin/deleteGenre?genreId='+genreId;
+    let url = '/admin/deleteGenre?genreId='+genreId;
     adminFetch(url)
         .then(()=>{this.setState({showAlert: false});}).then(() => {window.location.reload();
     });

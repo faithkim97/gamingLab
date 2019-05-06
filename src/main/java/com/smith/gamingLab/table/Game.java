@@ -1,5 +1,5 @@
 package com.smith.gamingLab.table;
-
+//@Lob
 import com.smith.gamingLab.constant_enum.Rating;
 
 import javax.persistence.*;

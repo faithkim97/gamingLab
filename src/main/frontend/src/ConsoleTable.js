@@ -14,12 +14,12 @@ class ConsoleTable extends Component {
   }
 
   componentDidMount() {
-    fetch('http://localhost:8080/game/consoles').then(response => response.json())
+    fetch('/game/consoles').then(response => response.json())
     .then(data => this.setState({consoles: data}));
   }
 
   deleteConsole(e, consoleId) {
-    let url = 'http://localhost:8080/admin/deleteConsole?consoleId='+consoleId;
+    let url = '/admin/deleteConsole?consoleId='+consoleId;
     adminFetch(url).then(() => {window.location.reload()});
   }
 

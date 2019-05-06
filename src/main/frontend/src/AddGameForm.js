@@ -29,7 +29,7 @@ class AddGameForm extends Component {
   handleSubmit(e) {
     e.preventDefault();
     const {title, checkedOut, digital, quantity, description, rating,genres, modes, console} = this.state;
-    let url = 'http://localhost:8080/admin/addgame';
+    let url = '/admin/addgame';
     let body ={
       game: {
         isCheckedOut: checkedOut,

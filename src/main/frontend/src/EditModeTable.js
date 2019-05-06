@@ -23,16 +23,16 @@ class EditModeTable extends Component {
   }
 
   componentDidMount() {
-    fetch('http://localhost:8080/game/modes').then(response => response.json())
+    fetch('/game/modes').then(response => response.json())
     .then(data => this.setState({modes: data})).catch(console.log("could not retrieve modes"));
   }
 
   deleteModeMapping(e, mapId) {
-    let url = 'http://localhost:8080/admin/deleteModeMap?mapId='+mapId;
+    let url = '/admin/deleteModeMap?mapId='+mapId;
     adminFetch(url).then(() => {window.location.reload();});
   }
   handleAddMode(e) {
-    let url = 'http://localhost:8080/admin/mapModeByModeGameIds?gameId='+this.props.value[0].game.id+"&modeIds="+e;
+    let url = '/admin/mapModeByModeGameIds?gameId='+this.props.value[0].game.id+"&modeIds="+e;
     adminFetch(url).then(() => {window.location.reload();});
   }
 

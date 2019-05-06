@@ -23,7 +23,7 @@ class ModeDropdown extends Component {
   }
 
   componentDidMount() {
-    fetch('http://localhost:8080/game/modes').then(response => response.json())
+    fetch('/game/modes').then(response => response.json())
     .then(data => this.setState({modes: data}, () => {
       const checkedMap = {};
       const modes = this.state.modes;

@@ -45,7 +45,7 @@ class EditGameForm extends Component {
 
   handleUpdate(e) {
     e.preventDefault();
-    let url = 'http://localhost:8080/admin/editgame';
+    let url = '/admin/editgame';
     const {checkedOut, newTitle, digital, description, quantity, rating} = this.state;
     let body = {
       id: this.game.id,

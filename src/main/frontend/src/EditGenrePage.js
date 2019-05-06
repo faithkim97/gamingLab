@@ -16,10 +16,9 @@ class EditGenrePage extends Component {
   }
 
   handleClick(e) {
-    let url = 'http://localhost:8080/admin/addGenre?genre='+this.state.newGenre;
+    let url = '/admin/addGenre?genre='+this.state.newGenre;
     adminFetch(url)
-        .then(th => console.log("then", th))
-        .catch(ct => console.log(ct));
+        .then(() => {window.location.reload()});
   }
 
   render() {

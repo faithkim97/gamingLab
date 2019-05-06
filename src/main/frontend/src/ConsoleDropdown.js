@@ -10,7 +10,7 @@ class ConsoleDropdown extends Component{
   }
 
   componentDidMount() {
-    fetch('http://localhost:8080/game/consoles').then(response => response.json())
+    fetch('/game/consoles').then(response => response.json())
     .then(data => this.setState({consoles: data})).catch(console.log("could not retrieve consoles"));
   }
 

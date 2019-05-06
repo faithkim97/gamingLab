@@ -25,7 +25,7 @@ class GenreDropdown extends Component {
   }
 
   componentDidMount() {
-    fetch('http://localhost:8080/game/genres').then(response => response.json())
+    fetch('/game/genres').then(response => response.json())
     .then(data => this.setState({genres: data},()=>{
       const checkedMap = {};
       const genres = this.state.genres;

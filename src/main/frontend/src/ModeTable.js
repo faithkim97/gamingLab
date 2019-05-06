@@ -15,12 +15,12 @@ class ModeTable extends Component {
   }
 
   componentDidMount() {
-    fetch('http://localhost:8080/game/modes').then(response => response.json())
+    fetch('/game/modes').then(response => response.json())
     .then(data => this.setState({modes: data}));
   }
 
   deleteMode(e, modeId) {
-    let url = 'http://localhost:8080/admin/deleteMode?modeId='+modeId;
+    let url = '/admin/deleteMode?modeId='+modeId;
     adminFetch(url).then(() => {window.location.reload()});
   }
 

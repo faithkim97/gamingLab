@@ -58,18 +58,6 @@ export function setPassword(password) {
   });
 }
 
-// function activeLink(currLink) {
-//     let url = "http://localhost:3000";
-//     switch(currLink) {
-//         case url+"/admin/search":
-//             return "/admin/search";
-//         case url+"/admin/addgame":
-//             return "/admin/addgame";
-//     }
-//
-//     return '';
-//
-// }
 
 
 class Admin extends Component {

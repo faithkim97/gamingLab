@@ -13,7 +13,7 @@ class EditConsole extends Component {
   }
 
   componentDidMount() {
-    fetch('http://localhost:8080/game/consoles').then(response => response.json())
+    fetch('/game/consoles').then(response => response.json())
     .then(data => this.setState({consoles: data})).catch(console.log("could not retrieve consoles"));
   }
 
@@ -23,11 +23,8 @@ class EditConsole extends Component {
   }
 
   changeConsole(e, mapId, gameId) {
-    let url = 'http://localhost:8080/admin/replaceConsoleMap?mapId='+mapId+"&consoleId="+this.state.pickedConsole
+    let url = '/admin/replaceConsoleMap?mapId='+mapId+"&consoleId="+this.state.pickedConsole
         +"&gameId="+gameId;
-  //   fetch('http://localhost:8080/admin/replaceConsoleMap?mapId='+mapId+"&consoleId="+this.state.pickedConsole
-  // +"&gameId="+gameId);
-  // window.location.reload();
     adminFetch(url).then(()=> {window.location.reload();});
 
 
@@ -35,9 +32,7 @@ class EditConsole extends Component {
   }
 
   handleDeleteConsole(e, mapId) {
-    let url = "http://localhost:8080/admin/deleteConsoleMap?mapId="+mapId;
-    // fetch("http://localhost:8080/admin/deleteConsoleMap?mapId="+mapId);
-    // window.location.reload();
+    let url = "/admin/deleteConsoleMap?mapId="+mapId;
     adminFetch(url).then(()=>{window.location.reload();});
   }
 

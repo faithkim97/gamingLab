@@ -16,7 +16,7 @@ class EditModePage extends Component {
   }
 
   handleClick(e) {
-    let url = 'http://localhost:8080/admin/addMode?mode='+this.state.newMode;
+    let url = '/admin/addMode?mode='+this.state.newMode;
     adminFetch(url).then(() => {window.location.reload()});
   }
 

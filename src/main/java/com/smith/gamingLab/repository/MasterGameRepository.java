@@ -18,11 +18,14 @@ public interface MasterGameRepository extends CrudRepository<MasterGame, Integer
             "left join genre on genre.id = game_genre.genre_id\n" +
             "left join playable_mode on playable_mode.id = game_mode.mode_id";
 
-    @Query(value = fullTable +" where (?1 is null or game.title like %?1% or game.description like %?1% or genre like %?1%)" +
-            " and (?2 is null or game.is_checked_out = ?2) and (?3 is null or game.is_digital = ?3)" +
-            " and (?4 is null or console.id = ?4) and (?5 is null or playable_mode.id = ?5)"+
-            " and (?6 is null or rating = ?6) order by game.id", nativeQuery = true)
+    @Query(value = fullTable +" where (:key is null or game.title like %:key% or game.description like %:key% or genre like %:key%)" +
+            " and ( :checkedOut is null or game.is_checked_out = :checkedOut) and (:isDigital is null or game.is_digital = :isDigital)" +
+            " and (:consoleId is null or console.id = :consoleId) and (:modeId is null or playable_mode.id = :modeId)"+
+            " and (:rating is null or rating = :rating) order by game.id", nativeQuery = true)
     List<MasterGame> getGamesByKeyword(String key, Boolean checkedOut, Boolean isDigital, Integer consoleId, Integer modeId, Integer rating);
+
+//    @Query(value = fullTable + " where game.title = '$1'", nativeQuery = true)
+//    List<MasterGame> getGamesByKeyword(String key, Boolean checkedOut, Boolean isDigital, Integer consoleId, Integer modeId, Integer rating);
 
     @Query(value = "select id from master_game where game_id = ?1", nativeQuery = true)
     List<Integer> getMasterGameByGameId(int gameId);

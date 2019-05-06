@@ -16,7 +16,7 @@ class EditConsolePage extends Component {
   }
 
   handleClick(e) {
-    let url = 'http://localhost:8080/admin/addConsole?console='+this.state.newConsole;
+    let url = '/admin/addConsole?console='+this.state.newConsole;
     adminFetch(url).then(() => {window.location.reload()});
   }
 

@@ -11,7 +11,7 @@ class DeleteGame extends Component {
   }
 
   handleDelete(e) {
-    let url = 'http://localhost:8080/admin/deleteGame?gameId='+this.props.value.id;
+    let url = '/admin/deleteGame?gameId='+this.props.value.id;
     adminFetch(url).then(() => {window.location.reload();});
   }
 
