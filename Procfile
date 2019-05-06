@@ -1,1 +1,1 @@
-web: java -jar target/h2-1.4.199.jar
+web: 
