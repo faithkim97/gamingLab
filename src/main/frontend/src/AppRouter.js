@@ -12,6 +12,9 @@ import {Nav, Carousel} from 'react-bootstrap';
 import LoginPage from './LoginPage';
 import Fonts from './Fonts.css';
 import About from './About';
+import SwitchImg from './switch.jpeg';
+import PS4Img from './ps4.jpeg';
+import XboxImg from './xboxone.jpeg'
 
 function Search(admin) {
   return(
@@ -64,8 +67,8 @@ function Carous() {
             <Carousel.Item>
                 <img
                     className="d-block w-100"
-                    src="switch.jpeg"
-                    alt="First slide"
+                    src={PS4Img}
+                    alt="https://images.pexels.com/photos/687811/pexels-photo-687811.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
                     style={{height:"750px"}}
                 />
                 <Carousel.Caption>
@@ -75,8 +78,8 @@ function Carous() {
             <Carousel.Item>
                 <img
                     className="d-block w-100"
-                    src="switch.jpeg"
-                    alt="Second slide"
+                    src={SwitchImg}
+                    alt="https://images.pexels.com/photos/371924/pexels-photo-371924.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
                     style={{height:"750px"}}
                 />
 
@@ -88,8 +91,8 @@ function Carous() {
             <Carousel.Item>
                 <img
                     className="d-block w-100"
-                    src="xboxone.jpeg"
-                    alt="Third slide"
+                    src={XboxImg}
+                    alt="https://images.pexels.com/photos/139038/pexels-photo-139038.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
                     style={{height:"750px"}}
                 />
 

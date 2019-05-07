@@ -1,13 +1,16 @@
 {
-  "main.css": "/static/css/main.1ff57b24.chunk.css",
-  "main.js": "/static/js/main.5cdc4379.chunk.js",
-  "main.js.map": "/static/js/main.5cdc4379.chunk.js.map",
+  "main.css": "/static/css/main.9800e709.chunk.css",
+  "main.js": "/static/js/main.4bfd1d33.chunk.js",
+  "main.js.map": "/static/js/main.4bfd1d33.chunk.js.map",
   "runtime~main.js": "/static/js/runtime~main.a8a9905a.js",
   "runtime~main.js.map": "/static/js/runtime~main.a8a9905a.js.map",
-  "static/js/2.7d43f582.chunk.js": "/static/js/2.7d43f582.chunk.js",
-  "static/js/2.7d43f582.chunk.js.map": "/static/js/2.7d43f582.chunk.js.map",
+  "static/js/2.0fd090ce.chunk.js": "/static/js/2.0fd090ce.chunk.js",
+  "static/js/2.0fd090ce.chunk.js.map": "/static/js/2.0fd090ce.chunk.js.map",
   "index.html": "/index.html",
-  "precache-manifest.7c1a88bf4766ec12ac033b4fd1e861ba.js": "/precache-manifest.7c1a88bf4766ec12ac033b4fd1e861ba.js",
+  "precache-manifest.6d89a481de474fdba204341fd51bb8b9.js": "/precache-manifest.6d89a481de474fdba204341fd51bb8b9.js",
   "service-worker.js": "/service-worker.js",
-  "static/css/main.1ff57b24.chunk.css.map": "/static/css/main.1ff57b24.chunk.css.map"
+  "static/css/main.9800e709.chunk.css.map": "/static/css/main.9800e709.chunk.css.map",
+  "static/media/ps4.jpeg": "/static/media/ps4.b9efffe6.jpeg",
+  "static/media/switch.jpeg": "/static/media/switch.22078359.jpeg",
+  "static/media/xboxone.jpeg": "/static/media/xboxone.6eead177.jpeg"
 }
