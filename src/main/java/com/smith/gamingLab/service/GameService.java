@@ -98,11 +98,26 @@ public class GameService {
         return gameRepository.getGamesByTitle(title);
     }
 
-    public List<MasterGame> getMasterGameByKey(String key, Boolean checkedOut, Boolean isDigital, Integer console, Integer modeId, String rating) {
-        Rating rating_enum = rating != null ? Rating.valueOf(rating) : null;
-        return masterGameRepository.getGamesByKeyword(key, checkedOut, isDigital, console, modeId, rating_enum != null ? rating_enum.ordinal() : null);
+//    public List<MasterGame> getMasterGameByKey(String key, Boolean checkedOut, Boolean isDigital, Integer console, Integer modeId, String rating) {
+//        Rating rating_enum = rating != null ? Rating.valueOf(rating) : null;
+//        return masterGameRepository.getGamesByKeyword(key, checkedOut, isDigital, console, modeId, rating_enum != null ? rating_enum.ordinal() : null);
+//    }
+
+    public List<MasterGame> getMasterGamesByKeyword(String key, int consoleId, int modeId, int rating) {
+        return masterGameRepository.getGamesByKeyword(key, consoleId, modeId, rating);
     }
 
+    public List<MasterGame> getGamesByCheckedOut(String key, int consoleId, int modeId, int rating, boolean checkedOut) {
+        return masterGameRepository.getGamesByCheckedOut(key, consoleId, modeId, rating, checkedOut);
+    }
+
+    public List<MasterGame> getGamesByDigital(String key, int consoleId, int modeId, int rating, boolean digital) {
+        return masterGameRepository.getGamesByDigital(key, consoleId, modeId, rating, digital);
+    }
+
+    public List<MasterGame> getGamesByCheckedOutIsDigital(String key, int consoleId, int modeId, int rating, boolean checkedOut, boolean digital) {
+        return masterGameRepository.getGamesByCheckedOutIsDigital(key, consoleId, modeId, rating, checkedOut, digital);
+    }
 
     public List<MasterGame> getMasterGamesByMode(PlayableMode mode) {
         return masterGameRepository.getMasterGamesByMode(mode.getMode());

@@ -87,20 +87,43 @@ public class GameController {
 
 
 
+//    @PostMapping("/findgame")
+//    @CrossOrigin(origins = "*")
+//    public @ResponseBody List<MasterGame> getGame(@RequestBody Query query) {
+//        if (isEmptyQuery(query)) {
+//            return getAllGames();
+//        }
+//        Game game = query.getGame();
+//        Rating rating = game.getRating();
+//        Console console = query.getConsole();
+//        PlayableMode mode = query.getModes() != null || !query.getModes().isEmpty()? query.getModes().get(0) : null;
+//        List<MasterGame> queriedGames =  gameService.getMasterGameByKey(getNullable(query.getKeyword()), game.getIsCheckedOut(), game.getIsDigital(), console != null
+//               && console.getId() != -1 ? console.getId() : null, mode != null && mode.getId() != -1 ?  mode.getId() : null,
+//                rating != Rating.NONE ? rating.toString() : null);
+//        return queriedGames;
+//    }
+
     @PostMapping("/findgame")
     @CrossOrigin(origins = "*")
-    public @ResponseBody List<MasterGame> getGame(@RequestBody Query query) {
+    public @ResponseBody List<MasterGame> findgame(@RequestBody Query query) {
         if (isEmptyQuery(query)) {
             return getAllGames();
         }
         Game game = query.getGame();
-        Rating rating = game.getRating();
-        Console console = query.getConsole();
-        PlayableMode mode = query.getModes() != null || !query.getModes().isEmpty()? query.getModes().get(0) : null;
-        List<MasterGame> queriedGames =  gameService.getMasterGameByKey(getNullable(query.getKeyword()), game.getIsCheckedOut(), game.getIsDigital(), console != null
-               && console.getId() != -1 ? console.getId() : null, mode != null && mode.getId() != -1 ?  mode.getId() : null,
-                rating != Rating.NONE ? rating.toString() : null);
-        return queriedGames;
+        String key = query.getKeyword() == null ? "" : query.getKeyword();
+        int rating = game.getRating() == Rating.NONE ? -1 : game.getRating().ordinal();
+        int consoleId = query.getConsole() == null ? -1 : query.getConsole().getId();
+        int modeId = query.getModes() == null || query.getModes().isEmpty() ? -1 : query.getModes().get(0).getId();
+        Boolean checkedOut = game.getIsCheckedOut();
+        Boolean digital = game.getIsDigital();
+        if (checkedOut != null && digital != null) {
+            return gameService.getGamesByCheckedOutIsDigital(key, consoleId, modeId, rating, checkedOut, digital);
+        } else if (checkedOut != null && digital == null) {
+            return gameService.getGamesByCheckedOut(key, consoleId, modeId, rating, checkedOut);
+        } else if (checkedOut == null && digital != null) {
+            return gameService.getGamesByDigital(key, consoleId, modeId, rating, digital);
+        }
+        return gameService.getMasterGamesByKeyword(key, consoleId, modeId, rating);
     }
 
     private boolean isEmptyQuery(Query query) {

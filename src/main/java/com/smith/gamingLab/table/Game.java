@@ -1,6 +1,7 @@
 package com.smith.gamingLab.table;
 //@Lob
 import com.smith.gamingLab.constant_enum.Rating;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 
@@ -15,8 +16,9 @@ public class Game {
     private Boolean isCheckedOut;
     private int quantity = 1;
 
-    @Column
-    @Lob
+//    @Column(columnDefinition="varchar2(20)")
+//    @Lob
+    @Column(columnDefinition = "text")
     private String description;
     private Boolean isDigital;
 

@@ -15,7 +15,7 @@ class SearchEngine extends Component {
       ratings:[],
       modes: [],
       isSearch: false,
-      key: null,
+      key: '',
       checkedOut: null,
       digital: null,
       console_id: -1,
