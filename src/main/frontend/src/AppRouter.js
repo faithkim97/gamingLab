@@ -64,7 +64,7 @@ function Carous() {
             <Carousel.Item>
                 <img
                     className="d-block w-100"
-                    src="https://images.pexels.com/photos/687811/pexels-photo-687811.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
+                    src="switch.jpeg"
                     alt="First slide"
                     style={{height:"750px"}}
                 />
@@ -75,8 +75,8 @@ function Carous() {
             <Carousel.Item>
                 <img
                     className="d-block w-100"
-                    src="https://images.pexels.com/photos/371924/pexels-photo-371924.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
-                    alt="Third slide"
+                    src="switch.jpeg"
+                    alt="Second slide"
                     style={{height:"750px"}}
                 />
 
@@ -88,7 +88,7 @@ function Carous() {
             <Carousel.Item>
                 <img
                     className="d-block w-100"
-                    src="https://images.pexels.com/photos/139038/pexels-photo-139038.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
+                    src="xboxone.jpeg"
                     alt="Third slide"
                     style={{height:"750px"}}
                 />
