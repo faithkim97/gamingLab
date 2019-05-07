@@ -73,9 +73,9 @@ public class HomeController {
         return new ClassPathResource("/index.html");
     }
 
-    @RequestMapping("/admin/editgame")
+    @RequestMapping("/admin/editgame/**")
     @ResponseBody
-    private ClassPathResource editGame(@RequestParam int gameId) {
+    private ClassPathResource editGame() {
         return new ClassPathResource("/index.html");
     }
 
