@@ -51,7 +51,7 @@ public class AdminController {
                          @RequestParam(value = "digital", required = false) boolean isDigital) {
         Game g = new Game();
         g.setTitle(title.toLowerCase());
-        g.setDescription(description.toLowerCase());
+        g.setDescription(description.toLowerCase().getBytes());
         int q = quantity == null ? 1 : quantity;
         g.setQuantity(q);
         if (rating != null) { g.setRating(rating);}
@@ -181,7 +181,7 @@ public class AdminController {
             editGame.setTitle(game.getTitle());
             editGame.setQuantity(game.getQuantity());
             editGame.setRating(game.getRating());
-            editGame.setDescription(game.getDescription());
+            editGame.setDescription(game.getDescription().getBytes());
             editGame.setIsCheckedOut(game.getIsCheckedOut());
             editGame.setIsDigital(game.getIsDigital());
             gameService.saveOrUpdate(editGame);

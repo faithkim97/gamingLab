@@ -17,9 +17,9 @@ public class Game {
     private int quantity = 1;
 
 //    @Column(columnDefinition="varchar2(20)")
-//    @Lob
-    @Column(columnDefinition = "text")
-    private String description;
+        @Column(columnDefinition = "bytea")
+    private byte[] description;
+
     private Boolean isDigital;
 
     public Game() {}
@@ -35,7 +35,7 @@ public class Game {
 
     public int getQuantity() { return quantity; }
 
-    public String getDescription() { return description; }
+    public String getDescription() { return new String(description); }
 
     public Boolean getIsDigital() { return isDigital; }
 
@@ -54,7 +54,7 @@ public class Game {
 
     public void setQuantity(int q) { quantity = q;}
 
-    public void setDescription(String description) { this.description = description; }
+    public void setDescription(byte[] description) { this.description = description; }
 
     public void setIsDigital(Boolean isDigital) { this.isDigital = isDigital; }
 
